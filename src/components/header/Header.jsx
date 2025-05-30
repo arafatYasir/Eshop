@@ -1,10 +1,11 @@
-import Container from "../container/Container";
+import MiddlePart from "./MiddlePart";
 import TopPart from "./TopPart";
 
 const Header = () => {
     return (
             <header>
                 <TopPart />
+                <MiddlePart />
             </header>
     );
 };
