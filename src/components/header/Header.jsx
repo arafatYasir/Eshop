@@ -1,3 +1,4 @@
+import BottomPart from "./BottomPart";
 import MiddlePart from "./MiddlePart";
 import TopPart from "./TopPart";
 
@@ -6,6 +7,7 @@ const Header = () => {
             <header>
                 <TopPart />
                 <MiddlePart />
+                <BottomPart />
             </header>
     );
 };
