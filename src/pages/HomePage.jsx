@@ -1,12 +1,13 @@
+import Banner from "../components/Banner";
 import Container from "../components/container/Container";
+import Facilities from "../components/Facilities";
 
 const HomePage = () => {
     return (
-        <Container>
-            <div>
-                asd
-            </div>
-        </Container>
+        <main>
+            <Banner />
+            <Facilities />
+        </main>
     );
 };
 
