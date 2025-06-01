@@ -39,7 +39,7 @@ const TopPart = () => {
 
     useEffect(() => {
         const handleCloseDropdown = (e) => {
-            if(dropdownRef.current && !dropdownRef.current.contains(e.target) && isOpen) {
+            if(dropdownRef.current && !dropdownRef.current.contains(e.target)) {
                 setIsOpen(false);
             }
         }

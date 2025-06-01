@@ -10,7 +10,7 @@ const FeaturedProducts = () => {
                     <h2 className="text-4xl text-[#303030] font-['Poppins'] leading-[46px] font-semibold">Featured Products</h2>
                     <p className="flex items-center text-[#FF624C] font-['Montserrat'] font-bold leading-6 gap-4">View All <HiArrowLongRight className="text-2xl" /></p>
                 </div>
-                <div className="flex justify-between">
+                <div className="flex justify-between mt-12">
                     <ProductLayout />
                     <ProductLayout />
                     <ProductLayout />

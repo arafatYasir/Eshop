@@ -12,7 +12,8 @@ const BottomPart = () => {
 
     useEffect(() => {
         const handleCloseDropdown = (e) => {
-            if (productsDropdownRef.current && !productsDropdownRef.current.contains(e.target) && isProductsDropdownOpen) {
+            console.log(productsDropdownRef.current.contains(e.target));
+            if (productsDropdownRef.current && !productsDropdownRef.current.contains(e.target)) {
                 setIsProductsDropdownOpen(false);
             }
         }
@@ -22,6 +23,7 @@ const BottomPart = () => {
         return () => document.removeEventListener("mousedown", handleCloseDropdown);
     }, []);
 
+    console.log(isProductsDropdownOpen);
 
     return (
         <nav className="bg-[#FF624C] py-6 font-['Montserrat']">
