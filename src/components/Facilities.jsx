@@ -1,4 +1,4 @@
-import Container from "./container/Container";
+import Container from "./commonLayouts/Container";
 import HeadPhoneIcon from "../icons/HeadPhoneIcon"
 import SecurityIcon from "../icons/SecurityIcon"
 import DeliveryIcon from "../icons/DeliveryIcon";

@@ -1,6 +1,6 @@
 import CartIcon from "../../icons/CartIcon";
 import UserIcon from "../../icons/UserIcon";
-import Container from "../container/Container"
+import Container from "../commonLayouts/Container";
 import { IoSearchSharp } from "react-icons/io5";
 const MiddlePart = () => {
     return (

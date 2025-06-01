@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import Button from "../Button";
-import Container from "../container/Container";
+import Container from "../commonLayouts/Container";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { IoIosMail } from "react-icons/io";
 import { FaLocationDot } from "react-icons/fa6";

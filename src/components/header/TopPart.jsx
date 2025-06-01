@@ -1,8 +1,8 @@
 import { Link } from "react-router";
 import { IoLocationOutline } from "react-icons/io5";
 import { BsTelephone } from "react-icons/bs";
-import Container from "../container/Container";
-import { useState } from "react";
+import Container from "../commonLayouts/Container";
+import { useEffect, useRef, useState } from "react";
 import { TfiAngleDown } from "react-icons/tfi";
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 
@@ -10,6 +10,7 @@ const TopPart = () => {
     const [selectedCountry, setSelectedCountry] = useState({ name: 'English (US)', value: 'US', flag: 'https://flagcdn.com/16x12/us.png' });
     const [currency, setCurrency] = useState({ name: 'US Dollar (USD)', value: 'USD' });
     const [isOpen, setIsOpen] = useState(false);
+    const dropdownRef = useRef(null);
 
     const countries = [
         { name: 'English (US)', value: 'US', flag: 'https://flagcdn.com/16x12/us.png' },
@@ -35,6 +36,18 @@ const TopPart = () => {
         setSelectedCountry(country);
         setIsOpen(false);
     }
+
+    useEffect(() => {
+        const handleCloseDropdown = (e) => {
+            if(dropdownRef.current && !dropdownRef.current.contains(e.target) && isOpen) {
+                setIsOpen(false);
+            }
+        }
+
+        document.addEventListener("mousedown", handleCloseDropdown);
+
+        return () => document.removeEventListener("mousedown", handleCloseDropdown);
+    }, []);
 
     return (
         <div className="border-b border-[#BFBFBF]">
@@ -74,7 +87,7 @@ const TopPart = () => {
                         </div>
 
                         {/* Language selection */}
-                        <div className="relative after:content-[''] after:absolute after:w-[1px] after:h-[32px] after:top-[50%] after:right-[-25px] after:bg-[#BFBFBF] after:-translate-y-1/2">
+                        <div className="relative after:content-[''] after:absolute after:w-[1px] after:h-[32px] after:top-[50%] after:right-[-25px] after:bg-[#BFBFBF] after:-translate-y-1/2" ref={dropdownRef}>
                             <select
                                 className="w-[112px] hidden"
                                 name="country"
@@ -115,7 +128,6 @@ const TopPart = () => {
                                     ))}
                                 </ul>
                             )}
-
                         </div>
 
                         {/* Social media links */}

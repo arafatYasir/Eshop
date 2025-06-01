@@ -1,12 +1,13 @@
 import Banner from "../components/Banner";
-import Container from "../components/container/Container";
 import Facilities from "../components/Facilities";
+import FeaturedProducts from "../components/FeaturedProducts";
 
 const HomePage = () => {
     return (
         <main>
             <Banner />
             <Facilities />
+            <FeaturedProducts />
         </main>
     );
 };
