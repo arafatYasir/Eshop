@@ -3,7 +3,7 @@ import { FiShare2 } from "react-icons/fi";
 import { IoIosHeartEmpty, IoMdStar } from "react-icons/io";
 import { IoCartOutline } from "react-icons/io5";
 
-const ProductLayout2 = ({ discountTag = false, category, title, rating = 1, totalRatings, previousPrice, price, stockPercent, stockColor }) => {
+const ProductLayout2 = ({ discountTag = false, category, title, rating = 1, totalRatings, previousPrice, price, stockPercent }) => {
     const [ratingStars, setRatingStars] = useState([]);
 
     useEffect(() => {
