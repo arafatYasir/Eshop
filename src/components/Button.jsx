@@ -1,9 +1,12 @@
-const Button = ({value, paddingX="40px", paddingY="16px"}) => {
+const Button = ({value, paddingX="40px", paddingY="16px", bg="#FF624C", color="white", border=false, borderColor="#FF624C", handleLoadMore}) => {
     return (
-        <button 
-        className={`text-white bg-[#FF624C] font-['Montserrat'] text-xl font-bold leading-[30px] rounded-[10px] cursor-pointer`}
+        <button onClick={handleLoadMore}
+        className={`font-['Montserrat'] text-xl font-bold leading-[30px] rounded-[10px] cursor-pointer`}
         style={{
-            padding: `${paddingY} ${paddingX}`
+            padding: `${paddingY} ${paddingX}`,
+            background: bg,
+            color: color,
+            border: border ? `1px solid ${borderColor}` : ""
         }}
         >{value}</button>
     );
