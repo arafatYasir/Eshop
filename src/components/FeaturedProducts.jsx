@@ -5,7 +5,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { LiaAngleLeftSolid, LiaAngleRightSolid } from "react-icons/lia";
-import products from "../../public/products/FeaturedProducts";
+import featuredProducts from "../../public/products/FeaturedProducts";
 
 function SampleNextArrow(props) {
     const { className, style, onClick } = props;
@@ -78,7 +78,7 @@ const FeaturedProducts = () => {
                 </div>
                 <Slider {...settings} className="mt-12 px-9">
                     {
-                        products.map(p => (
+                        featuredProducts.map(p => (
                             <div className="flex items-center justify-center" key={p.id}>
                                 <ProductLayout title={p.title} category={p.category} discountTag={p.discountTag} discountPercent={p.discountTag ? p.discountPercent : ""} rating={p.rating} totalRatings={p.totalRatings} price={p.price} previousPrice={p.discountTag ? p.previousPrice : ""} />
                             </div>

@@ -23,8 +23,6 @@ const BottomPart = () => {
         return () => document.removeEventListener("mousedown", handleCloseDropdown);
     }, []);
 
-    console.log(isProductsDropdownOpen);
-
     return (
         <nav className="bg-[#FF624C] py-6 font-['Montserrat']">
             <Container>

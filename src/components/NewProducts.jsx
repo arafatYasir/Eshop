@@ -4,15 +4,15 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Button from "./Button";
 import { useState } from "react";
-import products from "../../public/products/NewProducts";
+import newProducts from "../../public/products/NewProducts";
 
 
 const NewProducts = () => {
-    const [showingProducts, setShowingProducts] = useState(products.filter(p => p.id <= 5));
-    const [selectedCategory, setSelectedCategory] = useState(null)
+    const [showingProducts, setShowingProducts] = useState(newProducts.filter(p => p.id <= 5));
+    // const [selectedCategory, setSelectedCategory] = useState(null)
 
     const handleLoadMore = () => {
-        setShowingProducts(products);
+        setShowingProducts(newProducts);
     }
 
     return (
@@ -24,7 +24,7 @@ const NewProducts = () => {
                     </div>
                     <div className="flex items-center gap-4">
                         <p className="text-[#303030] font-['Montserrat'] leading-6">Sort by</p>
-                        <select className="w-[233px] text-[#FF624C] font-['Montserrat'] font-bold leading-6" name="categories" value={selectedCategory || "All Categories"} >
+                        <select className="w-[233px] text-[#FF624C] font-['Montserrat'] font-bold leading-6" name="categories" >
                             <option value="computers">Computers</option>
                             <option value="mobiles">Mobiles</option>
                         </select>
