@@ -117,7 +117,7 @@ const TopPart = () => {
 
                             {/* Option list */}
                             {isOpen && (
-                                <ul className=" absolute w-full border border-gray-300 bg-white shadow-lg z-10">
+                                <ul className="absolute w-full border border-gray-300 bg-white shadow-lg z-10">
                                     {countries.map(country => (
                                         <li className="flex items-center gap-2 p-2 hover:bg-gray-200 cursor-pointer"
                                             key={country?.value}
