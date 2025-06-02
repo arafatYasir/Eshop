@@ -65,6 +65,7 @@ const FeaturedProducts = () => {
             previousPrice: 1299,
             price: 1099,
             discountTag: true,
+            discountPercent: 20
         },
         {
             id: 2,
@@ -75,6 +76,7 @@ const FeaturedProducts = () => {
             previousPrice: 1499,
             price: 1349,
             discountTag: true,
+            discountPercent: 25
         },
         {
             id: 3,
@@ -85,6 +87,7 @@ const FeaturedProducts = () => {
             previousPrice: 399,
             price: 349,
             discountTag: true,
+            discountPercent: 63
         },
         {
             id: 4,
@@ -104,6 +107,7 @@ const FeaturedProducts = () => {
             previousPrice: 979,
             price: 899,
             discountTag: true,
+            discountPercent: 50
         },
         {
             id: 6,
@@ -123,6 +127,7 @@ const FeaturedProducts = () => {
             previousPrice: 159,
             price: 129,
             discountTag: true,
+            discountPercent: 30
         },
         {
             id: 8,
@@ -133,6 +138,7 @@ const FeaturedProducts = () => {
             previousPrice: 599,
             price: 549,
             discountTag: true,
+            discountPercent: 55
         },
         {
             id: 9,
@@ -143,6 +149,7 @@ const FeaturedProducts = () => {
             previousPrice: 399,
             price: 349,
             discountTag: true,
+            discountPercent: 10
         },
         {
             id: 10,
@@ -161,8 +168,8 @@ const FeaturedProducts = () => {
         speed: 700,
         slidesToShow: 5,
         slidesToScroll: 1,
-        // autoplay: true,
-        // autoplaySpeed: 2000,
+        autoplay: true,
+        autoplaySpeed: 2000,
         cssEase: "linear",
         nextArrow: <SampleNextArrow />,
         prevArrow: <SamplePrevArrow />,
@@ -178,7 +185,7 @@ const FeaturedProducts = () => {
                     {
                         products.map(p => (
                             <div className="flex items-center justify-center" key={p.id}>
-                                <ProductLayout title={p.title} category={p.category} discountTag={p.discountTag} rating={p.rating} totalRatings={p.totalRatings} price={p.price} previousPrice={p.discountTag ? p.previousPrice : ""} />
+                                <ProductLayout title={p.title} category={p.category} discountTag={p.discountTag} discountPercent={p.discountTag ? p.discountPercent : ""} rating={p.rating} totalRatings={p.totalRatings} price={p.price} previousPrice={p.discountTag ? p.previousPrice : ""} />
                             </div>
                         ))
                     }

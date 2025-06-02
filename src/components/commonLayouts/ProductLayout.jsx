@@ -3,7 +3,7 @@ import { FiShare2 } from "react-icons/fi";
 import { IoIosHeartEmpty, IoMdStar } from "react-icons/io";
 import { IoCartOutline } from "react-icons/io5";
 
-const ProductLayout = ({ discountTag = false, category, title, rating = 1, totalRatings, price, previousPrice }) => {
+const ProductLayout = ({ discountTag = false, discountPercent, category, title, rating = 1, totalRatings, price, previousPrice }) => {
     const [ratingStars, setRatingStars] = useState([]);
 
     useEffect(() => {
@@ -31,7 +31,7 @@ const ProductLayout = ({ discountTag = false, category, title, rating = 1, total
 
                 {/* Discount Tag */}
                 {discountTag && (
-                    <div className="absolute top-[-8px] right-[-10px] text-white font-['Montserrat'] font-semibold leading-6 py-[7px] px-5 bg-[#FF624C] rounded-[5px]">50%</div>
+                    <div className="absolute top-[-8px] right-[-10px] text-white font-['Montserrat'] font-semibold leading-6 py-[7px] px-5 bg-[#FF624C] rounded-[5px]">{discountPercent}%</div>
                 )}
             </div>
             <div className="mt-10">
