@@ -25,7 +25,7 @@ const Footer = () => {
                     <Button value="Subscribe" />
                 </div>
 
-                <div className="mt-[100px] flex justify-between">
+                <div className="mt-[100px] flex justify-between pb-20">
                     <div className="w-[349px]">
                         <div>
                             <img src="images/logo.webp" alt="logo" />
@@ -111,6 +111,20 @@ const Footer = () => {
                                 <li><Link to="#">Facebook</Link></li>
                             </ul>
                         </div>
+                    </div>
+                </div>
+
+                <div className="h-[1px] bg-[#CBCBCB]"></div>
+
+                <div className="text-[#303030] font-['Montserrat'] text-sm leading-5 flex justify-between mt-2 mb-20">
+                    <Link className="" to="#">Copyright © 2023 E-Shop. All Rights Reserved.</Link>
+
+                    <div className="flex gap-2">
+                        <Link className="">Privacy Policy</Link>
+                        <span>|</span>
+                        <Link>Terms & Condition</Link>
+                        <span>|</span>
+                        <Link>Sitemap</Link>
                     </div>
                 </div>
             </footer>
