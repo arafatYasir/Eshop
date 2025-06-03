@@ -42,7 +42,7 @@ const ProductLayout2 = ({ discountTag = false, category, title, rating = 1, tota
                     <div 
                     className="h-[30px] bg-[#303030] rounded-[25px] "
                     style={{width: stockPercent + "%"}}>
-                        <span className="absolute top-1/2 left-1/2 -translate-1/2 uppercase text-white font-bold font-['Montserrat'] leading-6">{stockPercent} Available</span>
+                        <span className="absolute top-1/2 left-1/2 -translate-1/2 uppercase text-white font-bold font-['Montserrat'] leading-6">{stockPercent}% Available</span>
                     </div>
                 </div>
             </div>
