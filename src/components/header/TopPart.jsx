@@ -131,7 +131,7 @@ const TopPart = () => {
                         </div>
 
                         {/* Social media links */}
-                        <div className="flex items-center gap-6">
+                        <div className="flex items-center gap-6 text-lg">
                             <Link to="#">
                                 <FaFacebookF />
                             </Link>

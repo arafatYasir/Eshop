@@ -18,8 +18,8 @@ function SampleNextArrow(props) {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                width: "40px",
-                height: "40px",
+                width: "72px",
+                height: "72px",
                 border: "1px solid #303030",
                 borderRadius: "50%",
                 right: "-30px",
@@ -28,40 +28,16 @@ function SampleNextArrow(props) {
             className={className}
             onClick={onClick}
         >
-            <LiaAngleRightSolid className="text-[#303030] absolute left-1/2 -translate-x-1/2" size={20} />
+            <LiaAngleRightSolid className="text-[#303030] absolute left-1/2 -translate-x-1/2 bg-transparent" size={26} />
         </div>
     );
-}
-
-function SamplePrevArrow(props) {
-    const { className, style, onClick } = props;
-    return (
-        <div
-            className={className}
-            style={{
-                ...style,
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                width: "40px",
-                height: "40px",
-                border: "1px solid #303030",
-                borderRadius: "50%",
-                left: "-30px",
-                zIndex: 10
-            }}
-            onClick={onClick}
-        >
-            <LiaAngleLeftSolid className="text-[#303030] absolute left-1/2 -translate-x-1/2" size={20} />
-        </div>
-    );
-}
+}   
 
 const SpringSale = () => {
     const [timerLeft, setTimerLeft] = useState(calculateTimeLeft());
 
     function calculateTimeLeft() {
-        const saleEndDate = new Date("June 5, 2025 12:00 PM +0600");
+        const saleEndDate = new Date("June 20, 2025 12:00 PM +0600");
         const currentDate = new Date().getTime();
         const difference = saleEndDate - currentDate;
 
@@ -98,10 +74,10 @@ const SpringSale = () => {
     };
 
     return (
-        <div className="mb-20">
+        <div className="mb-20 py-16" style={{ background: "url('/images/spring-sale-bg.png')" }}>
             <Container>
                 <div className="flex justify-between items-center">
-                    <div>
+                    <div className="relative">
                         <h2 className="text-[#303030] text-[56px] font-semibold font-['Poppins'] leading-[68px]">Spring Sale</h2>
 
                         <div className="flex items-center gap-6 mt-10 mb-[72px]">
@@ -133,7 +109,12 @@ const SpringSale = () => {
                         </div>
 
                         <Button value="Shop Now" />
+
+                        <div className="absolute bottom-[-210px] left-0">
+                            <img src="/images/spring-sale-dots.png" alt="background dots" />
+                        </div>
                     </div>
+
                     <div className="max-w-[950px]">
                         <Slider {...settings} className="mt-12 ">
                             {

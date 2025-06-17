@@ -20,7 +20,7 @@ function SampleNextArrow(props) {
                 height: "40px",
                 border: "1px solid #303030",
                 borderRadius: "50%",
-                right: "-30px",
+                right: "-1px",
                 zIndex: 10
             }}
             className={className}
@@ -45,7 +45,7 @@ function SamplePrevArrow(props) {
                 height: "40px",
                 border: "1px solid #303030",
                 borderRadius: "50%",
-                left: "-30px",
+                left: "-5px",
                 zIndex: 10
             }}
             onClick={onClick}

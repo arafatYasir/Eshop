@@ -12,7 +12,7 @@ const ProductLayout2 = ({ discountTag = false, category, title, rating = 1, tota
     }, [rating])
 
     return (
-        <div className="p-10 group cursor-pointer border border-transparent hover:border-[#C3C3C3] rounded-[10px] max-w-[464px]">
+        <div className="p-10 group cursor-pointer rounded-[10px] max-w-[464px] bg-[#EaEAEA] hover:bg-white transition duration-200 relative">
             <div className="relative bg-amber-200">
                 <img className="w-full" src="images/product-image.png" alt="product image" />
 
@@ -24,7 +24,7 @@ const ProductLayout2 = ({ discountTag = false, category, title, rating = 1, tota
             <div className="mt-10">
                 <p className="text-sm font-['Montserrat'] leading-5 text-[#303030] tracking-[4px] uppercase">{category}</p>
 
-                <h3 className="text-[#303030] font-['Poppins'] text-xl font-semibold leading-[30px]  mt-4 group-hover:text-[#FF624C] group-hover:underline transition duration-100">{title}</h3>
+                <h3 className="text-[#303030] font-['Poppins'] text-xl font-semibold leading-[30px]  mt-4 group-hover:text-[#FF624C] group-hover:underline decoration-2 transition duration-100">{title}</h3>
 
                 <div className="flex items-center gap-2 mt-1">
                     <div className="flex text-[#FED550] text-xl">

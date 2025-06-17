@@ -8,19 +8,27 @@ const BottomPart = () => {
     const [isProductsDropdownOpen, setIsProductsDropdownOpen] = useState(false);
     const [isCategoriesDropdownOpen, setIsCategoriesDropdownOpen] = useState(false);
     const productsDropdownRef = useRef(null);
-    // const categoriesDropdownRef = useRef(null);
+    const categoriesDropdownRef = useRef(null);
 
     useEffect(() => {
-        const handleCloseDropdown = (e) => {
-            console.log(productsDropdownRef.current.contains(e.target));
+        const handleCloseDropdown1 = (e) => {
+            if(categoriesDropdownRef.current && !categoriesDropdownRef.current.contains(e.target)) {
+                setIsCategoriesDropdownOpen(false);
+            }
+        }
+        const handleCloseDropdown2 = (e) => {
             if (productsDropdownRef.current && !productsDropdownRef.current.contains(e.target)) {
                 setIsProductsDropdownOpen(false);
             }
         }
 
-        document.addEventListener("mousedown", handleCloseDropdown);
+        document.addEventListener("mousedown", handleCloseDropdown1);
+        document.addEventListener("mousedown", handleCloseDropdown2);
 
-        return () => document.removeEventListener("mousedown", handleCloseDropdown);
+        return () => {
+            document.removeEventListener("mousedown", handleCloseDropdown1);
+            document.removeEventListener("mousedown", handleCloseDropdown2);
+        };
     }, []);
 
     return (
@@ -28,14 +36,8 @@ const BottomPart = () => {
             <Container>
                 <div className="flex justify-between">
                     <ul className="flex items-center gap-20 text-white font-bold leading-6">
-                        <li className="relative"
-                            onMouseEnter={() => {
-                                setIsCategoriesDropdownOpen(true);
-                                setIsProductsDropdownOpen(false);
-                            }}
-                            onMouseLeave={() => setIsCategoriesDropdownOpen(false)}
-                        >
-                            <button className="flex items-center gap-4 cursor-pointer" to="#">
+                        <li className="relative" ref={categoriesDropdownRef}>
+                            <button className="flex items-center gap-4 cursor-pointer" to="#" onClick={() => setIsCategoriesDropdownOpen(!isCategoriesDropdownOpen)}>
                                 <IoIosMenu className="text-3xl" />
                                 All Categories
                             </button>

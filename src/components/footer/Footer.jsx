@@ -65,36 +65,36 @@ const Footer = () => {
                     <div>
                         <h4 className="text-xl text-[#303030] font-semibold font-['Poppins'] leading-[30px]">Links</h4>
                         <ul className="flex flex-col gap-3 text-[#303030] font-['Montserrat'] leading-6 mt-6">
-                            <li><Link to="#">Products List</Link></li>
-                            <li><Link to="#">Order Tracking</Link></li>
-                            <li><Link to="#">Products Guide</Link></li>
-                            <li><Link to="#">Shopping Cart</Link></li>
-                            <li><Link to="#">Tech Blog</Link></li>
+                            <li><Link to="#" className="hover:underline">Products List</Link></li>
+                            <li><Link to="#" className="hover:underline">Order Tracking</Link></li>
+                            <li><Link to="#" className="hover:underline">Products Guide</Link></li>
+                            <li><Link to="#" className="hover:underline">Shopping Cart</Link></li>
+                            <li><Link to="#" className="hover:underline">Tech Blog</Link></li>
                         </ul>
                     </div>
 
                     <div>
                         <h4 className="text-xl text-[#303030] font-semibold font-['Poppins'] leading-[30px]">Supports</h4>
                         <ul className="flex flex-col gap-3 text-[#303030] font-['Montserrat'] leading-6 mt-6">
-                            <li><Link to="#">About Us</Link></li>
-                            <li><Link to="#">Privacy Policy</Link></li>
-                            <li><Link to="#">Return Policy</Link></li>
-                            <li><Link to="#">Help Centre</Link></li>
-                            <li><Link to="#">Store Locations</Link></li>
-                            <li><Link to="#">Careers</Link></li>
+                            <li><Link to="#" className="hover:underline">About Us</Link></li>
+                            <li><Link to="#" className="hover:underline">Privacy Policy</Link></li>
+                            <li><Link to="#" className="hover:underline">Return Policy</Link></li>
+                            <li><Link to="#" className="hover:underline">Help Centre</Link></li>
+                            <li><Link to="#" className="hover:underline">Store Locations</Link></li>
+                            <li><Link to="#" className="hover:underline">Careers</Link></li>
                         </ul>
                     </div>
 
                     <div>
                         <h4 className="text-xl text-[#303030] font-semibold font-['Poppins'] leading-[30px]">Categories</h4>
                         <ul className="flex flex-col gap-3 text-[#303030] font-['Montserrat'] leading-6 mt-6">
-                            <li><Link to="#">Computers & Tablets</Link></li>
-                            <li><Link to="#">Mobile Phones & Accessories</Link></li>
-                            <li><Link to="#">TV & Home Theater</Link></li>
-                            <li><Link to="#">Audio & Headphones</Link></li>
-                            <li><Link to="#">Cameras & Camcorders</Link></li>
-                            <li><Link to="#">Gaming Equipment</Link></li>
-                            <li><Link to="#">Home Appliances</Link></li>
+                            <li><Link to="#" className="hover:underline">Computers & Tablets</Link></li>
+                            <li><Link to="#" className="hover:underline">Mobile Phones & Accessories</Link></li>
+                            <li><Link to="#" className="hover:underline">TV & Home Theater</Link></li>
+                            <li><Link to="#" className="hover:underline">Audio & Headphones</Link></li>
+                            <li><Link to="#" className="hover:underline">Cameras & Camcorders</Link></li>
+                            <li><Link to="#" className="hover:underline">Gaming Equipment</Link></li>
+                            <li><Link to="#" className="hover:underline">Home Appliances</Link></li>
                         </ul>
                     </div>
 
@@ -106,9 +106,9 @@ const Footer = () => {
                         <div className="mt-[74px]">
                             <h4 className="text-xl text-[#303030] font-semibold font-['Poppins'] leading-[30px]">Follow Us</h4>
                             <ul className="flex flex-col gap-3 text-[#303030] font-['Montserrat'] leading-6 mt-6">
-                                <li><Link to="#">Twitter</Link></li>
-                                <li><Link to="#">Instagram</Link></li>
-                                <li><Link to="#">Facebook</Link></li>
+                                <li><Link to="#" className="hover:underline">Twitter</Link></li>
+                                <li><Link to="#" className="hover:underline">Instagram</Link></li>
+                                <li><Link to="#" className="hover:underline">Facebook</Link></li>
                             </ul>
                         </div>
                     </div>

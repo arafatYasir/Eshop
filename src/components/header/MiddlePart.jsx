@@ -1,18 +1,24 @@
+import { GoSearch } from "react-icons/go";
 import CartIcon from "../../icons/CartIcon";
 import UserIcon from "../../icons/UserIcon";
 import Container from "../commonLayouts/Container";
 import { IoSearchSharp } from "react-icons/io5";
+import { TfiSearch } from "react-icons/tfi";
+import { Link } from "react-router";
 const MiddlePart = () => {
     return (
         <Container>
             <div className="flex justify-between items-center py-8">
                 <div>
-                    <img src="images/logo.webp" alt="logo" />
+                    <Link to="/">
+                        <img src="images/logo.webp" alt="logo" />
+                    </Link>
                 </div>
                 <div className="flex gap-12">
                     <div className="relative">
                         <input className="w-[308px] text-sm text-[#303030] leading-5 py-[18px] pl-6 border border-[#CCC] rounded-[10px]" type="text" placeholder="Search Products ..." />
-                        <IoSearchSharp className="text-2xl absolute top-[50%] right-6 translate-y-[-50%]" />
+
+                        <TfiSearch className="text-lg font-thin absolute top-[50%] right-6 translate-y-[-50%]" />
                     </div>
 
                     <div className="flex gap-[90px] items-center relative">
