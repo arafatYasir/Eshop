@@ -9,7 +9,7 @@ import newProducts from "../../public/products/NewProducts";
 
 const NewProducts = () => {
     const [showingProducts, setShowingProducts] = useState(newProducts.filter(p => p.id <= 5));
-    // const [selectedCategory, setSelectedCategory] = useState(null)
+    const [selectedCategory, setSelectedCategory] = useState("Mobiles")
 
     const handleLoadMore = () => {
         setShowingProducts(newProducts);
@@ -24,9 +24,11 @@ const NewProducts = () => {
                     </div>
                     <div className="flex items-center gap-4">
                         <p className="text-[#303030] font-['Montserrat'] leading-6">Sort by</p>
-                        <select className="w-[233px] text-[#FF624C] font-['Montserrat'] font-bold leading-6" name="categories" >
-                            <option value="computers">Computers</option>
-                            <option value="mobiles">Mobiles</option>
+                        <select className="w-[233px] text-[#FF624C] font-['Montserrat'] font-bold leading-6" name="categories" value={selectedCategory} onChange={e => setSelectedCategory(e.target.value)}>
+                            <option value="computers" className="text-black">Computers</option>
+                            <option value="mobiles" className="text-black">Mobiles</option>
+                            <option value="tablets" className="text-black">Tablets</option>
+                            <option value="accessories" className="text-black">Accessories</option>
                         </select>
                     </div>
                 </div>
