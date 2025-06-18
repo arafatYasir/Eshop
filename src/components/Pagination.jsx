@@ -62,7 +62,8 @@ const Pagination = ({ totalItems, itemsPerPage, currentPage, onPageChange }) => 
                     <button
                         key={idx}
                         onClick={() => onPageChange(page)}
-                        className={`py-[9px] px-[18px] text-xl font-semibold leading-[30px] font-['Poppins'] rounded-[5px] ${currentPage === page ? "bg-[#FF624C] text-white" : ""} cursor-pointer`}
+                        className={`py-[9px] px-[18px] text-xl font-semibold leading-[30px] font-['Poppins'] rounded-[5px] ${currentPage === page ? "bg-[#FF624C] text-white" : ""} ${page === "..." ? "cursor-default" : "cursor-pointer"}`}
+                        disabled={page === "..."}
                     >
                         {page}
                     </button>
