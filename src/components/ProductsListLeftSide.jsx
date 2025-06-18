@@ -136,11 +136,11 @@ const ProductsListLeftSide = () => {
     ]
 
     return (
-        <div className="w-[355px] p-12 bg-[#F4F4F4] rounded-[25px]">
+        <div className="min-w-[353px] p-12 bg-[#F4F4F4] rounded-[25px]" >
             {/* Categories */}
-            <div className="flex items-center justify-between mb-5">
+            <div className="flex items-center cursor-pointer justify-between mb-5" onClick={() => setShowCategories(!showCategories)}>
                 <h3 className="text-xl text-[#303030] font-['Montserrat'] font-bold leading-[30px]">Categories</h3>
-                <button className={`${showCategories ? "rotate-180" : ""} transition cursor-pointer text-sm text-[#303030]`} onClick={() => setShowCategories(!showCategories)}><TfiAngleDown /></button>
+                <button className={`${showCategories ? "rotate-180" : ""} transition text-sm cursor-pointer text-[#303030]`} ><TfiAngleDown /></button>
             </div>
             {showCategories && (
                 <ul className="flex flex-col gap-3 border-b border-[#CFCFCF] pb-10">
@@ -155,9 +155,9 @@ const ProductsListLeftSide = () => {
 
 
             {/* Brands */}
-            <div className="flex items-center justify-between mt-10 mb-5">
+            <div className="flex items-center justify-between mt-10 mb-5 cursor-pointer" onClick={() => setShowBrands(!showBrands)}>
                 <h3 className="text-xl text-[#303030] font-['Montserrat'] font-bold leading-[30px]">Brands</h3>
-                <button className={`${showBrands ? "rotate-180" : ""} transition cursor-pointer text-sm text-[#303030]`} onClick={() => setShowBrands(!showBrands)}><TfiAngleDown /></button>
+                <button className={`${showBrands ? "rotate-180" : ""} transition  text-sm text-[#303030]`}><TfiAngleDown /></button>
             </div>
 
             {showBrands && (
@@ -181,9 +181,9 @@ const ProductsListLeftSide = () => {
             )}
 
             {/* Price */}
-            <div className="flex items-center justify-between mt-10 mb-5">
+            <div className="flex items-center justify-between mt-10 mb-5 cursor-pointer" onClick={() => setShowPrice(!showPrice)}>
                 <h3 className="text-xl text-[#303030] font-['Montserrat'] font-bold leading-[30px]">Price</h3>
-                <button className={`${showPrice ? "rotate-180" : ""} transition cursor-pointer text-sm text-[#303030]`} onClick={() => setShowPrice(!showPrice)}><TfiAngleDown /></button>
+                <button className={`${showPrice ? "rotate-180" : ""} transition text-sm text-[#303030]`}><TfiAngleDown /></button>
             </div>
 
             {showPrice && (
