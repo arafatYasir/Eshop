@@ -81,17 +81,29 @@ const BottomPart = () => {
                             </button>
                             {isProductsDropdownOpen && (
                                 <div className="absolute top-[80%] left-0 mt-2 w-64 z-50 bg-white rounded-xl shadow-lg border border-gray-100 p-4 space-y-2 font-['Poppins']">
-                                    <a href="#" className="block px-4 py-2 rounded-lg hover:bg-gray-100 transition duration-150">
-                                        <div className="text-sm font-semibold text-[#303030]">Product 1</div>
-                                    </a>
+                                    <Link 
+                                        to="/products-list" 
+                                        className="block px-4 py-2 rounded-lg hover:bg-gray-100 transition duration-150"
+                                        onClick={() => setIsProductsDropdownOpen(false)}
+                                    >
+                                        <p className="text-sm font-semibold text-[#303030]">Product 1</p>
+                                    </Link>
 
-                                    <a href="#" className="block px-4 py-2 rounded-lg hover:bg-gray-100 transition duration-150">
-                                        <div className="text-sm font-semibold text-[#303030]">Product 2</div>
-                                    </a>
+                                    <Link 
+                                        to="/products-list" 
+                                        className="block px-4 py-2 rounded-lg hover:bg-gray-100 transition duration-150"
+                                        onClick={() => setIsProductsDropdownOpen(false)}
+                                    >
+                                        <p className="text-sm font-semibold text-[#303030]">Product 2</p>
+                                    </Link>
 
-                                    <a href="#" className="block px-4 py-2 rounded-lg hover:bg-gray-100 transition duration-150">
-                                        <div className="text-sm font-semibold text-[#303030]">Product 3</div>
-                                    </a>
+                                    <Link 
+                                        to="/products-list" 
+                                        className="block px-4 py-2 rounded-lg hover:bg-gray-100 transition duration-150"
+                                        onClick={() => setIsProductsDropdownOpen(false)}
+                                    >
+                                        <p className="text-sm font-semibold text-[#303030]">Product 3</p>
+                                    </Link>
                                 </div>
                             )}
                         </li>

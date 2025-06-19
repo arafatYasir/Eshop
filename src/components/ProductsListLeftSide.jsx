@@ -47,7 +47,6 @@ const ProductsListLeftSide = () => {
         }
     }
 
-
     const minPercent = (minValue / 5000) * 100;
     const maxPercent = (maxValue / 5000) * 100;
 
@@ -136,7 +135,7 @@ const ProductsListLeftSide = () => {
     ]
 
     return (
-        <div className="min-w-[353px] p-12 bg-[#F4F4F4] rounded-[25px]" >
+        <div className="min-w-[354px] p-12 bg-[#F4F4F4] rounded-[25px]" >
             {/* Categories */}
             <div className="flex items-center cursor-pointer justify-between mb-5" onClick={() => setShowCategories(!showCategories)}>
                 <h3 className="text-xl text-[#303030] font-['Montserrat'] font-bold leading-[30px]">Categories</h3>
@@ -146,7 +145,7 @@ const ProductsListLeftSide = () => {
                 <ul className="flex flex-col gap-3 border-b border-[#CFCFCF] pb-10">
                     {categories.map(category => (
                         <li key={category.id} className="flex items-center gap-2">
-                            <input type="checkbox" id={category.title} />
+                            <input className="" type="checkbox" id={category.title} />
                             <label className="text-[#303030] font-['Montserrat'] leading-6" htmlFor={category.title}>{category.title}</label>
                         </li>
                     ))}
@@ -201,6 +200,7 @@ const ProductsListLeftSide = () => {
                             value={maxInput}
                             onChange={handleMaxInputChange}
                         />
+                        
                     </div>
 
                     <div className="mt-[30px]">

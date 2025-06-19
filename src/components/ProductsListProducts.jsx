@@ -6,7 +6,8 @@ import MenuIcon from "../icons/MenuIcon";
 
 const ProductsListProducts = () => {
     const [currentPage, setCurrentPage] = useState(1);
-    const [sortBy, setSortBy] = useState("Popularity");
+    const [sortByCategories, setSortByCategories] = useState("Popularity");
+    const [sortByPrice, setSortByPrice] = useState("Price Low-to-High");
 
     const itemsRange = {
         start: 0,
@@ -28,18 +29,17 @@ const ProductsListProducts = () => {
 
                     <div className="flex gap-[45px]">
                         <div className="after:content-[''] relative after:absolute after:w-[1px] after:h-[32px] after:bg-[#CBCBCB] after:top-1/2 after:-right-6 after:-translate-y-1/2">
-                            <select className="w-[150px] text-[#FF624C] font-['Montserrat'] font-bold leading-6 " name="categories" value={sortBy} onChange={e => setSortBy(e.target.value)}>
+                            <select className="w-[150px] text-[#FF624C] font-['Montserrat'] font-bold leading-6 " name="categories" value={sortByCategories} onChange={e => setSortByCategories(e.target.value)}>
                                 <option value="popularity" className="text-black">Popularity</option>
-                                <option value="priceLowToHigh" className="text-black">Price</option>
-                                <option value="priceHighToLow" className="text-black">Availability</option>
+                                <option value="rating" className="text-black">Rating</option>
+                                <option value="availability" className="text-black">Availability</option>
                             </select>
                         </div>
 
                         <div className="after:content-[''] relative after:absolute after:w-[1px] after:h-[32px] after:bg-[#CBCBCB] after:top-1/2 after:-right-6 after:-translate-y-1/2">
-                            <select className="w-[150px] text-[#FF624C] font-['Montserrat'] font-bold leading-6 " name="categories" value={sortBy} onChange={e => setSortBy(e.target.value)}>
-                                <option value="popularity" className="text-black">Popularity</option>
-                                <option value="priceLowToHigh" className="text-black">Price</option>
-                                <option value="priceHighToLow" className="text-black">Availability</option>
+                            <select className="w-[216px] text-[#FF624C] font-['Montserrat'] font-bold leading-6 " name="categories" value={sortByPrice} onChange={e => setSortByPrice(e.target.value)}>
+                                <option value="priceLowToHigh" className="text-black">Price Low-to-High</option>
+                                <option value="priceHighToLow" className="text-black">Price High-to-Low</option>
                             </select>
                         </div>
 
