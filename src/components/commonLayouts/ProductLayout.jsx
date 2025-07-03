@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { FiShare2 } from "react-icons/fi";
 import { IoIosHeartEmpty, IoMdStar } from "react-icons/io";
 import { IoCartOutline } from "react-icons/io5";
+import { Link } from "react-router";
 
 const ProductLayout = ({ discountTag = false, discountPercent, category, title, rating = 1, totalRatings, price, previousPrice }) => {
     const [ratingStars, setRatingStars] = useState([]);
@@ -12,7 +13,7 @@ const ProductLayout = ({ discountTag = false, discountPercent, category, title, 
     }, [rating])
 
     return (
-        <div className="p-6 group cursor-pointer border border-transparent hover:border-[#C3C3C3] rounded-[10px] max-w-[285px] relative">
+        <Link to="/product-details" className="p-6 group cursor-pointer border border-transparent hover:border-[#C3C3C3] rounded-[10px] max-w-[285px] relative block">
             <div className="relative">
                 <img className="w-full" src="images/product-image.png" alt="product image" />
 
@@ -51,7 +52,7 @@ const ProductLayout = ({ discountTag = false, discountPercent, category, title, 
             {discountTag && (
                 <div className="absolute top-4 right-4 text-white font-['Montserrat'] font-semibold leading-6 py-[7px] px-5 bg-[#FF624C] rounded-[5px]">{discountPercent}%</div>
             )}
-        </div>
+        </Link>
     );
 };
 
