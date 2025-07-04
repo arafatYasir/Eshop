@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
+import FullscreenIcon from "../icons/FullscreenIcon";
 
 const ProductDetailsCarousel = () => {
     const [nav1, setNav1] = useState(null);
     const [nav2, setNav2] = useState(null);
+    const [showFullScreen, setShowFullScreen] = useState(false);
     let sliderRef1 = useRef(null);
     let sliderRef2 = useRef(null);
 
@@ -29,57 +31,62 @@ const ProductDetailsCarousel = () => {
     return (
         <div>
             {/* First Slider */}
-            <h4>First Slider</h4>
-            <Slider className="w-[833px] bg-[#D9D9D9]" {...settings} asNavFor={nav2} ref={slider => (sliderRef1 = slider)}>
-                <div className="rounded-[25px]">
-                    <img className="rounded-[25px]" src="/images/product-details-image.png" alt="Product Image" />
-                </div>
-                <div>
+            <Slider className="w-[833px]" {...settings} asNavFor={nav2} ref={slider => (sliderRef1 = slider)}>
+                <div className="relative">
                     <img src="/images/product-details-image.png" alt="Product Image" />
+                    <div
+                        className="absolute top-2 right-2 cursor-pointer"
+                        onClick={() => setShowFullScreen(true)}
+                    >
+                        <FullscreenIcon />
+                    </div>
                 </div>
-                <div>
+                <div className="relative">
                     <img src="/images/product-details-image.png" alt="Product Image" />
+                    <div
+                        className="absolute top-2 right-2 cursor-pointer"
+                        onClick={() => setShowFullScreen(true)}
+                    >
+                        <FullscreenIcon />
+                    </div>
                 </div>
-                <div>
+                <div className="relative">
                     <img src="/images/product-details-image.png" alt="Product Image" />
-                </div>
-                <div>
-                    <img src="/images/product-details-image.png" alt="Product Image" />
-                </div>
-                <div>
-                    <img src="/images/product-details-image.png" alt="Product Image" />
-                </div>
-                <div>
-                    <img src="/images/product-details-image.png" alt="Product Image" />
+                    <div
+                        className="absolute top-2 right-2 cursor-pointer"
+                        onClick={() => setShowFullScreen(true)}
+                    >
+                        <FullscreenIcon />
+                    </div>
                 </div>
             </Slider>
 
             {/* Second Slider */}
-            <h4>Second Slider</h4>
             <Slider
+                className="w-[330px] mt-8"
                 asNavFor={nav1}
                 ref={slider => (sliderRef2 = slider)}
                 {...settings2}
             >
-                <div>
-                    <h3>1</h3>
+                <div className="">
+                    <img src="/images/product-details-preview.png" alt="Product Details Preview" />
                 </div>
-                <div>
-                    <h3>2</h3>
+                <div className="">
+                    <img src="/images/product-details-preview.png" alt="Product Details Preview" />
                 </div>
-                <div>
-                    <h3>3</h3>
-                </div>
-                <div>
-                    <h3>4</h3>
-                </div>
-                <div>
-                    <h3>5</h3>
-                </div>
-                <div>
-                    <h3>6</h3>
+                <div className="">
+                    <img src="/images/product-details-preview.png" alt="Product Details Preview" />
                 </div>
             </Slider>
+
+            {/* Fullscreen Modal */}
+            {showFullScreen && (
+                <div className="fixed inset-0 bg-black/50 w-full h-screen flex items-center justify-center">
+                    <img className="scale-120" src="/images/product-details-image.png" alt="Product Image" />
+
+                    <button className="absolute top-[13%] right-[21%] text-2xl cursor-pointer hover:font-bold transition" onClick={() => setShowFullScreen(false)}>&#10005;</button>
+                </div>
+            )}
         </div>
     );
 };

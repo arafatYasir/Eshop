@@ -11,7 +11,10 @@ const ProductDetailsPage = () => {
                 <span className="font-bold">NexSUS ROCK Strix Scar 17 Gaming Laptop</span>
             </div>
 
-            <ProductDetailsCarousel />
+            <div>
+                <ProductDetailsCarousel />
+                
+            </div>
         </Container>
     );
 };
