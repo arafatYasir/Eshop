@@ -11,6 +11,7 @@ import { useState } from "react";
 import { Bounce, toast, ToastContainer } from "react-toastify";
 import Button from "../components/Button";
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import ProductAdditionalInformations from "../components/ProductAdditionalInformations";
 
 const ProductDetailsPage = () => {
     const [quantity, setQuantity] = useState(1);
@@ -85,7 +86,7 @@ const ProductDetailsPage = () => {
             </div>
 
             {/* Facilities & Product Quantity */}
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between mt-[51px]">
                 {/* Facilities */}
                 <div className="flex gap-12">
                     <div className="flex items-center gap-6">
@@ -130,9 +131,13 @@ const ProductDetailsPage = () => {
                 <div className="flex gap-4">
                     <Button value="Buy Now"  />
 
-                    <button className="p-[17px] border border-[#FF624C] rounded-[10px]"><AiOutlineShoppingCart className="text-4xl text-[#FF624C]" /></button>
+                    <div className="w-[62px] h-[62px] flex items-center justify-center border border-[#FF624C] rounded-[10px]"><AiOutlineShoppingCart className="text-3xl text-[#FF624C]" /></div>
                 </div>
             </div>
+
+            {/* Product Additional Informations */}
+            <ProductAdditionalInformations />
+
             <ToastContainer />
         </Container>
     );
