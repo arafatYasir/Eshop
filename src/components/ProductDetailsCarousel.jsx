@@ -63,7 +63,7 @@ const ProductDetailsCarousel = () => {
 
             {/* Second Slider */}
             <Slider
-                className="w-[330px] mt-8"
+                className="w-[350px] mt-8"
                 asNavFor={nav1}
                 ref={slider => (sliderRef2 = slider)}
                 {...settings2}
@@ -84,7 +84,7 @@ const ProductDetailsCarousel = () => {
                 <div className="fixed inset-0 bg-black/50 w-full h-screen flex items-center justify-center">
                     <img className="scale-120" src="/images/product-details-image.png" alt="Product Image" />
 
-                    <button className="absolute top-[13%] right-[21%] text-2xl cursor-pointer hover:font-bold transition" onClick={() => setShowFullScreen(false)}>&#10005;</button>
+                    <button className="absolute top-[13%] right-[21%] text-2xl cursor-pointer font-bold transition text-[#FF624C]" onClick={() => setShowFullScreen(false)}>&#10005;</button>
                 </div>
             )}
         </div>
