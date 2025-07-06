@@ -69,6 +69,7 @@ const FeaturedProducts = () => {
         nextArrow: <SampleNextArrow />,
         prevArrow: <SamplePrevArrow />,
     };
+    
     return (
         <div className="mb-20">
             <Container>

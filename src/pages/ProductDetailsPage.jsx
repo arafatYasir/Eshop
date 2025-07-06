@@ -1,7 +1,6 @@
 import Container from "../components/commonLayouts/Container"
 import ProductDetails from "../components/ProductDetails";
 import ProductDetailsCarousel from "../components/ProductDetailsCarousel";
-import HeadPhoneIcon from "../icons/HeadPhoneIcon"
 import SecurityIcon from "../icons/SecurityIcon"
 import DeliveryIcon from "../icons/DeliveryIcon";
 import ReturnIcon from "../icons/ReturnIcon";
@@ -12,6 +11,8 @@ import { Bounce, toast, ToastContainer } from "react-toastify";
 import Button from "../components/Button";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import ProductAdditionalInformations from "../components/ProductAdditionalInformations";
+import NewProducts from "../components/NewProducts";
+import RelatedProducts from "../components/RelatedProducts";
 
 const ProductDetailsPage = () => {
     const [quantity, setQuantity] = useState(1);
@@ -137,6 +138,9 @@ const ProductDetailsPage = () => {
 
             {/* Product Additional Informations */}
             <ProductAdditionalInformations />
+
+            {/* Related Products */}
+            <RelatedProducts />
 
             <ToastContainer />
         </Container>

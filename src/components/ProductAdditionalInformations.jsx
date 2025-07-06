@@ -4,7 +4,7 @@ const ProductAdditionalInformations = () => {
     const [currentTab, setCurrentTab] = useState("specification");
 
     return (
-        <div className="mt-[100px] mb-16">
+        <div className="mt-[100px] mb-16 border-b border-[#CBCBCB] pb-20">
             <div className="flex gap-12 items-center">
                 <button
                     className={`text-[#303030] text-2xl font-['Poppins']  font-semibold opacity-25 ${currentTab === "description" ? "opacity-100 border-b-[4px] border-[#FF624C] pb-2" : ""} cursor-pointer`}
