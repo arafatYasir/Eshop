@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Container from "../components/commonLayouts/Container";
 import BillingDetails from "../components/BillingDetails";
+import OrderSummary from "../components/OrderSummary";
 
 const CheckoutPage = () => {
     const [activeTab, setActiveTab] = useState("Information");
@@ -55,8 +56,13 @@ const CheckoutPage = () => {
                     </div>
                 </div>
 
-                {/* Billing Details */}
-                <BillingDetails />
+                <div className="flex items-start justify-between my-20">
+                    {/* Billing Details */}
+                    <BillingDetails />
+
+                    {/* Order Summary */}
+                    <OrderSummary />
+                </div>
             </div>
         </Container>
     );
