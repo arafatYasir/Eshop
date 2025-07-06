@@ -58,7 +58,7 @@ const ProductAdditionalInformations = () => {
                         </p>
                         <p className="flex gap-[87px]">
                             <span className="text-[#303030] font-['Poppins'] text-xl font-semibold leading-[30px] w-[101px]">Connection</span>
-                            <span className="text-[#303030] font-['Montserrat'] text-xl leading-[30px] opacity-75 max-w-[531px]">Wi-Fi 6 (802.11ax), Bluetooth 5.1, Gigabit Ethernet, HDMI 2.0b, USB 3.2 Gen 2 Type-C with DisplayPort 1.4 and Power Delivery, 3 x USB 3.2 Gen 1 Type-A, 3.5mm audio</span>
+                            <span className="text-[#303030] font-['Montserrat'] text-xl leading-[30px] opacity-75 max-w-[550px]">Wi-Fi 6 (802.11ax), Bluetooth 5.1, Gigabit Ethernet, HDMI 2.0b, USB 3.2 Gen 2 Type-C with DisplayPort 1.4 and Power Delivery, 3 x USB 3.2 Gen 1 Type-A, 3.5mm audio</span>
                         </p>
                         <p className="flex gap-[87px]">
                             <span className="text-[#303030] font-['Poppins'] text-xl font-semibold leading-[30px] w-[101px]">Keyboard</span>
@@ -66,7 +66,7 @@ const ProductAdditionalInformations = () => {
                         </p>
                         <p className="flex gap-[87px]">
                             <span className="text-[#303030] font-['Poppins'] text-xl font-semibold leading-[30px] w-[101px]">Battery</span>
-                            <span className="text-[#303030] font-['Montserrat'] text-xl leading-[30px] opacity-75 max-w-[531px]">4-cell 90Wh lithium battery (up to 8 hours battery life)</span>
+                            <span className="text-[#303030] font-['Montserrat'] text-xl leading-[30px] opacity-75 max-w-[550px]">4-cell 90Wh lithium battery (up to 8 hours battery life)</span>
                         </p>
                         <p className="flex gap-[87px]">
                             <span className="text-[#303030] font-['Poppins'] text-xl font-semibold leading-[30px] w-[101px]">Dimensions</span>

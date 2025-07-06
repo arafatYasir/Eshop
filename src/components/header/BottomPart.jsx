@@ -10,6 +10,7 @@ const BottomPart = () => {
     const productsDropdownRef = useRef(null);
     const categoriesDropdownRef = useRef(null);
 
+
     useEffect(() => {
         const handleCloseDropdown1 = (e) => {
             if(categoriesDropdownRef.current && !categoriesDropdownRef.current.contains(e.target)) {
