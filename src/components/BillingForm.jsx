@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { TfiAngleDown } from "react-icons/tfi";
 
-const BillingDetails = () => {
+const BillingForm = () => {
     const [selectedCountry, setSelectedCountry] = useState("");
     const [selectedState, setSelectedState] = useState("");
     const [selectedCity, setSelectedCity] = useState("");
@@ -149,4 +149,4 @@ const BillingDetails = () => {
     );
 };
 
-export default BillingDetails;
+export default BillingForm;
