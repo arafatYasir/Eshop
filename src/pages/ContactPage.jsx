@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import Container from "../components/commonLayouts/Container"
 import ContactForm from "../components/ContactForm";
+import AdditionalContactInfo from "../components/AdditionalContactInfo";
 const ContactPage = () => {
     return (
         <Container>
@@ -13,7 +14,10 @@ const ContactPage = () => {
                 <span className="font-bold">Contact</span>
             </div>
 
-            <ContactForm />
+            <div className="flex justify-between items-start mt-12 mb-20">
+                <ContactForm />
+                <AdditionalContactInfo />
+            </div>
         </Container>
     );
 };

@@ -34,7 +34,7 @@ const Footer = () => {
                             <li className="relative">
                                 <BsFillTelephoneFill className="text-[#303030] opacity-[75%]" />
                                 <Link
-                                    className="absolute top-1/2 -translate-y-1/2 left-[28px] text-[#303030] font-['Montserrat'] leading-6"
+                                    className="absolute top-1/2 -translate-y-1/2 left-[27px] text-[#303030] font-['Montserrat'] leading-6"
                                     to="tel:+1 (555) 123-4567"
                                 >
                                     +1 (555) 123-4567
@@ -43,7 +43,7 @@ const Footer = () => {
                             <li className="relative">
                                 <IoIosMail className="text-[#303030] opacity-[75%]" />
                                 <Link
-                                    className="absolute top-1/2 -translate-y-1/2 left-[28px] text-[#303030] font-['Montserrat'] leading-6"
+                                    className="absolute top-1/2 -translate-y-1/2 left-[27px] text-[#303030] font-['Montserrat'] leading-6"
                                     to="mailto:information@eshop.com"
                                 >
                                     information@eshop.com
@@ -52,7 +52,7 @@ const Footer = () => {
                             <li className="relative">
                                 <FaLocationDot className="text-[#303030] opacity-[75%]" />
                                 <Link
-                                    className="absolute top-1/2 -translate-y-1/2 left-[28px] text-[#303030] font-['Montserrat'] leading-6"
+                                    className="absolute top-1/2 -translate-y-1/2 left-[27px] text-[#303030] font-['Montserrat'] leading-6"
                                     to="https://maps.app.goo.gl/DipLafPdoiQoKjnv7"
                                     target="_blank"
                                 >
