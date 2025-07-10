@@ -1,6 +1,9 @@
 import { Link } from "react-router";
 import Container from "../components/commonLayouts/Container";
 import CartProduct from "../components/CartProduct";
+import cartProducts from "../../public/products/CartProducts";
+import Button from "../components/Button";
+import Facilities from "../components/Facilities";
 
 const CartPage = () => {
     return (
@@ -19,7 +22,19 @@ const CartPage = () => {
                 <span className="w-[16.5%] inline-block">Total</span>
             </div>
 
-            <CartProduct />
+            <div>
+                {cartProducts.map(product => (
+                    <CartProduct key={product.id} category={product.category} title={product.title} variant={product.variant} price={product.price} totalPrice={product.price} />
+                ))}
+            </div>
+
+            <div className="text-right mt-8">
+                <Button value="Update Cart" paddingX="40px" paddingY="16px" />
+            </div>
+
+            <div className="border-t mt-[100px] border-[#CBCBCB] ">
+                <Facilities />
+            </div>
         </Container>
     );
 };
