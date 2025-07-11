@@ -7,7 +7,7 @@ const AdditionalContactInfo = () => {
     return (
         <div className="w-[594px] h-[496px] rounded-[25px] bg-[#F4F4F4] p-10">
             <h4 className="text-2xl text-[#303030] font-['Poppins'] font-semibold leading-[30px]">Let’s Keep in Touch!</h4>
-            <p className="text-xl text-[#303030] font-['Montserrat'] leading-[30px] max-w-[467px] mt-4">We would love to hear from you. Contact us for
+            <p className="text-xl text-[#303030] font-['Montserrat'] leading-[30px] max-w-[467px] mt-4 opacity-75">We would love to hear from you. Contact us for
                 any inquiries you might have for us.</p>
 
 
