@@ -71,7 +71,7 @@ const TopPart = () => {
                         {/* Currency selection */}
                         <div className="relative after:content-[''] after:absolute after:w-[1px] after:h-[32px] after:top-[50%] after:right-[-25px] after:bg-[#CBCBCB] after:-translate-y-1/2">
                             <select
-                                className="w-[55px] appearance-none cursor-pointer"
+                                className="w-[55px] appearance-none cursor-pointer outline-none"
                                 name="currency"
                                 value={currency?.value || ""}
                                 onChange={(e) => {

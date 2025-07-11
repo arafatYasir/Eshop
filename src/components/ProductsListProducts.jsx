@@ -3,6 +3,7 @@ import productsList from "../../public/products/ProductsListPageProducts";
 import ProductLayout from "./commonLayouts/ProductLayout";
 import Pagination from "./Pagination";
 import MenuIcon from "../icons/MenuIcon";
+import { TfiAngleDown } from "react-icons/tfi";
 
 const ProductsListProducts = () => {
     const [currentPage, setCurrentPage] = useState(1);
@@ -29,18 +30,20 @@ const ProductsListProducts = () => {
 
                     <div className="flex gap-[45px]">
                         <div className="after:content-[''] relative after:absolute after:w-[1px] after:h-[32px] after:bg-[#CBCBCB] after:top-1/2 after:-right-6 after:-translate-y-1/2">
-                            <select className="w-[150px] text-[#FF624C] font-['Montserrat'] font-bold leading-6 " name="categories" value={sortByCategories} onChange={e => setSortByCategories(e.target.value)}>
+                            <select className="w-[150px] text-[#FF624C] font-['Montserrat'] font-bold leading-6 cursor-pointer appearance-none outline-none" name="categories" value={sortByCategories} onChange={e => setSortByCategories(e.target.value)}>
                                 <option value="popularity" className="text-black">Popularity</option>
                                 <option value="rating" className="text-black">Rating</option>
                                 <option value="availability" className="text-black">Availability</option>
                             </select>
+                            <TfiAngleDown className="absolute text-sm top-1/2 -translate-1/2 right-0 pointer-events-none text-[#303030]" />
                         </div>
 
                         <div className="after:content-[''] relative after:absolute after:w-[1px] after:h-[32px] after:bg-[#CBCBCB] after:top-1/2 after:-right-6 after:-translate-y-1/2">
-                            <select className="w-[216px] text-[#FF624C] font-['Montserrat'] font-bold leading-6 " name="categories" value={sortByPrice} onChange={e => setSortByPrice(e.target.value)}>
+                            <select className="w-[216px] text-[#FF624C] font-['Montserrat'] font-bold leading-6 cursor-pointer appearance-none outline-none" name="categories" value={sortByPrice} onChange={e => setSortByPrice(e.target.value)}>
                                 <option value="priceLowToHigh" className="text-black">Price Low-to-High</option>
                                 <option value="priceHighToLow" className="text-black">Price High-to-Low</option>
                             </select>
+                            <TfiAngleDown className="absolute text-sm top-1/2 -translate-1/2 right-0 pointer-events-none text-[#303030]" />
                         </div>
 
                         <MenuIcon />

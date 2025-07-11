@@ -141,6 +141,7 @@ const ProductsListLeftSide = () => {
                 <h3 className="text-xl text-[#303030] font-['Montserrat'] font-bold leading-[30px]">Categories</h3>
                 <button className={`${showCategories ? "rotate-180" : ""} transition text-sm cursor-pointer text-[#303030]`} ><TfiAngleDown /></button>
             </div>
+
             {showCategories && (
                 <ul className="flex flex-col gap-3 border-b border-[#CFCFCF] pb-10">
                     {categories.map(category => (
@@ -156,7 +157,7 @@ const ProductsListLeftSide = () => {
             {/* Brands */}
             <div className="flex items-center justify-between mt-10 mb-5 cursor-pointer" onClick={() => setShowBrands(!showBrands)}>
                 <h3 className="text-xl text-[#303030] font-['Montserrat'] font-bold leading-[30px]">Brands</h3>
-                <button className={`${showBrands ? "rotate-180" : ""} transition  text-sm text-[#303030]`}><TfiAngleDown /></button>
+                <button className={`${showBrands ? "rotate-180" : ""} transition cursor-pointer text-sm text-[#303030]`}><TfiAngleDown /></button>
             </div>
 
             {showBrands && (
@@ -188,19 +189,24 @@ const ProductsListLeftSide = () => {
             {showPrice && (
                 <div>
                     <div className="flex gap-[11px]">
-                        <input
-                            className="w-[123px] h-[74px] text-center border border-[#ABABAB] rounded-[10px] focus:outline-none font-['Montserrat'] text-[#303030] leading-6"
-                            type="text"
-                            value={minInput}
-                            onChange={handleMinInputChange}
-                        />
-                        <input
-                            className="w-[123px] h-[74px] text-center border border-[#ABABAB] rounded-[10px] focus:outline-none font-['Montserrat'] text-[#303030] leading-6"
-                            type="text"
-                            value={maxInput}
-                            onChange={handleMaxInputChange}
-                        />
-                        
+                        <div className="relative">
+                            <input
+                                className="w-[123px] h-[74px] text-center border border-[#ABABAB] rounded-[10px] focus:outline-none font-['Montserrat'] text-[#303030] leading-6"
+                                type="text"
+                                value={minInput}
+                                onChange={handleMinInputChange}
+                            />
+                            <span className="absolute top-[25px] left-[30px] font-['Montserrat'] text-[#303030] leading-6">$</span>
+                        </div>
+                        <div className="relative">
+                            <input
+                                className="w-[123px] h-[74px] text-center border border-[#ABABAB] rounded-[10px] focus:outline-none font-['Montserrat'] text-[#303030] leading-6"
+                                type="text"
+                                value={maxInput}
+                                onChange={handleMaxInputChange}
+                            />
+                            <span className="absolute top-[25px] left-[30px] font-['Montserrat'] text-[#303030] leading-6">$</span>
+                        </div>
                     </div>
 
                     <div className="mt-[30px]">
