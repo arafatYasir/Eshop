@@ -1,4 +1,4 @@
-import { HiArrowLongRight } from "react-icons/hi2";
+import LongArrowIcon from "../icons/LongArrowIcon"
 import newProducts from "../../public/products/NewProducts";
 import Container from "./commonLayouts/Container";
 import ProductLayout from "./commonLayouts/ProductLayout";
@@ -12,7 +12,7 @@ const RelatedProducts = () => {
             <Container>
                 <div className="flex items-center justify-between">
                     <h2 className="text-4xl text-[#303030] font-['Poppins'] leading-[46px] font-semibold">Related Products</h2>
-                    <p className="flex items-center text-[#FF624C] font-['Montserrat'] font-bold leading-6 gap-4 cursor-pointer">View All <HiArrowLongRight className="text-3xl" /></p>
+                    <p className="flex items-center text-[#FF624C] font-['Montserrat'] font-bold leading-6 gap-4 cursor-pointer">View All <LongArrowIcon /></p>
                 </div>
                 <div className="mt-12 flex items-center justify-between flex-wrap gap-[20px]">
                     {
