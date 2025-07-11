@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Button from "./Button";
 import { useState } from "react";
 import newProducts from "../../public/products/NewProducts";
+import { TfiAngleDown } from "react-icons/tfi";
 
 
 const NewProducts = () => {
@@ -22,14 +23,16 @@ const NewProducts = () => {
                     <div>
                         <h2 className="text-4xl text-[#303030] font-['Poppins'] leading-[46px] font-semibold">New Products</h2>
                     </div>
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-4 relative">
                         <p className="text-[#303030] font-['Montserrat'] leading-6">Sort by</p>
-                        <select className="w-[233px] text-[#FF624C] font-['Montserrat'] font-bold leading-6" name="categories" value={selectedCategory} onChange={e => setSelectedCategory(e.target.value)}>
+                        <select className="w-[233px] text-[#FF624C] font-['Montserrat'] font-bold leading-6 outline-none cursor-pointer appearance-none" name="categories" value={selectedCategory} onChange={e => setSelectedCategory(e.target.value)}>
+                            <option value="" className="text-black">All Categories</option>
                             <option value="computers" className="text-black">Computers</option>
                             <option value="mobiles" className="text-black">Mobiles</option>
                             <option value="tablets" className="text-black">Tablets</option>
                             <option value="accessories" className="text-black">Accessories</option>
                         </select>
+                        <TfiAngleDown className="absolute text-sm top-1/2 -translate-1/2 right-0 pointer-events-none text-[#303030]" />
                     </div>
                 </div>
                 <div className="mt-12 flex items-center justify-between flex-wrap gap-[20px]">

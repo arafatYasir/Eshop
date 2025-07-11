@@ -4,11 +4,11 @@ import TopPart from "./TopPart";
 
 const Header = () => {
     return (
-            <header>
-                <TopPart />
-                <MiddlePart />
-                <BottomPart />
-            </header>
+        <header>
+            <TopPart />
+            <MiddlePart />
+            <BottomPart />
+        </header>
     );
 };
 

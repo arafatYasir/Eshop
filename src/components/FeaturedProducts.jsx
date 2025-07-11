@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { LiaAngleLeftSolid, LiaAngleRightSolid } from "react-icons/lia";
 import featuredProducts from "../../public/products/FeaturedProducts";
+import LongArrowIcon from "../icons/LongArrowIcon";
 
 function SampleNextArrow(props) {
     const { className, style, onClick } = props;
@@ -26,7 +27,7 @@ function SampleNextArrow(props) {
             className={className}
             onClick={onClick}
         >
-            <LiaAngleRightSolid className="text-[#303030] absolute left-1/2 -translate-x-1/2" size={20} />
+            <LiaAngleRightSolid className="text-[#303030] absolute left-1/2 -translate-x-1/2" size={16} />
         </div>
     );
 }
@@ -50,7 +51,7 @@ function SamplePrevArrow(props) {
             }}
             onClick={onClick}
         >
-            <LiaAngleLeftSolid className="text-[#303030] absolute left-1/2 -translate-x-1/2" size={20} />
+            <LiaAngleLeftSolid className="text-[#303030] absolute left-1/2 -translate-x-1/2" size={16} />
         </div>
     );
 }
@@ -75,7 +76,7 @@ const FeaturedProducts = () => {
             <Container>
                 <div className="flex justify-between items-center">
                     <h2 className="text-4xl text-[#303030] font-['Poppins'] leading-[46px] font-semibold">Featured Products</h2>
-                    <p className="flex items-center text-[#FF624C] font-['Montserrat'] font-bold leading-6 gap-4">View All <HiArrowLongRight className="text-2xl" /></p>
+                    <p className="flex items-center text-[#FF624C] font-['Montserrat'] font-bold leading-6 gap-4">View All <LongArrowIcon /></p>
                 </div>
                 <Slider {...settings} className="mt-12 px-9">
                     {

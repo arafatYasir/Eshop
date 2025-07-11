@@ -16,6 +16,7 @@ function SampleNextArrow(props) {
             style={{
                 ...style,
                 display: "flex",
+                background: "#FFF",
                 justifyContent: "center",
                 alignItems: "center",
                 width: "72px",
@@ -37,7 +38,7 @@ const SpringSale = () => {
     const [timerLeft, setTimerLeft] = useState(calculateTimeLeft());
 
     function calculateTimeLeft() {
-        const saleEndDate = new Date("June 20, 2025 12:00 PM +0600");
+        const saleEndDate = new Date("July 20, 2025 12:00 PM +0600");
         const currentDate = new Date().getTime();
         const difference = saleEndDate - currentDate;
 

@@ -16,14 +16,14 @@ const MiddlePart = () => {
                 </div>
                 <div className="flex gap-12">
                     <div className="relative">
-                        <input className="w-[308px] text-sm text-[#303030] leading-5 py-[18px] pl-6 border border-[#CCC] rounded-[10px]" type="text" placeholder="Search Products ..." />
+                        <input className="w-[308px] text-sm text-[#303030] leading-5 py-[18px] pl-6 border border-[#E5E5E5] rounded-[10px] outline-none" type="text" placeholder="Search Products ..." />
 
-                        <TfiSearch className="text-lg font-thin absolute top-[50%] right-6 translate-y-[-50%]" />
+                        <TfiSearch className="text-lg font-bold absolute top-[50%] right-6 translate-y-[-50%]" />
                     </div>
 
                     <div className="flex gap-[90px] items-center relative">
                         {/* Cart */}
-                        <div className="flex items-center gap-5 after:content-[] after:absolute after:top-1/2 after:left-1/2 after:w-[1px] after:h-[32px] after:bg-[#303030] after:-translate-y-1/2 after:-translate-x-1/2">
+                        <div className="flex items-center gap-5 after:content-[] after:absolute after:top-1/2 after:left-1/2 after:w-[1px] after:h-[32px] after:bg-[#979797] after:-translate-y-1/2 after:-translate-x-1/2">
                             <div>
                                 <CartIcon />
                             </div>

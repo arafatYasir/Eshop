@@ -55,7 +55,7 @@ const TopPart = () => {
                 <div className="flex justify-between items-center">
                     {/* Left part */}
                     <div className="flex gap-[50px] py-[22px]">
-                        <Link className="flex items-center gap-2 font-['Montserrat'] leading-5 text-[#303030] relative after:content-[''] after:absolute after:w-[1px] after:h-[32px] after:bg-[#BFBFBF] after:right-[-25px] after:top-[50%] after:-translate-1/2 text-sm" to="https://maps.app.goo.gl/DipLafPdoiQoKjnv7" target="_blank">
+                        <Link className="flex items-center gap-2 font-['Montserrat'] leading-5 text-[#303030] relative after:content-[''] after:absolute after:w-[1px] after:h-[32px] after:bg-[#CBCBCB] after:right-[-25px] after:top-[50%] after:-translate-1/2 text-sm" to="https://maps.app.goo.gl/DipLafPdoiQoKjnv7" target="_blank">
                             <IoLocationOutline size={20} />
                             123 Main Street, Anytown USA
                         </Link>
@@ -69,9 +69,9 @@ const TopPart = () => {
                     {/* Right part */}
                     <div className="flex items-center gap-[50px] text-sm text-[#303030]">
                         {/* Currency selection */}
-                        <div className="relative after:content-[''] after:absolute after:w-[1px] after:h-[32px] after:top-[50%] after:right-[-25px] after:bg-[#BFBFBF] after:-translate-y-1/2">
+                        <div className="relative after:content-[''] after:absolute after:w-[1px] after:h-[32px] after:top-[50%] after:right-[-25px] after:bg-[#CBCBCB] after:-translate-y-1/2">
                             <select
-                                className="w-[55px]"
+                                className="w-[55px] appearance-none cursor-pointer"
                                 name="currency"
                                 value={currency?.value || ""}
                                 onChange={(e) => {
@@ -83,11 +83,11 @@ const TopPart = () => {
                                     currencies.map(currency => <option key={currency?.value} value={currency?.value}>{currency?.value}</option>)
                                 }
                             </select>
-
+                            <TfiAngleDown className="absolute top-1/2 -translate-1/2 left-[43px] pointer-events-none text-[#303030]" />
                         </div>
 
                         {/* Language selection */}
-                        <div className="relative after:content-[''] after:absolute after:w-[1px] after:h-[32px] after:top-[50%] after:right-[-25px] after:bg-[#BFBFBF] after:-translate-y-1/2" ref={dropdownRef}>
+                        <div className="relative after:content-[''] after:absolute after:w-[1px] after:h-[32px] after:top-[50%] after:right-[-25px] after:bg-[#CBCBCB] after:-translate-y-1/2" ref={dropdownRef}>
                             <select
                                 className="w-[112px] hidden"
                                 name="country"
@@ -110,7 +110,7 @@ const TopPart = () => {
                                     <>
                                         <img className="w-[27px] h-[16px] mr-2" src={selectedCountry?.flag} alt={`${selectedCountry?.name} country flag`} />
                                         <span className="mr-2">{selectedCountry?.name}</span>
-                                        <TfiAngleDown />
+                                        <TfiAngleDown className="text-[#303030]" />
                                     </>
                                 }
                             </div>

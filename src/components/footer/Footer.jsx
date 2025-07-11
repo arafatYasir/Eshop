@@ -17,7 +17,7 @@ const Footer = () => {
                     </p>
 
                     <input
-                        className="text-[#303030] font-['Montserrat'] leading-6 border border-[#303030] rounded-[10px] py-6 pl-6 w-[470px] mt-8 mb-4"
+                        className="placeholder:text-[#303030] placeholder:opacity-75 font-['Montserrat'] leading-6 border border-[#929292] outline-none rounded-[10px] py-6 pl-6 w-[470px] mt-8 mb-4"
                         type="text"
                         placeholder="Enter your email address ..."
                     />
@@ -41,7 +41,7 @@ const Footer = () => {
                                 </Link>
                             </li>
                             <li className="relative">
-                                <IoIosMail className="text-[#303030] opacity-[75%]" />
+                                <IoIosMail className="text-[#303030] text-lg opacity-[75%]" />
                                 <Link
                                     className="absolute top-1/2 -translate-y-1/2 left-[27px] text-[#303030] font-['Montserrat'] leading-6"
                                     to="mailto:information@eshop.com"
@@ -116,7 +116,7 @@ const Footer = () => {
 
                 <div className="h-[1px] bg-[#CBCBCB]"></div>
 
-                <div className="text-[#303030] font-['Montserrat'] text-sm leading-5 flex justify-between mt-2 mb-20">
+                <div className="text-[#303030] font-['Montserrat'] text-sm leading-5 flex justify-between mt-2 mb-20 opacity-75">
                     <Link className="" to="#">Copyright © 2023 E-Shop. All Rights Reserved.</Link>
 
                     <div className="flex gap-2">

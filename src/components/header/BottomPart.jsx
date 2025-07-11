@@ -78,7 +78,7 @@ const BottomPart = () => {
                         <li ref={productsDropdownRef} className="relative">
                             <button onClick={() => setIsProductsDropdownOpen(!isProductsDropdownOpen)} className="flex items-center gap-2 cursor-pointer" to="/products-list">
                                 Products
-                                <TfiAngleDown className={`${isProductsDropdownOpen ? "rotate-180" : ""} transition`} />
+                                <TfiAngleDown className={`${isProductsDropdownOpen ? "rotate-180" : ""} transition text-sm font-bold`} />
                             </button>
                             {isProductsDropdownOpen && (
                                 <div className="absolute top-[80%] left-0 mt-2 w-64 z-50 bg-white rounded-xl shadow-lg border border-gray-100 p-4 space-y-2 font-['Poppins']">
