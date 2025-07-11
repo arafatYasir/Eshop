@@ -52,27 +52,27 @@ const BillingForm = () => {
                 {/* First Name */}
                 <div className="flex flex-col gap-3">
                     <label className="text-xl text-[#303030] font-['Montserrat'] font-bold leading-[30px]" htmlFor="firstname">First Name <span className="text-[#FF624C]">*</span></label>
-                    <input className="py-[25px] px-[32px] outline-none border border-[#CBCBCB] rounded-[10px] w-[424px] text-[#303030] font-['Montserrat'] text-xl leading-[30px]" type="text" id="firstname" placeholder="Amelia Robert" />
+                    <input className="py-[25px] px-[32px] outline-none border border-[#CBCBCB] rounded-[10px] w-[424px] text-[#303030] placeholder:text-[#303030] placeholder:opacity-75 font-['Montserrat'] text-xl leading-[30px]" type="text" id="firstname" placeholder="Amelia Robert" />
                 </div>
                 {/* Last Name */}
                 <div className="flex flex-col gap-3">
                     <label className="text-xl text-[#303030] font-['Montserrat'] font-bold leading-[30px]" htmlFor="lastname">Last Name <span className="text-[#FF624C]">*</span></label>
-                    <input className="py-[25px] px-[32px] outline-none border border-[#CBCBCB] rounded-[10px] w-[424px] text-[#303030] font-['Montserrat'] text-xl leading-[30px]" type="text" id="lastname" placeholder="Watson" />
+                    <input className="py-[25px] px-[32px] outline-none border border-[#CBCBCB] rounded-[10px] w-[424px] text-[#303030] placeholder:text-[#303030] placeholder:opacity-75 font-['Montserrat'] text-xl leading-[30px]" type="text" id="lastname" placeholder="Watson" />
                 </div>
                 {/* Phone Number */}
                 <div className="flex flex-col gap-3">
                     <label className="text-xl text-[#303030] font-['Montserrat'] font-bold leading-[30px]" htmlFor="number">Phone Number <span className="text-[#FF624C]">*</span></label>
-                    <input className="py-[25px] px-[32px] outline-none border border-[#CBCBCB] rounded-[10px] w-[424px] text-[#303030] font-['Montserrat'] text-xl leading-[30px]" type="text" id="number" placeholder="+123 456 7890" />
+                    <input className="py-[25px] px-[32px] outline-none border border-[#CBCBCB] rounded-[10px] w-[424px] text-[#303030] placeholder:text-[#303030] placeholder:opacity-75 font-['Montserrat'] text-xl leading-[30px]" type="text" id="number" placeholder="+123 456 7890" />
                 </div>
                 {/* Email Address */}
                 <div className="flex flex-col gap-3">
                     <label className="text-xl text-[#303030] font-['Montserrat'] font-bold leading-[30px]" htmlFor="email">Email Address <span className="text-[#FF624C]">*</span></label>
-                    <input className="py-[25px] px-[32px] outline-none border border-[#CBCBCB] rounded-[10px] w-[424px] text-[#303030] font-['Montserrat'] text-xl leading-[30px]" type="email" id="email" placeholder="amelia.watson@eshop.com" />
+                    <input className="py-[25px] px-[32px] outline-none border border-[#CBCBCB] rounded-[10px] w-[424px] text-[#303030] placeholder:text-[#303030] placeholder:opacity-75 font-['Montserrat'] text-xl leading-[30px]" type="email" id="email" placeholder="amelia.watson@eshop.com" />
                 </div>
                 {/* Address */}
                 <div className="flex flex-col gap-3">
                     <label className="text-xl text-[#303030] font-['Montserrat'] font-bold leading-[30px]" htmlFor="address">Address <span className="text-[#FF624C]">*</span></label>
-                    <input className="py-[25px] px-[32px] outline-none border border-[#CBCBCB] rounded-[10px] w-[870px] text-[#303030] font-['Montserrat'] text-xl leading-[30px]" type="text" id="address" placeholder="Home Address, Auxiliary St. 12345, Anywhere State" />
+                    <input className="py-[25px] px-[32px] outline-none border border-[#CBCBCB] rounded-[10px] w-[870px] text-[#303030] placeholder:text-[#303030] placeholder:opacity-75 font-['Montserrat'] text-xl leading-[30px]" type="text" id="address" placeholder="Home Address, Auxiliary St. 12345, Anywhere State" />
                 </div>
                 {/* Country */}
                 <div className="flex flex-col gap-3">
@@ -137,12 +137,12 @@ const BillingForm = () => {
                 {/* Zip Code */}
                 <div className="flex flex-col gap-3">
                     <label className="text-xl text-[#303030] font-['Montserrat'] font-bold leading-[30px]" htmlFor="zip">Zip Code</label>
-                    <input className="py-[25px] px-[32px] outline-none border border-[#CBCBCB] rounded-[10px] w-[424px] text-[#303030] font-['Montserrat'] text-xl leading-[30px]" type="number" id="zip" placeholder="555555" />
+                    <input className="py-[25px] px-[32px] outline-none border border-[#CBCBCB] rounded-[10px] w-[424px] text-[#303030] placeholder:text-[#303030] placeholder:opacity-75 font-['Montserrat'] text-xl leading-[30px]" type="number" id="zip" placeholder="555555" />
                 </div>
                 {/* Order Notes */}
                 <div className="flex flex-col gap-3">
                     <label className="text-xl text-[#303030] font-['Montserrat'] font-bold leading-[30px]" htmlFor="orderNotes">Order Notes</label>
-                    <textarea className="py-[25px] px-[32px] outline-none border border-[#CBCBCB] rounded-[10px] w-[870px] h-[173px] text-[#303030] font-['Montserrat'] text-xl leading-[30px] resize-none" type="text" id="orderNotes" placeholder="Enter your order notes ..." />
+                    <textarea className="py-[25px] px-[32px] outline-none border border-[#CBCBCB] rounded-[10px] w-[870px] h-[173px] text-[#303030] placeholder:text-[#303030] placeholder:opacity-75 font-['Montserrat'] text-xl leading-[30px] resize-none" type="text" id="orderNotes" placeholder="Enter your order notes ..." />
                 </div>
             </div>
         </div>
