@@ -1,17 +1,24 @@
-import { GoSearch } from "react-icons/go";
 import CartIcon from "../../icons/CartIcon";
 import UserIcon from "../../icons/UserIcon";
 import Container from "../commonLayouts/Container";
-import { IoSearchSharp } from "react-icons/io5";
+
 import { TfiSearch } from "react-icons/tfi";
 import { Link } from "react-router";
 import { useEffect, useRef, useState } from "react";
+import { FaBars } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { openMenu } from "../../menuSlice";
 const MiddlePart = () => {
     const [showSearch, setShowSearch] = useState(false);
     const searchRef = useRef(null);
+    const dispatch = useDispatch();
 
     const handleShowSearch = () => {
         setShowSearch(prev => !prev);
+    }
+
+    const handleOpenMenu = () => {
+        dispatch(openMenu())
     }
 
     useEffect(() => {
@@ -28,7 +35,8 @@ const MiddlePart = () => {
     return (
         <Container>
             <div className="flex justify-between items-center px-2 py-6 sm:py-8 sm:px-0 ">
-                <div>
+                <div className="flex items-center gap-2">
+                    <FaBars onClick={handleOpenMenu} className={`sm:hidden ${showSearch && "hidden"} text-[#303030] mb-1 text-lg`} />
                     <Link to="/">
                         <img className="w-[110px] object-cover sm:w-full" src="images/logo.webp" alt="logo" />
                     </Link>
