@@ -16,7 +16,7 @@ const TopPart = () => {
         { name: 'English (US)', value: 'US', flag: 'https://flagcdn.com/16x12/us.png' },
         { name: 'English (UK)', value: 'GB', flag: 'https://flagcdn.com/16x12/gb.png' },
         { name: 'English (CA)', value: 'CA', flag: 'https://flagcdn.com/16x12/ca.png' },
-        { name: 'English (AUS)', value: 'AU', flag: 'https://flagcdn.com/16x12/au.png' },
+        { name: 'English (AU)', value: 'AU', flag: 'https://flagcdn.com/16x12/au.png' },
         { name: 'German', value: 'DE', flag: 'https://flagcdn.com/16x12/de.png' },
         { name: 'French', value: 'FR', flag: 'https://flagcdn.com/16x12/fr.png' },
     ]
@@ -50,28 +50,28 @@ const TopPart = () => {
     }, []);
 
     return (
-        <div className="border-b border-[#BFBFBF]">
+        <div className="border-b border-[#BFBFBF] py-[10px] sm:py-[22px]">
             <Container>
-                <div className="flex justify-between items-center">
+                <div className="flex flex-col sm:flex-row sm:justify-between items-center gap-y-[10px] sm:gap-0">
                     {/* Left part */}
-                    <div className="flex gap-[50px] py-[22px]">
-                        <Link className="flex items-center gap-2 font-['Montserrat'] leading-5 text-[#303030] relative after:content-[''] after:absolute after:w-[1px] after:h-[32px] after:bg-[#CBCBCB] after:right-[-25px] after:top-[50%] after:-translate-1/2 text-sm" to="https://maps.app.goo.gl/DipLafPdoiQoKjnv7" target="_blank">
-                            <IoLocationOutline size={20} />
+                    <div className="flex justify-center gap-9 sm:gap-[50px]">
+                        <Link className="flex items-center gap-2 font-['Montserrat'] leading-5 text-[#303030] relative after:content-[''] after:absolute after:w-[1px] after:h-5 sm:after:h-[32px] after:bg-[#CBCBCB] after:right-[-20px] sm:after:right-[-25px] after:top-[50%] after:-translate-1/2 text-[13px] sm:text-sm" to="https://maps.app.goo.gl/DipLafPdoiQoKjnv7" target="_blank">
+                            <IoLocationOutline size={20} className="hidden sm:inline" />
                             123 Main Street, Anytown USA
                         </Link>
 
-                        <Link className="flex items-center gap-2 font-['Montserrat'] leading-5 text-[#303030] text-sm" to="tel:+18234523">
-                            <BsTelephone size={18} />
+                        <Link className="flex items-center gap-2 font-['Montserrat'] leading-5 text-[#303030] text-[13px] sm:text-sm" to="tel:+18234523">
+                            <BsTelephone size={18} className="hidden sm:inline" />
                             +1 (555) 123-4567
                         </Link>
                     </div>
 
                     {/* Right part */}
-                    <div className="flex items-center gap-[50px] text-sm text-[#303030]">
-                        {/* Currency selection */}
-                        <div className="relative after:content-[''] after:absolute after:w-[1px] after:h-[32px] after:top-[50%] after:right-[-25px] after:bg-[#CBCBCB] after:-translate-y-1/2">
+                    <div className="flex items-center gap-[37px] sm:gap-[50px] text-sm text-[#303030]">
+                        {/* ----Currency selection---- */}
+                        <div className="relative after:content-[''] after:absolute after:w-[1px] after:h-5 sm:after:h-[32px] after:top-[50%] after:right-[-20px] sm:after:right-[-25px] after:bg-[#CBCBCB] after:-translate-y-1/2">
                             <select
-                                className="w-[55px] appearance-none cursor-pointer outline-none"
+                                className="w-[55px] appearance-none cursor-pointer outline-none text-[11.5px] sm:text-base"
                                 name="currency"
                                 value={currency?.value || ""}
                                 onChange={(e) => {
@@ -83,11 +83,11 @@ const TopPart = () => {
                                     currencies.map(currency => <option key={currency?.value} value={currency?.value}>{currency?.value}</option>)
                                 }
                             </select>
-                            <TfiAngleDown className="absolute top-1/2 -translate-1/2 left-[43px] pointer-events-none text-[#303030]" />
+                            <TfiAngleDown className="absolute top-1/2 -translate-1/2 left-[43px] pointer-events-none text-[#303030] text-[11px]" />
                         </div>
 
-                        {/* Language selection */}
-                        <div className="relative after:content-[''] after:absolute after:w-[1px] after:h-[32px] after:top-[50%] after:right-[-25px] after:bg-[#CBCBCB] after:-translate-y-1/2" ref={dropdownRef}>
+                        {/* ----Language selection---- */}
+                        <div className="relative after:content-[''] after:absolute after:w-[1px] after:h-5 sm:after:h-[32px]  after:top-[50%] after:right-[-19px] sm:after:right-[-25px] after:bg-[#CBCBCB] after:-translate-y-1/2" ref={dropdownRef}>
                             <select
                                 className="w-[112px] hidden"
                                 name="country"
@@ -109,13 +109,13 @@ const TopPart = () => {
                                 {selectedCountry &&
                                     <>
                                         <img className="w-[27px] h-[16px] mr-2" src={selectedCountry?.flag} alt={`${selectedCountry?.name} country flag`} />
-                                        <span className="mr-2">{selectedCountry?.name}</span>
-                                        <TfiAngleDown className="text-[#303030]" />
+                                        <span className="mr-2 text-[11.5px] sm:text-base">{selectedCountry?.name}</span>
+                                        <TfiAngleDown className="text-[#303030] text-[11px] sm:text-base" />
                                     </>
                                 }
                             </div>
 
-                            {/* Option list */}
+                            {/* Country list */}
                             {isOpen && (
                                 <ul className="absolute w-full border border-gray-300 bg-white shadow-lg z-10">
                                     {countries.map(country => (
@@ -123,7 +123,8 @@ const TopPart = () => {
                                             key={country?.value}
                                             onClick={() => handleSelect(country)} >
                                             <img className="w-[27px] h-[16px] mr-2" src={country?.flag} alt={`${country?.name} country flag`} />
-                                            {country?.name}
+                                            
+                                            <span className="text-[11.5px] sm:text-base">{country?.name}</span>
                                         </li>
                                     ))}
                                 </ul>
@@ -131,15 +132,15 @@ const TopPart = () => {
                         </div>
 
                         {/* Social media links */}
-                        <div className="flex items-center gap-6 text-lg">
+                        <div className="flex items-center gap-4 sm:gap-6 text-lg">
                             <Link to="#">
-                                <FaFacebookF />
+                                <FaFacebookF className="text-sm sm:text-base" />
                             </Link>
                             <Link to="#">
-                                <FaTwitter />
+                                <FaTwitter className="text-sm sm:text-base" />
                             </Link>
                             <Link to="#">
-                                <FaInstagram />
+                                <FaInstagram className="text-sm sm:text-base" />
                             </Link>
                         </div>
                     </div>

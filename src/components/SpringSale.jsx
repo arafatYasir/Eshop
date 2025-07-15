@@ -83,28 +83,28 @@ const SpringSale = () => {
 
                         <div className="flex items-center gap-6 mt-10 mb-[72px]">
                             <div className="flex flex-col items-center">
-                                <span className="font-['Poppins'] text-[#FF624C] text-4xl font-semibold leading-[46px]">{timerLeft.days}</span>
+                                <span className="font-['Poppins'] text-[#FF624C] text-4xl font-semibold leading-[46px]">{timerLeft.days < 10 ? "0" : ""}{timerLeft.days}</span>
                                 <span className="text-[#303030] font-['Montserrat'] leading-6">Days</span>
                             </div>
 
                             <span className="font-['Poppins'] text-[#FF624C] text-4xl font-semibold leading-[46px]">:</span>
 
                             <div className="flex flex-col items-center">
-                                <span className="font-['Poppins'] text-[#FF624C] text-4xl font-semibold leading-[46px]">{timerLeft.hours}</span>
+                                <span className="font-['Poppins'] text-[#FF624C] text-4xl font-semibold leading-[46px]">{timerLeft.hours < 10 ? "0" : ""}{timerLeft.hours}</span>
                                 <span className="text-[#303030] font-['Montserrat'] leading-6">Hours</span>
                             </div>
 
                             <span className="font-['Poppins'] text-[#FF624C] text-4xl font-semibold leading-[46px]">:</span>
 
                             <div className="flex flex-col items-center">
-                                <span className="font-['Poppins'] text-[#FF624C] text-4xl font-semibold leading-[46px]">{timerLeft.minutes}</span>
+                                <span className="font-['Poppins'] text-[#FF624C] text-4xl font-semibold leading-[46px]">{timerLeft.minutes < 10 ? "0" : ""}{timerLeft.minutes}</span>
                                 <span className="text-[#303030] font-['Montserrat'] leading-6">Minutes</span>
                             </div>
 
                             <span className="font-['Poppins'] text-[#FF624C] text-4xl font-semibold leading-[46px]">:</span>
 
                             <div className="flex flex-col items-center">
-                                <span className="font-['Poppins'] text-[#FF624C] text-4xl font-semibold leading-[46px]">{timerLeft.seconds}</span>
+                                <span className="font-['Poppins'] text-[#FF624C] text-4xl font-semibold leading-[46px]">{timerLeft.seconds < 10 ? "0" : ""}{timerLeft.seconds}</span>
                                 <span className="text-[#303030] font-['Montserrat'] leading-6">Seconds</span>
                             </div>
                         </div>
