@@ -13,6 +13,7 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import ProductAdditionalInformations from "../components/ProductAdditionalInformations";
 import NewProducts from "../components/NewProducts";
 import RelatedProducts from "../components/RelatedProducts";
+import { Link } from "react-router";
 
 const ProductDetailsPage = () => {
     const [quantity, setQuantity] = useState(1);
@@ -33,7 +34,7 @@ const ProductDetailsPage = () => {
                 transition: Bounce,
             });
         }
-        else if(value < 0) {
+        else if (value < 0) {
             toast.error('Quantity cannot be negative', {
                 position: "top-right",
                 autoClose: 3000,
@@ -54,7 +55,7 @@ const ProductDetailsPage = () => {
     const handleIncreaseorDecrease = (type) => {
         if (type === "increase") {
             setQuantity(prev => prev + 1);
-        } else if(type === "decrease" && quantity - 1 < 0) {
+        } else if (type === "decrease" && quantity - 1 < 0) {
             toast.error('Quantity cannot be negative', {
                 position: "top-right",
                 autoClose: 3000,
@@ -130,7 +131,9 @@ const ProductDetailsPage = () => {
                 </div>
 
                 <div className="flex gap-4">
-                    <Button value="Buy Now"  />
+                    <Link to="/checkout">
+                        <Button value="Buy Now" />
+                    </Link>
 
                     <div className="w-[62px] h-[62px] flex items-center justify-center border border-[#FF624C] rounded-[10px]"><AiOutlineShoppingCart className="text-3xl text-[#FF624C]" /></div>
                 </div>
