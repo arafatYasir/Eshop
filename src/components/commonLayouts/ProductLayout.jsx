@@ -13,19 +13,19 @@ const ProductLayout = ({ discountTag = false, discountPercent, category, title, 
     }, [rating])
 
     return (
-        <Link to="/product-details" className="p-6 group cursor-pointer border border-transparent hover:border-[#C3C3C3] rounded-[10px] max-w-[285px] relative block">
+        <Link to="/product-details" className="p-6 group cursor-pointer border border-[#C3C3C3] sm:border-transparent sm:hover:border-[#C3C3C3] rounded-[10px] max-w-[285px] relative block">
             <div className="relative">
                 <img className="w-full" src="images/product-image.png" alt="product image" />
 
                 {/* Icons */}
-                <div className="flex gap-[18px] scale-0 group-hover:scale-100 transition duration-100 absolute bottom-[6px] left-[50%] -translate-x-1/2">
-                    <div className="flex items-center justify-center w-[50px] h-[50px] rounded-full border border-[#FF624C] text-[#FF624C] text-3xl hover:bg-[#FF624C] hover:text-white transition duration-100 bg-white">
+                <div className="flex gap-[18px] sm:scale-0 sm:group-hover:scale-100 transition duration-100 absolute bottom-[6px] left-[50%] -translate-x-1/2">
+                    <div className="flex items-center justify-center w-10 h-10 sm:w-[50px] sm:h-[50px] rounded-full border border-[#FF624C] text-[#FF624C] text-3xl hover:bg-[#FF624C] hover:text-white transition duration-100 bg-white">
                         <IoCartOutline size={22} />
                     </div>
-                    <div className="flex items-center justify-center w-[50px] h-[50px] rounded-full border border-[#FF624C] text-[#FF624C] text-3xl hover:bg-[#FF624C] hover:text-white transition duration-100 bg-white">
+                    <div className="flex items-center justify-center w-10 h-10 sm:w-[50px] sm:h-[50px] rounded-full border border-[#FF624C] text-[#FF624C] text-3xl hover:bg-[#FF624C] hover:text-white transition duration-100 bg-white">
                         <IoIosHeartEmpty size={22} />
                     </div>
-                    <div className="flex items-center justify-center w-[50px] h-[50px] rounded-full border border-[#FF624C] text-[#FF624C] text-3xl hover:bg-[#FF624C] hover:text-white transition duration-100 bg-white">
+                    <div className="flex items-center justify-center w-10 h-10 sm:w-[50px] sm:h-[50px] rounded-full border border-[#FF624C] text-[#FF624C] text-3xl hover:bg-[#FF624C] hover:text-white transition duration-100 bg-white">
                         <FiShare2 size={22} />
                     </div>
                 </div>

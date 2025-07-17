@@ -16,12 +16,13 @@ function SampleNextArrow(props) {
                 ...style,
                 display: "flex",
                 justifyContent: "center",
+                background: "white",
                 alignItems: "center",
                 width: "40px",
                 height: "40px",
                 border: "1px solid #303030",
                 borderRadius: "50%",
-                right: "-1px",
+                right: "8px",
                 zIndex: 10
             }}
             className={className}
@@ -40,13 +41,14 @@ function SamplePrevArrow(props) {
             style={{
                 ...style,
                 display: "flex",
+                background: "white",
                 justifyContent: "center",
                 alignItems: "center",
                 width: "40px",
                 height: "40px",
                 border: "1px solid #303030",
                 borderRadius: "50%",
-                left: "-5px",
+                left: "5px",
                 zIndex: 10
             }}
             onClick={onClick}
@@ -69,15 +71,24 @@ const FeaturedProducts = () => {
         cssEase: "linear",
         nextArrow: <SampleNextArrow />,
         prevArrow: <SamplePrevArrow />,
+        responsive: [
+            {
+                breakpoint: 415,
+                settings: {
+                    slidesToShow: 1,
+                }
+            }
+        ]
     };
-    
+
     return (
         <div className="mb-20">
             <Container>
-                <div className="flex justify-between items-center">
-                    <h2 className="text-4xl text-[#303030] font-['Poppins'] leading-[46px] font-semibold">Featured Products</h2>
-                    <p className="flex items-center text-[#FF624C] font-['Montserrat'] font-bold leading-6 gap-4">View All <LongArrowIcon /></p>
+                <div className="flex justify-between items-center px-2 sm:p-0">
+                    <h2 className="text-[22px] sm:text-4xl text-[#303030] font-['Poppins'] leading-[46px] font-semibold">Featured Products</h2>
+                    <p className="flex items-center text-[13px] sm:text-base text-[#FF624C] font-['Montserrat'] font-bold leading-6 gap-4">View All <LongArrowIcon width="25px" /></p>
                 </div>
+
                 <Slider {...settings} className="mt-12 px-9">
                     {
                         featuredProducts.map(p => (
