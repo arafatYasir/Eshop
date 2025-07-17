@@ -19,9 +19,9 @@ const NewProducts = () => {
     return (
         <div className="mb-20">
             <Container>
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between px-2 sm:px-0">
                     <div>
-                        <h2 className="text-4xl text-[#303030] font-['Poppins'] leading-[46px] font-semibold">New Products</h2>
+                        <h2 className="text-[22px] sm:text-4xl text-[#303030] font-['Poppins'] leading-[46px] font-semibold">New Products</h2>
                     </div>
                     <div className="flex items-center gap-4 relative">
                         <p className="text-[#303030] font-['Montserrat'] leading-6">Sort by</p>
@@ -32,10 +32,10 @@ const NewProducts = () => {
                             <option value="tablets" className="text-black">Tablets</option>
                             <option value="accessories" className="text-black">Accessories</option>
                         </select>
-                        <TfiAngleDown className="absolute text-sm top-1/2 -translate-1/2 right-0 pointer-events-none text-[#303030]" />
+                        <TfiAngleDown className="absolute text-sm top-1/2 -translate-1/2 right-7 pointer-events-none text-[#303030]" />
                     </div>
                 </div>
-                <div className="mt-12 flex items-center justify-between flex-wrap gap-[20px]">
+                <div className="mt-12 flex flex-col sm:flex-row items-center justify-between sm:flex-wrap gap-[20px]">
                     {
                         showingProducts.map(p => (
                             <ProductLayout key={p.id} title={p.title} category={p.category} discountTag={p.discountTag} discountPercent={p.discountTag ? p.discountPercent : ""} rating={p.rating} totalRatings={p.totalRatings} price={p.price} previousPrice={p.discountTag ? p.previousPrice : ""} />
