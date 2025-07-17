@@ -45,19 +45,19 @@ const FaqSection = () => {
     return (
         <div className="bg-[#F4F4F4] py-16 my-20 w-full">
             <Container>
-                <div className="flex items-end gap-28 relative">
-                    <div className="flex flex-col gap-6">
+                <div className="flex flex-col-reverse gap-10 sm:flex-row sm:items-end sm:gap-28 relative px-2 sm:px-0">
+                    <div className="flex flex-col gap-5 sm:gap-6">
                         {
                             faqs.map(faq => <FaqItem title={faq.title} description={faq.description} id={faq.id} handleOpenFaq={handleOpenFaq} key={faq.id} isOpen={faqId === faq.id} />)
                         }
                     </div>
                     <div>
-                        <h2 className="text-[#303030] text-4xl font-['Poppins'] font-semibold leading-[46px] mb-6 max-w-[306px]">Frequently Asked Questions</h2>
-                        <p className="text-[#303030] font-['Montserrat'] text-xl leading-[30px] max-w-[392px] mb-16">Questions that get asked the most by our clients. Get any burning questions?</p>
+                        <h2 className="text-[#303030] text-3xl sm:text-4xl font-['Poppins'] font-semibold leading-[46px] mb-5 sm:mb-6 max-w-[306px]">Frequently Asked Questions</h2>
+                        <p className="text-[#303030] font-['Montserrat'] text-lg sm:text-xl leading-[30px] max-w-[392px] mb-10 sm:mb-16">Questions that get asked the most by our clients. Get any burning questions?</p>
                         <Button value="Ask A Question" />
                     </div>
                     {/* Dots Image */}
-                    <div className="absolute top-0 right-0">
+                    <div className="absolute top-0 right-0 hidden sm:block">
                         <img  src="images/faq-dots.png" alt="faq background" />
                     </div>
                 </div>
