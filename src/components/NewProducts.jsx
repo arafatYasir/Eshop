@@ -3,18 +3,46 @@ import ProductLayout from "./commonLayouts/ProductLayout";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Button from "./Button";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import newProducts from "../../public/products/NewProducts";
 import { TfiAngleDown } from "react-icons/tfi";
 
 
 const NewProducts = () => {
-    const [showingProducts, setShowingProducts] = useState(newProducts.filter(p => p.id <= 5));
-    const [selectedCategory, setSelectedCategory] = useState("Mobiles")
+    const [showingProducts, setShowingProducts] = useState(newProducts.slice(0, 5));
+    const [selectedCategory, setSelectedCategory] = useState({ id: 1, name: "All Categories", value: "all" });
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const dropdownRef = useRef(null);
+
+    const categories = [
+        { id: 1, name: "All Categories", value: "all" },
+        { id: 2, name: "Computers", value: "computers" },
+        { id: 3, name: "Mobiles", value: "mobiles" },
+        { id: 4, name: "Tablets", value: "tablets" },
+        { id: 5, name: "Accessories", value: "accessories" },
+    ];
+
+
+    const handleSelectCategory = (category) => {
+        setSelectedCategory(category);
+        setIsDropdownOpen(false);
+    }
 
     const handleLoadMore = () => {
         setShowingProducts(newProducts);
     }
+
+    useEffect(() => {
+        const handleCloseDropdown = (e) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+                setIsDropdownOpen(false);
+            }
+        }
+
+        document.addEventListener("mousedown", handleCloseDropdown);
+
+        return () => document.removeEventListener("mousedown", handleCloseDropdown);
+    }, [])
 
     return (
         <div className="mb-20">
@@ -25,14 +53,39 @@ const NewProducts = () => {
                     </div>
                     <div className="flex items-center gap-4 relative">
                         <p className="text-[#303030] font-['Montserrat'] leading-6">Sort by</p>
-                        <select className="w-[233px] text-[#FF624C] font-['Montserrat'] font-bold leading-6 outline-none cursor-pointer appearance-none" name="categories" value={selectedCategory} onChange={e => setSelectedCategory(e.target.value)}>
-                            <option value="" className="text-black">All Categories</option>
-                            <option value="computers" className="text-black">Computers</option>
-                            <option value="mobiles" className="text-black">Mobiles</option>
-                            <option value="tablets" className="text-black">Tablets</option>
-                            <option value="accessories" className="text-black">Accessories</option>
-                        </select>
-                        <TfiAngleDown className="absolute text-sm top-1/2 -translate-1/2 right-7 pointer-events-none text-[#303030]" />
+
+                        <div className="relative" ref={dropdownRef}>
+                            <select className="w-[233px] text-[#FF624C] font-['Montserrat'] font-bold leading-6 outline-none cursor-pointer appearance-none hidden" name="categories" value={selectedCategory.value || ""}>
+
+                            </select>
+
+
+                            {/* Custom dropdown */}
+                            <div
+                                className="p-2 cursor-pointer flex items-center"
+                                onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
+                                {selectedCategory &&
+                                    <>
+                                        <span className="mr-10 text-lg font-semibold text-[#FF624C]">{selectedCategory?.name}</span>
+                                        <TfiAngleDown className={`text-[#303030] text-[11px] sm:text-base ${isDropdownOpen ? "rotate-180" : ""} transition`} />
+                                    </>
+                                }
+                            </div>
+
+                            {/* Country list */}
+                            {isDropdownOpen && (
+                                <ul className="absolute w-[125px] sm:w-[150px] border border-gray-300 bg-white shadow-lg z-10">
+                                    {categories.map(category => (
+                                        <li className="flex items-center gap-2 p-2 hover:bg-gray-200 cursor-pointer"
+                                            key={category?.id}
+                                            onClick={() => handleSelectCategory(category)} >
+                                            <span className="text-[11.5px] sm:text-base">{category?.name}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+                        </div>
+
                     </div>
                 </div>
                 <div className="mt-12 flex flex-col sm:flex-row items-center justify-between sm:flex-wrap gap-[20px]">

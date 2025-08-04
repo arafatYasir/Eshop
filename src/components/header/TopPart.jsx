@@ -8,9 +8,13 @@ import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 
 const TopPart = () => {
     const [selectedCountry, setSelectedCountry] = useState({ name: 'English (US)', value: 'US', flag: 'https://flagcdn.com/16x12/us.png' });
+    const [isCountryOpen, setIsCountryOpen] = useState(false);
+
     const [currency, setCurrency] = useState({ name: 'US Dollar (USD)', value: 'USD' });
-    const [isOpen, setIsOpen] = useState(false);
-    const dropdownRef = useRef(null);
+    const [isCurrencyOpen, setIsCurrencyOpen] = useState(false);
+
+    const countryDropdownRef = useRef(null);
+    const currencyDropdownRef = useRef(null);
 
     const countries = [
         { name: 'English (US)', value: 'US', flag: 'https://flagcdn.com/16x12/us.png' },
@@ -29,24 +33,38 @@ const TopPart = () => {
         { name: 'Euro (EUR)', value: 'EUR' },
         { name: 'Bangladeshi Taka (BDT)', value: 'BDT' },
         { name: 'Indian Rupee (INR)', value: 'INR' },
-        { name: 'Pakistani Rupee (PKR)', value: 'PKR' },
     ];
 
-    const handleSelect = (country) => {
+    const handleSelectCountry = (country) => {
         setSelectedCountry(country);
-        setIsOpen(false);
+        setIsCountryOpen(false);
+    }
+
+    const handleSelectCurrency = (currency) => {
+        setCurrency(currency);
+        setIsCurrencyOpen(false);
     }
 
     useEffect(() => {
-        const handleCloseDropdown = (e) => {
-            if(dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-                setIsOpen(false);
+        const handleCloseCountryDropdown = (e) => {
+            if(countryDropdownRef.current && !countryDropdownRef.current.contains(e.target)) {
+                setIsCountryOpen(false);
             }
         }
 
-        document.addEventListener("mousedown", handleCloseDropdown);
+        const handleCloseCurrencyDropdown = (e) => {
+            if(currencyDropdownRef.current && !currencyDropdownRef.current.contains(e.target)) {
+                setIsCurrencyOpen(false);
+            }
+        }
 
-        return () => document.removeEventListener("mousedown", handleCloseDropdown);
+        document.addEventListener("mousedown", handleCloseCountryDropdown);
+        document.addEventListener("mousedown", handleCloseCurrencyDropdown);
+
+        return () => {
+            document.removeEventListener("mousedown", handleCloseCountryDropdown);
+            document.removeEventListener("mousedown", handleCloseCurrencyDropdown);
+        }
     }, []);
 
     return (
@@ -68,60 +86,74 @@ const TopPart = () => {
 
                     {/* Right part */}
                     <div className="flex items-center gap-10 sm:gap-[50px] text-sm text-[#303030]">
-                        {/* ----Currency selection---- */}
-                        <div className="relative after:content-[''] after:absolute after:w-[1px] after:h-5 sm:after:h-[32px] after:top-[50%] after:right-[-20px] sm:after:right-[-25px] after:bg-[#CBCBCB] after:-translate-y-1/2">
+                        {/* ----Currency Selection---- */}
+                        <div className="relative after:content-[''] after:absolute after:w-[1px] after:h-5 sm:after:h-[32px] after:top-[50%] after:right-[-20px] sm:after:right-[-25px] after:bg-[#CBCBCB] after:-translate-y-1/2" ref={currencyDropdownRef}>
                             <select
-                                className="w-[55px] appearance-none cursor-pointer outline-none text-[11.5px] sm:text-base"
+                                className="w-[55px] appearance-none cursor-pointer outline-none text-[11.5px] sm:text-base hidden"
                                 name="currency"
                                 value={currency?.value || ""}
-                                onChange={(e) => {
-                                    const targetedCurrency = currencies.find(c => c.value === e.target.value);
-                                    setCurrency(targetedCurrency);
-                                }}
                             >
                                 {
                                     currencies.map(currency => <option key={currency?.value} value={currency?.value}>{currency?.value}</option>)
                                 }
                             </select>
-                            <TfiAngleDown className="absolute top-1/2 -translate-1/2 left-[43px] pointer-events-none text-[#303030] text-[11px] sm:text-base" />
+
+
+                            {/* ----Currency Custom Dropdown---- */}
+                            <div
+                                className="p-2 cursor-pointer flex items-center"
+                                onClick={() => setIsCurrencyOpen(!isCurrencyOpen)}>
+                                {currency &&
+                                    <>
+                                        <span className="mr-2 text-[11.5px] sm:text-base">{currency?.value}</span>
+                                        <TfiAngleDown className={`text-[#303030] text-[11px] sm:text-base ${isCurrencyOpen ? "rotate-180" : ""} transition`} />
+                                    </>
+                                }
+                            </div>
+
+                            {/* ----Currency List---- */}
+                            {isCurrencyOpen && (
+                                <ul className="absolute w-[70px] border border-gray-300 bg-white shadow-lg z-10">
+                                    {currencies.map(currency => (
+                                        <li className="p-2 hover:bg-gray-200 cursor-pointer text-center"
+                                            key={currency?.value}
+                                            onClick={() => handleSelectCurrency(currency)} >                                            
+                                            <span className="text-[11.5px] sm:text-base">{currency?.value}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
                         </div>
 
-                        {/* ----Language selection---- */}
-                        <div className="relative after:content-[''] after:absolute after:w-[1px] after:h-5 sm:after:h-[32px]  after:top-[50%] after:right-[-19px] sm:after:right-[-25px] after:bg-[#CBCBCB] after:-translate-y-1/2" ref={dropdownRef}>
+                        {/* ----Language Selection---- */}
+                        <div className="relative after:content-[''] after:absolute after:w-[1px] after:h-5 sm:after:h-[32px]  after:top-[50%] after:right-[-19px] sm:after:right-[-25px] after:bg-[#CBCBCB] after:-translate-y-1/2" ref={countryDropdownRef}>
                             <select
                                 className="w-[112px] hidden"
                                 name="country"
                                 value={selectedCountry?.value || ""}
-                                onChange={(e) => {
-                                    const targetedCountry = countries.find(c => c.value === e.target.value);
-                                    setSelectedCountry(targetedCountry);
-                                }}
                             >
-                                {
-                                    countries.map(country => <option key={country?.value} value={country?.value}>{country?.name}</option>)
-                                }
                             </select>
 
-                            {/* Custom dropdown */}
+                            {/* ----Language Custom Dropdown---- */}
                             <div
                                 className="p-2 cursor-pointer flex items-center"
-                                onClick={() => setIsOpen(!isOpen)}>
+                                onClick={() => setIsCountryOpen(!isCountryOpen)}>
                                 {selectedCountry &&
                                     <>
                                         <img className="w-[27px] h-[16px] mr-2" src={selectedCountry?.flag} alt={`${selectedCountry?.name} country flag`} />
                                         <span className="mr-2 text-[11.5px] sm:text-base">{selectedCountry?.name}</span>
-                                        <TfiAngleDown className="text-[#303030] text-[11px] sm:text-base" />
+                                        <TfiAngleDown className={`text-[#303030] text-[11px] sm:text-base ${isCountryOpen ? "rotate-180" : ""} transition`} />
                                     </>
                                 }
                             </div>
 
                             {/* Country list */}
-                            {isOpen && (
+                            {isCountryOpen && (
                                 <ul className="absolute w-[125px] sm:w-[150px] border border-gray-300 bg-white shadow-lg z-10">
                                     {countries.map(country => (
                                         <li className="flex items-center gap-2 p-2 hover:bg-gray-200 cursor-pointer"
                                             key={country?.value}
-                                            onClick={() => handleSelect(country)} >
+                                            onClick={() => handleSelectCountry(country)} >
                                             <img className="w-[27px] h-[16px] mr-2" src={country?.flag} alt={`${country?.name} country flag`} />
                                             
                                             <span className="text-[11.5px] sm:text-base">{country?.name}</span>
