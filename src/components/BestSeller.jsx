@@ -7,10 +7,10 @@ import LongArrowIcon from "../icons/LongArrowIcon";
 const BestSeller = () => {
     return (
         <Container>
-            <div className="flex flex-col items-center sm:items-start  sm:flex-row sm:justify-between px-2 sm:px-0">
+            <div className="flex flex-col items-center sm:items-start  sm:flex-row sm:justify-between">
                 <div className="max-w-[902px]">
                     <div className="flex justify-between items-center">
-                        <h2 className="text-2xl sm:text-4xl text-[#303030] font-['Poppins'] leading-[46px] font-semibold">Best Seller</h2>
+                        <h2 className="text-[22px] sm:text-4xl text-[#303030] font-['Poppins'] leading-[46px] font-semibold">Best Seller</h2>
                         <p className="flex items-center text-[#FF624C] font-['Montserrat'] font-bold leading-6 gap-4 cursor-pointer text-sm sm:text-base">View All <LongArrowIcon /></p>
                     </div>
                     <div className="flex flex-col items-center sm:items-start sm:flex-row sm:flex-wrap gap-5 sm:gap-1 justify-between mt-12">

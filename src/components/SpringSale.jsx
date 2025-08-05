@@ -114,7 +114,7 @@ const SpringSale = () => {
     return (
         <div className="mb-20 py-16" style={{ background: "url('/images/spring-sale-bg.png')" }}>
             <Container>
-                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center px-2 sm:px-0">
+                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center">
                     {/* ---- Timer ---- */}
                     <div className="relative">
                         <h2 className="text-[#303030] text-[35px] sm:text-[56px] font-semibold font-['Poppins'] leading-[68px]">Spring Sale</h2>

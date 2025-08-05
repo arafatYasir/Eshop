@@ -47,7 +47,7 @@ const NewProducts = () => {
     return (
         <div className="mb-20">
             <Container>
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between px-2 sm:px-0">
+                <div className="flex flex-col items-center sm:flex-row sm:items-center sm:justify-between">
                     <div>
                         <h2 className="text-[22px] sm:text-4xl text-[#303030] font-['Poppins'] leading-[46px] font-semibold">New Products</h2>
                     </div>
@@ -55,7 +55,7 @@ const NewProducts = () => {
                         <p className="text-[#303030] font-['Montserrat'] leading-6">Sort by</p>
 
                         <div className="relative" ref={dropdownRef}>
-                            <select className="w-[233px] text-[#FF624C] font-['Montserrat'] font-bold leading-6 outline-none cursor-pointer appearance-none hidden" name="categories" value={selectedCategory.value || ""}>
+                            <select className="hidden" name="categories" value={selectedCategory.value || ""}>
 
                             </select>
 
@@ -66,7 +66,7 @@ const NewProducts = () => {
                                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
                                 {selectedCategory &&
                                     <>
-                                        <span className="mr-10 text-lg font-semibold text-[#FF624C]">{selectedCategory?.name}</span>
+                                        <span className="mr-10 sm:text-lg font-bold text-[#FF624C]">{selectedCategory?.name}</span>
                                         <TfiAngleDown className={`text-[#303030] text-[11px] sm:text-base ${isDropdownOpen ? "rotate-180" : ""} transition`} />
                                     </>
                                 }

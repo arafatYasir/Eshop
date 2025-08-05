@@ -139,7 +139,7 @@ const FeaturedProducts = () => {
     return (
         <div className="mb-20">
             <Container>
-                <div className="flex justify-between items-center px-2 sm:p-0">
+                <div className="flex justify-between items-center">
                     <h2 className="text-[22px] sm:text-4xl text-[#303030] font-['Poppins'] leading-[46px] font-semibold">Featured Products</h2>
                     <p className="flex items-center text-[13px] sm:text-base text-[#FF624C] font-['Montserrat'] font-bold leading-6 gap-4">View All <LongArrowIcon width="25px" /></p>
                 </div>

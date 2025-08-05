@@ -33,7 +33,7 @@ const ProductLayout = ({ discountTag = false, discountPercent, category, title, 
             <div className="mt-10">
                 <p className="text-sm font-['Montserrat'] leading-5 text-[#303030] tracking-[4px] uppercase">{category}</p>
 
-                <h3 className="text-[#303030] font-['Poppins'] text-xl font-semibold leading-[30px] max-w-[237px] mt-4 group-hover:text-[#FF624C] group-hover:underline decoration-2 transition duration-100">{title.slice(0, 35)}...</h3>
+                <h3 className="text-[#303030] font-['Poppins'] text-lg sm:text-xl font-semibold leading-[30px] max-w-[237px] mt-4 group-hover:text-[#FF624C] group-hover:underline decoration-2 transition duration-100">{title.slice(0, 35)}...</h3>
 
                 <div className="flex items-center gap-2 mt-1">
                     <div className="flex text-[#FED550] text-xl">
@@ -43,8 +43,8 @@ const ProductLayout = ({ discountTag = false, discountPercent, category, title, 
                 </div>
 
                 <div className="flex items-baseline-last gap-2">
-                    <p className={`${discountTag ? "text-[#FF624C]" : "text-[#303030]"} font-['Poppins'] text-2xl font-semibold leading-[30px] mt-5`}>${price}</p>
-                    <p className={`text-[#303030] ${previousPrice ? "opacity-50" : "opacity-0"} leading-16 font-['Montserrat'] line-through`}>{previousPrice ? `$${previousPrice}` : "temp"}</p>
+                    <p className={`${discountTag ? "text-[#FF624C]" : "text-[#303030]"} font-['Poppins'] text-[22px] sm:text-2xl font-semibold leading-[30px] mt-5`}>${price}</p>
+                    <p className={`text-[#303030] text-sm sm:text-base ${previousPrice ? "opacity-50" : "opacity-0"} leading-16 font-['Montserrat'] line-through`}>{previousPrice ? `$${previousPrice}` : "temp"}</p>
                 </div>
             </div>
 

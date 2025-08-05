@@ -45,8 +45,8 @@ const FaqSection = () => {
     return (
         <div className="bg-[#F4F4F4] py-16 my-20 w-full">
             <Container>
-                <div className="flex flex-col-reverse gap-10 sm:flex-row sm:items-end sm:gap-28 relative px-2 sm:px-0">
-                    <div className="flex flex-col gap-5 sm:gap-6">
+                <div className="flex flex-col-reverse gap-10 sm:flex-row sm:items-end sm:gap-28 relative">
+                    <div className="flex flex-col gap-4 sm:gap-6">
                         {
                             faqs.map(faq => <FaqItem title={faq.title} description={faq.description} id={faq.id} handleOpenFaq={handleOpenFaq} key={faq.id} isOpen={faqId === faq.id} />)
                         }
