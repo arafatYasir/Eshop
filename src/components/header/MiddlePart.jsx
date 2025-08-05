@@ -8,14 +8,11 @@ import { useEffect, useRef, useState } from "react";
 import { FaBars } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { openMenu } from "../../menuSlice";
+import { RxCross1 } from "react-icons/rx";
 const MiddlePart = () => {
     const [showSearch, setShowSearch] = useState(false);
     const searchRef = useRef(null);
     const dispatch = useDispatch();
-
-    const handleShowSearch = () => {
-        setShowSearch(prev => !prev);
-    }
 
     const handleOpenMenu = () => {
         dispatch(openMenu())
@@ -23,7 +20,8 @@ const MiddlePart = () => {
 
     useEffect(() => {
         const handleHideSearch = (e) => {
-            if(searchRef.current && !searchRef.current.contains(e.target.value)) {
+            if (searchRef.current && !searchRef.current.contains(e.target)) {
+                console.log("I am running from useeffect.");
                 setShowSearch(false);
             }
         }
@@ -38,16 +36,24 @@ const MiddlePart = () => {
                 <div className="flex items-center gap-2">
                     <FaBars onClick={handleOpenMenu} className={`sm:hidden ${showSearch && "hidden"} text-[#303030] mb-1 text-lg`} />
                     <Link to="/">
-                        <img className={`w-[110px] object-cover sm:w-full ${showSearch ? "hidden" : ""}`}src="images/logo.webp" alt="logo" />
+                        <img className={`w-[110px] object-cover sm:w-full ${showSearch ? "hidden" : ""}`} src="images/logo.webp" alt="logo" />
                     </Link>
                 </div>
                 <div className={`flex items-center gap-12`}>
-                    <div className="relative">
-                        <input ref={searchRef} className={`w-[308px] ${!showSearch && "hidden"} sm:inline text-sm text-[#303030] leading-5 py-[18px] pl-6 border border-[#E5E5E5] rounded-[10px] outline-none `} type="text" placeholder="Search Products ..." />
+                    <div className={`relative`} ref={searchRef}>
+                        <input className={`w-[308px] ${!showSearch && "hidden"} md:inline text-sm text-[#303030] leading-5 py-[18px] pl-6 border border-[#E5E5E5] rounded-[10px] outline-none `} type="text" placeholder="Search Products ..." />
 
+                        {/* ----Laptop & Desktop Search Icon---- */}
                         <TfiSearch className="text-lg font-bold absolute top-[50%] right-6 translate-y-[-50%] hidden sm:block" />
 
-                        <TfiSearch onClick={handleShowSearch} className="text-xl sm:text-lg font-bold absolute top-[50%] right-[-30px] sm:right-6 translate-y-[-50%] mt-1 sm:mt-0 sm:hidden" />
+                        {/* ----Mobile & Tablet Search Icon---- */}
+                        <>
+                            {showSearch ? (
+                                <RxCross1 onClick={() => setShowSearch(false)} className="text-xl sm:text-lg font-bold absolute top-[45%] right-[-30px] sm:right-6 translate-y-[-50%] mt-1 sm:mt-0 sm:hidden" />
+                            ) : (
+                                <TfiSearch onClick={() => setShowSearch(true)} className="text-xl sm:text-lg font-bold absolute top-[50%] right-[-30px] sm:right-6 translate-y-[-50%] mt-1 sm:mt-0 sm:hidden" />
+                            )}
+                        </>
                     </div>
 
                     <div className={`flex gap-[25px] sm:gap-[90px] items-center relative ${showSearch ? "hidden" : ""}`}>

@@ -126,7 +126,7 @@ const FeaturedProducts = () => {
         prevArrow: <SamplePrevArrow />,
         responsive: [
             {
-                breakpoint: 415,
+                breakpoint: 640,
                 settings: {
                     slidesToShow: 1,
                     nextArrow: <SampleNextArrowMobile />,
