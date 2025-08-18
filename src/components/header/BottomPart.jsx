@@ -7,10 +7,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { closeMenu } from "../../menuSlice";
 
 const BottomPart = () => {
-    const [isProductsDropdownOpen, setIsProductsDropdownOpen] = useState(false);
     const [isCategoriesDropdownOpen, setIsCategoriesDropdownOpen] = useState(false);
-    const productsDropdownRef = useRef(null);
     const categoriesDropdownRef = useRef(null);
+
     const isMenuOpen = useSelector(store => store.menu.showMenu);
     const dispatch = useDispatch();
 
@@ -25,18 +24,11 @@ const BottomPart = () => {
                 setIsCategoriesDropdownOpen(false);
             }
         }
-        const handleCloseDropdown2 = (e) => {
-            if (productsDropdownRef.current && !productsDropdownRef.current.contains(e.target)) {
-                setIsProductsDropdownOpen(false);
-            }
-        }
 
         document.addEventListener("mousedown", handleCloseDropdown1);
-        document.addEventListener("mousedown", handleCloseDropdown2);
 
         return () => {
             document.removeEventListener("mousedown", handleCloseDropdown1);
-            document.removeEventListener("mousedown", handleCloseDropdown2);
         };
     }, []);
 
@@ -99,38 +91,10 @@ const BottomPart = () => {
                                     </div>
                                 )}
                             </li>
-                            <li ref={productsDropdownRef} className="relative">
-                                <button onClick={() => setIsProductsDropdownOpen(!isProductsDropdownOpen)} className="flex items-center gap-2 cursor-pointer" to="/products-list">
+                            <li className="relative">
+                                <Link className="flex items-center gap-2 cursor-pointer" to="/products-list">
                                     Products
-                                    <TfiAngleDown className={`${isProductsDropdownOpen ? "rotate-180" : ""} transition text-sm font-bold`} />
-                                </button>
-                                {isProductsDropdownOpen && (
-                                    <div className="absolute top-[80%] left-0 mt-2 w-64 z-50 bg-white rounded-xl shadow-lg border border-gray-100 p-4 space-y-2 font-['Poppins']">
-                                        <Link
-                                            to="/products-list"
-                                            className="block px-4 py-2 rounded-lg hover:bg-gray-100 transition duration-150"
-                                            onClick={() => setIsProductsDropdownOpen(false)}
-                                        >
-                                            <p className="text-sm font-semibold text-[#303030]">Product 1</p>
-                                        </Link>
-
-                                        <Link
-                                            to="/products-list"
-                                            className="block px-4 py-2 rounded-lg hover:bg-gray-100 transition duration-150"
-                                            onClick={() => setIsProductsDropdownOpen(false)}
-                                        >
-                                            <p className="text-sm font-semibold text-[#303030]">Product 2</p>
-                                        </Link>
-
-                                        <Link
-                                            to="/products-list"
-                                            className="block px-4 py-2 rounded-lg hover:bg-gray-100 transition duration-150"
-                                            onClick={() => setIsProductsDropdownOpen(false)}
-                                        >
-                                            <p className="text-sm font-semibold text-[#303030]">Product 3</p>
-                                        </Link>
-                                    </div>
-                                )}
+                                </Link>
                             </li>
                             <li>
                                 <Link to="/blog">Blog</Link>

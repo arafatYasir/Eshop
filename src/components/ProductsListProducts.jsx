@@ -56,7 +56,7 @@ const ProductsListProducts = () => {
             {/* ----Sorting Dropdowns---- */}
             <div className="flex flex-col sm:flex-row gap-y-5 sm:gap-0 mb-6 sm:mb-0 justify-between items-center">
                 <div>
-                    <p className="text-[#303030] font-['Montserrat'] leading-6">Showing {itemsRange.start + 1} - {itemsRange.end} of {productsList.length}</p>
+                    <p className="text-[#303030] font-['Montserrat'] leading-6 text-sm sm:text-base">Showing {itemsRange.start + 1} - {itemsRange.end} of {productsList.length}</p>
                 </div>
                 <div className="flex items-center">
                     <span className="hidden sm:inline text-[#303030] font-['Montserrat'] leading-6 mr-4">Sort by</span>
@@ -79,7 +79,7 @@ const ProductsListProducts = () => {
                                 className="w-[120px] sm:w-[150px] flex justify-between items-center cursor-pointer"
                                 onClick={() => setIsCategoriesOpen(!isCategoriesOpen)}
                             >
-                                <span className="text-[#FF624C] font-['Montserrat'] font-bold">
+                                <span className="text-[#FF624C] font-['Montserrat'] font-bold text-sm sm:text-base">
                                     {sortByCategories}
                                 </span>
                                 <TfiAngleDown
@@ -89,7 +89,7 @@ const ProductsListProducts = () => {
 
                             {/* Custom dropdown list */}
                             {isCategoriesOpen && (
-                                <ul className="absolute w-[150px] border border-gray-300 bg-white shadow-lg z-10 mt-1">
+                                <ul className="absolute w-[120px] sm:w-[150px] border border-gray-300 bg-white shadow-lg z-10 mt-1">
                                     {['Popularity', 'Rating', 'Availability'].map(option => (
                                         <li
                                             key={option}
@@ -122,10 +122,10 @@ const ProductsListProducts = () => {
 
                             {/* Custom dropdown toggle */}
                             <div
-                                className="w-[150px] sm:w-[216px] flex justify-between items-center cursor-pointer"
+                                className="w-[160px] sm:w-[216px] flex justify-between items-center cursor-pointer"
                                 onClick={() => setIsPriceOpen(!isPriceOpen)}
                             >
-                                <span className="text-[#FF624C] font-['Montserrat'] font-bold">
+                                <span className="text-[#FF624C] font-['Montserrat'] font-bold text-sm sm:text-base">
                                     {sortByPrice}
                                 </span>
                                 <TfiAngleDown
@@ -135,7 +135,7 @@ const ProductsListProducts = () => {
 
                             {/* Custom dropdown list */}
                             {isPriceOpen && (
-                                <ul className="absolute w-[216px] border border-gray-300 bg-white shadow-lg z-10 mt-1">
+                                <ul className="absolute w-[160px] sm:w-[216px] border border-gray-300 bg-white shadow-lg z-10 mt-1">
                                     {['Price Low-to-High', 'Price High-to-Low'].map(option => (
                                         <li
                                             key={option}
@@ -179,7 +179,7 @@ const ProductsListProducts = () => {
                 ))}
             </div>
 
-            {/* <Pagination totalItems={productsList.length} itemsPerPage={16} currentPage={currentPage} onPageChange={setCurrentPage} /> */}
+            <Pagination totalItems={productsList.length} itemsPerPage={16} currentPage={currentPage} onPageChange={setCurrentPage} />
         </div>
     );
 };

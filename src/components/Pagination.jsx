@@ -57,12 +57,12 @@ const Pagination = ({ totalItems, itemsPerPage, currentPage, onPageChange }) => 
                 <LiaAngleLeftSolid size={22} />
             </button>
 
-            <div className="flex gap-[30px] mx-[50px]">
+            <div className="flex sm:gap-[30px] gap-[5px] sm:mx-[50px]">
                 {pageNumbers.map((page, idx) => (
                     <button
                         key={idx}
                         onClick={() => onPageChange(page)}
-                        className={`py-[9px] px-[18px] text-xl font-semibold leading-[30px] font-['Poppins'] rounded-[5px] ${currentPage === page ? "bg-[#FF624C] text-white" : ""} ${page === "..." ? "cursor-default" : "cursor-pointer"}`}
+                        className={`px-[10px] py-[5px] sm:py-[9px] sm:px-[18px] text-xl font-semibold leading-[30px] font-['Poppins'] rounded-[5px] ${currentPage === page ? "bg-[#FF624C] text-white" : ""} ${page === "..." ? "cursor-default" : "cursor-pointer"}`}
                         disabled={page === "..."}
                     >
                         {page}
