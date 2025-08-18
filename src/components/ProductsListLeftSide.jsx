@@ -138,7 +138,7 @@ const ProductsListLeftSide = () => {
 
     // useEffect to handle body scroll lock when the sidebar is open
     useEffect(() => {
-        if(isFilterOpen) {
+        if (isFilterOpen) {
             document.body.style.overflow = "hidden";
         }
         else {
@@ -148,7 +148,7 @@ const ProductsListLeftSide = () => {
         return () => {
             document.body.style.overflow = "";
         }
-        
+
     }, [isFilterOpen])
 
     return (
@@ -261,17 +261,18 @@ const ProductsListLeftSide = () => {
                 )}
             </div>
 
+            <div className="flex items-center justify-between sm:hidden">
+                <div class="text-[22px] sm:text-4xl text-[#303030] font-['Poppins'] leading-[46px] font-semibold">Featured Products</div>
 
-            {/* Filter Opening Part for Mobile */}
-            <div
-                className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-[#ff8066] to-[#ff624c] text-white font-semibold shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-95 transition-all duration-200 cursor-pointer"
-                onClickCapture={() => setIsFilterOpen(true)}
-            >
-                <VscSettings size={22} className="text-white" />
-                <span className="tracking-wide">Filters</span>
+                {/* Filter Opening Part for Mobile */}
+                <div
+                    className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-[#ff8066] to-[#ff624c] text-white font-semibold shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-95 transition-all duration-200 cursor-pointer"
+                    onClickCapture={() => setIsFilterOpen(true)}
+                >
+                    <VscSettings size={22} className="text-white" />
+                    <span className="tracking-wide">Filters</span>
+                </div>
             </div>
-
-
 
             {/* ----Mobile Filters---- */}
             {isFilterOpen && (

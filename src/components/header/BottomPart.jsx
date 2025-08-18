@@ -52,7 +52,6 @@ const BottomPart = () => {
         return () => {
             document.body.style.overflow = "";
         }
-        
     }, [isMenuOpen])
 
     return (
@@ -178,21 +177,39 @@ const BottomPart = () => {
                 {/* Menu Links */}
                 <ul className="flex flex-col px-6 py-6 space-y-6">
                     {[
-                        "All Categories",
-                        "Products",
-                        "Blog",
-                        "Contact",
-                        "Limited Sale",
-                        "Best Seller",
-                        "New Arrival",
+                        {
+                            name: "All Categories",
+                        },
+                        {
+                            name: "Products",
+                            url: "/products-list"
+                        },
+                        {
+                            name: "Blog",
+                            url: "/blog"
+                        },
+                        {
+                            name: "Contact",
+                            url: "/contact"
+                        },
+                        {
+                            name: "Limited Sale",
+                            url: "limited-sale"
+                        },
+                        {
+                            name: "Best Seller",
+                            url: "best-seller"
+                        },
+                        {
+                            name: "New Arrival",
+                            url: "new-arrival"
+                        }
                     ].map((item, index) => (
                         <li
                             key={index}
                             className="relative text-lg font-medium text-[#303030] cursor-pointer group transition-colors duration-200"
                         >
-                            {item}
-                            {/* Hover underline animation */}
-                            <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#ff624c] group-hover:w-full transition-all duration-300 rounded"></span>
+                            <Link onClick={() => isMenuOpen(false)} to={item?.url}>{item.name}</Link>
                         </li>
                     ))}
                 </ul>

@@ -7,12 +7,12 @@ const ProductsListPage = () => {
 
     return (
         <Container>
-            <div className="flex flex-col sm:flex-row items-start gap-[25px] mt-16 mb-20">
+            <div className="flex flex-col sm:flex-row gap-[25px] mt-5 sm:mt-16 mb-20">
                 {/* Left Side */}
                 <ProductsListLeftSide />
 
                 {/* Right Side */}
-                {/* <ProductsListProducts /> */}
+                <ProductsListProducts />
             </div>
         </Container>
     );

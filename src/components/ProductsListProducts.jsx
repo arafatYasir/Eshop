@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import productsList from "../../public/products/ProductsListPageProducts";
 import ProductLayout from "./commonLayouts/ProductLayout";
 import Pagination from "./Pagination";
@@ -9,6 +9,11 @@ const ProductsListProducts = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [sortByCategories, setSortByCategories] = useState("Popularity");
     const [sortByPrice, setSortByPrice] = useState("Price Low-to-High");
+    const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
+    const [isPriceOpen, setIsPriceOpen] = useState(false);
+
+    const categoriesDropdownRef = useRef(null);
+    const priceDropdownRef = useRef(null);
 
     const itemsRange = {
         start: 0,
@@ -18,39 +23,147 @@ const ProductsListProducts = () => {
     itemsRange.start = currentPage === 1 ? 0 : (currentPage * 16) - 16;
     itemsRange.end = currentPage * 16;
 
+    useEffect(() => {
+        const handleCloseCategoriesDropdown = (e) => {
+            if (categoriesDropdownRef.current && !categoriesDropdownRef.current.contains(e.target)) {
+                setIsCategoriesOpen(false);
+            }
+        }
+
+        const handleClosePriceDropdown = (e) => {
+            if (priceDropdownRef.current && !priceDropdownRef.current.contains(e.target)) {
+                setIsPriceOpen(false);
+            }
+        }
+
+        document.addEventListener("mousedown", (e) => {
+            handleCloseCategoriesDropdown(e);
+            handleClosePriceDropdown(e);
+        })
+
+        return () => {
+            document.removeEventListener("mousedown", (e) => {
+                handleCloseCategoriesDropdown(e);
+                handleClosePriceDropdown(e);
+            })
+        }
+    }, [])
+
     return (
         <div>
-            <h2 className="text-[#303030] text-4xl font-['Poppins'] font-semibold leading-[46px] mb-6">Products</h2>
-            <div className="flex justify-between items-center">
+            <h2 className="hidden sm:block text-[#303030] text-4xl font-['Poppins'] font-semibold leading-[46px] mb-6">Products</h2>
+
+            {/* ----Sorting Dropdowns---- */}
+            <div className="flex flex-col sm:flex-row gap-y-5 sm:gap-0 mb-6 sm:mb-0 justify-between items-center">
                 <div>
                     <p className="text-[#303030] font-['Montserrat'] leading-6">Showing {itemsRange.start + 1} - {itemsRange.end} of {productsList.length}</p>
                 </div>
                 <div className="flex items-center">
-                    <span className="text-[#303030] font-['Montserrat'] leading-6 mr-4">Sort by</span>
+                    <span className="hidden sm:inline text-[#303030] font-['Montserrat'] leading-6 mr-4">Sort by</span>
 
                     <div className="flex gap-[45px]">
-                        <div className="after:content-[''] relative after:absolute after:w-[1px] after:h-[32px] after:bg-[#CBCBCB] after:top-1/2 after:-right-6 after:-translate-y-1/2">
-                            <select className="w-[150px] text-[#FF624C] font-['Montserrat'] font-bold leading-6 cursor-pointer appearance-none outline-none" name="categories" value={sortByCategories} onChange={e => setSortByCategories(e.target.value)}>
-                                <option value="popularity" className="text-black">Popularity</option>
-                                <option value="rating" className="text-black">Rating</option>
-                                <option value="availability" className="text-black">Availability</option>
+                        {/* ----Categories Dropdown---- */}
+                        <div
+                            className="relative after:content-[''] after:absolute after:w-[1px] after:h-[32px] after:bg-[#CBCBCB] after:top-1/2 after:-right-6 after:-translate-y-1/2"
+                            ref={categoriesDropdownRef}
+                        >
+                            <select
+                                className="text-[#FF624C] font-['Montserrat'] font-bold leading-6 cursor-pointer appearance-none outline-none hidden"
+                                name="categories"
+                                value={sortByCategories || ""}
+                            >
                             </select>
-                            <TfiAngleDown className="absolute text-sm top-1/2 -translate-1/2 right-0 pointer-events-none text-[#303030]" />
+
+                            {/* Custom dropdown toggle */}
+                            <div
+                                className="w-[120px] sm:w-[150px] flex justify-between items-center cursor-pointer"
+                                onClick={() => setIsCategoriesOpen(!isCategoriesOpen)}
+                            >
+                                <span className="text-[#FF624C] font-['Montserrat'] font-bold">
+                                    {sortByCategories}
+                                </span>
+                                <TfiAngleDown
+                                    className={`text-[#303030] text-sm transition-transform ${isCategoriesOpen ? 'rotate-180' : ''}`}
+                                />
+                            </div>
+
+                            {/* Custom dropdown list */}
+                            {isCategoriesOpen && (
+                                <ul className="absolute w-[150px] border border-gray-300 bg-white shadow-lg z-10 mt-1">
+                                    {['Popularity', 'Rating', 'Availability'].map(option => (
+                                        <li
+                                            key={option}
+                                            className="p-2 hover:bg-gray-200 cursor-pointer"
+                                            onClick={() => {
+                                                setSortByCategories(option);
+                                                setIsCategoriesOpen(false);
+                                            }}
+                                        >
+                                            <span className="text-black">
+                                                {option}
+                                            </span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
                         </div>
 
-                        <div className="after:content-[''] relative after:absolute after:w-[1px] after:h-[32px] after:bg-[#CBCBCB] after:top-1/2 after:-right-6 after:-translate-y-1/2">
-                            <select className="w-[216px] text-[#FF624C] font-['Montserrat'] font-bold leading-6 cursor-pointer appearance-none outline-none" name="categories" value={sortByPrice} onChange={e => setSortByPrice(e.target.value)}>
-                                <option value="priceLowToHigh" className="text-black">Price Low-to-High</option>
-                                <option value="priceHighToLow" className="text-black">Price High-to-Low</option>
+                        {/* ----Price Dropdown---- */}
+                        <div
+                            className="relative after:content-[''] after:absolute sm:after:w-[1px] sm:after:h-[32px] after:bg-[#CBCBCB] after:top-1/2 after:-right-6 after:-translate-y-1/2"
+                            ref={priceDropdownRef}
+                        >
+                            <select
+                                className="text-[#FF624C] font-['Montserrat'] font-bold leading-6 cursor-pointer appearance-none outline-none hidden"
+                                name="categories"
+                                value={sortByPrice || ""}
+                            >
                             </select>
-                            <TfiAngleDown className="absolute text-sm top-1/2 -translate-1/2 right-0 pointer-events-none text-[#303030]" />
+
+                            {/* Custom dropdown toggle */}
+                            <div
+                                className="w-[150px] sm:w-[216px] flex justify-between items-center cursor-pointer"
+                                onClick={() => setIsPriceOpen(!isPriceOpen)}
+                            >
+                                <span className="text-[#FF624C] font-['Montserrat'] font-bold">
+                                    {sortByPrice}
+                                </span>
+                                <TfiAngleDown
+                                    className={`text-[#303030] text-sm transition-transform ${isPriceOpen ? 'rotate-180' : ''}`}
+                                />
+                            </div>
+
+                            {/* Custom dropdown list */}
+                            {isPriceOpen && (
+                                <ul className="absolute w-[216px] border border-gray-300 bg-white shadow-lg z-10 mt-1">
+                                    {['Price Low-to-High', 'Price High-to-Low'].map(option => (
+                                        <li
+                                            key={option}
+                                            className="p-2 hover:bg-gray-200 cursor-pointer"
+                                            onClick={() => {
+                                                setSortByPrice(option);
+                                                setIsPriceOpen(false);
+                                            }}
+                                        >
+                                            <span className="text-black">
+                                                {option}
+                                            </span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
                         </div>
 
-                        <MenuIcon />
+                        <div className="hidden sm:block">
+                            <MenuIcon />
+                        </div>
                     </div>
+
+
                 </div>
             </div>
-            <div className="flex flex-wrap mt-[52px]">
+
+            <div className="flex flex-col items-center gap-y-6 sm:gap-0 sm:flex-row sm:flex-wrap sm:mt-[52px]">
                 {productsList.slice(itemsRange.start, itemsRange.end).map(p => (
                     <ProductLayout
                         key={p.id}
@@ -66,7 +179,7 @@ const ProductsListProducts = () => {
                 ))}
             </div>
 
-            <Pagination totalItems={productsList.length} itemsPerPage={16} currentPage={currentPage} onPageChange={setCurrentPage} />
+            {/* <Pagination totalItems={productsList.length} itemsPerPage={16} currentPage={currentPage} onPageChange={setCurrentPage} /> */}
         </div>
     );
 };
