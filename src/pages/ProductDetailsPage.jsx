@@ -75,14 +75,14 @@ const ProductDetailsPage = () => {
 
     return (
         <Container>
-            <div className="font-['Montserrat'] text-[#303030] text-sm sm:text-base leading-6 flex justify-center flex-wrap gap-x-10 gap-y-5 mt-10 sm:mt-16">
+            <div className="font-['Montserrat'] text-[#303030] text-sm sm:text-base leading-6 flex flex-wrap gap-x-10 gap-y-5 mt-10 sm:mt-16">
                 <span className="relative after:content-[''] after:absolute after:w-[1px] after:h-[20px] after:bg-[#4A4A4A] after:top-1/2 after:-translate-y-1/2 after:right-[-19px]">Home</span>
                 <span className="relative after:content-[''] after:absolute after:w-[1px] after:h-[20px] after:bg-[#4A4A4A] after:top-1/2 after:-translate-y-1/2 after:right-[-19px]">Computers & Tablets</span>
                 <span className="relative after:content-[''] after:absolute after:w-[1px] after:h-[20px] after:bg-[#4A4A4A] after:top-1/2 after:-translate-y-1/2 after:right-[-19px]">Laptop</span>
                 <span className="font-bold">NexSUS ROCK Strix Scar 17 Gaming Laptop</span>
             </div>
 
-            <div className="mt-12 flex flex-col sm:flex-row sm:justify-between">
+            <div className="mt-12 flex flex-col items-center sm:flex-row sm:justify-between">
                 <ProductDetailsCarousel />
                 <ProductDetails />
             </div>

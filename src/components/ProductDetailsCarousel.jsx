@@ -6,13 +6,44 @@ const ProductDetailsCarousel = () => {
     const [nav1, setNav1] = useState(null);
     const [nav2, setNav2] = useState(null);
     const [showFullScreen, setShowFullScreen] = useState(false);
+    const modalRef = useRef(null);
+
     let sliderRef1 = useRef(null);
     let sliderRef2 = useRef(null);
 
+    // useEffec to sync two sliers
     useEffect(() => {
         setNav1(sliderRef1);
         setNav2(sliderRef2);
     }, []);
+
+    // useEffect to handle body scroll lock when the sidebar is open
+    useEffect(() => {
+        if (showFullScreen) {
+            document.body.style.overflow = "hidden";
+        }
+        else {
+            document.body.style.overflow = "";
+        }
+
+        return () => {
+            document.body.style.overflow = "";
+        }
+
+    }, [showFullScreen]);
+
+    // useEffect to close the modal when clicked outside
+    useEffect(() => {
+        const handleCloseModal = (e) => {
+            if (modalRef.current && !modalRef.current.contains(e.target)) {
+                setShowFullScreen(false);
+            }
+        }
+
+        document.addEventListener("mousedown", handleCloseModal);
+
+        return () => document.removeEventListener("mousedown", handleCloseModal);
+    }, [])
 
     const settings = {
         infinite: true,
@@ -32,7 +63,7 @@ const ProductDetailsCarousel = () => {
     return (
         <div>
             {/* First Slider */}
-            <Slider className="max-w-[833px]" {...settings} asNavFor={nav2} ref={slider => (sliderRef1 = slider)}>
+            <Slider className="max-w-[370px] md:max-w-[833px]" {...settings} asNavFor={nav2} ref={slider => (sliderRef1 = slider)}>
                 <div className="relative max-w-[370px] sm:max-w-full">
                     <img className="w-full h-auto" src="/images/product-details-image.png" alt="Product Image" />
                     <div
@@ -82,10 +113,12 @@ const ProductDetailsCarousel = () => {
 
             {/* Fullscreen Modal */}
             {showFullScreen && (
-                <div className="fixed inset-0 bg-black/50 w-full h-screen flex items-center justify-center">
-                    <img className="scale-120" src="/images/product-details-image.png" alt="Product Image" />
+                <div className="fixed inset-0 bg-black/50 w-full h-screen flex items-center justify-center z-10">
+                    <div className="relative">
+                        <img ref={modalRef} className="scale-120" src="/images/product-details-image.png" alt="Product Image" />
+                        <button className="absolute top-[-5%] right-[6%] sm:top-[-20px] sm:right-[-40px] sm:text-2xl cursor-pointer font-bold transition text-[#FF624C]" onClick={() => setShowFullScreen(false)}>&#10005;</button>
+                    </div>
 
-                    <button className="absolute top-[13%] right-[21%] text-2xl cursor-pointer font-bold transition text-[#FF624C]" onClick={() => setShowFullScreen(false)}>&#10005;</button>
                 </div>
             )}
         </div>
