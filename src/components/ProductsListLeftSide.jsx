@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TfiAngleDown } from "react-icons/tfi";
+import { VscSettings } from "react-icons/vsc";
 
 const ProductsListLeftSide = () => {
+    const [isFilterOpen, setIsFilterOpen] = useState(false);
     const [showCategories, setShowCategories] = useState(true);
     const [showBrands, setShowBrands] = useState(true);
     const [showPrice, setShowPrice] = useState(true);
@@ -134,115 +136,312 @@ const ProductsListLeftSide = () => {
         }
     ]
 
+    // useEffect to handle body scroll lock when the sidebar is open
+    useEffect(() => {
+        if(isFilterOpen) {
+            document.body.style.overflow = "hidden";
+        }
+        else {
+            document.body.style.overflow = "";
+        }
+
+        return () => {
+            document.body.style.overflow = "";
+        }
+        
+    }, [isFilterOpen])
+
     return (
-        <div className="min-w-[354px] p-12 bg-[#F4F4F4] rounded-[25px]" >
-            {/* Categories */}
-            <div className="flex items-center cursor-pointer justify-between mb-5" onClick={() => setShowCategories(!showCategories)}>
-                <h3 className="text-xl text-[#303030] font-['Montserrat'] font-bold leading-[30px]">Categories</h3>
-                <button className={`${showCategories ? "rotate-180" : ""} transition text-sm cursor-pointer text-[#303030]`} ><TfiAngleDown /></button>
-            </div>
+        <>
+            {/* ----Desktop Filters---- */}
+            <div className="hidden sm:block min-w-[354px] p-12 bg-[#F4F4F4] rounded-[25px]" >
+                {/* Categories */}
+                <div className="flex items-center cursor-pointer justify-between mb-5" onClick={() => setShowCategories(!showCategories)}>
+                    <h3 className="text-xl text-[#303030] font-['Montserrat'] font-bold leading-[30px]">Categories</h3>
+                    <button className={`${showCategories ? "rotate-180" : ""} transition text-sm cursor-pointer text-[#303030]`} ><TfiAngleDown /></button>
+                </div>
 
-            {showCategories && (
-                <ul className="flex flex-col gap-3 border-b border-[#CFCFCF] pb-10">
-                    {categories.map(category => (
-                        <li key={category.id} className="flex items-center gap-2">
-                            <input className="" type="checkbox" id={category.title} />
-                            <label className="text-[#303030] font-['Montserrat'] leading-6" htmlFor={category.title}>{category.title}</label>
-                        </li>
-                    ))}
-                </ul>
-            )}
-
-
-            {/* Brands */}
-            <div className="flex items-center justify-between mt-10 mb-5 cursor-pointer" onClick={() => setShowBrands(!showBrands)}>
-                <h3 className="text-xl text-[#303030] font-['Montserrat'] font-bold leading-[30px]">Brands</h3>
-                <button className={`${showBrands ? "rotate-180" : ""} transition cursor-pointer text-sm text-[#303030]`}><TfiAngleDown /></button>
-            </div>
-
-            {showBrands && (
-                <div className="border-b border-[#CFCFCF] pb-10">
-                    <ul className="flex flex-col gap-3 ">
-                        {brands.slice(0, brandsLimit).map(brand => (
-                            <li key={brand.id} className="flex items-center gap-2 relative">
-                                <input type="checkbox" id={brand.title} />
-                                <label className="text-[#303030] font-['Montserrat'] leading-6" htmlFor={brand.title}>
-                                    <span>{brand.title}</span>
-                                    <span className="absolute top-0 right-0">({brand.available})</span>
-                                </label>
+                {showCategories && (
+                    <ul className="flex flex-col gap-3 border-b border-[#CFCFCF] pb-10">
+                        {categories.map(category => (
+                            <li key={category.id} className="flex items-center gap-2">
+                                <input className="" type="checkbox" id={category.title} />
+                                <label className="text-[#303030] font-['Montserrat'] leading-6" htmlFor={category.title}>{category.title}</label>
                             </li>
                         ))}
                     </ul>
+                )}
 
-                    {brands.length > brandsLimit && (
-                        <button className="text-[#303030] inline font-['Montserrat'] font-bold leading-6 border-b border-[#303030] mt-5 cursor-pointer" onClick={() => setBrandsLimit(brands.length)}>More Brands</button>
-                    )}
+
+                {/* Brands */}
+                <div className="flex items-center justify-between mt-10 mb-5 cursor-pointer" onClick={() => setShowBrands(!showBrands)}>
+                    <h3 className="text-xl text-[#303030] font-['Montserrat'] font-bold leading-[30px]">Brands</h3>
+                    <button className={`${showBrands ? "rotate-180" : ""} transition cursor-pointer text-sm text-[#303030]`}><TfiAngleDown /></button>
                 </div>
-            )}
 
-            {/* Price */}
-            <div className="flex items-center justify-between mt-10 mb-5 cursor-pointer" onClick={() => setShowPrice(!showPrice)}>
-                <h3 className="text-xl text-[#303030] font-['Montserrat'] font-bold leading-[30px]">Price</h3>
-                <button className={`${showPrice ? "rotate-180" : ""} transition text-sm text-[#303030]`}><TfiAngleDown /></button>
+                {showBrands && (
+                    <div className="border-b border-[#CFCFCF] pb-10">
+                        <ul className="flex flex-col gap-3 ">
+                            {brands.slice(0, brandsLimit).map(brand => (
+                                <li key={brand.id} className="flex items-center gap-2 relative">
+                                    <input type="checkbox" id={brand.title} />
+                                    <label className="text-[#303030] font-['Montserrat'] leading-6" htmlFor={brand.title}>
+                                        <span>{brand.title}</span>
+                                        <span className="absolute top-0 right-0">({brand.available})</span>
+                                    </label>
+                                </li>
+                            ))}
+                        </ul>
+
+                        {brands.length > brandsLimit && (
+                            <button className="text-[#303030] inline font-['Montserrat'] font-bold leading-6 border-b border-[#303030] mt-5 cursor-pointer" onClick={() => setBrandsLimit(brands.length)}>More Brands</button>
+                        )}
+                    </div>
+                )}
+
+                {/* Price */}
+                <div className="flex items-center justify-between mt-10 mb-5 cursor-pointer" onClick={() => setShowPrice(!showPrice)}>
+                    <h3 className="text-xl text-[#303030] font-['Montserrat'] font-bold leading-[30px]">Price</h3>
+                    <button className={`${showPrice ? "rotate-180" : ""} transition text-sm text-[#303030]`}><TfiAngleDown /></button>
+                </div>
+
+                {showPrice && (
+                    <div>
+                        <div className="flex gap-[11px]">
+                            <div className="relative">
+                                <input
+                                    className="w-[123px] h-[74px] text-center border border-[#ABABAB] rounded-[10px] focus:outline-none font-['Montserrat'] text-[#303030] leading-6"
+                                    type="text"
+                                    value={`$${minInput}`}
+                                    onChange={handleMinInputChange}
+                                />
+                            </div>
+                            <div className="relative">
+                                <input
+                                    className="w-[123px] h-[74px] text-center border border-[#ABABAB] rounded-[10px] focus:outline-none font-['Montserrat'] text-[#303030] leading-6"
+                                    type="text"
+                                    value={`$${maxInput}`}
+                                    onChange={handleMaxInputChange}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="mt-[30px]">
+                            <div className="relative w-full h-0.5 bg-[#C3C3C3]">
+                                <div
+                                    className="absolute h-full bg-[#FF624C]"
+                                    style={{ left: `${minPercent}%`, width: `${maxPercent - minPercent}%` }}
+                                ></div>
+
+                                <div className="relative">
+                                    <input
+                                        type="range"
+                                        className="absolute top-0 left-0 w-full h-full appearance-none cursor-pointer pointer-events-none z-10"
+                                        min={0}
+                                        max={5000}
+                                        value={minValue === "" ? "" : minValue}
+                                        step={50}
+                                        onChange={(e) => handleSliderChange("min", e.target.value)}
+                                    />
+                                </div>
+                                <div className="relative">
+                                    <input
+                                        type="range"
+                                        className="absolute top-0 left-0 w-full h-full appearance-none cursor-pointer pointer-events-none z-10"
+                                        min={0}
+                                        max={5000}
+                                        value={maxValue === "" ? "" : maxValue}
+                                        step={50}
+                                        onChange={(e) => handleSliderChange("max", e.target.value)}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
 
-            {showPrice && (
-                <div>
-                    <div className="flex gap-[11px]">
-                        <div className="relative">
-                            <input
-                                className="w-[123px] h-[74px] text-center border border-[#ABABAB] rounded-[10px] focus:outline-none font-['Montserrat'] text-[#303030] leading-6"
-                                type="text"
-                                value={minInput}
-                                onChange={handleMinInputChange}
-                            />
-                            <span className="absolute top-[25px] left-[30px] font-['Montserrat'] text-[#303030] leading-6">$</span>
+
+            {/* Filter Opening Part for Mobile */}
+            <div
+                className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-[#ff8066] to-[#ff624c] text-white font-semibold shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-95 transition-all duration-200 cursor-pointer"
+                onClickCapture={() => setIsFilterOpen(true)}
+            >
+                <VscSettings size={22} className="text-white" />
+                <span className="tracking-wide">Filters</span>
+            </div>
+
+
+
+            {/* ----Mobile Filters---- */}
+            {isFilterOpen && (
+                <div
+                    className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40 transition-opacity duration-300"
+                    onClick={() => setIsFilterOpen(false)}
+                ></div>
+            )}
+
+            <div
+                className={`fixed top-0 right-0 w-[75%] max-w-[320px] h-full z-50 bg-[#F4F4F4] sm:hidden rounded-l-2xl shadow-xl transform ${isFilterOpen ? "translate-x-0" : "translate-x-full"
+                    } transition-transform duration-500 ease-in-out flex flex-col`}
+            >
+                {/* Header */}
+                <div className="flex justify-between items-center px-6 py-4 bg-gradient-to-r from-[#ffffff] to-[#f9f9f9] rounded-tr-2xl border-b border-gray-200 flex-shrink-0">
+                    <h2 className="text-2xl font-bold text-[#303030] tracking-wide">Filters</h2>
+                    <button
+                        onClick={() => setIsFilterOpen(false)}
+                        className="text-3xl text-[#303030] hover:text-[#ff624c] transition duration-200"
+                    >
+                        &times;
+                    </button>
+                </div>
+
+                {/* Scrollable Content */}
+                <div className="px-6 py-6 space-y-8 overflow-y-auto flex-1">
+                    {/* Categories */}
+                    <div>
+                        <div
+                            className="flex items-center justify-between cursor-pointer mb-3"
+                            onClick={() => setShowCategories(!showCategories)}
+                        >
+                            <h3 className="text-lg font-bold text-[#303030] font-['Montserrat']">
+                                Categories
+                            </h3>
+                            <button
+                                className={`${showCategories ? "rotate-180" : ""} transition text-sm text-[#303030]`}
+                            >
+                                <TfiAngleDown />
+                            </button>
                         </div>
-                        <div className="relative">
-                            <input
-                                className="w-[123px] h-[74px] text-center border border-[#ABABAB] rounded-[10px] focus:outline-none font-['Montserrat'] text-[#303030] leading-6"
-                                type="text"
-                                value={maxInput}
-                                onChange={handleMaxInputChange}
-                            />
-                            <span className="absolute top-[25px] left-[30px] font-['Montserrat'] text-[#303030] leading-6">$</span>
-                        </div>
+                        {showCategories && (
+                            <ul className="flex flex-col gap-3 border-b border-[#CFCFCF] pb-5">
+                                {categories.map((category) => (
+                                    <li key={category.id} className="flex items-center gap-2">
+                                        <input type="checkbox" id={`mobile-${category.title}`} />
+                                        <label
+                                            className="text-[#303030] font-['Montserrat'] leading-6"
+                                            htmlFor={`mobile-${category.title}`}
+                                        >
+                                            {category.title}
+                                        </label>
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
                     </div>
 
-                    <div className="mt-[30px]">
-                        <div className="relative w-full h-0.5 bg-[#C3C3C3]">
-                            <div
-                                className="absolute h-full bg-[#FF624C]"
-                                style={{ left: `${minPercent}%`, width: `${maxPercent - minPercent}%` }}
-                            ></div>
-
-                            <div className="relative">
-                                <input
-                                    type="range"
-                                    className="absolute top-0 left-0 w-full h-full appearance-none cursor-pointer pointer-events-none z-10"
-                                    min={0}
-                                    max={5000}
-                                    value={minValue === "" ? "" : minValue}
-                                    step={50}
-                                    onChange={(e) => handleSliderChange("min", e.target.value)}
-                                />
-                            </div>
-                            <div className="relative">
-                                <input
-                                    type="range"
-                                    className="absolute top-0 left-0 w-full h-full appearance-none cursor-pointer pointer-events-none z-10"
-                                    min={0}
-                                    max={5000}
-                                    value={maxValue === "" ? "" : maxValue}
-                                    step={50}
-                                    onChange={(e) => handleSliderChange("max", e.target.value)}
-                                />
-                            </div>
+                    {/* Brands */}
+                    <div>
+                        <div
+                            className="flex items-center justify-between cursor-pointer mb-3"
+                            onClick={() => setShowBrands(!showBrands)}
+                        >
+                            <h3 className="text-lg font-bold text-[#303030] font-['Montserrat']">
+                                Brands
+                            </h3>
+                            <button
+                                className={`${showBrands ? "rotate-180" : ""} transition text-sm text-[#303030]`}
+                            >
+                                <TfiAngleDown />
+                            </button>
                         </div>
+                        {showBrands && (
+                            <div className="border-b border-[#CFCFCF] pb-5">
+                                <ul className="flex flex-col gap-3">
+                                    {brands.slice(0, brandsLimit).map((brand) => (
+                                        <li key={brand.id} className="flex items-center gap-2 relative">
+                                            <input type="checkbox" id={`mobile-${brand.title}`} />
+                                            <label
+                                                className="text-[#303030] font-['Montserrat'] leading-6"
+                                                htmlFor={`mobile-${brand.title}`}
+                                            >
+                                                <span>{brand.title}</span>
+                                                <span className="absolute top-0 right-0">
+                                                    ({brand.available})
+                                                </span>
+                                            </label>
+                                        </li>
+                                    ))}
+                                </ul>
+                                {brands.length > brandsLimit && (
+                                    <button
+                                        className="text-[#303030] font-['Montserrat'] font-bold leading-6 border-b border-[#303030] mt-3"
+                                        onClick={() => setBrandsLimit(brands.length)}
+                                    >
+                                        More Brands
+                                    </button>
+                                )}
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Price */}
+                    <div>
+                        <div
+                            className="flex items-center justify-between cursor-pointer mb-3"
+                            onClick={() => setShowPrice(!showPrice)}
+                        >
+                            <h3 className="text-lg font-bold text-[#303030] font-['Montserrat']">
+                                Price
+                            </h3>
+                            <button
+                                className={`${showPrice ? "rotate-180" : ""} transition text-sm text-[#303030]`}
+                            >
+                                <TfiAngleDown />
+                            </button>
+                        </div>
+                        {showPrice && (
+                            <div>
+                                <div className="flex gap-3">
+                                    <input
+                                        className="w-[45%] h-[60px] text-center border border-[#ABABAB] rounded-[10px] focus:outline-none font-['Montserrat'] text-[#303030]"
+                                        type="text"
+                                        value={`$${minInput}`}
+                                        onChange={handleMinInputChange}
+                                    />
+                                    <input
+                                        className="w-[45%] h-[60px] text-center border border-[#ABABAB] rounded-[10px] focus:outline-none font-['Montserrat'] text-[#303030]"
+                                        type="text"
+                                        value={`$${maxInput}`}
+                                        onChange={handleMaxInputChange}
+                                    />
+                                </div>
+                                <div className="mt-6">
+                                    <div className="relative w-full h-0.5 bg-[#C3C3C3]">
+                                        <div
+                                            className="absolute h-full bg-[#FF624C]"
+                                            style={{
+                                                left: `${minPercent}%`,
+                                                width: `${maxPercent - minPercent}%`,
+                                            }}
+                                        ></div>
+
+                                        <input
+                                            type="range"
+                                            className="absolute top-0 left-0 w-full h-full appearance-none cursor-pointer pointer-events-none z-10"
+                                            min={0}
+                                            max={5000}
+                                            value={minValue === "" ? "" : minValue}
+                                            step={50}
+                                            onChange={(e) => handleSliderChange("min", e.target.value)}
+                                        />
+                                        <input
+                                            type="range"
+                                            className="absolute top-0 left-0 w-full h-full appearance-none cursor-pointer pointer-events-none z-10"
+                                            min={0}
+                                            max={5000}
+                                            value={maxValue === "" ? "" : maxValue}
+                                            step={50}
+                                            onChange={(e) => handleSliderChange("max", e.target.value)}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </div>
-            )}
-        </div>
+            </div>
+        </>
     );
 };
 

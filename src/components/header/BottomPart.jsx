@@ -40,6 +40,21 @@ const BottomPart = () => {
         };
     }, []);
 
+    // Another useEffect to handle body scroll lock when the sidebar is open
+    useEffect(() => {
+        if(isMenuOpen) {
+            document.body.style.overflow = "hidden";
+        }
+        else {
+            document.body.style.overflow = "";
+        }
+
+        return () => {
+            document.body.style.overflow = "";
+        }
+        
+    }, [isMenuOpen])
+
     return (
         <>
             {/* ----Desktop Navbar---- */}
@@ -142,8 +157,6 @@ const BottomPart = () => {
             </nav>
 
             {/* ----Mobile Navbar---- */}
-            {/* ----Mobile Navbar---- */}
-            {/* Backdrop Overlay */}
             {isMenuOpen && (
                 <div
                     className="fixed inset-0 bg-black/30 backdrop-blur-sm z-40 transition-opacity duration-300"
