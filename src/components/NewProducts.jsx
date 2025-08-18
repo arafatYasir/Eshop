@@ -74,7 +74,7 @@ const NewProducts = () => {
 
                             {/* Country list */}
                             {isDropdownOpen && (
-                                <ul className="absolute w-[125px] sm:w-[150px] border border-gray-300 bg-white shadow-lg z-10">
+                                <ul className="absolute w-[125px] sm:w-full border border-gray-300 bg-white shadow-lg z-10">
                                     {categories.map(category => (
                                         <li className="flex items-center gap-2 p-2 hover:bg-gray-200 cursor-pointer"
                                             key={category?.id}

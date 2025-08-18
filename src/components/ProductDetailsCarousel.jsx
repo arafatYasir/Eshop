@@ -17,7 +17,8 @@ const ProductDetailsCarousel = () => {
     const settings = {
         infinite: true,
         slidesToShow: 1,
-        slidesToScroll: 1
+        slidesToScroll: 1,
+        arrows: false
     };
 
     const settings2 = {
@@ -25,15 +26,15 @@ const ProductDetailsCarousel = () => {
         slidesToShow: 3,
         slidesToScroll: 1,
         focusOnSelect: true,
+        arrows: false
     };
-
 
     return (
         <div>
             {/* First Slider */}
-            <Slider className="w-[833px]" {...settings} asNavFor={nav2} ref={slider => (sliderRef1 = slider)}>
-                <div className="relative">
-                    <img src="/images/product-details-image.png" alt="Product Image" />
+            <Slider className="max-w-[833px]" {...settings} asNavFor={nav2} ref={slider => (sliderRef1 = slider)}>
+                <div className="relative max-w-[370px] sm:max-w-full">
+                    <img className="w-full h-auto" src="/images/product-details-image.png" alt="Product Image" />
                     <div
                         className="absolute top-2 right-2 cursor-pointer"
                         onClick={() => setShowFullScreen(true)}
@@ -41,8 +42,8 @@ const ProductDetailsCarousel = () => {
                         <FullscreenIcon />
                     </div>
                 </div>
-                <div className="relative">
-                    <img src="/images/product-details-image.png" alt="Product Image" />
+                <div className="relative max-w-[370px] sm:max-w-full">
+                    <img className="w-full h-auto" src="/images/product-details-image.png" alt="Product Image" />
                     <div
                         className="absolute top-2 right-2 cursor-pointer"
                         onClick={() => setShowFullScreen(true)}
@@ -50,8 +51,8 @@ const ProductDetailsCarousel = () => {
                         <FullscreenIcon />
                     </div>
                 </div>
-                <div className="relative">
-                    <img src="/images/product-details-image.png" alt="Product Image" />
+                <div className="relative max-w-[370px] sm:max-w-full">
+                    <img className="w-full h-auto" src="/images/product-details-image.png" alt="Product Image" />
                     <div
                         className="absolute top-2 right-2 cursor-pointer"
                         onClick={() => setShowFullScreen(true)}
