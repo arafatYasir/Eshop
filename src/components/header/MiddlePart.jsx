@@ -60,7 +60,7 @@ const MiddlePart = () => {
                         {/* Cart */}
                         <div className="flex items-center gap-5 sm:after:content-[] sm:after:absolute sm:after:top-1/2 sm:after:left-1/2 sm:after:w-[1px] sm:after:h-[32px] sm:after:bg-[#979797] sm:after:-translate-y-1/2 sm:after:-translate-x-1/2">
                             <div className="w-[28px] sm:w-[32px]">
-                                <CartIcon width="full" />
+                                <Link to="/cart"> <CartIcon width="full" /> </Link>
                             </div>
                             <div className="hidden sm:block">
                                 <p className="text-[#303030] font-['Montserrat'] leading-6 ">Cart</p>

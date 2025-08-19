@@ -13,26 +13,31 @@ const CartPage = () => {
                 <span className="font-bold">Cart</span>
             </div>
 
-            <h2 className="text-[#303030] font-['Poppins'] text-[56px] font-bold leading-[68px] mt-12">Your Cart</h2>
+            <h2 className="text-[#303030] font-['Poppins'] text-3xl sm:text-[56px] font-bold leading-[68px] mt-12">Your Cart</h2>
 
-            <div className="h-[88px] py-8 px-[56px] bg-[#F4F4F4] rounded-[15px] mt-[28px] uppercase text-[#303030] font-['Montserrat'] font-bold leading-6">
+            <div className="hidden md:block h-[88px] py-8 px-[56px] bg-[#F4F4F4] rounded-[15px] mt-[28px] uppercase text-[#303030] font-['Montserrat'] font-bold leading-6">
                 <span className="w-[50%] inline-block">Product</span>
                 <span className="w-[16.5%] inline-block">Price</span>
                 <span className="w-[16.5%] inline-block">Qty</span>
                 <span className="w-[16.5%] inline-block">Total</span>
             </div>
 
-            <div>
+            <div className="space-y-8 md:space-y-0">
                 {cartProducts.map(product => (
                     <CartProduct key={product.id} category={product.category} title={product.title} variant={product.variant} price={product.price} totalPrice={product.price} />
                 ))}
             </div>
 
-            <div className="text-right mt-8">
-                <Button value="Update Cart" paddingX="40px" paddingY="16px" />
+            <div className="text-right mt-8 mb-8 md:mb-0">
+                <div className="sm:hidden">
+                    <Button value="Update Cart" paddingX="20px" paddingY="10px" />
+                </div>
+                <div className="hidden sm:block">
+                    <Button value="Update Cart" paddingX="40px" paddingY="16px" />
+                </div>
             </div>
 
-            <div className="border-t mt-[100px] border-[#CBCBCB] ">
+            <div className="border-t mt-[100px] border-[#CBCBCB] hidden md:block">
                 <Facilities />
             </div>
         </Container>
