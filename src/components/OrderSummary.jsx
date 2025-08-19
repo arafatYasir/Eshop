@@ -4,7 +4,7 @@ import OrderedProduct from "./OrderedProduct";
 
 const OrderSummary = () => {
     return (
-        <div className="bg-[#F4F4F4] rounded-[25px] w-[594px] pt-10 px-10 pb-14">
+        <div className="bg-[#F4F4F4] rounded-[25px] w-full md:w-[594px] pt-10 px-5 md:px-10 pb-14">
             <h4 className="text-2xl text-[#303030] font-['Poppins'] font-semibold leading-[30px]">Order Summary</h4>
 
             {/* Ordered Products */}
@@ -17,18 +17,24 @@ const OrderSummary = () => {
             </div>
 
             {/* Shipping Fee */}
-            <div className="flex gap-[254px] mt-5">
-                <p className="relative text-xl text-[#303030] font-['Montserrat'] leading-[30px]">Shipping Fee <span className="absolute top-0 right-[-24px]"><InfoIcon /></span></p>
-                <p className="text-xl text-[#303030] font-['Poppins'] leading-[30px] font-bold">$10.00</p>
+            <div className="flex justify-between md:justify-start md:gap-[254px] mt-5">
+                <p className="relative sm:text-xl text-[#303030] font-['Montserrat'] leading-[30px]">Shipping Fee <span className="absolute top-0 right-[-24px]"><InfoIcon width={16} height={16} /></span></p>
+                <p className="sm:text-xl text-[#303030] font-['Poppins'] leading-[30px] font-bold">$10.00</p>
             </div>
 
             {/* Total Price */}
-            <div className="w-[514px] h-[180px] rounded-[10px] bg-white mt-12 px-[21px] pt-[27px] pb-6">
+            <div className="md:w-[514px] h-[180px] rounded-[10px] bg-white mt-12 px-[21px] pt-[27px] pb-6">
                 <p className="flex justify-between px-[3px] mb-6">
                     <span className="text-[#303030] font-['Poppins'] leading-6 font-bold">Total</span>
-                    <span className="text-xl text-[#303030] font-['Poppins'] leading-[30px] font-bold">$4,999.00</span>
+                    <span className="sm:text-xl text-[#303030] font-['Poppins'] leading-[30px] font-bold">$4,999.00</span>
                 </p>
-                <Button value="Order Now" paddingY="24px" paddingX="179px" />
+
+                <div className="md:hidden text-center">
+                    <Button value="Order Now" paddingY="20px" paddingX="70px" />
+                </div>
+                <div className="hidden md:block">
+                    <Button value="Order Now" paddingY="24px" paddingX="179px" />
+                </div>
             </div>
         </div>
     );

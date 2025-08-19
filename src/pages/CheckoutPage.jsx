@@ -14,18 +14,17 @@ const CheckoutPage = () => {
                     <span className="font-bold">Checkout</span>
                 </div>
 
-
                 <div className="mt-12">
-                    <h1 className="text-center text-[#303030] font-['Poppins'] text-[56px] font-bold leading-[68px]">Checkout</h1>
+                    <h1 className="text-center text-[#303030] font-['Poppins'] text-3xl sm:text-[56px] font-bold leading-[68px]">Checkout</h1>
 
                     {/* Tabs */}
-                    <div className="flex justify-center items-start gap-[70px] mt-11">
+                    <div className="flex justify-center flex-wrap items-start gap-y-5 md:gap-x-[70px] gap-x-[50px] mt-11">
                         <div className="flex items-center gap-4">
                             {activeTab === "Information" && (
-                                <div className="w-[50px] h-[50px] rounded-full bg-[#FF624C] text-white font-['Montserrat'] flex items-center justify-center font-bold leading-6">01</div>
+                                <div className="w-8 sm:w-[50px] h-8 sm:h-[50px] rounded-full bg-[#FF624C] text-white font-['Montserrat'] flex items-center justify-center font-bold leading-6">01</div>
                             )}
                             <button
-                                className={`text-[#303030] font-['Poppins'] text-2xl font-semibold leading-[30px] opacity-25 cursor-pointer ${activeTab === "Information" ? "opacity-100 border-b-[4px] pb-2 border-[#FF624C]" : ""}`}
+                                className={`text-[#303030] font-['Poppins'] text-xl sm:text-2xl font-semibold leading-[30px] opacity-25 cursor-pointer ${activeTab === "Information" ? "opacity-100 border-b-[3px] sm:border-b-[4px] pb-2 border-[#FF624C]" : ""}`}
                                 onClick={() => setActiveTab("Information")}
                             >
                                 Information
@@ -33,10 +32,10 @@ const CheckoutPage = () => {
                         </div>
                         <div className="flex items-center gap-4">
                             {activeTab === "Shipping" && (
-                                <div className="w-[50px] h-[50px] rounded-full bg-[#FF624C] text-white font-['Montserrat'] flex items-center justify-center font-bold leading-6">02</div>
+                                <div className="w-8 sm:w-[50px] h-8 sm:h-[50px] rounded-full bg-[#FF624C] text-white font-['Montserrat'] flex items-center justify-center font-bold leading-6">02</div>
                             )}
                             <button
-                                className={`text-[#303030] font-['Poppins'] text-2xl font-semibold leading-[30px] opacity-25 cursor-pointer ${activeTab === "Shipping" ? "opacity-100 border-b-[4px] pb-2 border-[#FF624C]" : ""}`}
+                                className={`text-[#303030] font-['Poppins'] text-xl sm:text-2xl font-semibold leading-[30px] opacity-25 cursor-pointer ${activeTab === "Shipping" ? "opacity-100 border-b-[3px] sm:border-b-[4px] pb-2 border-[#FF624C]" : ""}`}
                                 onClick={() => setActiveTab("Shipping")}
                             >
                                 Shipping
@@ -44,10 +43,10 @@ const CheckoutPage = () => {
                         </div>
                         <div className="flex items-center gap-4">
                             {activeTab === "Payment" && (
-                                <div className="w-[50px] h-[50px] rounded-full bg-[#FF624C] text-white font-['Montserrat'] flex items-center justify-center font-bold leading-6">03</div>
+                                <div className="w-8 sm:w-[50px] h-8 sm:h-[50px] rounded-full bg-[#FF624C] text-white font-['Montserrat'] flex items-center justify-center font-bold leading-6">03</div>
                             )}
                             <button
-                                className={`text-[#303030] font-['Poppins'] text-2xl font-semibold leading-[30px] opacity-25 cursor-pointer ${activeTab === "Payment" ? "opacity-100 border-b-[4px] pb-2 border-[#FF624C]" : ""}`}
+                                className={`text-[#303030] font-['Poppins'] text-xl sm:text-2xl font-semibold leading-[30px] opacity-25 cursor-pointer ${activeTab === "Payment" ? "opacity-100 border-b-[3px] sm:border-b-[4px] pb-2 border-[#FF624C]" : ""}`}
                                 onClick={() => setActiveTab("Payment")}
                             >
                                 Payment
@@ -56,7 +55,7 @@ const CheckoutPage = () => {
                     </div>
                 </div>
 
-                <div className="flex items-start justify-between my-20">
+                <div className="flex flex-col gap-y-10 md:gap-y-0 md:flex-row items-start justify-between my-20">
                     {/* Billing Details */}
                     <BillingForm />
 
