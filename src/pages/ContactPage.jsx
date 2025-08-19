@@ -14,7 +14,7 @@ const ContactPage = () => {
                 <span className="font-bold">Contact</span>
             </div>
 
-            <div className="flex justify-between items-start mt-12 mb-20">
+            <div className="flex flex-col gap-y-10 sm:gap-y-0 sm:flex-row justify-between items-start mt-12 mb-20">
                 <ContactForm />
                 <AdditionalContactInfo />
             </div>
