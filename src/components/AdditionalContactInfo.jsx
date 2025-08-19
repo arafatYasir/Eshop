@@ -5,7 +5,7 @@ import { Link } from "react-router";
 
 const AdditionalContactInfo = () => {
     return (
-        <div className="sm:w-[594px] sm:h-[496px] rounded-[25px] bg-[#F4F4F4] p-10">
+        <div className="sm:w-[594px] sm:h-[496px] rounded-[25px] bg-[#F4F4F4] p-5 sm:p-10">
             <h4 className="text-xl sm:text-2xl text-[#303030] font-['Poppins'] font-semibold leading-[30px]">Let’s Keep in Touch!</h4>
             <p className="sm:text-xl text-[#303030] font-['Montserrat'] leading-[30px] max-w-[467px] mt-4 opacity-75">We would love to hear from you. Contact us for
                 any inquiries you might have for us.</p>
