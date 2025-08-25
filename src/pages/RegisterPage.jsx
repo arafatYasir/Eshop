@@ -1,35 +1,15 @@
 import { useState } from "react";
 import Button from "../components/Button";
-import { toast, ToastContainer } from "react-toastify";
 
-const LoginPage = () => {
+const RegisterPage = () => {
+    const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{6,}$/;
 
-    const handleEmailLogin = (e) => {
-        // Prevents webiste reload
-        e.preventDefault();    
-
-        // Checking if email and password both exists
-        if(!email || !password) {
-            toast.error("Please enter email and password!");
-            return;
-        }
-
-        // Checking if email is valid
-        if(!emailRegex.test(email)) {
-            toast.error("Email is not valid!");
-            return;
-        }
-
-        // Then finally login the user if credentials are correct
-    };
-
-    const handleGoogleLogin = () => {
-        // TODO: Implement Firebase Google login
-        console.log("Login with Google");
+    const handleRegister = (e) => {
+        e.preventDefault();
+        // TODO: Handle registration logic
+        console.log(name, email, password);
     };
 
     return (
@@ -37,14 +17,33 @@ const LoginPage = () => {
             <div className="w-full max-w-lg border border-[#CBCBCB] rounded-[12px] p-8 sm:p-10 shadow-sm">
                 {/* Title */}
                 <h2 className="text-[#303030] font-['Poppins'] text-[22px] sm:text-3xl font-semibold leading-[36px] text-center">
-                    Welcome Back
+                    Create Account
                 </h2>
                 <p className="text-[#303030] opacity-75 font-['Montserrat'] text-sm sm:text-base mt-2 text-center">
-                    Please log in to continue
+                    Register to start shopping
                 </p>
 
-                {/* ----Login form---- */}
-                <form onSubmit={handleEmailLogin} className="mt-8 flex flex-col gap-6">
+                {/* Form */}
+                <form onSubmit={handleRegister} className="mt-8 flex flex-col gap-6">
+                    {/* Name */}
+                    <div className="flex flex-col gap-2">
+                        <label
+                            htmlFor="name"
+                            className="text-[#303030] font-['Montserrat'] text-sm sm:text-base font-semibold"
+                        >
+                            Full Name
+                        </label>
+                        <input
+                            type="text"
+                            id="name"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            placeholder="Amelia Robert Watson"
+                            required
+                            className="py-3 px-4 outline-none border border-[#CBCBCB] rounded-[10px] text-[#303030] placeholder:text-[#303030] placeholder:opacity-75 font-['Montserrat'] text-base w-full"
+                        />
+                    </div>
+
                     {/* Email */}
                     <div className="flex flex-col gap-2">
                         <label
@@ -77,15 +76,15 @@ const LoginPage = () => {
                             id="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            placeholder="qwerty"
+                            placeholder="••••••••"
                             required
                             className="py-3 px-4 outline-none border border-[#CBCBCB] rounded-[10px] text-[#303030] placeholder:text-[#303030] placeholder:opacity-75 font-['Montserrat'] text-base w-full"
                         />
                     </div>
 
-                    {/* Login Button */}
+                    {/* Register Button */}
                     <div className="text-center">
-                        <Button value="Login" paddingX="40px" paddingY="16px" />
+                        <Button value="Register" paddingX="40px" paddingY="16px" />
                     </div>
                 </form>
 
@@ -98,10 +97,10 @@ const LoginPage = () => {
                     <div className="flex-1 h-px bg-[#CBCBCB]" />
                 </div>
 
-                {/* Google Login */}
+                {/* Google Register */}
                 <div className="mt-6">
                     <button
-                        onClick={handleGoogleLogin}
+                        onClick={() => console.log("Google register")}
                         className="w-full flex items-center justify-center gap-3 py-3 border border-[#CBCBCB] rounded-[10px] font-['Montserrat'] text-base text-[#303030] hover:bg-[#f8f8f8] transition"
                     >
                         <img
@@ -112,10 +111,14 @@ const LoginPage = () => {
                         Continue with Google
                     </button>
                 </div>
+                
+                <p className="text-center text-sm text-[#303030] opacity-75 mt-6 font-['Montserrat']">
+                    Already have an account?{" "}
+                    <span className="text-[#FF624C] cursor-pointer">Login</span>
+                </p>
             </div>
-            <ToastContainer />
         </div>
     );
 };
 
-export default LoginPage;
+export default RegisterPage;
