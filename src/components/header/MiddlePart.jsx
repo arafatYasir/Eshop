@@ -6,13 +6,19 @@ import { TfiSearch } from "react-icons/tfi";
 import { Link } from "react-router";
 import { useEffect, useRef, useState } from "react";
 import { FaBars } from "react-icons/fa";
-import { useDispatch } from "react-redux";
-import { openMenu } from "../../menuSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { openMenu } from "../../slices/menuSlice";
 import { RxCross1 } from "react-icons/rx";
+import auth from "../../firebase/firebaseconfig";
+
 const MiddlePart = () => {
     const [showSearch, setShowSearch] = useState(false);
     const searchRef = useRef(null);
     const dispatch = useDispatch();
+    const loading = useSelector(state => state.auth.loading);
+
+    console.log(loading, auth.currentUser);
+
 
     const handleOpenMenu = () => {
         dispatch(openMenu())
@@ -69,15 +75,17 @@ const MiddlePart = () => {
                         </div>
 
                         {/* User account */}
-                        <div className={`flex items-center gap-6 ${showSearch ? "hidden" : ""}`}>
+                        <Link to={auth.currentUser ? "/dashboard" : "/login"} className={`flex items-center gap-6 ${showSearch ? "hidden" : ""}`}>
+
                             <div className="w-[24px] sm:w-[28px]">
                                 <UserIcon width="full" />
                             </div>
                             <div className="hidden sm:block">
-                                <p className="text-[#303030] font-['Montserrat'] leading-6 ">User</p>
+                                <p className="text-[#303030] font-['Montserrat'] leading-6 ">{auth.currentUser ? auth.currentUser.displayName : "User"}</p>
                                 <span className="text-[#303030] font-['Montserrat'] leading-6 font-bold">Account</span>
                             </div>
-                        </div>
+
+                        </Link>
                     </div>
                 </div>
             </div>

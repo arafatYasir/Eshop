@@ -1,25 +1,25 @@
 import { useState } from "react";
 import Button from "../components/Button";
 import { toast, ToastContainer } from "react-toastify";
+import { Link } from "react-router";
 
 const LoginPage = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{6,}$/;
 
     const handleEmailLogin = (e) => {
-        // Prevents webiste reload
-        e.preventDefault();    
+        // Prevents page reload
+        e.preventDefault();
 
         // Checking if email and password both exists
-        if(!email || !password) {
+        if (!email || !password) {
             toast.error("Please enter email and password!");
             return;
         }
 
         // Checking if email is valid
-        if(!emailRegex.test(email)) {
+        if (!emailRegex.test(email)) {
             toast.error("Email is not valid!");
             return;
         }
@@ -77,7 +77,7 @@ const LoginPage = () => {
                             id="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            placeholder="qwerty"
+                            placeholder="Qwerty123"
                             required
                             className="py-3 px-4 outline-none border border-[#CBCBCB] rounded-[10px] text-[#303030] placeholder:text-[#303030] placeholder:opacity-75 font-['Montserrat'] text-base w-full"
                         />
@@ -85,7 +85,7 @@ const LoginPage = () => {
 
                     {/* Login Button */}
                     <div className="text-center">
-                        <Button value="Login" paddingX="40px" paddingY="16px" />
+                        <Button value="Login" paddingX="40px" paddingY="16px" width="100%" />
                     </div>
                 </form>
 
@@ -112,6 +112,11 @@ const LoginPage = () => {
                         Continue with Google
                     </button>
                 </div>
+
+                <p className="text-center text-[#303030] opacity-75 mt-6 font-['Montserrat']">
+                    Don't have an account?{" "}
+                    <Link to="/register" className="text-[#FF624C] cursor-pointer hover:underline">Register</Link>
+                </p>
             </div>
             <ToastContainer />
         </div>

@@ -1,15 +1,68 @@
 import { useState } from "react";
 import Button from "../components/Button";
+import { toast } from "react-toastify";
+import { handleCreateUserWithEmailAndPassword } from "../firebase/authService";
+import auth from "../firebase/firebaseconfig";
+import { useSelector } from "react-redux";
+import { updateProfile } from "firebase/auth";
+import store from "../store";
+import { setUser } from "../slices/authSlice";
+import { Link } from "react-router";
 
 const RegisterPage = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const data = useSelector(state => state.auth.user);
 
-    const handleRegister = (e) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{6,}$/;
+
+    const handleRegister = async (e) => {
+        // Prevents page reload
         e.preventDefault();
-        // TODO: Handle registration logic
-        console.log(name, email, password);
+
+        // Checking if all value are available
+        if(!name || !email || !password) {
+            toast.error("Please provide data for all fields.");
+            return;
+        }
+        
+        // Checking if name is valid
+        if(name.length < 4) {
+            toast.warning("Name should at leats contain 4 letters.");
+            return;
+        }
+
+        // Checking if email is valid
+        if(!emailRegex.test(email)) {
+            toast.error("Email is not valid.");
+            return;
+        }
+
+        // Checking if password is strong
+        if(!passwordRegex.test(password)) {
+            toast.error("Password must be at least 6 characters and include uppercase, lowercase, number, and special character.");
+            return;
+        }
+
+        // If everything is ok then create the account
+        try {
+            const userCredentials = await handleCreateUserWithEmailAndPassword(auth, email, password);
+
+            updateProfile(userCredentials.user, {displayName: name})
+            .then(() => {
+                toast.success("Profile Updated!");
+            })
+            .catch(e => {
+                toast.error(e.message);
+            })
+
+            console.log(userCredentials.user);
+        }
+        catch (e) {
+            toast.error(e.message);
+        }
     };
 
     return (
@@ -76,7 +129,7 @@ const RegisterPage = () => {
                             id="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            placeholder="••••••••"
+                            placeholder="$Qwerty123"
                             required
                             className="py-3 px-4 outline-none border border-[#CBCBCB] rounded-[10px] text-[#303030] placeholder:text-[#303030] placeholder:opacity-75 font-['Montserrat'] text-base w-full"
                         />
@@ -84,7 +137,7 @@ const RegisterPage = () => {
 
                     {/* Register Button */}
                     <div className="text-center">
-                        <Button value="Register" paddingX="40px" paddingY="16px" />
+                        <Button value="Register" paddingX="40px" paddingY="16px" width="100%" />
                     </div>
                 </form>
 
@@ -111,10 +164,10 @@ const RegisterPage = () => {
                         Continue with Google
                     </button>
                 </div>
-                
-                <p className="text-center text-sm text-[#303030] opacity-75 mt-6 font-['Montserrat']">
+
+                <p className="text-center text-[#303030] opacity-75 mt-6 font-['Montserrat']">
                     Already have an account?{" "}
-                    <span className="text-[#FF624C] cursor-pointer">Login</span>
+                    <Link to="/login" className="text-[#FF624C] cursor-pointer hover:underline">Login</Link>
                 </p>
             </div>
         </div>

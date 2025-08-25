@@ -1,4 +1,4 @@
-const Button = ({value, paddingX="40px", paddingY="16px", bg="#FF624C", color="white", border=false, borderColor="#FF624C", handleLoadMore}) => {
+const Button = ({value, paddingX="40px", paddingY="16px", bg="#FF624C", color="white", border=false, borderColor="#FF624C", width="auto", handleLoadMore}) => {
     return (
         <button onClick={handleLoadMore}
         className={`font-['Montserrat'] text-base sm:text-xl font-bold leading-[30px] rounded-[10px] cursor-pointer`}
@@ -6,7 +6,8 @@ const Button = ({value, paddingX="40px", paddingY="16px", bg="#FF624C", color="w
             padding: `${paddingY} ${paddingX}`,
             background: bg,
             color: color,
-            border: border ? `1px solid ${borderColor}` : ""
+            border: border ? `1px solid ${borderColor}` : "",
+            width: width
         }}
         >{value}</button>
     );

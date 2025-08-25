@@ -9,9 +9,16 @@ import ContactPage from "./pages/ContactPage"
 import CartPage from "./pages/CartPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import { useSelector } from "react-redux";
 
 
 const App = () => {
+  const loading = useSelector(state => state.auth.loading);
+
+  if(loading) {
+    return <div>Loading...</div>
+  }
+
   return (
     <Routes>
       <Route path="/" element={<Layout />}>

@@ -7,10 +7,10 @@ export const menuSlice = createSlice({
   },
   reducers: {
     openMenu: (state) => {
-        state.showMenu = true;
+      state.showMenu = true;
     },
     closeMenu: (state) => {
-        state.showMenu = false;
+      state.showMenu = false;
     }
   },
 })

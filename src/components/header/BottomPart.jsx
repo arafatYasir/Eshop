@@ -4,7 +4,7 @@ import { IoIosMenu } from "react-icons/io";
 import { TfiAngleDown } from "react-icons/tfi";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { closeMenu } from "../../menuSlice";
+import { closeMenu } from "../../slices/menuSlice";
 
 const BottomPart = () => {
     const [isCategoriesDropdownOpen, setIsCategoriesDropdownOpen] = useState(false);
