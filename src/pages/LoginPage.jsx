@@ -1,11 +1,18 @@
 import { useState } from "react";
 import Button from "../components/Button";
 import { toast, ToastContainer } from "react-toastify";
-import { Link } from "react-router";
+import { Link, Navigate, useNavigate } from "react-router";
+import { handleSignInUser } from "../firebase/authService";
 
 const LoginPage = () => {
+    // States
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    // Extra hooks
+    const naviage = useNavigate();
+
+    // Regular Expressions
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     const handleEmailLogin = (e) => {
@@ -24,7 +31,31 @@ const LoginPage = () => {
             return;
         }
 
-        // Then finally login the user if credentials are correct
+        // Login the user if credentials are correct
+        handleSignInUser(email, password)
+            .then(() => {
+                naviage("/");
+            })
+            .catch(e => {
+                const errorCode = e.code;
+                if (errorCode === "auth/invalid-email") {
+                    toast.error("The email address is not valid.")
+                } else if (errorCode === "auth/user-not-found") {
+                    toast.error("No user found with this email. Please sign up first.");
+                } else if (errorCode === "auth/wrong-password") {
+                    toast.error("Incorrect password. Please try again.");
+                } else if (errorCode === "auth/too-many-requests") {
+                    toast.error("Too many failed attempts. Try again later.");
+                } else if (errorCode === "auth/network-request-failed") {
+                    toast.error("Network error. Please check your internet connection.");
+                } else if (errorCode === "auth/email-already-in-use") {
+                    toast.error("This email is already in use. Try signing in instead.");
+                } else if (errorCode === "auth/invalid-credential") {
+                    toast.error("Invalid email or password. Please check your details.");
+                } else if (errorCode === "auth/account-exists-with-different-credential") {
+                    toast.error("An account already exists with this email but a different sign-in method. Try using that method.");
+                }
+            })
     };
 
     const handleGoogleLogin = () => {
@@ -77,7 +108,7 @@ const LoginPage = () => {
                             id="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            placeholder="Qwerty123"
+                            placeholder="$Qwerty123"
                             required
                             className="py-3 px-4 outline-none border border-[#CBCBCB] rounded-[10px] text-[#303030] placeholder:text-[#303030] placeholder:opacity-75 font-['Montserrat'] text-base w-full"
                         />
