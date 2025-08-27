@@ -34,7 +34,7 @@ const LoginPage = () => {
         // Login the user if credentials are correct
         handleSignInUser(email, password)
             .then(() => {
-                naviage("/");
+                naviage("/dashboard");
             })
             .catch(e => {
                 const errorCode = e.code;

@@ -60,7 +60,7 @@ const RegisterPage = () => {
                         setEmail("");
                         setName("");
                         setPassword("");
-                        navigate("/")
+                        navigate("/dashboard")
                     })
                     .catch((e) => {
                         toast.error(e.message);

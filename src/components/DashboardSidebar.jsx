@@ -1,6 +1,8 @@
 import { FaUser, FaBoxOpen, FaHeart, FaLock, FaCog } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentTab } from "../slices/dashboardSlice";
+import { handleSignOut } from "../firebase/authService";
+import { useNavigate } from "react-router";
 
 const sidebarItems = [
     { label: "Profile", icon: <FaUser /> },
@@ -12,6 +14,7 @@ const sidebarItems = [
 
 const DashboardSidebar = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { currentTab } = useSelector(state => state.dashboard);
 
     return (
@@ -38,7 +41,10 @@ const DashboardSidebar = () => {
 
             {/* Optional: Logout Button at the bottom */}
             <div className="mt-auto pt-6 border-t border-gray-200">
-                <button className="flex items-center gap-3 px-4 py-3 rounded-lg text-[#FF624C] font-semibold hover:bg-gray-100 transition-all">
+                <button onClick={() => {
+                    handleSignOut();
+                    navigate("/");
+                }} className="flex items-center gap-3 px-4 py-3 rounded-lg text-[#FF624C] font-semibold hover:bg-gray-100 transition-all">
                     <FaLock />
                     Logout
                 </button>
