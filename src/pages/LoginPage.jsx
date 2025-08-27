@@ -2,7 +2,7 @@ import { useState } from "react";
 import Button from "../components/Button";
 import { toast, ToastContainer } from "react-toastify";
 import { Link, Navigate, useNavigate } from "react-router";
-import { handleSignInUser } from "../firebase/authService";
+import { handleSignInUser, handleSignInWithGoogle } from "../firebase/authService";
 
 const LoginPage = () => {
     // States
@@ -59,8 +59,13 @@ const LoginPage = () => {
     };
 
     const handleGoogleLogin = () => {
-        // TODO: Implement Firebase Google login
-        console.log("Login with Google");
+        handleSignInWithGoogle()
+        .then(() => {
+            naviage("/dashboard");
+        })
+        .catch(e => {
+            toast.error(e.message);
+        })
     };
 
     return (
@@ -133,7 +138,7 @@ const LoginPage = () => {
                 <div className="mt-6">
                     <button
                         onClick={handleGoogleLogin}
-                        className="w-full flex items-center justify-center gap-3 py-3 border border-[#CBCBCB] rounded-[10px] font-['Montserrat'] text-base text-[#303030] hover:bg-[#f8f8f8] transition"
+                        className="w-full flex items-center justify-center gap-3 py-3 border border-[#CBCBCB] rounded-[10px] font-['Montserrat'] text-base text-[#303030] hover:bg-[#f8f8f8] transition cursor-pointer"
                     >
                         <img
                             src="https://www.svgrepo.com/show/355037/google.svg"

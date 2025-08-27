@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Button from "../components/Button";
 import { toast, ToastContainer } from "react-toastify";
-import { handleCreateUser } from "../firebase/authService";
+import { handleCreateUser, handleSignInWithGoogle } from "../firebase/authService";
 import { updateProfile } from "firebase/auth";
 import { Link, useNavigate } from "react-router";
 
@@ -70,6 +70,16 @@ const RegisterPage = () => {
                 toast.error(e.message);
             })
     };
+
+    const handleGoogleSignUp = () => {
+        handleSignInWithGoogle()
+            .then(() => {
+                navigate("/dashboard");
+            })
+            .catch(e => {
+                toast.error(e.message);
+            })
+    }
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-white px-4">
@@ -156,11 +166,11 @@ const RegisterPage = () => {
                     <div className="flex-1 h-px bg-[#CBCBCB]" />
                 </div>
 
-                {/* Google Register */}
+                {/* Google Sign Up */}
                 <div className="mt-6">
                     <button
-                        onClick={() => console.log("Google register")}
-                        className="w-full flex items-center justify-center gap-3 py-3 border border-[#CBCBCB] rounded-[10px] font-['Montserrat'] text-base text-[#303030] hover:bg-[#f8f8f8] transition"
+                        onClick={handleGoogleSignUp}
+                        className="w-full flex items-center justify-center gap-3 py-3 border border-[#CBCBCB] rounded-[10px] font-['Montserrat'] text-base text-[#303030] hover:bg-[#f8f8f8] transition cursor-pointer"
                     >
                         <img
                             src="https://www.svgrepo.com/show/355037/google.svg"
