@@ -1,68 +1,74 @@
 import { useState } from "react";
 import Button from "../components/Button";
-import { toast } from "react-toastify";
-import { handleCreateUserWithEmailAndPassword } from "../firebase/authService";
-import auth from "../firebase/firebaseconfig";
-import { useSelector } from "react-redux";
+import { toast, ToastContainer } from "react-toastify";
+import { handleCreateUser } from "../firebase/authService";
 import { updateProfile } from "firebase/auth";
-import store from "../store";
-import { setUser } from "../slices/authSlice";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 const RegisterPage = () => {
+    // States
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const data = useSelector(state => state.auth.user);
 
+    // Extra hooks
+    const navigate = useNavigate();
+
+    // Regular Expressions
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{6,}$/;
 
-    const handleRegister = async (e) => {
+    const handleRegister = (e) => {
         // Prevents page reload
         e.preventDefault();
 
+
         // Checking if all value are available
-        if(!name || !email || !password) {
+        if (!name || !email || !password) {
             toast.error("Please provide data for all fields.");
             return;
         }
-        
+
         // Checking if name is valid
-        if(name.length < 4) {
+        if (name.length < 4) {
             toast.warning("Name should at leats contain 4 letters.");
             return;
         }
 
         // Checking if email is valid
-        if(!emailRegex.test(email)) {
+        if (!emailRegex.test(email)) {
             toast.error("Email is not valid.");
             return;
         }
 
         // Checking if password is strong
-        if(!passwordRegex.test(password)) {
+        if (!passwordRegex.test(password)) {
             toast.error("Password must be at least 6 characters and include uppercase, lowercase, number, and special character.");
             return;
         }
 
-        // If everything is ok then create the account
-        try {
-            const userCredentials = await handleCreateUserWithEmailAndPassword(auth, email, password);
+        console.log("I am here")
 
-            updateProfile(userCredentials.user, {displayName: name})
-            .then(() => {
-                toast.success("Profile Updated!");
+        // If everything is ok then create the account
+        handleCreateUser(email, password)
+            .then((userCredentials) => {
+                const user = userCredentials.user;
+
+                // Updating user's profile with name
+                updateProfile(user, { displayName: name })
+                    .then(() => {
+                        setEmail("");
+                        setName("");
+                        setPassword("");
+                        navigate("/")
+                    })
+                    .catch((e) => {
+                        toast.error(e.message);
+                    })
             })
             .catch(e => {
                 toast.error(e.message);
             })
-
-            console.log(userCredentials.user);
-        }
-        catch (e) {
-            toast.error(e.message);
-        }
     };
 
     return (
@@ -170,6 +176,7 @@ const RegisterPage = () => {
                     <Link to="/login" className="text-[#FF624C] cursor-pointer hover:underline">Login</Link>
                 </p>
             </div>
+            <ToastContainer />
         </div>
     );
 };

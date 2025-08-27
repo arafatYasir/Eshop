@@ -9,15 +9,35 @@ import ContactPage from "./pages/ContactPage"
 import CartPage from "./pages/CartPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
-import { useSelector } from "react-redux";
-
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { onAuthStateChanged } from "firebase/auth";
+import auth from "./firebase/firebaseconfig";
+import { removeUser, setUser } from "./slices/authSlice";
 
 const App = () => {
-  const loading = useSelector(state => state.auth.loading);
+  const dispatch = useDispatch();
 
-  if(loading) {
-    return <div>Loading...</div>
-  }
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, user => {
+      if (user) {
+        dispatch(setUser({
+          uid: user.uid,
+          name: user.displayName || null,
+          email: user.email,
+          emailVerified: user.emailVerified,
+          photoURL: user.photoURL || null
+        }));
+      }
+      else {
+        dispatch(removeUser());
+      }
+    });
+
+
+    return () => unsubscribe();
+  }, [dispatch]);
+
 
   return (
     <Routes>

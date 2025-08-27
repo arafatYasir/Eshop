@@ -9,16 +9,14 @@ import { FaBars } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { openMenu } from "../../slices/menuSlice";
 import { RxCross1 } from "react-icons/rx";
-import auth from "../../firebase/firebaseconfig";
+import Button from "../Button";
+import { handleSignOut } from "../../firebase/authService";
 
 const MiddlePart = () => {
     const [showSearch, setShowSearch] = useState(false);
     const searchRef = useRef(null);
     const dispatch = useDispatch();
-    const loading = useSelector(state => state.auth.loading);
-
-    console.log(loading, auth.currentUser);
-
+    const {loading, user} = useSelector(state => state.auth);
 
     const handleOpenMenu = () => {
         dispatch(openMenu())
@@ -75,17 +73,20 @@ const MiddlePart = () => {
                         </div>
 
                         {/* User account */}
-                        <Link to={auth.currentUser ? "/dashboard" : "/login"} className={`flex items-center gap-6 ${showSearch ? "hidden" : ""}`}>
-
+                        {
+                            console.log(user)
+                        }
+                        <Link to={user ? "/dashboard" : "/login"} className={`flex items-center gap-6 ${showSearch ? "hidden" : ""}`}>
                             <div className="w-[24px] sm:w-[28px]">
                                 <UserIcon width="full" />
                             </div>
                             <div className="hidden sm:block">
-                                <p className="text-[#303030] font-['Montserrat'] leading-6 ">{auth.currentUser ? auth.currentUser.displayName : "User"}</p>
+                                <p className="text-[#303030] font-['Montserrat'] leading-6 ">{(user && !loading) ? user.name : "User"}</p>
                                 <span className="text-[#303030] font-['Montserrat'] leading-6 font-bold">Account</span>
                             </div>
-
                         </Link>
+
+                        {(user && !loading) && <Button signOut={handleSignOut} value="Sign Out" paddingX="16px" paddingY="8px" />}
                     </div>
                 </div>
             </div>
