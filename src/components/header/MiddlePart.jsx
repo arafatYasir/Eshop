@@ -10,7 +10,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { openMenu } from "../../slices/menuSlice";
 import { RxCross1 } from "react-icons/rx";
 import Button from "../Button";
-import { handleSignOut } from "../../firebase/authService";
 
 const MiddlePart = () => {
     const [showSearch, setShowSearch] = useState(false);
@@ -85,8 +84,6 @@ const MiddlePart = () => {
                                 <span className="text-[#303030] font-['Montserrat'] leading-6 font-bold">Account</span>
                             </div>
                         </Link>
-
-                        {(user && !loading) && <Button signOut={handleSignOut} value="Sign Out" paddingX="16px" paddingY="8px" />}
                     </div>
                 </div>
             </div>

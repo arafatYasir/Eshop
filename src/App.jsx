@@ -14,6 +14,8 @@ import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import auth from "./firebase/firebaseconfig";
 import { removeUser, setUser } from "./slices/authSlice";
+import DashboardPage from "./pages/DashboardPage";
+import DashboardLayout from "./components/commonLayouts/DashboardLayout";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -51,6 +53,9 @@ const App = () => {
         <Route path="/cart" element={<CartPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+      </Route>
+      <Route path="/dashboard" element={<DashboardLayout />}> 
+        <Route index element={<DashboardPage />} />
       </Route>
     </Routes>
   );
