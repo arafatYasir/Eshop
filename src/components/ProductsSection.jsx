@@ -18,8 +18,8 @@ const ProductsSection = () => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [brand, setBrand] = useState("");
-    const [rating, setRating] = useState(5);
-    const [totalRatings, setTotalRatings] = useState(0);
+    const [rating, setRating] = useState("");
+    const [totalRatings, setTotalRatings] = useState("");
     const [previousPrice, setPreviousPrice] = useState("");
     const [price, setPrice] = useState("");
     const [discountTag, setDiscountTag] = useState(false);
@@ -75,11 +75,27 @@ const ProductsSection = () => {
         setSpecifications(newSpecs);
     }
 
+    // Function to reset form
+    const resetForm = () => {
+        setCategory("");
+        setTitle("");
+        setDescription("");
+        setBrand("");
+        setRating(0);
+        setTotalRatings(0);
+        setPreviousPrice(0);
+        setPrice(0);
+        setDiscountTag(false);
+        setDiscountPercent(0);
+        setStock(0);
+        setTags([]);
+        setImages([]);
+        setSpecifications([]);
+    };
+
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        const form = e.target;
-
         setLoading(true);
 
         const productData = {
@@ -108,9 +124,42 @@ const ProductsSection = () => {
             toast.error(e.message);
         } finally {
             setLoading(false);
-            form.reset();
+            resetForm();
         }
     };
+
+    async function temp(product) {
+        const { title, category, description, brand, rating, totalRatings, previousPrice, price, discountTag, discountPercent, stock, tags, images, specifications } = product;
+
+        const productData = {
+            id: Date.now(),
+            category,
+            title,
+            description,
+            brand,
+            rating,
+            totalRatings,
+            previousPrice : previousPrice || null,
+            price,
+            discountTag,
+            discountPercent: discountTag ? discountPercent : null,
+            stock,
+            tags,
+            images,
+            specifications,
+        };
+
+        try {
+            const id = await saveProduct(productData);
+            toast.success("Product added successfully!", id);
+        }
+        catch (e) {
+            toast.error(e.message);
+        }
+    }
+
+
+
 
     return (
         <div className="p-8 bg-white rounded-2xl shadow-xl max-w-4xl mx-auto">
