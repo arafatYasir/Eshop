@@ -9,7 +9,6 @@ import { FaBars } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { openMenu } from "../../slices/menuSlice";
 import { RxCross1 } from "react-icons/rx";
-import Button from "../Button";
 
 const MiddlePart = () => {
     const [showSearch, setShowSearch] = useState(false);
@@ -59,9 +58,9 @@ const MiddlePart = () => {
                         </>
                     </div>
 
-                    <div className={`flex gap-[25px] sm:gap-[90px] items-center relative ${showSearch ? "hidden" : ""}`}>
+                    <div className={`flex gap-[25px] sm:gap-[90px] items-center ${showSearch ? "hidden" : ""}`}>
                         {/* Cart */}
-                        <div className="flex items-center gap-5 sm:after:content-[] sm:after:absolute sm:after:top-1/2 sm:after:left-1/2 sm:after:w-[1px] sm:after:h-[32px] sm:after:bg-[#979797] sm:after:-translate-y-1/2 sm:after:-translate-x-1/2">
+                        <div className="flex relative items-center gap-5 sm:after:content-[] sm:after:absolute sm:after:top-1/2 sm:after:right-[-45px] sm:after:w-[1px] sm:after:h-[32px] sm:after:bg-[#979797] sm:after:-translate-y-1/2 sm:after:-translate-x-1/2">
                             <div className="w-[28px] sm:w-[32px]">
                                 <Link to="/cart"> <CartIcon width="full" /> </Link>
                             </div>
@@ -72,9 +71,6 @@ const MiddlePart = () => {
                         </div>
 
                         {/* User account */}
-                        {
-                            console.log(user)
-                        }
                         <Link to={user ? "/dashboard" : "/login"} className={`flex items-center gap-6 ${showSearch ? "hidden" : ""}`}>
                             <div className="w-[24px] sm:w-[28px]">
                                 <UserIcon width="full" />

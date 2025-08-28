@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCurrentTab } from "../slices/dashboardSlice";
 import { handleSignOut } from "../firebase/authService";
 import { useNavigate } from "react-router";
+import { AiFillProduct } from "react-icons/ai";
 
 const sidebarItems = [
     { label: "Profile", icon: <FaUser /> },
@@ -10,6 +11,7 @@ const sidebarItems = [
     { label: "Wishlist", icon: <FaHeart /> },
     { label: "Security", icon: <FaLock /> },
     { label: "Settings", icon: <FaCog /> },
+    { label: "ProductsSection", icon: <AiFillProduct /> },
 ];
 
 const DashboardSidebar = () => {
@@ -39,8 +41,8 @@ const DashboardSidebar = () => {
                 ))}
             </nav>
 
-            {/* Optional: Logout Button at the bottom */}
-            <div className="mt-auto pt-6 border-t border-gray-200">
+            {/* Logout Button at the bottom */}
+            <div className="mt-5 pt-1 border-t border-gray-200">
                 <button onClick={() => {
                     handleSignOut();
                     navigate("/");
