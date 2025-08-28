@@ -11,7 +11,7 @@ const sidebarItems = [
     { label: "Wishlist", icon: <FaHeart /> },
     { label: "Security", icon: <FaLock /> },
     { label: "Settings", icon: <FaCog /> },
-    { label: "ProductsSection", icon: <AiFillProduct /> },
+    { label: "Products", icon: <AiFillProduct /> },
 ];
 
 const DashboardSidebar = () => {

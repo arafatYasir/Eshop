@@ -22,7 +22,7 @@ const DashboardPage = () => {
             case "Wishlist": return <WishlistSection />;
             case "Security": return <SecuritySection />;
             case "Settings": return <SettingsSection />;
-            case "ProductsSection": return <ProductsSection />
+            case "Products": return <ProductsSection />
             default: return null;    
         }
     };

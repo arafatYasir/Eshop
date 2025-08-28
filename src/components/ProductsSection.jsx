@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { saveProduct } from "../firebase/firestoreService";
+import { toast, ToastContainer } from "react-toastify";
 
 const categories = [
     "Computers & Tablets",
@@ -14,6 +16,7 @@ const ProductsSection = () => {
     // Static tates
     const [category, setCategory] = useState(categories[0]);
     const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
     const [brand, setBrand] = useState("");
     const [rating, setRating] = useState(5);
     const [totalRatings, setTotalRatings] = useState(0);
@@ -67,13 +70,15 @@ const ProductsSection = () => {
 
     const updateSpec = (idx, field, value) => {
         const newSpecs = [...specifications];
-        newSpecs[idx] = {...newSpecs[idx], [field]: value};
+        newSpecs[idx] = { ...newSpecs[idx], [field]: value };
 
         setSpecifications(newSpecs);
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const form = e.target;
 
         setLoading(true);
 
@@ -81,26 +86,31 @@ const ProductsSection = () => {
             id: Date.now(),
             category,
             title,
+            description,
             brand,
             rating,
             totalRatings,
             previousPrice,
             price,
             discountTag,
-            discountPercent,
+            discountPercent: discountTag ? discountPercent : null,
             stock,
             tags,
             images,
             specifications,
-            createdAt: new Date()
         };
 
-        console.log(productData);
-        setTimeout(() => {
+        // Saving product data to firestore db
+        try {
+            const id = await saveProduct(productData);
+            toast.success("Product added successfully!", id);
+        } catch (e) {
+            toast.error(e.message);
+        } finally {
             setLoading(false);
-        }, 200)
-    }
-
+            form.reset();
+        }
+    };
 
     return (
         <div className="p-8 bg-white rounded-2xl shadow-xl max-w-4xl mx-auto">
@@ -148,7 +158,7 @@ const ProductsSection = () => {
                                 placeholder={field.label}
                                 value={field.value}
                                 onChange={(e) => field.setter(field.type === "number" ? Number(e.target.value) : e.target.value)}
-                                className="p-3 border border-gray-300 rounded-lg w-full focus:ring-2 focus:ring-blue-400 transition"
+                                className="p-3 border border-gray-300 rounded-lg w-full focus:ring-2 focus:ring-blue-400 transition outline-none"
                             />
                         </div>
                     ))}
@@ -162,7 +172,7 @@ const ProductsSection = () => {
                             id="discountTag"
                             value={discountTag}
                             onChange={(e) => setDiscountTag(e.target.value === "true")}
-                            className="appearance-none w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none transition bg-white pr-10"
+                            className="appearance-none w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none transition bg-white pr-10 outline-none"
                         >
                             <option value={true}>Yes</option>
                             <option value={false}>No</option>
@@ -176,13 +186,27 @@ const ProductsSection = () => {
                     {discountTag && (
                         <div>
                             <label htmlFor="discountPercent" className="block text-gray-700 font-semibold mb-2">Discount Percent</label>
-                            <input id="discountPercent" type="number" placeholder="Discount %" value={discountPercent} onChange={(e) => setDiscountPercent(Number(e.target.value))} className="p-3 border border-gray-300 rounded-lg w-full focus:ring-2 focus:ring-blue-400 transition" />
+                            <input id="discountPercent" type="number" placeholder="Discount %" value={discountPercent} onChange={(e) => setDiscountPercent(Number(e.target.value))} className="p-3 border border-gray-300 rounded-lg w-full focus:ring-2 focus:ring-blue-400 transition outline-none" />
                         </div>
                     )}
                     <div>
                         <label htmlFor="stock" className="block text-gray-700 font-semibold mb-2">Stock</label>
-                        <input id="stock" type="number" placeholder="Stock" value={stock} onChange={(e) => setStock(Number(e.target.value))} className="p-3 border border-gray-300 rounded-lg w-full focus:ring-2 focus:ring-blue-400 transition" />
+                        <input id="stock" type="number" placeholder="Stock" value={stock} onChange={(e) => setStock(Number(e.target.value))} className="p-3 border border-gray-300 rounded-lg w-full focus:ring-2 focus:ring-blue-400 transition outline-none" />
                     </div>
+                </div>
+
+                {/* Description */}
+                <div>
+                    <label htmlFor="description" className="block text-gray-700 font-semibold mb-2">Description</label>
+                    <textarea
+                        id="description"
+                        type="text"
+                        rows={5}
+                        placeholder="Description"
+                        value={description}
+                        onChange={e => setDescription(e.target.value)}
+                        className="p-3 border border-gray-300 rounded-lg w-full focus:ring-2 focus:ring-blue-400 transition outline-none resize-none"
+                    />
                 </div>
 
                 {/* Tags */}
@@ -191,10 +215,10 @@ const ProductsSection = () => {
                     {tags.map((tag, index) => (
                         <div key={index} className="flex gap-2 mb-2">
                             <input type="text" value={tag} onChange={(e) => updateTag(index, e.target.value)} className="p-2 border rounded flex-1" />
-                            <button type="button" onClick={() => removeTag(index)} className="px-2 bg-red-500 text-white rounded">Remove</button>
+                            <button type="button" onClick={() => removeTag(index)} className="px-2 bg-red-500 text-white rounded cursor-pointer">Remove</button>
                         </div>
                     ))}
-                    <button type="button" onClick={addTag} className="px-4 py-2 bg-blue-500 text-white rounded">Add Tag</button>
+                    <button type="button" onClick={addTag} className="px-4 py-2 bg-blue-500 text-white rounded cursor-pointer">Add Tag</button>
                 </div>
 
                 {/* Images */}
@@ -203,10 +227,10 @@ const ProductsSection = () => {
                     {images.map((img, index) => (
                         <div key={index} className="flex gap-2 mb-2">
                             <input type="text" value={img} onChange={(e) => updateImage(index, e.target.value)} className="p-2 border rounded flex-1" />
-                            <button type="button" onClick={() => removeImage(index)} className="px-2 bg-red-500 text-white rounded">Remove</button>
+                            <button type="button" onClick={() => removeImage(index)} className="px-2 bg-red-500 text-white rounded cursor-pointer">Remove</button>
                         </div>
                     ))}
-                    <button type="button" onClick={addImage} className="px-4 py-2 bg-blue-500 text-white rounded">Add Image</button>
+                    <button type="button" onClick={addImage} className="px-4 py-2 bg-blue-500 text-white rounded cursor-pointer">Add Image</button>
                 </div>
 
                 {/* Specifications */}
@@ -216,16 +240,17 @@ const ProductsSection = () => {
                         <div key={index} className="flex gap-2 mb-2">
                             <input type="text" placeholder="Section" value={spec.key} onChange={(e) => updateSpec(index, "key", e.target.value)} className="p-2 border rounded flex-1" />
                             <input type="text" placeholder="Value" value={spec.value} onChange={(e) => updateSpec(index, "value", e.target.value)} className="p-2 border rounded flex-1" />
-                            <button type="button" onClick={() => removeSpec(index)} className="px-2 bg-red-500 text-white rounded">Remove</button>
+                            <button type="button" onClick={() => removeSpec(index)} className="px-2 bg-red-500 text-white rounded cursor-pointer">Remove</button>
                         </div>
                     ))}
-                    <button type="button" onClick={addSpec} className="px-4 py-2 bg-blue-500 text-white rounded">Add Specification</button>
+                    <button type="button" onClick={addSpec} className="px-4 py-2 bg-blue-500 text-white rounded cursor-pointer">Add Specification</button>
                 </div>
 
-                <button type="submit" className="px-6 py-3 bg-green-500 text-white rounded mt-4 hover:bg-green-600 transition">{loading ? "Saving..." : "Save Product"}</button>
+                <button type="submit" className="px-6 py-3 bg-green-500 text-white rounded mt-4 hover:bg-green-600 transition cursor-pointer">{loading ? "Saving..." : "Save Product"}</button>
 
-            </form>
-        </div>
+            </form >
+            <ToastContainer />
+        </div >
     );
 };
 
