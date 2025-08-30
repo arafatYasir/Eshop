@@ -119,9 +119,10 @@ function SampleNextArrow(props) {
 const FeaturedProducts = () => {
     const dispatch = useDispatch();
     const featuredProducts = useSelector(state => state.products.featured);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     const fetchProducts = async () => {
+        setLoading(true);
         const q = query(collection(db, "Products"), where("tags", "array-contains", "Featured"));
 
         const snapshot = await getDocs(q);
@@ -139,7 +140,9 @@ const FeaturedProducts = () => {
     }
 
     useEffect(() => {
-        fetchProducts();
+        if(featuredProducts.length === 0) {
+            fetchProducts();
+        }
     }, [])
 
     // Slider settings
@@ -179,7 +182,7 @@ const FeaturedProducts = () => {
                         {
                             featuredProducts.map(p => (
                                 <div className="flex items-center justify-center" key={p.id}>
-                                    <ProductLayout title={p.title} category={p.category} discountTag={p.discountTag} discountPercent={p.discountTag ? p.discountPercent : ""} rating={p.rating} totalRatings={p.totalRatings} price={p.price} previousPrice={p.discountTag ? p.previousPrice : ""} tags={p.tags} />
+                                    <ProductLayout title={p.title} category={p.category} discountTag={p.discountTag} discountPercent={p.discountTag ? p.discountPercent : ""} rating={p.rating} totalRatings={p.totalRatings} price={p.price} previousPrice={p.discountTag ? p.previousPrice : ""} tags={p.tags} id={p.id} />
                                 </div>
                             ))
                         }

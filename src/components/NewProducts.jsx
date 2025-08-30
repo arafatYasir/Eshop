@@ -17,7 +17,7 @@ const NewProducts = () => {
     const [selectedCategory, setSelectedCategory] = useState({ id: 1, name: "All Categories", value: "all" });
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef(null);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     // Redux state and dispatch
     const dispatch = useDispatch();
@@ -43,6 +43,7 @@ const NewProducts = () => {
 
 
     const fetchProducts = async () => {
+        setLoading(true)
         const q = query(collection(db, "Products"), where("tags", "array-contains", "New"));
         const snapshot = await getDocs(q);
         const data = snapshot.docs.map(doc => {
@@ -60,7 +61,9 @@ const NewProducts = () => {
 
     // useEffect to fetch new products
     useEffect(() => {
-        fetchProducts();
+        if(newProducts.length === 0) {
+            fetchProducts();
+        }
     }, [])
 
     useEffect(() => {
@@ -122,7 +125,7 @@ const NewProducts = () => {
                 <div className="mt-12 flex flex-col sm:flex-row items-center justify-between sm:flex-wrap gap-[20px]">
                     {(!loading && newProducts.length > 0) ? (
                         newProducts.slice(0, limit).map(p => (
-                            <ProductLayout key={p.id} title={p.title} category={p.category} discountTag={p.discountTag} discountPercent={p.discountTag ? p.discountPercent : ""} rating={p.rating} totalRatings={p.totalRatings} price={p.price} previousPrice={p.discountTag ? p.previousPrice : ""} tags={p.tags} />
+                            <ProductLayout key={p.id} title={p.title} category={p.category} discountTag={p.discountTag} discountPercent={p.discountTag ? p.discountPercent : ""} rating={p.rating} totalRatings={p.totalRatings} price={p.price} previousPrice={p.discountTag ? p.previousPrice : ""} tags={p.tags} id={p.id} />
                         ))
                     ) : <LoadingSpinner message="Loading New Products..." />}
                 </div>

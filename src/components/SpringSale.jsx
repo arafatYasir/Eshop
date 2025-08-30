@@ -69,7 +69,7 @@ const SpringSale = () => {
     const [timerLeft, setTimerLeft] = useState(calculateTimeLeft());
     const dispatch = useDispatch();
     const springSaleProducts = useSelector(state => state.products.springSale);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     function calculateTimeLeft() {
         const saleEndDate = new Date("September 18, 2025 12:00 PM +0600");
@@ -89,6 +89,7 @@ const SpringSale = () => {
     }
 
     const fetchProducts = async () => {
+        setLoading(true);
         const q = query(collection(db, "Products"), where("tags", "array-contains", "Spring Sale"));
         const snapshot = await getDocs(q);
         const data = snapshot.docs.map(doc => {
@@ -105,7 +106,9 @@ const SpringSale = () => {
     }
 
     useEffect(() => {
-        fetchProducts();
+        if(springSaleProducts.length === 0) {
+            fetchProducts();
+        }
     }, [])
 
     useEffect(() => {
@@ -185,7 +188,7 @@ const SpringSale = () => {
                         {(!loading && springSaleProducts.length > 0) ? (
                             <Slider {...settings} className="mt-12 ">
                                 {springSaleProducts.map(p => (
-                                    <ProductLayout2 key={p.id} title={p.title} category={p.category} discountTag={p.discountTag} discountPercent={p.discountTag ? p.discountPercent : ""} rating={p.rating} totalRatings={p.totalRatings} price={p.price} previousPrice={p.discountTag ? p.previousPrice : ""} stock={p.stock} tags={p.tags} />
+                                    <ProductLayout2 key={p.id} title={p.title} category={p.category} discountTag={p.discountTag} discountPercent={p.discountTag ? p.discountPercent : ""} rating={p.rating} totalRatings={p.totalRatings} price={p.price} previousPrice={p.discountTag ? p.previousPrice : ""} stock={p.stock} tags={p.tags} id={p.id} />
                                 ))}
                             </Slider>
                         ) : <LoadingSpinner message="Loading Spring Products..." />}

@@ -194,6 +194,7 @@ const ProductsListProducts = () => {
                             price={p.price}
                             previousPrice={p.discountTag ? p.previousPrice : ""}
                             tags={p.tags}
+                            id={p.id}
                         />
                     ))
                 ) : <LoadingSpinner />}

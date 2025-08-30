@@ -9,7 +9,7 @@ import ContactPage from "./pages/ContactPage"
 import CartPage from "./pages/CartPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import auth from "./firebase/firebaseconfig";
@@ -46,7 +46,7 @@ const App = () => {
       <Route path="/" element={<Layout />}>
         <Route path="/" element={<HomePage />} />
         <Route path="/products-list" element={<ProductsListPage />} />
-        <Route path="/product-details" element={<ProductDetailsPage />} />
+        <Route path="/product-details/:id" element={<ProductDetailsPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/blog" element={<BlogPage />} />
         <Route path="/contact" element={<ContactPage />} />

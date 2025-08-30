@@ -4,7 +4,7 @@ import { IoIosHeartEmpty, IoMdStar } from "react-icons/io";
 import { IoCartOutline } from "react-icons/io5";
 import { Link } from "react-router";
 
-const ProductLayout2 = ({ discountTag, discountPercent, category, title, rating = 1, totalRatings, previousPrice, price, tags, stock }) => {
+const ProductLayout2 = ({ discountTag, discountPercent, category, title, rating = 1, totalRatings, previousPrice, price, tags, stock, id }) => {
     const [ratingStars, setRatingStars] = useState([]);
 
     useEffect(() => {
@@ -13,7 +13,7 @@ const ProductLayout2 = ({ discountTag, discountPercent, category, title, rating 
     }, [rating])
 
     return (
-        <Link to={`/product-details/${title}?tag=${tags[0]}`} className="p-10 block group cursor-pointer rounded-[10px] max-w-[464px] bg-[#EaEAEA] hover:bg-white transition duration-200 relative">
+        <Link to={`/product-details/${id}`} className="p-10 block group cursor-pointer rounded-[10px] max-w-[464px] bg-[#EaEAEA] hover:bg-white transition duration-200 relative">
             <div className="relative bg-amber-200">
                 <img className="w-full" src="images/product-image.png" alt="product image" />
 

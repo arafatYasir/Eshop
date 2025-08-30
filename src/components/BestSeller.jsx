@@ -10,7 +10,7 @@ import LoadingSpinner from "./LoadingSpinner";
 import Button from "./Button";
 
 const BestSeller = () => {
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [limit, setLimit] = useState(6);
     const dispatch = useDispatch();
     const bestSellingProducts = useSelector(state => state.products.bestSeller);
@@ -20,6 +20,7 @@ const BestSeller = () => {
     }
 
     const fetchProducts = async () => {
+        setLoading(true);
         const q = query(collection(db, "Products"), where("tags", "array-contains", "Best Seller"));
         const snapshot = await getDocs(q);
         const data = snapshot.docs.map(doc => {
@@ -36,7 +37,9 @@ const BestSeller = () => {
     }
 
     useEffect(() => {
-        fetchProducts();
+        if(bestSellingProducts.length === 0) {
+            fetchProducts();
+        }
     }, [])
 
     return (
@@ -52,7 +55,7 @@ const BestSeller = () => {
                         <div className="flex flex-col items-center sm:items-start sm:flex-row sm:flex-wrap gap-5 sm:gap-1 justify-between mt-12">
                             {
                                 bestSellingProducts.slice(0, limit).map(p => (
-                                    <ProductLayout key={p.id} title={p.title} category={p.category} discountTag={p.discountTag} discountPercent={p.discountTag ? p.discountPercent : ""} rating={p.rating} totalRatings={p.totalRatings} price={p.price} previousPrice={p.discountTag ? p.previousPrice : ""} tags={p.tags} />
+                                    <ProductLayout key={p.id} title={p.title} category={p.category} discountTag={p.discountTag} discountPercent={p.discountTag ? p.discountPercent : ""} rating={p.rating} totalRatings={p.totalRatings} price={p.price} previousPrice={p.discountTag ? p.previousPrice : ""} tags={p.tags} id={p.id} />
                                 ))
                             }
                         </div>
