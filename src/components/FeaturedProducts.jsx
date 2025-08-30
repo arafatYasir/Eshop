@@ -187,7 +187,7 @@ const FeaturedProducts = () => {
                         {
                             featuredProducts.map(p => (
                                 <div className="flex items-center justify-center" key={p.id}>
-                                    <ProductLayout title={p.title} category={p.category} discountTag={p.discountTag} discountPercent={p.discountTag ? p.discountPercent : ""} rating={p.rating} totalRatings={p.totalRatings} price={p.price} previousPrice={p.discountTag ? p.previousPrice : ""} tags={p.tags} id={p.id} />
+                                    <ProductLayout title={p.title} type={p.type} discountTag={p.discountTag} discountPercent={p.discountTag ? p.discountPercent : ""} rating={p.rating} totalRatings={p.totalRatings} price={p.price} previousPrice={p.discountTag ? p.previousPrice : ""} tags={p.tags} id={p.id} />
                                 </div>
                             ))
                         }

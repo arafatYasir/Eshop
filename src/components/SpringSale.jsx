@@ -193,7 +193,7 @@ const SpringSale = () => {
                         {(!loading && springSaleProducts.length > 0) ? (
                             <Slider {...settings} className="mt-12 ">
                                 {springSaleProducts.map(p => (
-                                    <ProductLayout2 key={p.id} title={p.title} category={p.category} discountTag={p.discountTag} discountPercent={p.discountTag ? p.discountPercent : ""} rating={p.rating} totalRatings={p.totalRatings} price={p.price} previousPrice={p.discountTag ? p.previousPrice : ""} stock={p.stock} tags={p.tags} id={p.id} />
+                                    <ProductLayout2 key={p.id} title={p.title} type={p.type} discountTag={p.discountTag} discountPercent={p.discountTag ? p.discountPercent : ""} rating={p.rating} totalRatings={p.totalRatings} price={p.price} previousPrice={p.discountTag ? p.previousPrice : ""} stock={p.stock} tags={p.tags} id={p.id} />
                                 ))}
                             </Slider>
                         ) : <LoadingSpinner message="Loading Spring Products..." />}

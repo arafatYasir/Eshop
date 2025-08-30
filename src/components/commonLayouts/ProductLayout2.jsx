@@ -4,7 +4,7 @@ import { IoIosHeartEmpty, IoMdStar } from "react-icons/io";
 import { IoCartOutline } from "react-icons/io5";
 import { Link } from "react-router";
 
-const ProductLayout2 = ({ discountTag, discountPercent, category, title, rating = 1, totalRatings, previousPrice, price, tags, stock, id }) => {
+const ProductLayout2 = ({ discountTag, discountPercent, type, title, rating = 1, totalRatings, previousPrice, price, tags, stock, id }) => {
     const [ratingStars, setRatingStars] = useState([]);
 
     useEffect(() => {
@@ -23,7 +23,7 @@ const ProductLayout2 = ({ discountTag, discountPercent, category, title, rating 
                 )}
             </div>
             <div className="mt-10">
-                <p className="text-sm font-['Montserrat'] leading-5 text-[#303030] tracking-[4px] uppercase">{category}</p>
+                <p className="text-sm font-['Montserrat'] leading-5 text-[#303030] tracking-[4px] uppercase">{type}</p>
 
                 <h3 className="text-[#303030] font-['Poppins'] text-lg sm:text-xl font-semibold leading-[30px]  mt-4 group-hover:text-[#FF624C] group-hover:underline decoration-2 transition duration-100">{title.slice(0, 30)}...</h3>
 
