@@ -2,8 +2,9 @@ import { useState } from "react";
 import Button from "../components/Button";
 import { toast, ToastContainer } from "react-toastify";
 import { handleCreateUser, handleSignInWithGoogle } from "../firebase/authService";
-import { updateProfile } from "firebase/auth";
-import { Link, useNavigate } from "react-router";
+import { Link, Navigate, useNavigate } from "react-router";
+import { createUserDocument } from "../firebase/firestoreService";
+import { useSelector } from "react-redux";
 
 const RegisterPage = () => {
     // States
@@ -14,6 +15,12 @@ const RegisterPage = () => {
     // Extra hooks
     const navigate = useNavigate();
 
+    // If user is already logged in navigate to dashboard
+    const {user} = useSelector(state => state.auth);
+    if(user) {
+        return <Navigate to="/dashboard" />
+    }
+
     // Regular Expressions
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{6,}$/;
@@ -21,7 +28,6 @@ const RegisterPage = () => {
     const handleRegister = (e) => {
         // Prevents page reload
         e.preventDefault();
-
 
         // Checking if all value are available
         if (!name || !email || !password) {
@@ -47,24 +53,18 @@ const RegisterPage = () => {
             return;
         }
 
-        console.log("I am here")
-
         // If everything is ok then create the account
         handleCreateUser(email, password)
-            .then((userCredentials) => {
+            .then(async (userCredentials) => {
                 const user = userCredentials.user;
 
-                // Updating user's profile with name
-                updateProfile(user, { displayName: name })
-                    .then(() => {
-                        setEmail("");
-                        setName("");
-                        setPassword("");
-                        navigate("/dashboard")
-                    })
-                    .catch((e) => {
-                        toast.error(e.message);
-                    })
+                // Create user doc immediately
+                await createUserDocument(user, { displayName: name })
+
+                setEmail("");
+                setName("");
+                setPassword("");
+                navigate("/dashboard");
             })
             .catch(e => {
                 toast.error(e.message);
@@ -73,7 +73,12 @@ const RegisterPage = () => {
 
     const handleGoogleSignUp = () => {
         handleSignInWithGoogle()
-            .then(() => {
+            .then(async (res) => {
+                const user = res.user;
+                
+                // Create user doc immediately
+                await createUserDocument(user, {displayName: user.displayName })
+
                 navigate("/dashboard");
             })
             .catch(e => {

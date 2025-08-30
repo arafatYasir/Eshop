@@ -24,7 +24,6 @@ const MiddlePart = () => {
     useEffect(() => {
         const handleHideSearch = (e) => {
             if (searchRef.current && !searchRef.current.contains(e.target)) {
-                console.log("I am running from useeffect.");
                 setShowSearch(false);
             }
         }

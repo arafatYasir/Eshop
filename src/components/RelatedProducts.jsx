@@ -68,21 +68,20 @@ const RelatedProducts = ({ category }) => {
                 <div className="mt-10 sm:mt-12 flex items-center justify-center sm:justify-between flex-wrap gap-y-5 sm:gap-y-0 sm:gap-x-[20px]">
                     {
                         (!loading && relatedProducts.length > 0) ? <>
-                            {relatedProducts.map(p => (
+                            {relatedProducts.slice(0, limit).map(p => (
                                 <ProductLayout key={p.id} title={p.title} category={p.category} discountTag={p.discountTag} discountPercent={p.discountTag ? p.discountPercent : ""} rating={p.rating} totalRatings={p.totalRatings} price={p.price} previousPrice={p.discountTag ? p.previousPrice : ""} tags={p.tags} id={p.id} />
                             ))}
-
-                            {
-                                (limit !== relatedProducts.length && !loading) ? (
-                                    <div className="text-center mt-16">
-                                        <Button handleLoadMore={handleLoadMore} value="Load More" bg="white" color="#FF624C" border={true} />
-                                    </div>
-                                ) : ""
-                            }
                         </>
                             : <LoadingSpinner />
                     }
                 </div>
+                {
+                    (limit !== relatedProducts.length && !loading) ? (
+                        <div className="flex justify-center mt-16">
+                            <Button handleLoadMore={handleLoadMore} value="Load More" bg="white" color="#FF624C" border={true} />
+                        </div>
+                    ) : ""
+                }
             </Container>
         </div>
     );

@@ -1,4 +1,4 @@
-import { collection, doc, getDocs, query, serverTimestamp, setDoc, where } from "firebase/firestore"
+import { collection, doc, getDoc, getDocs, query, serverTimestamp, setDoc, where } from "firebase/firestore"
 import { db } from "./firebaseconfig"
 
 // Function to save product
@@ -71,6 +71,57 @@ export const getProduct = async (productId) => {
         }
     }
     catch(e) {
+        console.error(e.message);
+        return null;
+    }
+}
+
+// Create a user document
+export const createUserDocument = async (user, extraData = {}) => {
+    if(!user?.uid) return;
+
+    try {
+        const userRef = doc(db, "Users", user.uid);
+
+        await setDoc(userRef, {
+            uid: user.uid,
+            name: extraData.displayName || null,
+            email: user.email || null,
+            photoURL: user.photoURL || null,
+            cart: [],
+            orders: [],
+            wishlist: [],
+            userType: "normal",
+            createdAt: serverTimestamp()
+        });
+
+        console.log("User doc created successfully!");
+    }
+    catch (e) {
+        console.error(e.message);
+    }
+}
+
+// Get user document
+export const getUserDocument = async (uid) => {
+    try {
+        const userRef = doc(db, "Users", uid);
+        const userSnap = await getDoc(userRef);
+
+        if(userSnap.exists()) {
+            const userDoc = userSnap.data();
+
+            return {
+                ...userDoc,
+                createdAt: userDoc.createdAt ? userDoc.createdAt.toDate().getTime() : null
+            };
+        }
+        else {
+            console.warn("No user document found with id: ", uid);
+            return null;
+        }
+    }
+    catch (e) {
         console.error(e.message);
         return null;
     }

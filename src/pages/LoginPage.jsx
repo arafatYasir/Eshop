@@ -3,6 +3,7 @@ import Button from "../components/Button";
 import { toast, ToastContainer } from "react-toastify";
 import { Link, Navigate, useNavigate } from "react-router";
 import { handleSignInUser, handleSignInWithGoogle } from "../firebase/authService";
+import { useSelector } from "react-redux";
 
 const LoginPage = () => {
     // States
@@ -11,6 +12,12 @@ const LoginPage = () => {
 
     // Extra hooks
     const naviage = useNavigate();
+
+    // If user is already logged in navigate to dashboard
+    const {user} = useSelector(state => state.auth);
+    if(user) {
+        return <Navigate to="/dashboard" />
+    }
 
     // Regular Expressions
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

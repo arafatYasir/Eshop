@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import Button from "../Button";
+import logo from "../../../public/images/logo.webp"
 import Container from "../commonLayouts/Container";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { IoIosMail } from "react-icons/io";
@@ -36,7 +37,7 @@ const Footer = () => {
                 <div className="mt-[100px] flex flex-col pl-5 gap-y-6 md:items-start md:flex-row md:justify-between pb-10 sm:pb-20">
                     <div className="md:w-[349px] w-full">
                         <div className="">
-                            <img src="images/logo.webp" alt="logo" />
+                            <img src={logo} alt="logo" />
                         </div>
                         <ul className="flex flex-col gap-3 mt-[30px] md:mt-[158px]">
                             <li className="relative">
@@ -109,7 +110,7 @@ const Footer = () => {
                     <div>
                         <div>
                             <h4 className="text-lg sm:text-xl text-[#303030] font-semibold font-['Poppins'] leading-[30px]">Payments</h4>
-                            <img className="mt-6" src="images/payments.png" alt="payment methods" />
+                            <img className="mt-6" src="/images/payments.png" alt="payment methods" />
                         </div>
                         <div className="mt-8 sm:mt-[74px]">
                             <h4 className="text-lg sm:text-xl text-[#303030] font-semibold font-['Poppins'] leading-[30px]">Follow Us</h4>

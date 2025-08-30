@@ -16,29 +16,32 @@ import auth from "./firebase/firebaseconfig";
 import { removeUser, setUser } from "./slices/authSlice";
 import DashboardPage from "./pages/DashboardPage";
 import DashboardLayout from "./components/commonLayouts/DashboardLayout";
+import { getUserDocument } from "./firebase/firestoreService";
 
 const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, user => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
       if (user) {
-        dispatch(setUser({
-          uid: user.uid,
-          name: user.displayName || null,
-          email: user.email,
-          emailVerified: user.emailVerified,
-          photoURL: user.photoURL || null
-        }));
+        try {
+          const userDoc = await getUserDocument(user.uid);
+
+          if (userDoc) {
+            dispatch(setUser(userDoc));
+          }
+        }
+        catch (e) {
+          console.error(e.message);
+        }
       }
       else {
         dispatch(removeUser());
       }
-    });
-
+    })
 
     return () => unsubscribe();
-  }, [dispatch]);
+  }, [dispatch])
 
 
   return (
@@ -54,7 +57,7 @@ const App = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
       </Route>
-      <Route path="/dashboard" element={<DashboardLayout />}> 
+      <Route path="/dashboard" element={<DashboardLayout />}>
         <Route index element={<DashboardPage />} />
       </Route>
     </Routes>

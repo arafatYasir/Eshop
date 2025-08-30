@@ -1,11 +1,17 @@
-import { Link } from "react-router";
+import { Link, Navigate } from "react-router";
 import Container from "../components/commonLayouts/Container";
 import CartProduct from "../components/CartProduct";
 import cartProducts from "../../public/products/CartProducts";
 import Button from "../components/Button";
 import Facilities from "../components/Facilities";
+import { useSelector } from "react-redux";
 
 const CartPage = () => {
+    const {user, loading} = useSelector(state => state.auth);
+    
+    if(!user) {
+        return <Navigate to="/login" />
+    }
     return (
         <Container >
             <div className="font-['Montserrat'] text-[#303030] text-base leading-6 flex gap-10 mt-16">
