@@ -4,16 +4,17 @@ import { IoIosHeartEmpty, IoMdStar } from "react-icons/io";
 import { IoCartOutline } from "react-icons/io5";
 import { Link } from "react-router";
 
-const ProductLayout = ({ discountTag = false, discountPercent, category, title, rating = 1, totalRatings, price, previousPrice }) => {
-    const [ratingStars, setRatingStars] = useState([]);
-
+const ProductLayout = ({ discountTag = false, discountPercent, category, title, rating = 1, totalRatings, price, previousPrice, tags }) => {
+    const [ratingStars, setRatingStars] = useState([]);;
     useEffect(() => {
-        const newRatingArray = new Array(rating).fill(1);
+        const newRatingArray = new Array(parseInt(rating)).fill(1);
         setRatingStars(newRatingArray);
-    }, [rating])
+    }, [rating]);
+
+    if(!tags || tags.length === 0) {return;}
 
     return (
-        <Link to="/product-details" className="p-6 group cursor-pointer border border-[#C3C3C3] sm:border-transparent sm:hover:border-[#C3C3C3] rounded-[10px] max-w-[285px] relative block">
+        <Link to={`/product-details/${title}?tag=${tags[0]}`} className="p-6 group cursor-pointer border border-[#C3C3C3] sm:border-transparent sm:hover:border-[#C3C3C3] rounded-[10px] max-w-[285px] relative block">
             <div className="relative">
                 <img className="w-full" src="images/product-image.png" alt="product image" />
 
@@ -31,7 +32,7 @@ const ProductLayout = ({ discountTag = false, discountPercent, category, title, 
                 </div>
             </div>
             <div className="mt-10">
-                <p className="text-sm font-['Montserrat'] leading-5 text-[#303030] tracking-[4px] uppercase">{category}</p>
+                <p className="text-sm font-['Montserrat'] leading-5 text-[#303030] tracking-[4px] uppercase">{category.slice(0, 12)}...</p>
 
                 <h3 className="text-[#303030] font-['Poppins'] text-lg sm:text-xl font-semibold leading-[30px] max-w-[237px] mt-4 group-hover:text-[#FF624C] group-hover:underline decoration-2 transition duration-100">{title.slice(0, 35)}...</h3>
 

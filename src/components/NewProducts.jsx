@@ -4,15 +4,24 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Button from "./Button";
 import { useEffect, useRef, useState } from "react";
-import newProducts from "../../public/products/NewProducts";
 import { TfiAngleDown } from "react-icons/tfi";
+import { useDispatch, useSelector } from "react-redux";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { db } from "../firebase/firebaseconfig";
+import { setNewProducts } from "../slices/productsSlice";
+import LoadingSpinner from "./LoadingSpinner";
 
 
 const NewProducts = () => {
-    const [showingProducts, setShowingProducts] = useState(newProducts.slice(0, 5));
+    const [limit, setLimit] = useState(5);
     const [selectedCategory, setSelectedCategory] = useState({ id: 1, name: "All Categories", value: "all" });
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef(null);
+    const [loading, setLoading] = useState(true);
+
+    // Redux state and dispatch
+    const dispatch = useDispatch();
+    const newProducts = useSelector(state => state.products.new);
 
     const categories = [
         { id: 1, name: "All Categories", value: "all" },
@@ -29,8 +38,30 @@ const NewProducts = () => {
     }
 
     const handleLoadMore = () => {
-        setShowingProducts(newProducts);
+        setLimit(limit + 5);
     }
+
+
+    const fetchProducts = async () => {
+        const q = query(collection(db, "Products"), where("tags", "array-contains", "New"));
+        const snapshot = await getDocs(q);
+        const data = snapshot.docs.map(doc => {
+            const product = doc.data();
+
+            return {
+                ...product,
+                createdAt: product.createdAt ? product.createdAt.toDate().getTime() : null
+            };
+        });
+
+        dispatch(setNewProducts(data));
+        setLoading(false);
+    }
+
+    // useEffect to fetch new products
+    useEffect(() => {
+        fetchProducts();
+    }, [])
 
     useEffect(() => {
         const handleCloseDropdown = (e) => {
@@ -44,6 +75,10 @@ const NewProducts = () => {
         return () => document.removeEventListener("mousedown", handleCloseDropdown);
     }, [])
 
+    if(loading) return <LoadingSpinner message="Loading new products..." />
+
+    console.log(newProducts);
+
     return (
         <div className="mb-20">
             <Container>
@@ -55,7 +90,7 @@ const NewProducts = () => {
                         <p className="text-[#303030] font-['Montserrat'] leading-6">Sort by</p>
 
                         <div className="relative" ref={dropdownRef}>
-                            <select className="hidden" name="categories" value={selectedCategory.value || ""}>
+                            <select className="hidden" name="categories" value={selectedCategory.value || ""} onChange={e => handleSelectCategory(e.target.value)}>
 
                             </select>
 
@@ -90,14 +125,14 @@ const NewProducts = () => {
                 </div>
                 <div className="mt-12 flex flex-col sm:flex-row items-center justify-between sm:flex-wrap gap-[20px]">
                     {
-                        showingProducts.map(p => (
-                            <ProductLayout key={p.id} title={p.title} category={p.category} discountTag={p.discountTag} discountPercent={p.discountTag ? p.discountPercent : ""} rating={p.rating} totalRatings={p.totalRatings} price={p.price} previousPrice={p.discountTag ? p.previousPrice : ""} />
+                        newProducts.slice(0, limit).map(p => (
+                            <ProductLayout key={p.id} title={p.title} category={p.category} discountTag={p.discountTag} discountPercent={p.discountTag ? p.discountPercent : ""} rating={p.rating} totalRatings={p.totalRatings} price={p.price} previousPrice={p.discountTag ? p.previousPrice : ""} tags={p.tags} />
                         ))
                     }
                 </div>
 
                 {
-                    showingProducts.length === 5 ? (
+                    limit !== newProducts.length ? (
                         <div className="text-center mt-16">
                             <Button handleLoadMore={handleLoadMore} value="Load More" bg="white" color="#FF624C" border={true} />
                         </div>

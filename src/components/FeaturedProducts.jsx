@@ -5,8 +5,13 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { LiaAngleLeftSolid, LiaAngleRightSolid } from "react-icons/lia";
-import featuredProducts from "../../public/products/FeaturedProducts";
 import LongArrowIcon from "../icons/LongArrowIcon";
+import { useEffect, useState } from "react";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { db } from "../firebase/firebaseconfig";
+import LoadingSpinner from "./LoadingSpinner";
+import { useDispatch, useSelector } from "react-redux";
+import { setFeaturedProducts } from "../slices/productsSlice";
 
 // ---- Mobile Slider Arrow Functions ----
 
@@ -112,7 +117,32 @@ function SampleNextArrow(props) {
 }
 
 const FeaturedProducts = () => {
+    const dispatch = useDispatch();
+    const featuredProducts = useSelector(state => state.products.featured);
+    const [loading, setLoading] = useState(true);
 
+    const fetchProducts = async () => {
+        const q = query(collection(db, "Products"), where("tags", "array-contains", "Featured"));
+
+        const snapshot = await getDocs(q);
+        const data = snapshot.docs.map(doc => {
+            const product = doc.data();
+
+            return {
+                ...product,
+                createdAt: product.createdAt ? product.createdAt.toDate().getTime() : null
+            };
+        });
+
+        dispatch(setFeaturedProducts(data));
+        setLoading(false);
+    }
+
+    useEffect(() => {
+        fetchProducts();
+    }, [])
+
+    // Slider settings
     var settings = {
         dots: false,
         infinite: true,
@@ -136,6 +166,8 @@ const FeaturedProducts = () => {
         ]
     };
 
+    if(loading) return <LoadingSpinner message="Loading featured products..." />
+
     return (
         <div className="mb-20">
             <Container>
@@ -148,7 +180,7 @@ const FeaturedProducts = () => {
                     {
                         featuredProducts.map(p => (
                             <div className="flex items-center justify-center" key={p.id}>
-                                <ProductLayout title={p.title} category={p.category} discountTag={p.discountTag} discountPercent={p.discountTag ? p.discountPercent : ""} rating={p.rating} totalRatings={p.totalRatings} price={p.price} previousPrice={p.discountTag ? p.previousPrice : ""} />
+                                <ProductLayout title={p.title} category={p.category} discountTag={p.discountTag} discountPercent={p.discountTag ? p.discountPercent : ""} rating={p.rating} totalRatings={p.totalRatings} price={p.price} previousPrice={p.discountTag ? p.previousPrice : ""} tags={p.tags} />
                             </div>
                         ))
                     }

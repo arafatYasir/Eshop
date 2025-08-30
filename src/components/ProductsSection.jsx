@@ -13,7 +13,7 @@ const categories = [
 ];
 
 const ProductsSection = () => {
-    // Static tates
+    // Static states
     const [category, setCategory] = useState(categories[0]);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
@@ -93,7 +93,7 @@ const ProductsSection = () => {
         setSpecifications([]);
     };
 
-
+    // Form submit function
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
@@ -127,39 +127,6 @@ const ProductsSection = () => {
             resetForm();
         }
     };
-
-    async function temp(product) {
-        const { title, category, description, brand, rating, totalRatings, previousPrice, price, discountTag, discountPercent, stock, tags, images, specifications } = product;
-
-        const productData = {
-            id: Date.now(),
-            category,
-            title,
-            description,
-            brand,
-            rating,
-            totalRatings,
-            previousPrice : previousPrice || null,
-            price,
-            discountTag,
-            discountPercent: discountTag ? discountPercent : null,
-            stock,
-            tags,
-            images,
-            specifications,
-        };
-
-        try {
-            const id = await saveProduct(productData);
-            toast.success("Product added successfully!", id);
-        }
-        catch (e) {
-            toast.error(e.message);
-        }
-    }
-
-
-
 
     return (
         <div className="p-8 bg-white rounded-2xl shadow-xl max-w-4xl mx-auto">
