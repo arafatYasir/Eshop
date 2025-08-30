@@ -166,8 +166,6 @@ const FeaturedProducts = () => {
         ]
     };
 
-    if(loading) return <LoadingSpinner message="Loading featured products..." />
-
     return (
         <div className="mb-20">
             <Container>
@@ -176,15 +174,17 @@ const FeaturedProducts = () => {
                     <p className="flex items-center text-[13px] sm:text-base text-[#FF624C] font-['Montserrat'] font-bold leading-6 gap-4">View All <LongArrowIcon width="25px" /></p>
                 </div>
 
-                <Slider {...settings} className="mt-12 sm:px-9 max-w-[285px] mx-auto sm:min-w-full">
-                    {
-                        featuredProducts.map(p => (
-                            <div className="flex items-center justify-center" key={p.id}>
-                                <ProductLayout title={p.title} category={p.category} discountTag={p.discountTag} discountPercent={p.discountTag ? p.discountPercent : ""} rating={p.rating} totalRatings={p.totalRatings} price={p.price} previousPrice={p.discountTag ? p.previousPrice : ""} tags={p.tags} />
-                            </div>
-                        ))
-                    }
-                </Slider>
+                {(!loading && featuredProducts.length > 0) ? (
+                    <Slider {...settings} className="mt-12 sm:px-9 max-w-[285px] mx-auto sm:min-w-full">
+                        {
+                            featuredProducts.map(p => (
+                                <div className="flex items-center justify-center" key={p.id}>
+                                    <ProductLayout title={p.title} category={p.category} discountTag={p.discountTag} discountPercent={p.discountTag ? p.discountPercent : ""} rating={p.rating} totalRatings={p.totalRatings} price={p.price} previousPrice={p.discountTag ? p.previousPrice : ""} tags={p.tags} />
+                                </div>
+                            ))
+                        }
+                    </Slider>
+                ) : <LoadingSpinner message="Loading Featured Products..." />}
             </Container>
         </div>
     );

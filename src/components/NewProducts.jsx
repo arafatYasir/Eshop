@@ -75,10 +75,6 @@ const NewProducts = () => {
         return () => document.removeEventListener("mousedown", handleCloseDropdown);
     }, [])
 
-    if(loading) return <LoadingSpinner message="Loading new products..." />
-
-    console.log(newProducts);
-
     return (
         <div className="mb-20">
             <Container>
@@ -124,15 +120,15 @@ const NewProducts = () => {
                     </div>
                 </div>
                 <div className="mt-12 flex flex-col sm:flex-row items-center justify-between sm:flex-wrap gap-[20px]">
-                    {
+                    {(!loading && newProducts.length > 0) ? (
                         newProducts.slice(0, limit).map(p => (
                             <ProductLayout key={p.id} title={p.title} category={p.category} discountTag={p.discountTag} discountPercent={p.discountTag ? p.discountPercent : ""} rating={p.rating} totalRatings={p.totalRatings} price={p.price} previousPrice={p.discountTag ? p.previousPrice : ""} tags={p.tags} />
                         ))
-                    }
+                    ) : <LoadingSpinner message="Loading New Products..." />}
                 </div>
 
                 {
-                    limit !== newProducts.length ? (
+                    (limit !== newProducts.length && !loading) ? (
                         <div className="text-center mt-16">
                             <Button handleLoadMore={handleLoadMore} value="Load More" bg="white" color="#FF624C" border={true} />
                         </div>

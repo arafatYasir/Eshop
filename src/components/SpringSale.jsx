@@ -5,9 +5,13 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { LiaAngleLeftSolid, LiaAngleRightSolid } from "react-icons/lia";
-import springSaleProducts from "../../public/products/SpringSellProducts";
 import { useEffect, useState } from "react";
 import Button from "./Button";
+import { collection, getDocs, query, where } from "firebase/firestore";
+import { db } from "../firebase/firebaseconfig";
+import { useDispatch, useSelector } from "react-redux";
+import { setSpringSaleProducts } from "../slices/productsSlice";
+import LoadingSpinner from "./LoadingSpinner";
 
 // ---- PC Slider Arrow Function ----
 function SampleNextArrow(props) {
@@ -64,6 +68,9 @@ function SampleNextArrowMobile(props) {
 
 const SpringSale = () => {
     const [timerLeft, setTimerLeft] = useState(calculateTimeLeft());
+    const dispatch = useDispatch();
+    const springSaleProducts = useSelector(state => state.products.springSale);
+    const [loading, setLoading] = useState(true);
 
     function calculateTimeLeft() {
         const saleEndDate = new Date("September 18, 2025 12:00 PM +0600");
@@ -81,6 +88,26 @@ const SpringSale = () => {
             seconds: Math.floor((difference % (1000 * 60)) / 1000),
         }
     }
+
+    const fetchProducts = async () => {
+        const q = query(collection(db, "Products"), where("tags", "array-contains", "Spring Sale"));
+        const snapshot = await getDocs(q);
+        const data = snapshot.docs.map(doc => {
+            const product = doc.data();
+
+            return {
+                ...product,
+                createdAt: product.createdAt ? product.createdAt.toDate().getTime() : null
+            };
+        });
+
+        dispatch(setSpringSaleProducts(data));
+        setLoading(false);
+    }
+
+    useEffect(() => {
+        fetchProducts();
+    }, [])
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -156,14 +183,13 @@ const SpringSale = () => {
 
                     {/* ---- Slider ---- */}
                     <div className="max-w-[950px]">
-                        <Slider {...settings} className="mt-12 ">
-                            {
-                                springSaleProducts.map(p => (
-
-                                    <ProductLayout2 key={p.id} title={p.title} category={p.category} discountTag={p.discountTag} discountPercent={p.discountTag ? p.discountPercent : ""} rating={p.rating} totalRatings={p.totalRatings} price={p.price} previousPrice={p.discountTag ? p.previousPrice : ""} stockPercent={p.stockAmount} />
-                                ))
-                            }
-                        </Slider>
+                        {(!loading && springSaleProducts.length > 0) ? (
+                            <Slider {...settings} className="mt-12 ">
+                                {springSaleProducts.map(p => (
+                                    <ProductLayout2 key={p.id} title={p.title} category={p.category} discountTag={p.discountTag} discountPercent={p.discountTag ? p.discountPercent : ""} rating={p.rating} totalRatings={p.totalRatings} price={p.price} previousPrice={p.discountTag ? p.previousPrice : ""} stock={p.stock} tags={p.tags} />
+                                ))}
+                            </Slider>
+                        ) : <LoadingSpinner message="Loading Spring Products..." />}
                     </div>
                 </div>
             </Container>
