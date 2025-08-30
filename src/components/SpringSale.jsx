@@ -1,6 +1,5 @@
 import Container from "./commonLayouts/Container";
 import ProductLayout2 from "./commonLayouts/ProductLayout2";
-import { HiArrowLongRight } from "react-icons/hi2";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";

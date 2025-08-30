@@ -1,9 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import productsList from "../../public/products/ProductsListPageProducts";
 import ProductLayout from "./commonLayouts/ProductLayout";
 import Pagination from "./Pagination";
 import MenuIcon from "../icons/MenuIcon";
 import { TfiAngleDown } from "react-icons/tfi";
+import { useDispatch, useSelector } from "react-redux";
+import { getProducts } from "../firebase/firestoreService";
+import { setAllProducts } from "../slices/productsSlice";
+import LoadingSpinner from "./LoadingSpinner";
 
 const ProductsListProducts = () => {
     const [currentPage, setCurrentPage] = useState(1);
@@ -11,9 +14,13 @@ const ProductsListProducts = () => {
     const [sortByPrice, setSortByPrice] = useState("Price Low-to-High");
     const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
     const [isPriceOpen, setIsPriceOpen] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     const categoriesDropdownRef = useRef(null);
     const priceDropdownRef = useRef(null);
+
+    const dispatch = useDispatch();
+    const allProducts = useSelector(state => state.products.allProducts);
 
     const itemsRange = {
         start: 0,
@@ -22,6 +29,16 @@ const ProductsListProducts = () => {
 
     itemsRange.start = currentPage === 1 ? 0 : (currentPage * 16) - 16;
     itemsRange.end = currentPage * 16;
+
+    const fetchProducts = async () => {
+        const products = await getProducts();
+        dispatch(setAllProducts(products));
+        setLoading(false);
+    }
+
+    useEffect(() => {
+        fetchProducts();
+    }, [])
 
     useEffect(() => {
         const handleCloseCategoriesDropdown = (e) => {
@@ -56,7 +73,7 @@ const ProductsListProducts = () => {
             {/* ----Sorting Dropdowns---- */}
             <div className="flex flex-col sm:flex-row gap-y-5 sm:gap-0 mb-6 sm:mb-0 justify-between items-center">
                 <div>
-                    <p className="text-[#303030] font-['Montserrat'] leading-6 text-sm sm:text-base">Showing {itemsRange.start + 1} - {itemsRange.end} of {productsList.length}</p>
+                    <p className="text-[#303030] font-['Montserrat'] leading-6 text-sm sm:text-base">Showing {itemsRange.start + 1} - {itemsRange.end} of {allProducts.length}</p>
                 </div>
                 <div className="flex items-center">
                     <span className="hidden sm:inline text-[#303030] font-['Montserrat'] leading-6 mr-4">Sort by</span>
@@ -164,22 +181,25 @@ const ProductsListProducts = () => {
             </div>
 
             <div className="flex flex-col items-center gap-y-6 sm:gap-0 sm:flex-row sm:flex-wrap sm:mt-[52px]">
-                {productsList.slice(itemsRange.start, itemsRange.end).map(p => (
-                    <ProductLayout
-                        key={p.id}
-                        title={p.title}
-                        category={p.category}
-                        discountTag={p.discountTag}
-                        discountPercent={p.discountTag ? p.discountPercent : ""}
-                        rating={p.rating}
-                        totalRatings={p.totalRatings}
-                        price={p.price}
-                        previousPrice={p.discountTag ? p.previousPrice : ""}
-                    />
-                ))}
+                {(!loading && allProducts.length > 0) ? (
+                    allProducts.slice(itemsRange.start, itemsRange.end).map(p => (
+                        <ProductLayout
+                            key={p.id}
+                            title={p.title}
+                            category={p.category}
+                            discountTag={p.discountTag}
+                            discountPercent={p.discountTag ? p.discountPercent : ""}
+                            rating={p.rating}
+                            totalRatings={p.totalRatings}
+                            price={p.price}
+                            previousPrice={p.discountTag ? p.previousPrice : ""}
+                            tags={p.tags}
+                        />
+                    ))
+                ) : <LoadingSpinner />}
             </div>
 
-            <Pagination totalItems={productsList.length} itemsPerPage={16} currentPage={currentPage} onPageChange={setCurrentPage} />
+            <Pagination totalItems={allProducts.length} itemsPerPage={16} currentPage={currentPage} onPageChange={setCurrentPage} />
         </div>
     );
 };

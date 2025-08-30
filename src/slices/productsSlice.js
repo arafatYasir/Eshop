@@ -6,7 +6,8 @@ export const productsSlice = createSlice({
         featured: [],
         new: [],
         bestSeller: [],
-        springSale: []
+        springSale: [],
+        allProducts: []
     },
     reducers: {
         setFeaturedProducts: (state, action) => {
@@ -20,10 +21,13 @@ export const productsSlice = createSlice({
         },
         setSpringSaleProducts: (state, action) => {
             state.springSale = [...action.payload];
+        },
+        setAllProducts: (state, action) => {
+            state.allProducts = [...action.payload];
         }
     },
 })
 
-export const { setFeaturedProducts, setNewProducts, setBestSellerProducts, setSpringSaleProducts} = productsSlice.actions
+export const { setFeaturedProducts, setNewProducts, setBestSellerProducts, setSpringSaleProducts, setAllProducts} = productsSlice.actions
 
 export default productsSlice.reducer

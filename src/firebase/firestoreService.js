@@ -1,4 +1,4 @@
-import { collection, doc, serverTimestamp, setDoc } from "firebase/firestore"
+import { collection, doc, getDocs, serverTimestamp, setDoc } from "firebase/firestore"
 import { db } from "./firebaseconfig"
 
 // Function to save product
@@ -24,5 +24,28 @@ export const saveProduct = async (product) => {
     }
     catch (e) {
         alert(e.message);
+    }
+}
+
+// Get all products
+export const getProducts = async () => {
+    try {
+        const productsCollectionRef = collection(db, "Products");
+        const snapshot = await getDocs(productsCollectionRef);
+
+        const products = snapshot.docs.map(doc => {
+            const product = doc.data();
+
+            return {
+                ...product,
+                createdAt: product.createdAt ? product.createdAt.toDate().getTime() : null
+            };
+        })
+
+        return products;
+    }
+    catch(e) {
+        console.error(e.message);
+        return [];
     }
 }
