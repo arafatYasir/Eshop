@@ -18,6 +18,7 @@ const NewProducts = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef(null);
     const [loading, setLoading] = useState(false);
+    const localStorageProducts = JSON.parse(localStorage.getItem("newProducts")) || [];
 
     // Redux state and dispatch
     const dispatch = useDispatch();
@@ -57,12 +58,16 @@ const NewProducts = () => {
 
         dispatch(setNewProducts(data));
         setLoading(false);
+        localStorage.setItem("newProducts", JSON.stringify(data));
     }
 
     // useEffect to fetch new products
     useEffect(() => {
-        if(newProducts.length === 0) {
+        if(localStorageProducts.length === 0) {
             fetchProducts();
+        }
+        else {
+            dispatch(setNewProducts(localStorageProducts));
         }
     }, [])
 

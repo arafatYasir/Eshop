@@ -14,6 +14,7 @@ const BestSeller = () => {
     const [limit, setLimit] = useState(6);
     const dispatch = useDispatch();
     const bestSellingProducts = useSelector(state => state.products.bestSeller);
+    const localStorageProducts = JSON.parse(localStorage.getItem("bestSellingProducts")) || [];
 
     const handleLoadMore = () => {
         setLimit(limit + 3);
@@ -34,11 +35,15 @@ const BestSeller = () => {
 
         dispatch(setBestSellerProducts(data));
         setLoading(false);
+        localStorage.setItem("bestSellingProducts", JSON.stringify(data));
     }
 
     useEffect(() => {
-        if(bestSellingProducts.length === 0) {
+        if(localStorageProducts.length === 0) {
             fetchProducts();
+        }
+        else {
+            dispatch(setBestSellerProducts(localStorageProducts))
         }
     }, [])
 

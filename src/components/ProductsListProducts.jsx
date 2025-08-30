@@ -15,6 +15,7 @@ const ProductsListProducts = () => {
     const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
     const [isPriceOpen, setIsPriceOpen] = useState(false);
     const [loading, setLoading] = useState(false);
+    const localStorageProducts = JSON.parse(localStorage.getItem("allProducts")) || [];
 
     const categoriesDropdownRef = useRef(null);
     const priceDropdownRef = useRef(null);
@@ -35,11 +36,15 @@ const ProductsListProducts = () => {
         const products = await getProducts();
         dispatch(setAllProducts(products));
         setLoading(false);
+        localStorage.setItem("allProducts", JSON.stringify(products));
     }
 
     useEffect(() => {
-        if(allProducts.length === 0) {
+        if(localStorageProducts.length === 0) {
             fetchProducts();
+        }
+        else {
+            dispatch(setAllProducts(localStorageProducts));
         }
     }, [])
 

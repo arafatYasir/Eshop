@@ -70,6 +70,7 @@ const SpringSale = () => {
     const dispatch = useDispatch();
     const springSaleProducts = useSelector(state => state.products.springSale);
     const [loading, setLoading] = useState(false);
+    const localStorageProducts = JSON.parse(localStorage.getItem("springSaleProducts")) || [];
 
     function calculateTimeLeft() {
         const saleEndDate = new Date("September 18, 2025 12:00 PM +0600");
@@ -103,11 +104,15 @@ const SpringSale = () => {
 
         dispatch(setSpringSaleProducts(data));
         setLoading(false);
+        localStorage.setItem("springSaleProducts", JSON.stringify(data));
     }
 
     useEffect(() => {
-        if(springSaleProducts.length === 0) {
+        if(localStorageProducts.length === 0) {
             fetchProducts();
+        }
+        else {
+            dispatch(setSpringSaleProducts(localStorageProducts));
         }
     }, [])
 

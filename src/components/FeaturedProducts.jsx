@@ -120,6 +120,7 @@ const FeaturedProducts = () => {
     const dispatch = useDispatch();
     const featuredProducts = useSelector(state => state.products.featured);
     const [loading, setLoading] = useState(false);
+    const localStorageProducts = JSON.parse(localStorage.getItem("featuredProducts")) || [];
 
     const fetchProducts = async () => {
         setLoading(true);
@@ -137,11 +138,15 @@ const FeaturedProducts = () => {
 
         dispatch(setFeaturedProducts(data));
         setLoading(false);
+        localStorage.setItem("featuredProducts", JSON.stringify(data));
     }
 
     useEffect(() => {
-        if(featuredProducts.length === 0) {
+        if(localStorageProducts.length === 0) {
             fetchProducts();
+        } 
+        else {
+            dispatch(setFeaturedProducts(localStorageProducts));
         }
     }, [])
 

@@ -5,19 +5,23 @@ import { handleSignOut } from "../firebase/authService";
 import { useNavigate } from "react-router";
 import { AiFillProduct } from "react-icons/ai";
 
-const sidebarItems = [
-    { label: "Profile", icon: <FaUser /> },
-    { label: "Orders", icon: <FaBoxOpen /> },
-    { label: "Wishlist", icon: <FaHeart /> },
-    { label: "Security", icon: <FaLock /> },
-    { label: "Settings", icon: <FaCog /> },
-    { label: "Products", icon: <AiFillProduct /> },
-];
+
 
 const DashboardSidebar = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { currentTab } = useSelector(state => state.dashboard);
+    const { user } = useSelector(state => state.auth);
+
+
+    const sidebarItems = [
+        { label: "Profile", icon: <FaUser /> },
+        { label: "Orders", icon: <FaBoxOpen /> },
+        { label: "Wishlist", icon: <FaHeart /> },
+        { label: "Security", icon: <FaLock /> },
+        { label: "Settings", icon: <FaCog /> },
+        { label: user.userType === "admin" ? "Products" : "", icon: user.userType === "admin" ? <AiFillProduct /> : "" },
+    ];
 
     return (
         <aside className="w-64 bg-white shadow-md border-r border-gray-200 min-h-screen p-6 flex flex-col">
