@@ -16,7 +16,7 @@ const ProductLayout = ({ discountTag = false, id, discountPercent, category, tit
     return (
         <Link to={`/product-details/${id}`} className="p-6 group cursor-pointer border border-[#C3C3C3] sm:border-transparent sm:hover:border-[#C3C3C3] rounded-[10px] max-w-[285px] relative block">
             <div className="relative">
-                <img className="w-full" src="images/product-image.png" alt="product image" />
+                <img className="w-full" src="/images/product-image.png" alt="product image" />
 
                 {/* Icons */}
                 <div className="flex gap-[18px] sm:scale-0 sm:group-hover:scale-100 transition duration-100 absolute bottom-[6px] left-[50%] -translate-x-1/2">

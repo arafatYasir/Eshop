@@ -1,6 +1,7 @@
 import CartIcon from "../../icons/CartIcon";
 import UserIcon from "../../icons/UserIcon";
 import Container from "../commonLayouts/Container";
+import logo from "../../../public/images/logo.webp"
 
 import { TfiSearch } from "react-icons/tfi";
 import { Link } from "react-router";
@@ -38,7 +39,7 @@ const MiddlePart = () => {
                 <div className="flex items-center gap-2">
                     <FaBars onClick={handleOpenMenu} className={`sm:hidden ${showSearch && "hidden"} text-[#303030] mb-1 text-lg`} />
                     <Link to="/">
-                        <img className={`w-[110px] object-cover sm:w-full ${showSearch ? "hidden" : ""}`} src="images/logo.webp" alt="logo" />
+                        <img className={`w-[110px] object-cover sm:w-full ${showSearch ? "hidden" : ""}`} src={logo} alt="logo" />
                     </Link>
                 </div>
                 <div className={`flex items-center gap-12`}>

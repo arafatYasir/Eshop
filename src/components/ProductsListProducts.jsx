@@ -14,7 +14,7 @@ const ProductsListProducts = () => {
     const [sortByPrice, setSortByPrice] = useState("Price Low-to-High");
     const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
     const [isPriceOpen, setIsPriceOpen] = useState(false);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     const categoriesDropdownRef = useRef(null);
     const priceDropdownRef = useRef(null);
@@ -31,13 +31,16 @@ const ProductsListProducts = () => {
     itemsRange.end = currentPage * 16;
 
     const fetchProducts = async () => {
+        setLoading(true);
         const products = await getProducts();
         dispatch(setAllProducts(products));
         setLoading(false);
     }
 
     useEffect(() => {
-        fetchProducts();
+        if(allProducts.length === 0) {
+            fetchProducts();
+        }
     }, [])
 
     useEffect(() => {

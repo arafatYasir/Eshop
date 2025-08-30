@@ -1,11 +1,62 @@
+import { collection, getDocs, query, where } from "firebase/firestore";
 import LongArrowIcon from "../icons/LongArrowIcon"
-import newProducts from "../../public/products/NewProducts";
 import Container from "./commonLayouts/Container";
 import ProductLayout from "./commonLayouts/ProductLayout";
+import { useSelector } from "react-redux";
+import { db } from "../firebase/firebaseconfig";
+import { useEffect, useState } from "react";
+import LoadingSpinner from "./LoadingSpinner";
+import Button from "./Button";
 
 
-const RelatedProducts = () => {
+const RelatedProducts = ({ category }) => {
+    const allProducts = useSelector(state => state.products.allProducts);
+    const [relatedProducts, setRelatedProducts] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [limit, setLimit] = useState(5);
 
+    const fetchProducts = async () => {
+        setLoading(true);
+        try {
+            const q = query(collection(db, "Products"), where("category", "==", category));
+            const snapshot = await getDocs(q);
+
+            const products = snapshot.docs.map(doc => {
+                const product = doc.data();
+
+                return {
+                    ...product,
+                    createdAt: product.createdAt ? product.createdAt.toDate().getTime() : null
+                };
+            })
+            setRelatedProducts(products);
+        }
+        catch (e) {
+            console.error(e.message);
+        }
+        finally {
+            setLoading(false);
+        }
+    }
+
+    const getExistingRelatedProducts = () => {
+        const filtered = allProducts.filter(p => p.category === category);
+        setRelatedProducts(filtered);
+    }
+
+    const handleLoadMore = () => {
+        setLimit(limit + 5);
+    }
+
+
+    useEffect(() => {
+        if (allProducts.length === 0) {
+            fetchProducts();
+        }
+        else {
+            getExistingRelatedProducts();
+        }
+    }, [])
 
     return (
         <div className="mb-20">
@@ -16,9 +67,20 @@ const RelatedProducts = () => {
                 </div>
                 <div className="mt-10 sm:mt-12 flex items-center justify-center sm:justify-between flex-wrap gap-y-5 sm:gap-y-0 sm:gap-x-[20px]">
                     {
-                        newProducts.slice(0, 5).map(p => (
-                            <ProductLayout key={p.id} title={p.title} category={p.category} discountTag={p.discountTag} discountPercent={p.discountTag ? p.discountPercent : ""} rating={p.rating} totalRatings={p.totalRatings} price={p.price} previousPrice={p.discountTag ? p.previousPrice : ""} />
-                        ))
+                        (!loading && relatedProducts.length > 0) ? <>
+                            {relatedProducts.map(p => (
+                                <ProductLayout key={p.id} title={p.title} category={p.category} discountTag={p.discountTag} discountPercent={p.discountTag ? p.discountPercent : ""} rating={p.rating} totalRatings={p.totalRatings} price={p.price} previousPrice={p.discountTag ? p.previousPrice : ""} tags={p.tags} id={p.id} />
+                            ))}
+
+                            {
+                                (limit !== relatedProducts.length && !loading) ? (
+                                    <div className="text-center mt-16">
+                                        <Button handleLoadMore={handleLoadMore} value="Load More" bg="white" color="#FF624C" border={true} />
+                                    </div>
+                                ) : ""
+                            }
+                        </>
+                            : <LoadingSpinner />
                     }
                 </div>
             </Container>

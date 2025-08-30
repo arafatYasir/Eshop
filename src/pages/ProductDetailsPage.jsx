@@ -6,17 +6,23 @@ import DeliveryIcon from "../icons/DeliveryIcon";
 import ReturnIcon from "../icons/ReturnIcon";
 import { PiMinus } from "react-icons/pi";
 import { LuPlus } from "react-icons/lu";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Bounce, toast, ToastContainer } from "react-toastify";
 import Button from "../components/Button";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import ProductAdditionalInformations from "../components/ProductAdditionalInformations";
 import NewProducts from "../components/NewProducts";
 import RelatedProducts from "../components/RelatedProducts";
-import { Link } from "react-router";
+import { Link, useParams } from "react-router";
+import { getProduct } from "../firebase/firestoreService";
+import LoadingSpinner from "../components/LoadingSpinner";
 
 const ProductDetailsPage = () => {
     const [quantity, setQuantity] = useState(1);
+    const [product, setProduct] = useState(null)
+    const [loading, setLoading] = useState(false);
+    const {id} = useParams();
+
 
     const handleChangeQuantity = (e) => {
         const value = parseInt(e.target.value);
@@ -73,22 +79,35 @@ const ProductDetailsPage = () => {
         }
     };
 
+    const fetchProduct = async () => {
+        setLoading(true);
+        const data = await getProduct(parseInt(id));
+        setProduct(data)
+        setLoading(false);
+    }
+
+    useEffect(() => {
+       fetchProduct();
+    }, [id])
+
+    if(loading || !product) return <LoadingSpinner message="Loading Product Details..." />
+
     return (
         <Container>
             <div className="font-['Montserrat'] text-[#303030] text-sm sm:text-base leading-6 flex flex-wrap gap-x-10 gap-y-5 mt-10 sm:mt-16">
                 <span className="relative after:content-[''] after:absolute after:w-[1px] after:h-[20px] after:bg-[#4A4A4A] after:top-1/2 after:-translate-y-1/2 after:right-[-19px]">Home</span>
-                <span className="relative after:content-[''] after:absolute after:w-[1px] after:h-[20px] after:bg-[#4A4A4A] after:top-1/2 after:-translate-y-1/2 after:right-[-19px]">Computers & Tablets</span>
-                <span className="relative after:content-[''] after:absolute after:w-[1px] after:h-[20px] after:bg-[#4A4A4A] after:top-1/2 after:-translate-y-1/2 after:right-[-19px]">Laptop</span>
-                <span className="font-bold">NexSUS ROCK Strix Scar 17 Gaming Laptop</span>
+                <span className="relative after:content-[''] after:absolute after:w-[1px] after:h-[20px] after:bg-[#4A4A4A] after:top-1/2 after:-translate-y-1/2 after:right-[-19px]">{product?.category}</span>
+                <span className="relative after:content-[''] after:absolute after:w-[1px] after:h-[20px] after:bg-[#4A4A4A] after:top-1/2 after:-translate-y-1/2 after:right-[-19px]">{product?.type}</span>
+                <span className="font-bold">{product?.title}</span>
             </div>
 
             <div className="mt-12 flex flex-col items-center sm:flex-row sm:justify-between">
                 <ProductDetailsCarousel />
-                <ProductDetails />
+                <ProductDetails product={product} />
             </div>
 
             {/* Facilities & Product Quantity */}
-            <div className="flex  items-center justify-between mt-5 sm:mt-[51px]">
+            <div className="flex items-center justify-between mt-5 sm:mt-[51px]">
                 {/* Facilities */}
                 <div className="sm:flex gap-12 hidden">
                     <div className="flex items-center gap-6">
@@ -145,10 +164,10 @@ const ProductDetailsPage = () => {
             </div>
 
             {/* Product Additional Informations */}
-            <ProductAdditionalInformations />
+            <ProductAdditionalInformations product={product} specifications={product.specifications} />
 
             {/* Related Products */}
-            <RelatedProducts />
+            <RelatedProducts category={product.category} />
 
             <ToastContainer />
         </Container>

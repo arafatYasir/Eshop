@@ -1,42 +1,40 @@
 import { IoMdStar } from "react-icons/io";
 
-const ProductDetails = () => {
+const ProductDetails = ({product}) => {
+    const {totalRatings, title, price, rating, previousPrice, brand, stock} = product;
+    
+    const formattedRating = parseFloat(rating).toFixed(0);
+
     return (
         <div className="">
             {/* Rating */}
             <div className="flex items-center gap-2 mt-5 sm:mt-0">
                 <div className="flex text-[#FED550] text-[25px]">
-                    <IoMdStar />
-                    <IoMdStar />
-                    <IoMdStar />
-                    <IoMdStar />
-                    <IoMdStar />
+                    {Array.from({length: parseInt(formattedRating)}).map((_, index) => (
+                        <IoMdStar key={index} />
+                    ))}
                 </div>
-                <span className="text-[#303030] text-xl font-['Montserrat'] leading-[30px]">(142)</span>
+                <span className="text-[#303030] text-xl font-['Montserrat'] leading-[30px]">({totalRatings})</span>
             </div>
 
             {/* Product Title */}
-            <h2 className="text-[#303030] font-['Poppins'] text-lg sm:text-4xl font-semibold leading-[46px] sm:border-b border-[#CBCBCB] sm:pb-6 sm:w-[630px] mt-1 sm:mt-4">NexSUS ROCK Strix Scar 17 Gaming Laptop 15.7” 1TB SSD 16GB RAM Pro</h2>
+            <h2 className="text-[#303030] font-['Poppins'] text-lg sm:text-4xl font-semibold leading-[46px] sm:border-b border-[#CBCBCB] sm:pb-6 sm:w-[630px] mt-1 sm:mt-4">{title}</h2>
 
             {/* Price */}
             <p className="flex items-baseline gap-5 mt-1 sm:mt-5 border-b border-[#CBCBCB] sm:pb-6 sm:border-0">
-                <span className="text-[#FF624C] font-['Poppins'] text-4xl sm:text-[56px] font-bold leading-[68px]">$2,999.99</span>
-                <del className="text-[#303030] font-['Montserrat'] text-xl leading-[30px] opacity-50">$5,499.99</del>
+                <span className="text-[#FF624C] font-['Poppins'] text-4xl sm:text-[56px] font-bold leading-[68px]">${price}</span>
+                <del className="text-[#303030] font-['Montserrat'] text-xl leading-[30px] opacity-50">{previousPrice ? "$" + previousPrice : ""}</del>
             </p>
 
             {/* Info */}
-            <div className="sm:w-[630px] flex flex-col gap-4 mt-5 sm:mt-12">
+            <div className="sm:w-[630px] flex flex-col gap-4 mt-5">
                 <p className="flex gap-[31px] sm:gap-[105px]">
                     <span className="text-[#303030] font-['Poppins'] sm:text-xl font-semibold leading-[30px]">Brand</span>
-                    <span className="text-[#303030] font-['Montserrat'] sm:text-xl leading-[30px]">NexSUS Tech Company</span>
+                    <span className="text-[#303030] font-['Montserrat'] sm:text-xl leading-[30px]">{brand}</span>
                 </p>
-                <p className="flex gap-[48px] sm:gap-[122px]">
-                    <span className="text-[#303030] font-['Poppins'] sm:text-xl font-semibold leading-[30px]">Size</span>
-                    <span className="text-[#303030] font-['Montserrat'] sm:text-xl leading-[30px]">15.7 x 11.1 x 1.0 inches (W x D x H)</span>
-                </p>
-                <p className="flex gap-[23px] sm:gap-[97px]">
-                    <span className="text-[#303030] font-['Poppins'] sm:text-xl font-semibold leading-[30px]">Weight</span>
-                    <span className="text-[#303030] font-['Montserrat'] sm:text-xl leading-[30px]">6.28 pounds</span>
+                <p className="flex gap-[23px] sm:gap-[110px]">
+                    <span className="text-[#303030] font-['Poppins'] sm:text-xl font-semibold leading-[30px]">Stock</span>
+                    <span className="text-[#303030] font-['Montserrat'] sm:text-xl leading-[30px]">{stock}</span>
                 </p>
                 <p className="flex gap-[13px] sm:gap-[87px]">
                     <span className="text-[#303030] font-['Poppins'] sm:text-xl font-semibold leading-[30px]">Delivery</span>

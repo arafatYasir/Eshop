@@ -1,4 +1,4 @@
-import { collection, doc, getDocs, serverTimestamp, setDoc } from "firebase/firestore"
+import { collection, doc, getDocs, query, serverTimestamp, setDoc, where } from "firebase/firestore"
 import { db } from "./firebaseconfig"
 
 // Function to save product
@@ -47,5 +47,31 @@ export const getProducts = async () => {
     catch(e) {
         console.error(e.message);
         return [];
+    }
+}
+
+
+// Get a specific product
+export const getProduct = async (productId) => {
+    try {
+        const q = query(collection(db, "Products"), where("id", "==", productId));
+        const snapshot = await getDocs(q);
+
+        if(!snapshot.empty) {
+            const doc = snapshot.docs[0].data();
+
+            return {
+                ...doc,
+                createdAt: doc.createdAt ? doc.createdAt.toDate().getTime() : null
+            };
+        }
+        else {
+            console.error("No product found on id: ", productId);
+            return;
+        }
+    }
+    catch(e) {
+        console.error(e.message);
+        return null;
     }
 }
