@@ -4,15 +4,15 @@ import { setCurrentTab } from "../slices/dashboardSlice";
 import { handleSignOut } from "../firebase/authService";
 import { useNavigate } from "react-router";
 import { AiFillProduct } from "react-icons/ai";
-
-
+import { clearCart } from "../slices/cartSlice";
 
 const DashboardSidebar = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { currentTab } = useSelector(state => state.dashboard);
-    const { user } = useSelector(state => state.auth);
+    const { user, loading } = useSelector(state => state.auth);
 
+    // if(loading) return;
 
     const sidebarItems = [
         { label: "Profile", icon: <FaUser /> },
@@ -49,6 +49,9 @@ const DashboardSidebar = () => {
             <div className="mt-5 pt-1 border-t border-gray-200">
                 <button onClick={() => {
                     handleSignOut();
+                    // Clearing the cart
+                    localStorage.removeItem("cart");
+                    dispatch(clearCart());
                     navigate("/");
                 }} className="flex items-center gap-3 px-4 py-3 rounded-lg text-[#FF624C] font-semibold hover:bg-gray-100 transition-all">
                     <FaLock />

@@ -194,7 +194,7 @@ const ProductsListProducts = () => {
                         <ProductLayout
                             key={p.id}
                             title={p.title}
-                            category={p.category}
+                            type={p.type}
                             discountTag={p.discountTag}
                             discountPercent={p.discountTag ? p.discountPercent : ""}
                             rating={p.rating}

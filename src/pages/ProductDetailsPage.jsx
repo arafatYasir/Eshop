@@ -16,12 +16,16 @@ import RelatedProducts from "../components/RelatedProducts";
 import { Link, useParams } from "react-router";
 import { getProduct } from "../firebase/firestoreService";
 import LoadingSpinner from "../components/LoadingSpinner";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../slices/cartSlice";
 
 const ProductDetailsPage = () => {
     const [quantity, setQuantity] = useState(1);
     const [product, setProduct] = useState(null)
     const [loading, setLoading] = useState(false);
-    const {id} = useParams();
+    const { id } = useParams();
+
+    const dispatch = useDispatch();
 
 
     const handleChangeQuantity = (e) => {
@@ -79,6 +83,20 @@ const ProductDetailsPage = () => {
         }
     };
 
+
+    const handleAddToCart = () => {
+        const p = {
+            id: product.id,
+            title: product.title,
+            price: product.price,
+            type: product.type,
+            quantity: 1
+        };
+
+        dispatch(addToCart(p));
+        toast.success("Item added to cart! Please go to your cart and update it.");
+    }
+
     const fetchProduct = async () => {
         setLoading(true);
         const data = await getProduct(parseInt(id));
@@ -87,10 +105,10 @@ const ProductDetailsPage = () => {
     }
 
     useEffect(() => {
-       fetchProduct();
+        fetchProduct();
     }, [id])
 
-    if(loading || !product) return <LoadingSpinner message="Loading Product Details..." />
+    if (loading || !product) return <LoadingSpinner message="Loading Product Details..." />
 
     return (
         <Container>
@@ -159,7 +177,7 @@ const ProductDetailsPage = () => {
                         </div>
                     </Link>
 
-                    <div className="w-[50px] sm:w-[62px] sm:h-[62px] flex items-center justify-center border border-[#FF624C] rounded-[10px]"><AiOutlineShoppingCart className="text-3xl text-[#FF624C]" /></div>
+                    <div onClick={handleAddToCart} className="w-[50px] sm:w-[62px] sm:h-[62px] flex items-center justify-center border border-[#FF624C] rounded-[10px] cursor-pointer"><AiOutlineShoppingCart className="text-3xl text-[#FF624C] " /></div>
                 </div>
             </div>
 

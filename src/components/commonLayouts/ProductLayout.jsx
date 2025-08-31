@@ -5,6 +5,7 @@ import { IoCartOutline } from "react-icons/io5";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router";
 import { addToCart } from "../../slices/cartSlice";
+import {ToastContainer, toast} from "react-toastify"
 
 const ProductLayout = ({ discountTag = false, id, discountPercent, type, title, rating = 1, totalRatings, price, previousPrice, tags }) => {
     const [ratingStars, setRatingStars] = useState([]);
@@ -27,6 +28,7 @@ const ProductLayout = ({ discountTag = false, id, discountPercent, type, title, 
         };
 
         dispatch(addToCart(product));
+        toast.success("Item added to cart! Please go to your cart and update it.");
     }
 
     return (
@@ -69,6 +71,8 @@ const ProductLayout = ({ discountTag = false, id, discountPercent, type, title, 
             {discountTag && (
                 <div className="absolute top-4 right-4 text-white font-['Montserrat'] font-semibold leading-6 py-[7px] px-5 bg-[#FF624C] rounded-[5px]">{discountPercent}%</div>
             )}
+
+            <ToastContainer />
         </div>
     );
 };

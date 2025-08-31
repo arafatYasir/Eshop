@@ -5,7 +5,7 @@ const ProfileSection = () => {
     const {user} = useSelector(state => state.auth);
     return (
         <div>
-            <h2 className="text-2xl font-semibold mb-4">Profile Information (<span className="text-red-500 font-bold">{user.userType === "admin" ? "Admin" : ""}</span>)*</h2>
+            <h2 className="text-2xl font-semibold mb-4">Profile Information <span className="text-red-500 font-bold">{user.userType === "admin" ? "Admin*" : ""}</span></h2>
             <div className="flex items-center gap-5">
                 {
                     photoURL && <div>

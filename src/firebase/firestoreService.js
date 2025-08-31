@@ -1,4 +1,4 @@
-import { collection, doc, getDoc, getDocs, query, serverTimestamp, setDoc, where } from "firebase/firestore"
+import { arrayUnion, collection, doc, getDoc, getDocs, query, serverTimestamp, setDoc, updateDoc, where } from "firebase/firestore"
 import { db } from "./firebaseconfig"
 
 // Function to save product
@@ -35,6 +35,7 @@ export const getProducts = async () => {
 
         const products = snapshot.docs.map(doc => {
             const product = doc.data();
+            console.log(product);
 
             return {
                 ...product,
@@ -44,7 +45,7 @@ export const getProducts = async () => {
 
         return products;
     }
-    catch(e) {
+    catch (e) {
         console.error(e.message);
         return [];
     }
@@ -57,7 +58,7 @@ export const getProduct = async (productId) => {
         const q = query(collection(db, "Products"), where("id", "==", productId));
         const snapshot = await getDocs(q);
 
-        if(!snapshot.empty) {
+        if (!snapshot.empty) {
             const doc = snapshot.docs[0].data();
 
             return {
@@ -70,7 +71,7 @@ export const getProduct = async (productId) => {
             return;
         }
     }
-    catch(e) {
+    catch (e) {
         console.error(e.message);
         return null;
     }
@@ -78,7 +79,7 @@ export const getProduct = async (productId) => {
 
 // Create a user document
 export const createUserDocument = async (user, extraData = {}) => {
-    if(!user?.uid) return;
+    if (!user?.uid) return;
 
     try {
         const userRef = doc(db, "Users", user.uid);
@@ -108,7 +109,7 @@ export const getUserDocument = async (uid) => {
         const userRef = doc(db, "Users", uid);
         const userSnap = await getDoc(userRef);
 
-        if(userSnap.exists()) {
+        if (userSnap.exists()) {
             const userDoc = userSnap.data();
 
             return {
@@ -126,3 +127,43 @@ export const getUserDocument = async (uid) => {
         return null;
     }
 }
+
+
+// Update user cart in firestore for each user
+export const updateUserCart = async (uid, cart) => {
+    try {
+        const userRef = doc(db, "Users", uid);
+        // Replace the cart field entirely
+        await setDoc(
+            userRef,
+            {
+                cart: cart.filter(Boolean), // remove null/undefined just in case
+            },
+            { merge: true } // keep other fields like profile, but cart fully replaced
+        );
+    }
+    catch (e) {
+        console.error("HELLO ERROR");
+    }
+}
+
+
+
+// Get user cart data
+export const getUserCart = async (uid) => {
+    try {
+        const userRef = doc(db, "Users", uid);
+        const userSnap = await getDoc(userRef);
+
+        if (userSnap.exists()) {
+            const userData = userSnap.data();
+            return userData.cart || []; // return empty array if cart field doesn't exist
+        } else {
+            console.warn("User document not found");
+            return [];
+        }
+    } catch (error) {
+        console.error("Error fetching user cart:", error);
+        return [];
+    }
+};

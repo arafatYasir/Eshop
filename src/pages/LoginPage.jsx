@@ -3,7 +3,10 @@ import Button from "../components/Button";
 import { toast, ToastContainer } from "react-toastify";
 import { Link, Navigate, useNavigate } from "react-router";
 import { handleSignInUser, handleSignInWithGoogle } from "../firebase/authService";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoading } from "../slices/authSlice";
+import { getUserCart } from "../firebase/firestoreService";
+import { setCart } from "../slices/cartSlice";
 
 const LoginPage = () => {
     // States
@@ -12,10 +15,11 @@ const LoginPage = () => {
 
     // Extra hooks
     const naviage = useNavigate();
+    const dispatch = useDispatch();
 
     // If user is already logged in navigate to dashboard
-    const {user} = useSelector(state => state.auth);
-    if(user) {
+    const { user } = useSelector(state => state.auth);
+    if (user) {
         return <Navigate to="/dashboard" />
     }
 
@@ -40,7 +44,16 @@ const LoginPage = () => {
 
         // Login the user if credentials are correct
         handleSignInUser(email, password)
-            .then(() => {
+            .then(async (res) => {
+                const user = res.user;
+
+                // Getting user cart data
+                const cart = await getUserCart(user.uid);
+
+                // Setting cart data to redux
+                dispatch(setCart(cart));
+
+                // dispatch(setLoading(true));
                 naviage("/dashboard");
             })
             .catch(e => {
@@ -67,12 +80,20 @@ const LoginPage = () => {
 
     const handleGoogleLogin = () => {
         handleSignInWithGoogle()
-        .then(() => {
-            naviage("/dashboard");
-        })
-        .catch(e => {
-            toast.error(e.message);
-        })
+            .then(async (res) => {
+                const user = res.user;
+
+                // Getting user cart data
+                const cart = await getUserCart(user.uid);
+
+                // Setting cart data to redux
+                dispatch(setCart(cart));
+                
+                naviage("/dashboard");
+            })
+            .catch(e => {
+                toast.error(e.message);
+            })
     };
 
     return (

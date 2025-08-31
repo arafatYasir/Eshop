@@ -1,16 +1,25 @@
 import { useState } from "react";
 import { LuPlus } from "react-icons/lu";
 import { PiMinus } from "react-icons/pi";
+import { useDispatch, useSelector } from "react-redux";
+import { updateQuantity } from "../slices/cartSlice";
 
-const CartQuantity = () => {
-    const [count, setCount] = useState(1);
+const CartQuantity = ({id}) => {
+    const {items} = useSelector(state => state.cart);
+
+    const item = items.find(i => i.id === id);
+
+    const [count, setCount] = useState(item.quantity);
+    const dispatch = useDispatch();
 
     const handleUpdate = (action) => {
         if(action === "increment") {
             setCount(prevCount => prevCount + 1);
+            dispatch(updateQuantity({id, quantity: count + 1}));
         }
-        else if(action === "decrement" && count > 1) {
+        else if(action === "decrement") {
             setCount(prevCount => prevCount - 1);
+            dispatch(updateQuantity({id, quantity: count - 1}));
         }
     }
 

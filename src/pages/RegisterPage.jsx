@@ -16,8 +16,8 @@ const RegisterPage = () => {
     const navigate = useNavigate();
 
     // If user is already logged in navigate to dashboard
-    const {user} = useSelector(state => state.auth);
-    if(user) {
+    const { user } = useSelector(state => state.auth);
+    if (user) {
         return <Navigate to="/dashboard" />
     }
 
@@ -75,9 +75,9 @@ const RegisterPage = () => {
         handleSignInWithGoogle()
             .then(async (res) => {
                 const user = res.user;
-                
+
                 // Create user doc immediately
-                await createUserDocument(user, {displayName: user.displayName })
+                await createUserDocument(user, { displayName: user.displayName })
 
                 navigate("/dashboard");
             })

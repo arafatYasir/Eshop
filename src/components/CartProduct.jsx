@@ -1,8 +1,16 @@
+import { useDispatch } from "react-redux";
 import ShareIcon from "../icons/ShareIcon";
 import TrashIcon from "../icons/TrashIcon";
 import CartQuantity from "./CartQuantity"
+import { removeFromCart } from "../slices/cartSlice";
 
-const CartProduct = ({category, title, variant, price, totalPrice}) => {
+const CartProduct = ({id, type, title, variant, price, totalPrice}) => {
+    const dispatch = useDispatch();
+
+    const handleRemoveFromCart = () => {
+        dispatch(removeFromCart(id))
+    }
+
     return (
         <div className="sm:h-[294px] flex flex-col md:flex-row items-center rounded-[10px] border sm:border-[transparent] transition px-[36px] py-[24px] group relative hover:border-[#CBCBCB] border-[#CBCBCB]">
             {/* Product Part */}
@@ -11,7 +19,7 @@ const CartProduct = ({category, title, variant, price, totalPrice}) => {
                     <img className="w-[237px] h-[214px] object-cover" src="/images/product-image.png" alt="Product Image" />
                 </div>
                 <div>
-                    <p className="text-[#303030] font-['Montserrat'] text-sm leading-5 uppercase tracking-[4px]">{category}</p>
+                    <p className="text-[#303030] font-['Montserrat'] text-sm leading-5 uppercase tracking-[4px]">{type}</p>
                     <h4 className="text-[#303030] font-['Poppins'] text-xl font-semibold leading-[30px] max-w-[314px] mt-4 group-hover:text-[#FF624C] group-hover:underline group-hover:decoration-2">{title}</h4>
                     <p className="text-[#303030] font-['Montserrat'] mt-4 md:mt-[46px]">
                         <span className="font-bold mr-2">Variant:</span>
@@ -25,7 +33,7 @@ const CartProduct = ({category, title, variant, price, totalPrice}) => {
 
             {/* Quantity Part */}
             <div className="md:w-[16.5%] mt-4 md:mt-0">
-                <CartQuantity />
+                <CartQuantity id={id} />
             </div>
 
             {/* Total Price Part */}
@@ -33,7 +41,7 @@ const CartProduct = ({category, title, variant, price, totalPrice}) => {
 
             {/* Icons for desktop */}
             <div className="hidden absolute top-1/2 right-12 -translate-1/2 group-hover:block">
-                <div className="hover:bg-[#FF624C] text-[#FF624C] hover:text-white border border-[#FF624C] transition w-16 h-16 rounded-full flex items-center justify-center cursor-pointer">
+                <div onClick={handleRemoveFromCart} className="hover:bg-[#FF624C] text-[#FF624C] hover:text-white border border-[#FF624C] transition w-16 h-16 rounded-full flex items-center justify-center cursor-pointer">
                     <TrashIcon />
                 </div>
                 <div className="hover:bg-[#FF624C] text-[#FF624C] mt-[38px] hover:text-white border border-[#FF624C] transition w-16 h-16 rounded-full flex items-center justify-center cursor-pointer">
@@ -43,7 +51,7 @@ const CartProduct = ({category, title, variant, price, totalPrice}) => {
 
             {/* Icons for mobile & tablet */}
             <div className="flex md:hidden items-center gap-6 mt-5">
-                <div className="active:bg-[#FF624C] text-[#FF624C] active:text-white border border-[#FF624C] transition w-10 h-10 rounded-full flex items-center justify-center cursor-pointer">
+                <div onClick={handleRemoveFromCart} className="active:bg-[#FF624C] text-[#FF624C] active:text-white border border-[#FF624C] transition w-10 h-10 rounded-full flex items-center justify-center cursor-pointer">
                     <TrashIcon width={28} height={28} />
                 </div>
                 <div className="active:bg-[#FF624C] text-[#FF624C] md:mt-[38px] active:text-white border border-[#FF624C] transition w-10 h-10 rounded-full flex items-center justify-center cursor-pointer">

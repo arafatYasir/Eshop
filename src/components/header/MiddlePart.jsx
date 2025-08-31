@@ -16,6 +16,7 @@ const MiddlePart = () => {
     const searchRef = useRef(null);
     const dispatch = useDispatch();
     const {loading, user} = useSelector(state => state.auth);
+    const {totalPrice} = useSelector(state => state.cart);
 
     const handleOpenMenu = () => {
         dispatch(openMenu())
@@ -66,7 +67,7 @@ const MiddlePart = () => {
                             </div>
                             <div className="hidden sm:block">
                                 <p className="text-[#303030] font-['Montserrat'] leading-6 ">Cart</p>
-                                <span className="text-[#303030] font-['Montserrat'] leading-6 font-bold">$ 150,00</span>
+                                <span className="text-[#303030] font-['Montserrat'] leading-6 font-bold">$ {totalPrice}</span>
                             </div>
                         </div>
 
