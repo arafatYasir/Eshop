@@ -3,7 +3,7 @@ import ProductLayout from "./commonLayouts/ProductLayout";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Button from "./Button";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { TfiAngleDown } from "react-icons/tfi";
 import { useDispatch, useSelector } from "react-redux";
 import { collection, getDocs, query, where } from "firebase/firestore";
@@ -26,9 +26,10 @@ const NewProducts = () => {
 
     const categories = [
         { id: 1, name: "All Categories", value: "all" },
-        { id: 2, name: "Computers", value: "computers" },
-        { id: 3, name: "Mobiles", value: "mobiles" },
-        { id: 4, name: "Tablets", value: "tablets" },
+        { id: 2, name: "Computers", value: "computer" },
+        { id: 3, name: "Mobiles", value: "mobile" },
+        { id: 4, name: "Tablets", value: "tablet" },
+        { id: 4, name: "Laptops", value: "laptop" },
         { id: 5, name: "Accessories", value: "accessories" },
     ];
 
@@ -60,6 +61,28 @@ const NewProducts = () => {
         setLoading(false);
         localStorage.setItem("newProducts", JSON.stringify(data));
     }
+
+    // Filtered products based on selected category
+    const filteredProducts = useMemo(() => {
+        if(!newProducts || newProducts.length === 0) return [];
+
+        switch (selectedCategory.value) {
+            case "all":
+                return newProducts;
+            case "computer":
+                return newProducts.filter(p => p.type.toLowerCase() === "computer"|| p.type.toLowerCase() === "desktop");
+            case "laptop":
+                return newProducts.filter(p => p.type.toLowerCase() === "laptop");
+            case "mobile":
+                return newProducts.filter(p => p.type.toLowerCase() === "mobile");
+            case "tablet":
+                return newProducts.filter(p => p.type.toLowerCase() === "tablet");
+            case "accessories":
+                return newProducts.filter(p => !["desktop", "computer", "laptop", "mobile", "tablet"].includes(p.type.toLowerCase()));
+            default:
+                return newProducts;
+        }
+    }, [newProducts, selectedCategory]);
 
     // useEffect to fetch new products
     useEffect(() => {
@@ -129,14 +152,14 @@ const NewProducts = () => {
                 </div>
                 <div className="mt-12 flex flex-col sm:flex-row items-center justify-between sm:flex-wrap gap-[20px]">
                     {(!loading && newProducts.length > 0) ? (
-                        newProducts.slice(0, limit).map(p => (
+                        filteredProducts.slice(0, limit).map(p => (
                             <ProductLayout key={p.id} title={p.title} images={p.images} type={p.type} discountTag={p.discountTag} discountPercent={p.discountTag ? p.discountPercent : ""} rating={p.rating} totalRatings={p.totalRatings} price={p.price} previousPrice={p.discountTag ? p.previousPrice : ""} tags={p.tags} id={p.id} />
                         ))
                     ) : <LoadingSpinner message="Loading New Products..." />}
                 </div>
 
                 {
-                    (limit !== newProducts.length && !loading) ? (
+                    (limit !== filteredProducts.length && !loading) ? (
                         <div className="text-center mt-16">
                             <Button handleLoadMore={handleLoadMore} value="Load More" bg="white" color="#FF624C" border={true} />
                         </div>

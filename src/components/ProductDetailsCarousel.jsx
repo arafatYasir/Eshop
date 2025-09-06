@@ -63,8 +63,8 @@ const ProductDetailsCarousel = ({images}) => {
     return (
         <div>
             {/* First Slider */}
-            <Slider className="max-w-[370px] md:max-w-[833px]" {...settings} asNavFor={nav2} ref={slider => (sliderRef1 = slider)}>
-                <div className="relative max-w-[370px] sm:max-w-full">
+            <Slider className="max-w-[370px] md:max-w-[833px] pl-2" {...settings} asNavFor={nav2} ref={slider => (sliderRef1 = slider)}>
+                <div className="relative max-w-[370px] sm:max-w-full border">
                     <img className="w-full h-auto" src={images[1]} alt="Product Image" />
                     <div
                         className="absolute top-2 right-2 cursor-pointer"
@@ -73,7 +73,7 @@ const ProductDetailsCarousel = ({images}) => {
                         <FullscreenIcon />
                     </div>
                 </div>
-                <div className="relative max-w-[370px] sm:max-w-full">
+                <div className="relative max-w-[370px] sm:max-w-full border">
                     <img className="w-full h-auto" src={images[1]} alt="Product Image" />
                     <div
                         className="absolute top-2 right-2 cursor-pointer"
@@ -82,7 +82,7 @@ const ProductDetailsCarousel = ({images}) => {
                         <FullscreenIcon />
                     </div>
                 </div>
-                <div className="relative max-w-[370px] sm:max-w-full">
+                <div className="relative max-w-[370px] sm:max-w-full border">
                     <img className="w-full h-auto" src={images[1]} alt="Product Image" />
                     <div
                         className="absolute top-2 right-2 cursor-pointer"

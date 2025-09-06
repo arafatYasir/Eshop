@@ -38,12 +38,10 @@ const MiddlePart = () => {
         }
 
         const timer = setTimeout(() => {
-
             const results = searchProducts(searchValue);
             results.then(data => {
                 setProducts(data);
                 console.log(data);
-
             });
         }, 500);
 

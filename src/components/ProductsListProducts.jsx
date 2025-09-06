@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import ProductLayout from "./commonLayouts/ProductLayout";
 import Pagination from "./Pagination";
 import MenuIcon from "../icons/MenuIcon";
@@ -10,8 +10,8 @@ import LoadingSpinner from "./LoadingSpinner";
 
 const ProductsListProducts = () => {
     const [currentPage, setCurrentPage] = useState(1);
-    const [sortByCategories, setSortByCategories] = useState("Popularity");
-    const [sortByPrice, setSortByPrice] = useState("Price Low-to-High");
+    const [sortByCategories, setSortByCategories] = useState("None");
+    const [sortByPrice, setSortByPrice] = useState("None");
     const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
     const [isPriceOpen, setIsPriceOpen] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -39,8 +39,49 @@ const ProductsListProducts = () => {
         localStorage.setItem("allProducts", JSON.stringify(products));
     }
 
+    // Filtered products
+    const filteredProducts = useMemo(() => {
+        if (!allProducts || allProducts.length === 0) return [];
+
+        // Make a copy of products
+        let products = [...allProducts];
+
+        // Apply category-based sorting first
+        if (sortByCategories && sortByCategories !== "None") {
+            products.sort((a, b) => {
+                switch (sortByCategories) {
+                    case "Popularity":
+                        return (b.totalRatings || 0) - (a.totalRatings || 0);
+                    case "Rating":
+                        return (b.rating || 0) - (a.rating || 0);
+                    case "Availability":
+                        return (b.stock || 0) - (a.stock || 0);
+                    default:
+                        return 0;
+                }
+            });
+        }
+
+        // Apply price-based sorting on top
+        if (sortByPrice && sortByPrice !== "None") {
+            products.sort((a, b) => {
+                switch (sortByPrice) {
+                    case "Price Low-to-High":
+                        return (a.price || 0) - (b.price || 0);
+                    case "Price High-to-Low":
+                        return (b.price || 0) - (a.price || 0);
+                    default:
+                        return 0;
+                }
+            });
+        }
+
+        return products;
+    }, [allProducts, sortByCategories, sortByPrice]);
+
+
     useEffect(() => {
-        if(localStorageProducts.length === 0) {
+        if (localStorageProducts.length === 0) {
             fetchProducts();
         }
         else {
@@ -115,7 +156,7 @@ const ProductsListProducts = () => {
                             {/* Custom dropdown list */}
                             {isCategoriesOpen && (
                                 <ul className="absolute w-[120px] sm:w-[150px] border border-gray-300 bg-white shadow-lg z-10 mt-1">
-                                    {['Popularity', 'Rating', 'Availability'].map(option => (
+                                    {['None', 'Popularity', 'Rating', 'Availability'].map(option => (
                                         <li
                                             key={option}
                                             className="p-2 hover:bg-gray-200 cursor-pointer"
@@ -161,7 +202,7 @@ const ProductsListProducts = () => {
                             {/* Custom dropdown list */}
                             {isPriceOpen && (
                                 <ul className="absolute w-[160px] sm:w-[216px] border border-gray-300 bg-white shadow-lg z-10 mt-1">
-                                    {['Price Low-to-High', 'Price High-to-Low'].map(option => (
+                                    {['None', 'Price Low-to-High', 'Price High-to-Low'].map(option => (
                                         <li
                                             key={option}
                                             className="p-2 hover:bg-gray-200 cursor-pointer"
@@ -190,7 +231,7 @@ const ProductsListProducts = () => {
 
             <div className="flex flex-col items-center gap-y-6 sm:gap-0 sm:flex-row sm:flex-wrap sm:mt-[52px]">
                 {(!loading && allProducts.length > 0) ? (
-                    allProducts.slice(itemsRange.start, itemsRange.end).map(p => (
+                    filteredProducts.slice(itemsRange.start, itemsRange.end).map(p => (
                         <ProductLayout
                             key={p.id}
                             title={p.title}
