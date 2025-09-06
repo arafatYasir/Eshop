@@ -45,7 +45,7 @@
                     existingItem.quantity += 1;
                 }
                 else {
-                    state.items.push({ ...product, quantity: 1 });
+                    state.items.push({ ...product, quantity: product.quantity || 1 });
                 }
 
                 const totals = calculateTotals(state.items);

@@ -168,3 +168,20 @@ export const getUserCart = async (uid) => {
         return [];
     }
 };
+
+
+// Search products
+export const searchProducts = async (keyword) => {
+    if(!keyword) return [];
+
+    const productsRef = collection(db, "Products");
+    
+    const q = query(productsRef, where("title", ">=", keyword), where("title", "<=", keyword + "\uf8ff"))
+
+    const querySnapshot = await getDocs(q);
+    
+    return querySnapshot.docs.map(doc => ({
+        ...doc.data(),
+        createdAt: doc.data().createdAt.toDate().getTime()
+    }));
+}

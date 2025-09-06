@@ -165,15 +165,15 @@ const TopPart = () => {
 
                         {/* Social media links */}
                         <div className="flex items-center gap-4 sm:gap-6 text-lg">
-                            <Link to="#">
+                            <a href="https://www.facebook.com/" target="_blank">
                                 <FaFacebookF className="text-sm sm:text-base" />
-                            </Link>
-                            <Link to="#">
+                            </a>
+                            <a href="https://x.com/" target="_blank">
                                 <FaTwitter className="text-sm sm:text-base" />
-                            </Link>
-                            <Link to="#">
+                            </a>
+                            <a href="https://www.instagram.com/" target="_blank">
                                 <FaInstagram className="text-sm sm:text-base" />
-                            </Link>
+                            </a>
                         </div>
                     </div>
                 </div>

@@ -2,13 +2,15 @@ import { useEffect, useState } from "react";
 import { FiShare2 } from "react-icons/fi";
 import { IoIosHeartEmpty, IoMdStar } from "react-icons/io";
 import { IoCartOutline } from "react-icons/io5";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router";
 import { addToCart } from "../../slices/cartSlice";
 import {ToastContainer, toast} from "react-toastify"
 
 const ProductLayout = ({ discountTag = false, images, id, discountPercent, type, title, rating = 1, totalRatings, price, previousPrice, tags }) => {
     const [ratingStars, setRatingStars] = useState([]);
+    const {user} = useSelector(state => state.auth);
+
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -19,6 +21,11 @@ const ProductLayout = ({ discountTag = false, images, id, discountPercent, type,
     if(!tags || tags.length === 0) {return;}
 
     const handleAddToCart = () => {
+        if(!user) {
+            toast.error("You need to be logged in to add items to cart.");
+            return;
+        }
+        
         const product = {
             id,
             title,

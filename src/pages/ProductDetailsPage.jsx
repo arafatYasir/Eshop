@@ -15,7 +15,7 @@ import RelatedProducts from "../components/RelatedProducts";
 import { Link, useParams } from "react-router";
 import { getProduct } from "../firebase/firestoreService";
 import LoadingSpinner from "../components/LoadingSpinner";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../slices/cartSlice";
 
 const ProductDetailsPage = () => {
@@ -25,6 +25,7 @@ const ProductDetailsPage = () => {
     const { id } = useParams();
 
     const dispatch = useDispatch();
+    const {user} = useSelector(state => state.auth)
 
 
     const handleChangeQuantity = (e) => {
@@ -84,18 +85,27 @@ const ProductDetailsPage = () => {
 
 
     const handleAddToCart = () => {
+        if(!user) {
+            toast.error("You need to be logged in to add items to cart.");
+            return;
+        }
+
         const p = {
             id: product.id,
             title: product.title,
             price: product.price,
             type: product.type,
             images: product.images,
-            quantity: 1
+            quantity: quantity
         };
+
+        console.log(p);
 
         dispatch(addToCart(p));
         toast.success("Item added to cart! Please go to your cart and update it.");
     }
+
+    console.log(quantity);
 
     const fetchProduct = async () => {
         setLoading(true);

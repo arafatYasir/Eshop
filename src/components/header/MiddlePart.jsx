@@ -10,17 +10,45 @@ import { FaBars } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { openMenu } from "../../slices/menuSlice";
 import { RxCross1 } from "react-icons/rx";
+import { searchProducts } from "../../firebase/firestoreService";
 
 const MiddlePart = () => {
     const [showSearch, setShowSearch] = useState(false);
+    const [products, setProducts] = useState([]);
+    const [searchValue, setSearchValue] = useState("");
+
     const searchRef = useRef(null);
     const dispatch = useDispatch();
-    const {loading, user} = useSelector(state => state.auth);
-    const {totalPrice} = useSelector(state => state.cart);
+
+    const { loading, user } = useSelector(state => state.auth);
+    const { totalPrice } = useSelector(state => state.cart);
 
     const handleOpenMenu = () => {
         dispatch(openMenu())
     }
+
+    const handleSearchProducts = (e) => {
+        setSearchValue(e.target.value);
+    }
+
+    useEffect(() => {
+        if (!searchValue) {
+            setProducts([]);
+            return;
+        }
+
+        const timer = setTimeout(() => {
+
+            const results = searchProducts(searchValue);
+            results.then(data => {
+                setProducts(data);
+                console.log(data);
+
+            });
+        }, 500);
+
+        return () => clearTimeout(timer);
+    }, [searchValue])
 
     useEffect(() => {
         const handleHideSearch = (e) => {
@@ -44,7 +72,7 @@ const MiddlePart = () => {
                 </div>
                 <div className={`flex items-center gap-12`}>
                     <div className={`relative`} ref={searchRef}>
-                        <input className={`w-[308px] ${!showSearch && "hidden"} md:inline text-sm text-[#303030] leading-5 py-[18px] pl-6 border border-[#E5E5E5] rounded-[10px] outline-none `} type="text" placeholder="Search Products ..." />
+                        <input value={searchValue} onChange={handleSearchProducts} className={`w-[308px] ${!showSearch && "hidden"} md:inline text-sm text-[#303030] leading-5 py-[18px] pl-6 pr-11 border border-[#E5E5E5] rounded-[10px] outline-none `} type="text" placeholder="Search Products ..." />
 
                         {/* ----Laptop & Desktop Search Icon---- */}
                         <TfiSearch className="text-lg font-bold absolute top-[50%] right-6 translate-y-[-50%] hidden sm:block" />
@@ -57,6 +85,27 @@ const MiddlePart = () => {
                                 <TfiSearch onClick={() => setShowSearch(true)} className="text-xl sm:text-lg font-bold absolute top-[50%] right-[-30px] sm:right-6 translate-y-[-50%] mt-1 sm:mt-0 sm:hidden" />
                             )}
                         </>
+
+                        {/* Search Results */}
+                        {products.length > 0 && (
+                            <ul className="absolute left-0 w-full bg-white shadow-lg rounded-md border border-gray-200 mt-1 z-50 max-h-64 overflow-y-auto">
+                                {products.map((p) => (
+                                    <Link key={p.id} to={`/product-details/${p.id}`} onClick={() => {
+                                        setSearchValue("");
+                                    }}>
+                                        <li
+                                            className="px-4 py-2 cursor-pointer hover:bg-blue-100 focus:bg-blue-100 focus:outline-none transition-colors duration-200"
+                                            tabIndex={0} // allows keyboard navigation
+                                        >
+                                            <span className="font-medium text-gray-800">{p.title}</span>
+                                            {/* Optional: show price or category */}
+                                            {/* <span className="text-sm text-gray-500 ml-2">${p.price}</span> */}
+                                        </li>
+                                    </Link>
+                                ))}
+                            </ul>
+                        )}
+
                     </div>
 
                     <div className={`flex gap-[25px] sm:gap-[90px] items-center ${showSearch ? "hidden" : ""}`}>
