@@ -43,7 +43,7 @@ const CartPage = () => {
 
             <div className="space-y-8 md:space-y-0">
                 {cartProducts.map(product => (
-                    <CartProduct key={product.id} id={product.id} type={product.type} title={product.title} variant={"Black"} price={product.price} totalPrice={product.price} />
+                    <CartProduct key={product.id} id={product.id} type={product.type} title={product.title} images={product.images} variant={"Black"} price={product.price} totalPrice={product.price} />
                 ))}
             </div>
 

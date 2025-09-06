@@ -7,7 +7,7 @@ import { Link } from "react-router";
 import { addToCart } from "../../slices/cartSlice";
 import {ToastContainer, toast} from "react-toastify"
 
-const ProductLayout = ({ discountTag = false, id, discountPercent, type, title, rating = 1, totalRatings, price, previousPrice, tags }) => {
+const ProductLayout = ({ discountTag = false, images, id, discountPercent, type, title, rating = 1, totalRatings, price, previousPrice, tags }) => {
     const [ratingStars, setRatingStars] = useState([]);
     const dispatch = useDispatch();
 
@@ -24,6 +24,7 @@ const ProductLayout = ({ discountTag = false, id, discountPercent, type, title, 
             title,
             price,
             type,
+            images,
             quantity: 1
         };
 
@@ -34,7 +35,7 @@ const ProductLayout = ({ discountTag = false, id, discountPercent, type, title, 
     return (
         <div  className="p-6 group border border-[#C3C3C3] sm:border-transparent sm:hover:border-[#C3C3C3] rounded-[10px] max-w-[285px] relative">
             <div className="relative">
-                <img className="w-full" src="/images/product-image.png" alt="product image" />
+                <img className="w-full" loading="lazy" src={images[0]} alt="product image" />
 
                 {/* Icons */}
                 <div className="flex gap-[18px] sm:scale-0 sm:group-hover:scale-100 transition duration-100 cursor-pointer absolute bottom-[6px] left-[50%] -translate-x-1/2">

@@ -4,7 +4,7 @@ import TrashIcon from "../icons/TrashIcon";
 import CartQuantity from "./CartQuantity"
 import { removeFromCart } from "../slices/cartSlice";
 
-const CartProduct = ({id, type, title, variant, price, totalPrice}) => {
+const CartProduct = ({id, type, title, images, variant, price, totalPrice}) => {
     const dispatch = useDispatch();
 
     const handleRemoveFromCart = () => {
@@ -16,7 +16,7 @@ const CartProduct = ({id, type, title, variant, price, totalPrice}) => {
             {/* Product Part */}
             <div className="md:w-[50%] flex flex-col md:flex-row items-center gap-y-[20px] md:gap-[62px]">
                 <div>
-                    <img className="w-[237px] h-[214px] object-cover" src="/images/product-image.png" alt="Product Image" />
+                    <img className="w-[237px] h-[214px] object-cover" src={images[0]} alt="Product Image" />
                 </div>
                 <div>
                     <p className="text-[#303030] font-['Montserrat'] text-sm leading-5 uppercase tracking-[4px]">{type}</p>

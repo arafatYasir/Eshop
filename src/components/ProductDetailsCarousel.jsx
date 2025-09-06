@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
 import FullscreenIcon from "../icons/FullscreenIcon";
 
-const ProductDetailsCarousel = () => {
+const ProductDetailsCarousel = ({images}) => {
     const [nav1, setNav1] = useState(null);
     const [nav2, setNav2] = useState(null);
     const [showFullScreen, setShowFullScreen] = useState(false);
@@ -65,7 +65,7 @@ const ProductDetailsCarousel = () => {
             {/* First Slider */}
             <Slider className="max-w-[370px] md:max-w-[833px]" {...settings} asNavFor={nav2} ref={slider => (sliderRef1 = slider)}>
                 <div className="relative max-w-[370px] sm:max-w-full">
-                    <img className="w-full h-auto" src="/images/product-details-image.png" alt="Product Image" />
+                    <img className="w-full h-auto" src={images[1]} alt="Product Image" />
                     <div
                         className="absolute top-2 right-2 cursor-pointer"
                         onClick={() => setShowFullScreen(true)}
@@ -74,7 +74,7 @@ const ProductDetailsCarousel = () => {
                     </div>
                 </div>
                 <div className="relative max-w-[370px] sm:max-w-full">
-                    <img className="w-full h-auto" src="/images/product-details-image.png" alt="Product Image" />
+                    <img className="w-full h-auto" src={images[1]} alt="Product Image" />
                     <div
                         className="absolute top-2 right-2 cursor-pointer"
                         onClick={() => setShowFullScreen(true)}
@@ -83,7 +83,7 @@ const ProductDetailsCarousel = () => {
                     </div>
                 </div>
                 <div className="relative max-w-[370px] sm:max-w-full">
-                    <img className="w-full h-auto" src="/images/product-details-image.png" alt="Product Image" />
+                    <img className="w-full h-auto" src={images[1]} alt="Product Image" />
                     <div
                         className="absolute top-2 right-2 cursor-pointer"
                         onClick={() => setShowFullScreen(true)}
@@ -95,19 +95,19 @@ const ProductDetailsCarousel = () => {
 
             {/* Second Slider */}
             <Slider
-                className="w-[350px] mt-8"
+                className="w-[350px] mt-8 bg-[#f4f4f4] pt-1 pl-5"
                 asNavFor={nav1}
                 ref={slider => (sliderRef2 = slider)}
                 {...settings2}
             >
                 <div className="">
-                    <img src="/images/product-details-preview.png" alt="Product Details Preview" />
+                    <img className="w-[93px] h-[81px]" src={images[0]} alt="Product Details Preview" />
                 </div>
                 <div className="">
-                    <img src="/images/product-details-preview.png" alt="Product Details Preview" />
+                    <img className="w-[93px] h-[81px]" src={images[0]} alt="Product Details Preview" />
                 </div>
                 <div className="">
-                    <img src="/images/product-details-preview.png" alt="Product Details Preview" />
+                    <img className="w-[93px] h-[81px]" src={images[0]} alt="Product Details Preview" />
                 </div>
             </Slider>
 
@@ -115,7 +115,7 @@ const ProductDetailsCarousel = () => {
             {showFullScreen && (
                 <div className="fixed inset-0 bg-black/50 w-full h-screen flex items-center justify-center z-10">
                     <div className="relative">
-                        <img ref={modalRef} className="scale-120" src="/images/product-details-image.png" alt="Product Image" />
+                        <img ref={modalRef} className="scale-120" src={images[1]} alt="Product Image" />
                         <button className="absolute top-[-5%] right-[6%] sm:top-[-20px] sm:right-[-40px] sm:text-2xl cursor-pointer font-bold transition text-[#FF624C]" onClick={() => setShowFullScreen(false)}>&#10005;</button>
                     </div>
 

@@ -11,7 +11,6 @@ import { Bounce, toast, ToastContainer } from "react-toastify";
 import Button from "../components/Button";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import ProductAdditionalInformations from "../components/ProductAdditionalInformations";
-import NewProducts from "../components/NewProducts";
 import RelatedProducts from "../components/RelatedProducts";
 import { Link, useParams } from "react-router";
 import { getProduct } from "../firebase/firestoreService";
@@ -90,6 +89,7 @@ const ProductDetailsPage = () => {
             title: product.title,
             price: product.price,
             type: product.type,
+            images: product.images,
             quantity: 1
         };
 
@@ -120,7 +120,7 @@ const ProductDetailsPage = () => {
             </div>
 
             <div className="mt-12 flex flex-col items-center sm:flex-row sm:justify-between">
-                <ProductDetailsCarousel />
+                <ProductDetailsCarousel images={product.images} />
                 <ProductDetails product={product} />
             </div>
 

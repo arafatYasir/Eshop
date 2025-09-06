@@ -130,7 +130,7 @@ const NewProducts = () => {
                 <div className="mt-12 flex flex-col sm:flex-row items-center justify-between sm:flex-wrap gap-[20px]">
                     {(!loading && newProducts.length > 0) ? (
                         newProducts.slice(0, limit).map(p => (
-                            <ProductLayout key={p.id} title={p.title} type={p.type} discountTag={p.discountTag} discountPercent={p.discountTag ? p.discountPercent : ""} rating={p.rating} totalRatings={p.totalRatings} price={p.price} previousPrice={p.discountTag ? p.previousPrice : ""} tags={p.tags} id={p.id} />
+                            <ProductLayout key={p.id} title={p.title} images={p.images} type={p.type} discountTag={p.discountTag} discountPercent={p.discountTag ? p.discountPercent : ""} rating={p.rating} totalRatings={p.totalRatings} price={p.price} previousPrice={p.discountTag ? p.previousPrice : ""} tags={p.tags} id={p.id} />
                         ))
                     ) : <LoadingSpinner message="Loading New Products..." />}
                 </div>

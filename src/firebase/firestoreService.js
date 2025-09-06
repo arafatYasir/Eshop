@@ -1,4 +1,4 @@
-import { arrayUnion, collection, doc, getDoc, getDocs, query, serverTimestamp, setDoc, updateDoc, where } from "firebase/firestore"
+import { collection, doc, getDoc, getDocs, query, serverTimestamp, setDoc, where } from "firebase/firestore"
 import { db } from "./firebaseconfig"
 
 // Function to save product
@@ -23,7 +23,7 @@ export const saveProduct = async (product) => {
         return newProductRef.id;
     }
     catch (e) {
-        alert(e.message);
+        console.error(e.message);
     }
 }
 
@@ -77,6 +77,7 @@ export const getProduct = async (productId) => {
     }
 }
 
+
 // Create a user document
 export const createUserDocument = async (user, extraData = {}) => {
     if (!user?.uid) return;
@@ -102,6 +103,7 @@ export const createUserDocument = async (user, extraData = {}) => {
         console.error(e.message);
     }
 }
+
 
 // Get user document
 export const getUserDocument = async (uid) => {
@@ -137,16 +139,15 @@ export const updateUserCart = async (uid, cart) => {
         await setDoc(
             userRef,
             {
-                cart: cart.filter(Boolean), // remove null/undefined just in case
+                cart: cart.filter(Boolean),
             },
             { merge: true } // keep other fields like profile, but cart fully replaced
         );
     }
     catch (e) {
-        console.error("HELLO ERROR");
+        console.error(e.message);
     }
 }
-
 
 
 // Get user cart data
