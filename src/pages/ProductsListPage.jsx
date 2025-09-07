@@ -1,18 +1,21 @@
+import { useState } from "react";
 import Container from "../components/commonLayouts/Container";
 
 import ProductsListLeftSide from "../components/ProductsListLeftSide";
 import ProductsListProducts from "../components/ProductsListProducts";
 
 const ProductsListPage = () => {
+    const [selectedCategories, setSelectedCategories] = useState("");
+    const [selectedBrands, setSelectedBrands] = useState("");
 
     return (
         <Container>
             <div className="flex flex-col sm:items-start sm:flex-row gap-[25px] mt-5 sm:mt-16 mb-20">
                 {/* Left Side */}
-                <ProductsListLeftSide />
+                <ProductsListLeftSide selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories} selectedBrands={selectedBrands} setSelectedBrands={setSelectedBrands} />
 
                 {/* Right Side */}
-                <ProductsListProducts />
+                <ProductsListProducts selectedCategories={selectedCategories} selectedBrands={selectedBrands} />
             </div>
         </Container>
     );

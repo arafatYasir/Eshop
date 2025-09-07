@@ -7,7 +7,9 @@ export const productsSlice = createSlice({
         new: [],
         bestSeller: [],
         springSale: [],
-        allProducts: []
+        allProducts: [],
+        minValue: 0,
+        maxValue: 5000
     },
     reducers: {
         setFeaturedProducts: (state, action) => {
@@ -24,10 +26,16 @@ export const productsSlice = createSlice({
         },
         setAllProducts: (state, action) => {
             state.allProducts = [...action.payload];
+        },
+        setMin: (state, action) => {
+            state.minValue = action.payload;
+        },
+        setMax: (state, action) => {
+            state.maxValue = action.payload;
         }
     },
 })
 
-export const { setFeaturedProducts, setNewProducts, setBestSellerProducts, setSpringSaleProducts, setAllProducts} = productsSlice.actions
+export const { setFeaturedProducts, setNewProducts, setBestSellerProducts, setSpringSaleProducts, setAllProducts, setMin, setMax} = productsSlice.actions
 
 export default productsSlice.reducer

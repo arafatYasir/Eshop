@@ -8,7 +8,7 @@ import { getProducts } from "../firebase/firestoreService";
 import { setAllProducts } from "../slices/productsSlice";
 import LoadingSpinner from "./LoadingSpinner";
 
-const ProductsListProducts = () => {
+const ProductsListProducts = ({ selectedCategories, selectedBrands }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [sortByCategories, setSortByCategories] = useState("None");
     const [sortByPrice, setSortByPrice] = useState("None");
@@ -22,14 +22,7 @@ const ProductsListProducts = () => {
 
     const dispatch = useDispatch();
     const allProducts = useSelector(state => state.products.allProducts);
-
-    const itemsRange = {
-        start: 0,
-        end: 16
-    };
-
-    itemsRange.start = currentPage === 1 ? 0 : (currentPage * 16) - 16;
-    itemsRange.end = currentPage * 16;
+    const {minValue, maxValue} = useSelector(state => state.products);
 
     const fetchProducts = async () => {
         setLoading(true);
@@ -45,6 +38,22 @@ const ProductsListProducts = () => {
 
         // Make a copy of products
         let products = [...allProducts];
+
+        // Filter by sidebar categories
+        if (selectedCategories.length > 0) {
+            products = products.filter(p => selectedCategories.includes(p.category));
+        }
+
+        // Filter by sidebar brands
+        if (selectedBrands.length > 0) {
+            products = products.filter(p => selectedBrands.includes(p.brand));
+            console.log(products);
+        }
+
+        // Filter by minValue and maxValue
+        if(minValue && maxValue) {
+            products = products.filter(p => parseInt(p.price) >= parseInt(minValue) && parseInt(p.price) <= parseInt(maxValue));
+        }
 
         // Apply category-based sorting first
         if (sortByCategories && sortByCategories !== "None") {
@@ -77,7 +86,15 @@ const ProductsListProducts = () => {
         }
 
         return products;
-    }, [allProducts, sortByCategories, sortByPrice]);
+    }, [allProducts, sortByCategories, sortByPrice, selectedCategories, selectedBrands, minValue, maxValue]);
+
+    const itemsRange = {
+        start: 0,
+        end: 16
+    };
+
+    itemsRange.start = currentPage === 1 ? 0 : (currentPage * 16) - 16;
+    itemsRange.end = Math.min(currentPage * 16, filteredProducts.length);
 
 
     useEffect(() => {
@@ -116,14 +133,13 @@ const ProductsListProducts = () => {
     }, [])
 
     return (
-        <div>
+        <div className="w-full">
             <h2 className="hidden sm:block text-[#303030] text-4xl font-['Poppins'] font-semibold leading-[46px] mb-6">Products</h2>
 
             {/* ----Sorting Dropdowns---- */}
-            <div className="flex flex-col sm:flex-row gap-y-5 sm:gap-0 mb-6 sm:mb-0 justify-between items-center">
-                <div>
-                    <p className="text-[#303030] font-['Montserrat'] leading-6 text-sm sm:text-base">Showing {itemsRange.start + 1} - {itemsRange.end} of {allProducts.length}</p>
-                </div>
+            <div className="flex flex-col sm:flex-row gap-y-5 sm:gap-y-0 mb-6 sm:mb-0 justify-between items-center">
+                <p className="text-[#303030] font-['Montserrat'] leading-6 text-sm sm:text-base">Showing {itemsRange.start + 1} - {itemsRange.end} of {filteredProducts.length}</p>
+
                 <div className="flex items-center">
                     <span className="hidden sm:inline text-[#303030] font-['Montserrat'] leading-6 mr-4">Sort by</span>
 
@@ -229,28 +245,28 @@ const ProductsListProducts = () => {
                 </div>
             </div>
 
-            <div className="flex flex-col items-center gap-y-6 sm:gap-0 sm:flex-row sm:flex-wrap sm:mt-[52px]">
-                {(!loading && allProducts.length > 0) ? (
-                    filteredProducts.slice(itemsRange.start, itemsRange.end).map(p => (
-                        <ProductLayout
-                            key={p.id}
-                            title={p.title}
-                            images={p.images}
-                            type={p.type}
-                            discountTag={p.discountTag}
-                            discountPercent={p.discountTag ? p.discountPercent : ""}
-                            rating={p.rating}
-                            totalRatings={p.totalRatings}
-                            price={p.price}
-                            previousPrice={p.discountTag ? p.previousPrice : ""}
-                            tags={p.tags}
-                            id={p.id}
-                        />
-                    ))
-                ) : <LoadingSpinner />}
-            </div>
+                <div className="flex flex-col items-center gap-y-6 sm:gap-0 sm:flex-row sm:flex-wrap sm:mt-[52px]">
+                    {(!loading && allProducts.length > 0) ? (
+                        filteredProducts.slice(itemsRange.start, itemsRange.end).map(p => (
+                            <ProductLayout
+                                key={p.id}
+                                title={p.title}
+                                images={p.images}
+                                type={p.type}
+                                discountTag={p.discountTag}
+                                discountPercent={p.discountTag ? p.discountPercent : ""}
+                                rating={p.rating}
+                                totalRatings={p.totalRatings}
+                                price={p.price}
+                                previousPrice={p.discountTag ? p.previousPrice : ""}
+                                tags={p.tags}
+                                id={p.id}
+                            />
+                        ))
+                    ) : <LoadingSpinner />}
+                </div>
 
-            <Pagination totalItems={allProducts.length} itemsPerPage={16} currentPage={currentPage} onPageChange={setCurrentPage} />
+            <Pagination totalItems={filteredProducts.length} itemsPerPage={16} currentPage={currentPage} onPageChange={setCurrentPage} />
         </div>
     );
 };

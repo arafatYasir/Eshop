@@ -45,8 +45,6 @@ const Pagination = ({ totalItems, itemsPerPage, currentPage, onPageChange }) => 
 
     const pageNumbers = generatePageNumbers();
 
-
-
     return (
         <div className="flex items-center justify-center mt-20">
             <button

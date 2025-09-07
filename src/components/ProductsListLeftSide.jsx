@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { TfiAngleDown } from "react-icons/tfi";
 import { VscSettings } from "react-icons/vsc";
+import { useDispatch } from "react-redux";
+import { setMax, setMin } from "../slices/productsSlice";
 
-const ProductsListLeftSide = () => {
+const ProductsListLeftSide = ({selectedCategories, setSelectedCategories, selectedBrands, setSelectedBrands}) => {
     const [isFilterOpen, setIsFilterOpen] = useState(false);
     const [showCategories, setShowCategories] = useState(true);
     const [showBrands, setShowBrands] = useState(true);
@@ -13,6 +15,8 @@ const ProductsListLeftSide = () => {
     const [maxValue, setMaxValue] = useState(5000);
     const [minInput, setMinInput] = useState("0");
     const [maxInput, setMaxInput] = useState("5000");
+
+    const dispatch = useDispatch();
 
     const handleMinInputChange = (e) => {
         const value = e.target.value;
@@ -47,6 +51,9 @@ const ProductsListLeftSide = () => {
                 setMaxInput(parse.toString());
             }
         }
+
+        dispatch(setMin(minValue));
+        dispatch(setMax(maxValue));        
     }
 
     const minPercent = (minValue / 5000) * 100;
@@ -87,32 +94,32 @@ const ProductsListLeftSide = () => {
         {
             id: 1,
             title: "Apple",
-            available: 565,
+            available: 11,
         },
         {
             id: 2,
             title: "Samsung",
-            available: 432,
+            available: 11,
         },
         {
             id: 3,
             title: "ASUS",
-            available: 330,
+            available: 11,
         },
         {
             id: 4,
             title: "Dell",
-            available: 250,
+            available: 11,
         },
         {
             id: 5,
             title: "Lenovo",
-            available: 200,
+            available: 22,
         },
         {
             id: 6,
             title: "HP",
-            available: 98,
+            available: 23,
         },
         {
             id: 7,
@@ -122,19 +129,43 @@ const ProductsListLeftSide = () => {
         {
             id: 8,
             title: "Sony",
-            available: 150,
+            available: 11,
         },
         {
             id: 9,
             title: "LG",
-            available: 120,
+            available: 11,
         },
         {
             id: 10,
             title: "Microsoft",
-            available: 75,
+            available: 21,
         }
     ]
+
+    // Category changing function
+    const handleCategoryChange = (category) => {
+        setSelectedCategories(prev => {
+            if(prev.includes(category)) {
+                return prev.filter(c => c !== category);
+            }
+            else {
+                return [...prev, category];
+            }
+        })
+    }
+
+    // Brand changing function
+    const handleBrandChange = (brand) => {
+        setSelectedBrands(prev => {
+            if(prev.includes(brand)) {
+                return prev.filter(b => b !== brand);
+            }
+            else {
+                return [...prev, brand];
+            }
+        })
+    }
 
     // useEffect to handle body scroll lock when the sidebar is open
     useEffect(() => {
@@ -165,8 +196,9 @@ const ProductsListLeftSide = () => {
                     <ul className="flex flex-col gap-3 border-b border-[#CFCFCF] pb-10">
                         {categories.map(category => (
                             <li key={category.id} className="flex items-center gap-2">
-                                <input className="" type="checkbox" id={category.title} />
-                                <label className="text-[#303030] font-['Montserrat'] leading-6" htmlFor={category.title}>{category.title}</label>
+                                <input value={category.title} checked={selectedCategories.includes(category.title) || null} onChange={() => handleCategoryChange(category.title)} type="checkbox" id={category.title} />
+
+                                <label className={`text-[#303030] font-['Montserrat'] leading-6 ${selectedCategories.includes(category.title) && "font-bold"}`} htmlFor={category.title}>{category.title}</label>
                             </li>
                         ))}
                     </ul>
@@ -184,8 +216,8 @@ const ProductsListLeftSide = () => {
                         <ul className="flex flex-col gap-3 ">
                             {brands.slice(0, brandsLimit).map(brand => (
                                 <li key={brand.id} className="flex items-center gap-2 relative">
-                                    <input type="checkbox" id={brand.title} />
-                                    <label className="text-[#303030] font-['Montserrat'] leading-6" htmlFor={brand.title}>
+                                    <input value={brand.title} onChange={() => handleBrandChange(brand.title)} checked={selectedBrands.includes(brand.title)} type="checkbox" id={brand.title} />
+                                    <label className={`text-[#303030] font-['Montserrat'] leading-6 ${selectedBrands.includes(brand.title) && "font-bold"}`} htmlFor={brand.title}>
                                         <span>{brand.title}</span>
                                         <span className="absolute top-0 right-0">({brand.available})</span>
                                     </label>
@@ -214,6 +246,7 @@ const ProductsListLeftSide = () => {
                                     type="text"
                                     value={`$${minInput}`}
                                     onChange={handleMinInputChange}
+                                    disabled
                                 />
                             </div>
                             <div className="relative">
@@ -222,6 +255,7 @@ const ProductsListLeftSide = () => {
                                     type="text"
                                     value={`$${maxInput}`}
                                     onChange={handleMaxInputChange}
+                                    disabled
                                 />
                             </div>
                         </div>
