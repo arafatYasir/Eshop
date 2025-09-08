@@ -1,64 +1,93 @@
 import { useDispatch } from "react-redux";
 import ShareIcon from "../icons/ShareIcon";
 import TrashIcon from "../icons/TrashIcon";
-import CartQuantity from "./CartQuantity"
+import CartQuantity from "./CartQuantity";
 import { removeFromCart } from "../slices/cartSlice";
 
-const CartProduct = ({id, type, title, images, variant, price, totalPrice}) => {
+const CartProduct = ({ id, type, title, images, variant, price, totalPrice }) => {
     const dispatch = useDispatch();
 
     const handleRemoveFromCart = () => {
-        dispatch(removeFromCart(id))
-    }
+        dispatch(removeFromCart(id));
+    };
 
     return (
-        <div className="sm:h-[294px] flex flex-col md:flex-row items-center rounded-[10px] border sm:border-[transparent] transition px-[36px] py-[24px] group relative hover:border-[#CBCBCB] border-[#CBCBCB]">
-            {/* Product Part */}
-            <div className="md:w-[50%] flex flex-col md:flex-row items-center gap-y-[20px] md:gap-[62px]">
-                <div>
-                    <img className="w-[237px] h-[214px] object-cover" src={images[0]} alt="Product Image" />
-                </div>
-                <div>
-                    <p className="text-[#303030] font-['Montserrat'] text-sm leading-5 uppercase tracking-[4px]">{type}</p>
-                    <h4 className="text-[#303030] font-['Poppins'] text-xl font-semibold leading-[30px] max-w-[314px] mt-4 group-hover:text-[#FF624C] group-hover:underline group-hover:decoration-2">{title}</h4>
-                    <p className="text-[#303030] font-['Montserrat'] mt-4 md:mt-[46px]">
-                        <span className="font-bold mr-2">Variant:</span>
-                        <span>{variant}</span>
-                    </p>
-                </div>
-            </div>
+        <tr>
+            <td colSpan={5} className="relative">
+                <div className="rounded-[10px] border border-[#CBCBCB] lg:border-transparent lg:hover:border-[#CBCBCB] transition px-[36px] py-[24px] flex flex-col md:flex-row md:items-center md:justify-between gap-6">
 
-            {/* Price Part */}
-            <div className="text-[#303030] md:w-[16.5%] font-['Poppins'] text-xl font-semibold leading-[30px] mt-4 md:mt-0"><span className="md:hidden">Price: </span>${price}</div>
+                    {/* Product */}
+                    <div className="flex items-center gap-6">
+                        <img
+                            src={images[0]}
+                            alt={title}
+                            className="w-[120px] h-[100px] lg:w-[237px] lg:h-[214px] object-cover rounded"
+                        />
+                        <div>
+                            <p className="text-[#303030] font-['Montserrat'] text-sm leading-5 uppercase tracking-[4px]">
+                                {type}
+                            </p>
+                            <h4 className="text-[#303030] font-['Poppins'] text-lg lg:text-xl font-semibold leading-[28px] lg:leading-[30px] max-w-[314px] mt-2 lg:mt-4 hover:text-[#FF624C] hover:underline hover:decoration-2">
+                                {title}
+                            </h4>
+                            <p className="text-[#303030] font-['Montserrat'] mt-2 lg:mt-[46px] text-sm lg:text-base">
+                                <span className="font-bold mr-2">Variant:</span>
+                                <span>{variant}</span>
+                            </p>
+                        </div>
+                    </div>
 
-            {/* Quantity Part */}
-            <div className="md:w-[16.5%] mt-4 md:mt-0">
-                <CartQuantity id={id} />
-            </div>
+                    {/* Price */}
+                    <div className="text-[#303030] font-['Poppins'] text-lg lg:text-xl font-semibold leading-[30px]">
+                        <span className="md:hidden font-bold">Price: </span>${price}
+                    </div>
 
-            {/* Total Price Part */}
-            <div className="text-[#303030] md:w-[16.5%] font-['Poppins'] text-xl font-semibold leading-[30px] mt-4 md:mt-0"><span className="md:hidden">Total Price: </span>${totalPrice}</div>
+                    {/* Quantity */}
+                    <div>
+                        <CartQuantity id={id} />
+                    </div>
 
-            {/* Icons for desktop */}
-            <div className="hidden absolute top-1/2 right-12 -translate-1/2 group-hover:block">
-                <div onClick={handleRemoveFromCart} className="hover:bg-[#FF624C] text-[#FF624C] hover:text-white border border-[#FF624C] transition w-16 h-16 rounded-full flex items-center justify-center cursor-pointer">
-                    <TrashIcon />
-                </div>
-                <div className="hover:bg-[#FF624C] text-[#FF624C] mt-[38px] hover:text-white border border-[#FF624C] transition w-16 h-16 rounded-full flex items-center justify-center cursor-pointer">
-                    <ShareIcon />
-                </div>
-            </div>
+                    {/* Total */}
+                    <div className="text-[#303030] font-['Poppins'] text-lg lg:text-xl font-semibold leading-[30px]">
+                        <span className="md:hidden font-bold">Total: </span>${totalPrice}
+                    </div>
 
-            {/* Icons for mobile & tablet */}
-            <div className="flex md:hidden items-center gap-6 mt-5">
-                <div onClick={handleRemoveFromCart} className="active:bg-[#FF624C] text-[#FF624C] active:text-white border border-[#FF624C] transition w-10 h-10 rounded-full flex items-center justify-center cursor-pointer">
-                    <TrashIcon width={28} height={28} />
+                    {/* Actions – desktop */}
+                    <div className="hidden lg:flex flex-col gap-4 items-center">
+                        <button
+                            aria-label="Remove from cart"
+                            onClick={handleRemoveFromCart}
+                            className="hover:bg-[#FF624C] text-[#FF624C] hover:text-white border border-[#FF624C] transition w-12 h-12 lg:w-16 lg:h-16 rounded-full flex items-center justify-center cursor-pointer"
+                        >
+                            <TrashIcon />
+                        </button>
+                        <button
+                            aria-label="Share product"
+                            className="hover:bg-[#FF624C] text-[#FF624C] hover:text-white border border-[#FF624C] transition w-12 h-12 lg:w-16 lg:h-16 rounded-full flex items-center justify-center cursor-pointer"
+                        >
+                            <ShareIcon />
+                        </button>
+                    </div>
+
+                    {/* Actions – mobile & tablet absolute */}
+                    <div className="lg:hidden absolute top-4 right-4 flex gap-3">
+                        <button
+                            aria-label="Remove from cart"
+                            onClick={handleRemoveFromCart}
+                            className="active:bg-[#FF624C] text-[#FF624C] active:text-white border border-[#FF624C] transition w-10 h-10 rounded-full flex items-center justify-center cursor-pointer"
+                        >
+                            <TrashIcon width={22} height={22} />
+                        </button>
+                        <button
+                            aria-label="Share product"
+                            className="active:bg-[#FF624C] text-[#FF624C] active:text-white border border-[#FF624C] transition w-10 h-10 rounded-full flex items-center justify-center cursor-pointer"
+                        >
+                            <ShareIcon width={20} height={20} />
+                        </button>
+                    </div>
                 </div>
-                <div className="active:bg-[#FF624C] text-[#FF624C] md:mt-[38px] active:text-white border border-[#FF624C] transition w-10 h-10 rounded-full flex items-center justify-center cursor-pointer">
-                    <ShareIcon width={20} height={20} />
-                </div>
-            </div>
-        </div>
+            </td>
+        </tr>
     );
 };
 
