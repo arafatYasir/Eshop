@@ -245,7 +245,7 @@ const ProductsListProducts = ({ selectedCategories, selectedBrands }) => {
                 </div>
             </div>
 
-                <div className="flex flex-col items-start gap-y-6 sm:flex-row sm:flex-wrap sm:mt-[52px] sm:justify-center sm:gap-5 xl:justify-start">
+                <div className="flex flex-col items-center gap-y-6 sm:flex-row sm:flex-wrap sm:mt-[52px] sm:justify-center sm:gap-5 xl:justify-start">
                     {(!loading && allProducts.length > 0) ? (
                         filteredProducts.slice(itemsRange.start, itemsRange.end).map(p => (
                             <ProductLayout
