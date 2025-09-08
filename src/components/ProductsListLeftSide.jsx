@@ -42,25 +42,19 @@ const ProductsListLeftSide = ({ selectedCategories, setSelectedCategories, selec
     const handleSliderChange = (type, value) => {
         const parse = parseInt(value);
 
-        if(timer) {
-            clearTimeout(timer);
+        if (type === "min" && parse <= maxValue) {
+            setMinValue(parse);
+            setMinInput(parse.toString());
+        }
+        else {
+            if (parse >= minValue) {
+                setMaxValue(parse);
+                setMaxInput(parse.toString());
+            }
         }
 
-        timer = setTimeout(() => {
-            if (type === "min" && parse <= maxValue) {
-                setMinValue(parse);
-                setMinInput(parse.toString());
-            }
-            else {
-                if (parse >= minValue) {
-                    setMaxValue(parse);
-                    setMaxInput(parse.toString());
-                }
-            }
-
-            dispatch(setMin(minValue));
-            dispatch(setMax(maxValue));
-        }, 400)
+        dispatch(setMin(minValue));
+        dispatch(setMax(maxValue));
 
 
     }
