@@ -12,9 +12,9 @@ import { db } from "../firebase/firebaseconfig";
 import LoadingSpinner from "./LoadingSpinner";
 import { useDispatch, useSelector } from "react-redux";
 import { setFeaturedProducts } from "../slices/productsSlice";
+import { Link } from "react-router";
 
 // ---- Mobile Slider Arrow Functions ----
-
 function SampleNextArrowMobile(props) {
     const { className, style, onClick } = props;
     return (
@@ -55,7 +55,7 @@ function SamplePrevArrowMobile(props) {
                 height: "40px",
                 border: "1px solid #303030",
                 borderRadius: "50%",
-                left: "-20px",
+                left: "-25px",
                 zIndex: 10,
             }}
             onClick={onClick}
@@ -142,9 +142,9 @@ const FeaturedProducts = () => {
     }
 
     useEffect(() => {
-        if(localStorageProducts.length === 0) {
+        if (localStorageProducts.length === 0) {
             fetchProducts();
-        } 
+        }
         else {
             dispatch(setFeaturedProducts(localStorageProducts));
         }
@@ -170,20 +170,44 @@ const FeaturedProducts = () => {
                     nextArrow: <SampleNextArrowMobile />,
                     prevArrow: <SamplePrevArrowMobile />,
                 }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 2,
+                    nextArrow: <SampleNextArrow />,
+                    prevArrow: <SamplePrevArrow />,
+                }
+            },
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 2,
+                    nextArrow: <SampleNextArrow />,
+                    prevArrow: <SamplePrevArrow />,
+                }
+            },
+            {
+                breakpoint: 1280,
+                settings: {
+                    slidesToShow: 3,
+                    nextArrow: <SampleNextArrow />,
+                    prevArrow: <SamplePrevArrow />,
+                }
             }
         ]
     };
 
     return (
-        <div className="mb-20">
+        <div className="mb-20 sm:px-5 lg:px-0">
             <Container>
                 <div className="flex justify-between items-center">
-                    <h2 className="text-[22px] sm:text-4xl text-[#303030] font-['Poppins'] leading-[46px] font-semibold">Featured Products</h2>
-                    <p className="flex items-center text-[13px] sm:text-base text-[#FF624C] font-['Montserrat'] font-bold leading-6 gap-4">View All <LongArrowIcon width="25px" /></p>
+                    <h2 className="text-[22px] sm:text-3xl md:text-4xl text-[#303030] font-['Poppins'] leading-[46px] font-semibold">Featured Products</h2>
+                    <Link to="/products-list" className="flex items-center text-[13px] sm:text-base text-[#FF624C] font-['Montserrat'] font-bold leading-6 gap-4">View All <LongArrowIcon width="25px" /></Link>
                 </div>
 
                 {(!loading && featuredProducts.length > 0) ? (
-                    <Slider {...settings} className="mt-12 sm:px-9 max-w-[285px] mx-auto sm:min-w-full">
+                    <Slider {...settings} className="mt-12 sm:px-9 max-w-[285px] mx-auto sm:max-w-[650px] lg:min-w-full">
                         {
                             featuredProducts.map(p => (
                                 <div className="flex items-center justify-center" key={p.id}>

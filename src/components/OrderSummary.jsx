@@ -1,14 +1,9 @@
 import { useSelector } from "react-redux";
 import InfoIcon from "../icons/InfoIcon";
 import Button from "./Button";
-import OrderedProduct from "./OrderedProduct";
 
 const OrderSummary = () => {
-    const { items } = useSelector(state => state.cart);
-    let totalPrice = items.reduce((sum, item) => {
-        return sum + item.price * item.quantity;
-    }, 0);
-    totalPrice += 10;
+    const { items, totalPrice } = useSelector(state => state.cart);
 
     return (
         <div className="bg-[#F4F4F4] rounded-[25px] w-full md:w-[594px] pt-10 px-5 md:px-10 pb-14">
@@ -49,7 +44,7 @@ const OrderSummary = () => {
             <div className="md:w-[514px] h-[180px] rounded-[10px] bg-white mt-12 px-[21px] pt-[27px] pb-6">
                 <p className="flex justify-between px-[3px] mb-6">
                     <span className="sm:text-xl text-[#303030] font-['Poppins'] leading-6 font-bold">Total</span>
-                    <span className="sm:text-xl text-[#303030] font-['Poppins'] leading-[30px] font-bold">${totalPrice.toFixed(2)}</span>
+                    <span className="sm:text-xl text-[#303030] font-['Poppins'] leading-[30px] font-bold">${(parseFloat(totalPrice) + 10).toFixed(2)}</span>
                 </p>
 
                 <div className="md:hidden text-center">

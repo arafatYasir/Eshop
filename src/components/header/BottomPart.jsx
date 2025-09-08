@@ -49,14 +49,16 @@ const BottomPart = () => {
     return (
         <>
             {/* ----Desktop Navbar---- */}
-            <nav className="bg-[#FF624C] py-6 font-['Montserrat'] hidden sm:block">
+            <nav className="bg-[#FF624C] py-6 font-['Montserrat'] hidden sm:block sm:px-5 lg:px-0">
                 <Container>
                     <div className="flex justify-between">
-                        <ul className="flex items-center gap-20 text-white font-bold leading-6">
+                        <ul className="flex items-center sm:gap-8 md:gap-10 lg:gap-20 text-white font-bold leading-6">
                             <li className="relative" ref={categoriesDropdownRef}>
                                 <button className="flex items-center gap-4 cursor-pointer" to="#" onClick={() => setIsCategoriesDropdownOpen(!isCategoriesDropdownOpen)}>
                                     <IoIosMenu className="text-3xl" />
-                                    All Categories
+                                    <span className="hidden lg:inline">
+                                        All Categories
+                                    </span>
                                 </button>
 
                                 {isCategoriesDropdownOpen && (
@@ -104,15 +106,15 @@ const BottomPart = () => {
                             </li>
                         </ul>
 
-                        <ul className="flex items-center gap-20 text-white font-bold leading-6">
+                        <ul className="flex items-center sm:gap-8 md:gap-20 text-white font-bold leading-6">
                             <li>
-                                <Link to="#">LIMITED SALE</Link>
+                                <Link to="/products-list">LIMITED SALE</Link>
                             </li>
                             <li>
-                                <Link to="#">Best Seller</Link>
+                                <Link to="/products-list">Best Seller</Link>
                             </li>
-                            <li>
-                                <Link to="#">New Arrival</Link>
+                            <li className="hidden lg:block">
+                                <Link to="/products-list">New Arrival</Link>
                             </li>
                         </ul>
                     </div>
@@ -158,15 +160,15 @@ const BottomPart = () => {
                         },
                         {
                             name: "Limited Sale",
-                            url: "limited-sale"
+                            url: "/products-list"
                         },
                         {
                             name: "Best Seller",
-                            url: "best-seller"
+                            url: "/products-list"
                         },
                         {
                             name: "New Arrival",
-                            url: "new-arrival"
+                            url: "/products-list"
                         }
                     ].map((item, index) => (
                         <li

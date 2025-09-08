@@ -7,7 +7,7 @@ import ReturnIcon from "../icons/ReturnIcon";
 const Facilities = () => {
     return (
         <Container>
-            <div className="flex flex-col sm:flex-row relative pl-8 sm:pl-0 sm:justify-between my-8 sm:my-20 gap-4 sm:gap-0">
+            <div className="flex flex-col lg:flex-row relative pl-8 lg:pl-0 lg:justify-between my-8 lg:my-20 gap-4 lg:gap-0">
                 <div className="flex items-center gap-3 sm:gap-6">
                     <div>
                         <HeadPhoneIcon />

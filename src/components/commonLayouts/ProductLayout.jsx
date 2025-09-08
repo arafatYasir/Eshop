@@ -25,6 +25,7 @@ const ProductLayout = ({ discountTag = false, images, id, discountPercent, type,
             toast.error("You need to be logged in to add items to cart.");
             return;
         }
+
         
         const product = {
             id,
@@ -34,25 +35,25 @@ const ProductLayout = ({ discountTag = false, images, id, discountPercent, type,
             images,
             quantity: 1
         };
-
         dispatch(addToCart(product));
+
         toast.success("Item added to cart! Please go to your cart and update it.");
     }
 
     return (
-        <div  className="p-6 group border border-[#C3C3C3] sm:border-transparent sm:hover:border-[#C3C3C3] rounded-[10px] max-w-[285px] relative">
+        <div  className="p-6 group border border-[#C3C3C3] lg:border-transparent sm:hover:border-[#C3C3C3] rounded-[10px] max-w-[285px] relative">
             <div className="relative">
                 <img className="w-full" loading="lazy" src={images[0]} alt="product image" />
 
                 {/* Icons */}
-                <div className="flex gap-[18px] sm:scale-0 sm:group-hover:scale-100 transition duration-100 cursor-pointer absolute bottom-[6px] left-[50%] -translate-x-1/2">
-                    <div onClick={handleAddToCart} className="flex items-center justify-center w-10 h-10 sm:w-[50px] sm:h-[50px] rounded-full border border-[#FF624C] text-[#FF624C] text-3xl hover:bg-[#FF624C] hover:text-white transition duration-100 bg-white">
+                <div className="flex gap-[18px] lg:scale-0 lg:group-hover:scale-100 transition duration-100 cursor-pointer absolute bottom-[6px] left-[50%] -translate-x-1/2">
+                    <div onClick={handleAddToCart} onTouchStart={handleAddToCart} className="flex items-center justify-center w-10 h-10 md:w-[50px] md:h-[50px] rounded-full border border-[#FF624C] text-[#FF624C] text-3xl hover:bg-[#FF624C] hover:text-white transition duration-100 bg-white">
                         <IoCartOutline size={22} />
                     </div>
-                    <div className="flex items-center justify-center w-10 h-10 sm:w-[50px] sm:h-[50px] rounded-full border border-[#FF624C] text-[#FF624C] text-3xl hover:bg-[#FF624C] hover:text-white transition duration-100 bg-white">
+                    <div className="flex items-center justify-center w-10 h-10 md:w-[50px] md:h-[50px] rounded-full border border-[#FF624C] text-[#FF624C] text-3xl hover:bg-[#FF624C] hover:text-white transition duration-100 bg-white">
                         <IoIosHeartEmpty size={22} />
                     </div>
-                    <div className="flex items-center justify-center w-10 h-10 sm:w-[50px] sm:h-[50px] rounded-full border border-[#FF624C] text-[#FF624C] text-3xl hover:bg-[#FF624C] hover:text-white transition duration-100 bg-white">
+                    <div className="flex items-center justify-center w-10 h-10 md:w-[50px] md:h-[50px] rounded-full border border-[#FF624C] text-[#FF624C] text-3xl hover:bg-[#FF624C] hover:text-white transition duration-100 bg-white">
                         <FiShare2 size={22} />
                     </div>
                 </div>

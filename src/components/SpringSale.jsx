@@ -130,7 +130,7 @@ const SpringSale = () => {
         speed: 700,
         slidesToShow: 2,
         slidesToScroll: 1,
-        autoplay: true,
+        // autoplay: true,
         autoplaySpeed: 2000,
         cssEase: "linear",
         nextArrow: <SampleNextArrow />,
@@ -141,19 +141,26 @@ const SpringSale = () => {
                     slidesToShow: 1,
                     nextArrow: <SampleNextArrowMobile />
                 }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 1,
+                    nextArrow: <SampleNextArrowMobile />
+                }
             }
         ]
     };
 
     return (
-        <div className="mb-20 py-16" style={{ background: "url('/images/spring-sale-bg.png')" }}>
+        <div className="mb-20 py-16 sm:px-8 lg:px-0" style={{ background: "url('/images/spring-sale-bg.png')" }}>
             <Container>
-                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center">
+                <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center">
                     {/* ---- Timer ---- */}
                     <div className="relative">
-                        <h2 className="text-[#303030] text-[35px] sm:text-[56px] font-semibold font-['Poppins'] leading-[68px]">Spring Sale</h2>
+                        <h2 className="text-[#303030] text-[35px] sm:text-[42px] md:text-[56px] font-semibold font-['Poppins'] leading-[68px]">Spring Sale</h2>
 
-                        <div className="flex items-center justify-between sm:justify-start sm:gap-6 mt-5 mb-12 sm:mt-10 sm:mb-[72px]">
+                        <div className="flex items-center justify-between sm:justify-start sm:gap-6 mt-5 mb-12 md:mt-10 md:mb-[72px]">
                             <div className="flex flex-col items-center">
                                 <span className="font-['Poppins'] text-[#FF624C] text-[22px] sm:text-4xl font-semibold leading-[46px]">{timerLeft.days < 10 ? "0" : ""}{timerLeft.days}</span>
                                 <span className="text-[#303030] font-['Montserrat'] leading-6 text-sm sm:text-base">Days</span>
@@ -189,9 +196,9 @@ const SpringSale = () => {
                     </div>
 
                     {/* ---- Slider ---- */}
-                    <div className="max-w-[950px]">
+                    <div className=" ">
                         {(!loading && springSaleProducts.length > 0) ? (
-                            <Slider {...settings} className="mt-12 ">
+                            <Slider {...settings} className="mt-12 sm:max-w-[464px] md:max-w-[950px]">
                                 {springSaleProducts.map(p => (
                                     <ProductLayout2 key={p.id} title={p.title} images={p.images} type={p.type} discountTag={p.discountTag} discountPercent={p.discountTag ? p.discountPercent : ""} rating={p.rating} totalRatings={p.totalRatings} price={p.price} previousPrice={p.discountTag ? p.previousPrice : ""} stock={p.stock} tags={p.tags} id={p.id} />
                                 ))}

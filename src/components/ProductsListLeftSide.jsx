@@ -4,7 +4,7 @@ import { VscSettings } from "react-icons/vsc";
 import { useDispatch } from "react-redux";
 import { setMax, setMin } from "../slices/productsSlice";
 
-const ProductsListLeftSide = ({selectedCategories, setSelectedCategories, selectedBrands, setSelectedBrands}) => {
+const ProductsListLeftSide = ({ selectedCategories, setSelectedCategories, selectedBrands, setSelectedBrands }) => {
     const [isFilterOpen, setIsFilterOpen] = useState(false);
     const [showCategories, setShowCategories] = useState(true);
     const [showBrands, setShowBrands] = useState(true);
@@ -17,6 +17,7 @@ const ProductsListLeftSide = ({selectedCategories, setSelectedCategories, select
     const [maxInput, setMaxInput] = useState("5000");
 
     const dispatch = useDispatch();
+    let timer;
 
     const handleMinInputChange = (e) => {
         const value = e.target.value;
@@ -41,19 +42,27 @@ const ProductsListLeftSide = ({selectedCategories, setSelectedCategories, select
     const handleSliderChange = (type, value) => {
         const parse = parseInt(value);
 
-        if (type === "min" && parse <= maxValue) {
-            setMinValue(parse);
-            setMinInput(parse.toString());
-        }
-        else {
-            if (parse >= minValue) {
-                setMaxValue(parse);
-                setMaxInput(parse.toString());
-            }
+        if(timer) {
+            clearTimeout(timer);
         }
 
-        dispatch(setMin(minValue));
-        dispatch(setMax(maxValue));        
+        timer = setTimeout(() => {
+            if (type === "min" && parse <= maxValue) {
+                setMinValue(parse);
+                setMinInput(parse.toString());
+            }
+            else {
+                if (parse >= minValue) {
+                    setMaxValue(parse);
+                    setMaxInput(parse.toString());
+                }
+            }
+
+            dispatch(setMin(minValue));
+            dispatch(setMax(maxValue));
+        }, 400)
+
+
     }
 
     const minPercent = (minValue / 5000) * 100;
@@ -146,7 +155,7 @@ const ProductsListLeftSide = ({selectedCategories, setSelectedCategories, select
     // Category changing function
     const handleCategoryChange = (category) => {
         setSelectedCategories(prev => {
-            if(prev.includes(category)) {
+            if (prev.includes(category)) {
                 return prev.filter(c => c !== category);
             }
             else {
@@ -158,7 +167,7 @@ const ProductsListLeftSide = ({selectedCategories, setSelectedCategories, select
     // Brand changing function
     const handleBrandChange = (brand) => {
         setSelectedBrands(prev => {
-            if(prev.includes(brand)) {
+            if (prev.includes(brand)) {
                 return prev.filter(b => b !== brand);
             }
             else {
@@ -217,6 +226,7 @@ const ProductsListLeftSide = ({selectedCategories, setSelectedCategories, select
                             {brands.slice(0, brandsLimit).map(brand => (
                                 <li key={brand.id} className="flex items-center gap-2 relative">
                                     <input value={brand.title} onChange={() => handleBrandChange(brand.title)} checked={selectedBrands.includes(brand.title)} type="checkbox" id={brand.title} />
+
                                     <label className={`text-[#303030] font-['Montserrat'] leading-6 ${selectedBrands.includes(brand.title) && "font-bold"}`} htmlFor={brand.title}>
                                         <span>{brand.title}</span>
                                         <span className="absolute top-0 right-0">({brand.available})</span>
@@ -352,9 +362,9 @@ const ProductsListLeftSide = ({selectedCategories, setSelectedCategories, select
                             <ul className="flex flex-col gap-3 border-b border-[#CFCFCF] pb-5">
                                 {categories.map((category) => (
                                     <li key={category.id} className="flex items-center gap-2">
-                                        <input type="checkbox" id={`mobile-${category.title}`} />
+                                        <input value={category.title} checked={selectedCategories.includes(category.title) || null} onChange={() => handleCategoryChange(category.title)} type="checkbox" id={`mobile-${category.title}`} />
                                         <label
-                                            className="text-[#303030] font-['Montserrat'] leading-6"
+                                            className={`text-[#303030] font-['Montserrat'] leading-6 ${selectedCategories.includes(category.title) && "font-bold"}`}
                                             htmlFor={`mobile-${category.title}`}
                                         >
                                             {category.title}
@@ -385,9 +395,9 @@ const ProductsListLeftSide = ({selectedCategories, setSelectedCategories, select
                                 <ul className="flex flex-col gap-3">
                                     {brands.slice(0, brandsLimit).map((brand) => (
                                         <li key={brand.id} className="flex items-center gap-2 relative">
-                                            <input type="checkbox" id={`mobile-${brand.title}`} />
+                                            <input value={brand.title} onChange={() => handleBrandChange(brand.title)} checked={selectedBrands.includes(brand.title)} type="checkbox" id={`mobile-${brand.title}`} />
                                             <label
-                                                className="text-[#303030] font-['Montserrat'] leading-6"
+                                                className={`text-[#303030] font-['Montserrat'] leading-6 ${selectedBrands.includes(brand.title) && "font-bold"}`}
                                                 htmlFor={`mobile-${brand.title}`}
                                             >
                                                 <span>{brand.title}</span>
@@ -433,12 +443,14 @@ const ProductsListLeftSide = ({selectedCategories, setSelectedCategories, select
                                         type="text"
                                         value={`$${minInput}`}
                                         onChange={handleMinInputChange}
+                                        disabled
                                     />
                                     <input
                                         className="w-[45%] h-[60px] text-center border border-[#ABABAB] rounded-[10px] focus:outline-none font-['Montserrat'] text-[#303030]"
                                         type="text"
                                         value={`$${maxInput}`}
                                         onChange={handleMaxInputChange}
+                                        disabled
                                     />
                                 </div>
                                 <div className="mt-6">

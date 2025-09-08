@@ -43,16 +43,16 @@ const FaqSection = () => {
     ];
 
     return (
-        <div className="bg-[#F4F4F4] py-16 my-20 w-full">
+        <div className="bg-[#F4F4F4] py-16 my-20 w-full sm:px-5 lg:px-0">
             <Container>
-                <div className="flex flex-col-reverse gap-10 sm:flex-row sm:items-end sm:gap-28 relative">
+                <div className="flex flex-col-reverse gap-10 lg:flex-row lg:items-end lg:gap-28 relative">
                     <div className="flex flex-col gap-4 sm:gap-6">
                         {
                             faqs.map(faq => <FaqItem title={faq.title} description={faq.description} id={faq.id} handleOpenFaq={handleOpenFaq} key={faq.id} isOpen={faqId === faq.id} />)
                         }
                     </div>
                     <div>
-                        <h2 className="text-[#303030] text-3xl sm:text-4xl font-['Poppins'] font-semibold leading-[46px] mb-5 sm:mb-6 max-w-[306px]">Frequently Asked Questions</h2>
+                        <h2 className="text-[#303030] text-3xl sm:text-[33px] md:text-4xl font-['Poppins'] font-semibold leading-[46px] mb-5 sm:mb-6 max-w-[306px]">Frequently Asked Questions</h2>
                         <p className="text-[#303030] font-['Montserrat'] text-lg sm:text-xl leading-[30px] max-w-[392px] mb-10 sm:mb-16">Questions that get asked the most by our clients. Get any burning questions?</p>
                         <Button value="Ask A Question" />
                     </div>

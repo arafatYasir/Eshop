@@ -4,7 +4,7 @@ import Container from "./commonLayouts/Container";
 const Banner = () => {
     return (
         <Container>
-            <Link to="#">
+            <Link className="sm:px-5 block lg:px-0" to="/products-list">
                 <img className="object-cover sm:mt-8" src="images/banner.png" alt="banner image" />
             </Link>
         </Container>

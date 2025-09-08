@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { FiShare2 } from "react-icons/fi";
 import { IoIosHeartEmpty, IoMdStar } from "react-icons/io";
-import { IoCartOutline } from "react-icons/io5";
 import { Link } from "react-router";
 
 const ProductLayout2 = ({ discountTag, discountPercent, type, title, images, rating = 1, totalRatings, previousPrice, price, tags, stock, id }) => {
@@ -39,11 +38,11 @@ const ProductLayout2 = ({ discountTag, discountPercent, type, title, images, rat
                     <p className="text-[#303030] font-['Montserrat'] leading-6 opacity-[50%] line-through text-sm sm:text-base">${previousPrice}</p>
                 </div>
 
-                <div className="h-[25px] sm:h-[30px] bg-[#E0E0E0] rounded-[25px] relative mt-8">
+                <div className="h-[25px] md:h-[30px] bg-[#E0E0E0] rounded-[25px] relative mt-8">
                     <div 
-                    className="h-[25px] sm:h-[30px] bg-[#303030] rounded-[25px] "
+                    className="h-[25px] md:h-[30px] bg-[#303030] rounded-[25px] "
                     style={{width: stock + "%"}}>
-                        <span className="absolute top-1/2 left-1/2 -translate-1/2 uppercase text-white text-sm sm:text-base font-bold font-['Montserrat'] leading-6">{stock}% Available</span>
+                        <span className="absolute top-1/2 left-1/2 -translate-1/2 uppercase text-white text-sm md:text-base font-bold font-['Montserrat'] leading-6">{stock}% Available</span>
                     </div>
                 </div>
             </div>

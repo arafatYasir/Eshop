@@ -107,11 +107,11 @@ const NewProducts = () => {
     }, [])
 
     return (
-        <div className="mb-20">
+        <div className="mb-20 sm:px-5 lg:px-0">
             <Container>
                 <div className="flex flex-col items-center sm:flex-row sm:items-center sm:justify-between">
                     <div>
-                        <h2 className="text-[22px] sm:text-4xl text-[#303030] font-['Poppins'] leading-[46px] font-semibold">New Products</h2>
+                        <h2 className="text-[22px] sm:text-3xl md:text-4xl text-[#303030] font-['Poppins'] leading-[46px] font-semibold">New Products</h2>
                     </div>
                     <div className="flex items-center gap-4 relative">
                         <p className="text-[#303030] font-['Montserrat'] leading-6">Sort by</p>
@@ -150,7 +150,7 @@ const NewProducts = () => {
 
                     </div>
                 </div>
-                <div className="mt-12 flex flex-col sm:flex-row items-center justify-between sm:flex-wrap gap-[20px]">
+                <div className="mt-12 flex flex-col sm:flex-row items-center justify-center sm:flex-wrap gap-[20px]">
                     {(!loading && newProducts.length > 0) ? (
                         filteredProducts.slice(0, limit).map(p => (
                             <ProductLayout key={p.id} title={p.title} images={p.images} type={p.type} discountTag={p.discountTag} discountPercent={p.discountTag ? p.discountPercent : ""} rating={p.rating} totalRatings={p.totalRatings} price={p.price} previousPrice={p.discountTag ? p.previousPrice : ""} tags={p.tags} id={p.id} />

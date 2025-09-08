@@ -34,12 +34,12 @@ const Footer = () => {
                 </div>
 
                 {/* ----Actual Footer---- */}
-                <div className="mt-[100px] flex flex-col pl-5 gap-y-6 md:items-start md:flex-row md:justify-between pb-10 sm:pb-20">
+                <div className="mt-[100px] flex flex-col pl-5 pr-5 gap-y-6 lg:items-start md:flex-row md:flex-wrap md:justify-between pb-10 sm:pb-20">
                     <div className="md:w-[349px] w-full">
                         <div className="">
                             <img src={logo} alt="logo" />
                         </div>
-                        <ul className="flex flex-col gap-3 mt-[30px] md:mt-[158px]">
+                        <ul className="flex flex-col gap-3 mt-[30px] lg:mt-[158px]">
                             <li className="relative">
                                 <BsFillTelephoneFill className="text-[#303030] opacity-[75%] text-sm sm:text-base" />
                                 <Link
