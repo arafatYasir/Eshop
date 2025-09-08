@@ -10,7 +10,7 @@ const ProductsListPage = () => {
 
     return (
         <Container>
-            <div className="flex flex-col sm:items-start sm:flex-row gap-[25px] mt-5 sm:mt-16 mb-20">
+            <div className="flex flex-col xl:items-start xl:flex-row gap-[25px] mt-5 sm:mt-16 mb-20 sm:px-5 xl:px-0">
                 {/* Left Side */}
                 <ProductsListLeftSide selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories} selectedBrands={selectedBrands} setSelectedBrands={setSelectedBrands} />
 

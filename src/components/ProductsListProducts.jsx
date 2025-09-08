@@ -134,14 +134,14 @@ const ProductsListProducts = ({ selectedCategories, selectedBrands }) => {
 
     return (
         <div className="w-full">
-            <h2 className="hidden sm:block text-[#303030] text-4xl font-['Poppins'] font-semibold leading-[46px] mb-6">Products</h2>
+            <h2 className="hidden xl:block text-[#303030] text-4xl font-['Poppins'] font-semibold leading-[46px] mb-6">Products</h2>
 
             {/* ----Sorting Dropdowns---- */}
-            <div className="flex flex-col sm:flex-row gap-y-5 sm:gap-y-0 mb-6 sm:mb-0 justify-between items-center">
+            <div className="flex flex-col md:flex-row gap-y-5 md:gap-y-0 mb-6 md:mb-0 justify-between items-center">
                 <p className="text-[#303030] font-['Montserrat'] leading-6 text-sm sm:text-base">Showing {itemsRange.start + 1} - {itemsRange.end} of {filteredProducts.length}</p>
 
                 <div className="flex items-center">
-                    <span className="hidden sm:inline text-[#303030] font-['Montserrat'] leading-6 mr-4">Sort by</span>
+                    <span className="hidden md:inline text-[#303030] font-['Montserrat'] leading-6 mr-4">Sort by</span>
 
                     <div className="flex gap-[45px]">
                         {/* ----Categories Dropdown---- */}
@@ -192,7 +192,7 @@ const ProductsListProducts = ({ selectedCategories, selectedBrands }) => {
 
                         {/* ----Price Dropdown---- */}
                         <div
-                            className="relative after:content-[''] after:absolute sm:after:w-[1px] sm:after:h-[32px] after:bg-[#CBCBCB] after:top-1/2 after:-right-6 after:-translate-y-1/2"
+                            className="relative after:content-[''] after:absolute 2xl:after:w-[1px] sm:after:h-[32px] after:bg-[#CBCBCB] after:top-1/2 after:-right-6 after:-translate-y-1/2"
                             ref={priceDropdownRef}
                         >
                             <select
@@ -236,7 +236,7 @@ const ProductsListProducts = ({ selectedCategories, selectedBrands }) => {
                             )}
                         </div>
 
-                        <div className="hidden sm:block">
+                        <div className="hidden 2xl:block">
                             <MenuIcon />
                         </div>
                     </div>
@@ -245,7 +245,7 @@ const ProductsListProducts = ({ selectedCategories, selectedBrands }) => {
                 </div>
             </div>
 
-                <div className="flex flex-col items-center gap-y-6 sm:gap-0 sm:flex-row sm:flex-wrap sm:mt-[52px]">
+                <div className="flex flex-col items-start gap-y-6 sm:flex-row sm:flex-wrap sm:mt-[52px] sm:justify-center sm:gap-5 xl:justify-start">
                     {(!loading && allProducts.length > 0) ? (
                         filteredProducts.slice(itemsRange.start, itemsRange.end).map(p => (
                             <ProductLayout

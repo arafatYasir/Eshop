@@ -188,7 +188,7 @@ const ProductsListLeftSide = ({ selectedCategories, setSelectedCategories, selec
     return (
         <>
             {/* ----Desktop Filters---- */}
-            <div className="hidden sm:block min-w-[354px] p-12 bg-[#F4F4F4] rounded-[25px]" >
+            <div className="hidden xl:block min-w-[354px] p-12 bg-[#F4F4F4] rounded-[25px]" >
                 {/* Categories */}
                 <div className="flex items-center cursor-pointer justify-between mb-5" onClick={() => setShowCategories(!showCategories)}>
                     <h3 className="text-xl text-[#303030] font-['Montserrat'] font-bold leading-[30px]">Categories</h3>
@@ -299,8 +299,8 @@ const ProductsListLeftSide = ({ selectedCategories, setSelectedCategories, selec
                 )}
             </div>
 
-            <div className="flex items-center justify-between sm:hidden">
-                <div class="text-[22px] sm:text-4xl text-[#303030] font-['Poppins'] leading-[46px] font-semibold">Featured Products</div>
+            <div className="flex items-center justify-between xl:hidden">
+                <div class="text-[22px] sm:text-4xl text-[#303030] font-['Poppins'] leading-[46px] font-semibold">Products</div>
 
                 {/* Filter Opening Part for Mobile */}
                 <div
@@ -321,11 +321,11 @@ const ProductsListLeftSide = ({ selectedCategories, setSelectedCategories, selec
             )}
 
             <div
-                className={`fixed top-0 right-0 w-[75%] max-w-[320px] h-full z-50 bg-[#F4F4F4] sm:hidden rounded-l-2xl shadow-xl transform ${isFilterOpen ? "translate-x-0" : "translate-x-full"
+                className={`fixed top-0 right-0 w-[75%] max-w-[320px] h-full z-50 bg-[#F4F4F4] xl:hidden rounded-l-2xl shadow-xl transform ${isFilterOpen ? "translate-x-0" : "translate-x-full"
                     } transition-transform duration-500 ease-in-out flex flex-col`}
             >
                 {/* Header */}
-                <div className="flex justify-between items-center px-6 py-4 bg-gradient-to-r from-[#ffffff] to-[#f9f9f9] rounded-tr-2xl border-b border-gray-200 flex-shrink-0">
+                <div className="flex justify-between items-center px-6 py-4 bg-gradient-to-r from-[#ffffff] to-[#f9f9f9] border-gray-200 flex-shrink-0">
                     <h2 className="text-2xl font-bold text-[#303030] tracking-wide">Filters</h2>
                     <button
                         onClick={() => setIsFilterOpen(false)}
