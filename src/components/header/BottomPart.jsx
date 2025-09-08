@@ -49,10 +49,10 @@ const BottomPart = () => {
     return (
         <>
             {/* ----Desktop Navbar---- */}
-            <nav className="bg-[#FF624C] py-6 font-['Montserrat'] hidden sm:block sm:px-5 lg:px-0">
+            <nav className="bg-[#FF624C] py-6 font-['Montserrat'] hidden sm:block sm:px-5 2xl:px-0">
                 <Container>
                     <div className="flex justify-between">
-                        <ul className="flex items-center sm:gap-8 md:gap-10 lg:gap-20 text-white font-bold leading-6">
+                        <ul className="flex items-center sm:gap-8 md:gap-10 lg:gap-14 xl:gap-20 text-white font-bold leading-6">
                             <li className="relative" ref={categoriesDropdownRef}>
                                 <button className="flex items-center gap-4 cursor-pointer" to="#" onClick={() => setIsCategoriesDropdownOpen(!isCategoriesDropdownOpen)}>
                                     <IoIosMenu className="text-3xl" />
@@ -106,14 +106,14 @@ const BottomPart = () => {
                             </li>
                         </ul>
 
-                        <ul className="flex items-center sm:gap-8 md:gap-20 text-white font-bold leading-6">
+                        <ul className="flex items-center sm:gap-8 md:gap-15 2xl:gap-20 text-white font-bold leading-6">
                             <li>
                                 <Link to="/products-list">LIMITED SALE</Link>
                             </li>
                             <li>
                                 <Link to="/products-list">Best Seller</Link>
                             </li>
-                            <li className="hidden lg:block">
+                            <li className="hidden xl:block">
                                 <Link to="/products-list">New Arrival</Link>
                             </li>
                         </ul>

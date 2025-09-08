@@ -107,7 +107,7 @@ const NewProducts = () => {
     }, [])
 
     return (
-        <div className="mb-20 sm:px-5 lg:px-0">
+        <div className="mb-20 sm:px-5 2xl:px-0">
             <Container>
                 <div className="flex flex-col items-center sm:flex-row sm:items-center sm:justify-between">
                     <div>

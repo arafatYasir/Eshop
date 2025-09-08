@@ -194,12 +194,20 @@ const FeaturedProducts = () => {
                     nextArrow: <SampleNextArrow />,
                     prevArrow: <SamplePrevArrow />,
                 }
+            },
+            {
+                breakpoint: 1536,
+                settings: {
+                    slidesToShow: 4,
+                    nextArrow: <SampleNextArrow />,
+                    prevArrow: <SamplePrevArrow />,
+                }
             }
         ]
     };
 
     return (
-        <div className="mb-20 sm:px-5 lg:px-0">
+        <div className="mb-20 sm:px-5 2xl:px-0">
             <Container>
                 <div className="flex justify-between items-center">
                     <h2 className="text-[22px] sm:text-3xl md:text-4xl text-[#303030] font-['Poppins'] leading-[46px] font-semibold">Featured Products</h2>
@@ -207,7 +215,7 @@ const FeaturedProducts = () => {
                 </div>
 
                 {(!loading && featuredProducts.length > 0) ? (
-                    <Slider {...settings} className="mt-12 sm:px-9 max-w-[285px] mx-auto sm:max-w-[650px] lg:min-w-full">
+                    <Slider {...settings} className="mt-12 sm:px-9 max-w-[285px] mx-auto sm:max-w-[650px]  xl:max-w-[1230px] 2xl:min-w-full">
                         {
                             featuredProducts.map(p => (
                                 <div className="flex items-center justify-center" key={p.id}>

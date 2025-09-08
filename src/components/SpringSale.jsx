@@ -148,12 +148,27 @@ const SpringSale = () => {
                     slidesToShow: 1,
                     nextArrow: <SampleNextArrowMobile />
                 }
-            }
+            },
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 2,
+                    nextArrow: <SampleNextArrowMobile />
+                }
+            },
+            {
+                breakpoint: 1280,
+                settings: {
+                    slidesToShow: 1,
+                    nextArrow: <SampleNextArrowMobile />
+                }
+            },
+
         ]
     };
 
     return (
-        <div className="mb-20 py-16 sm:px-8 lg:px-0" style={{ background: "url('/images/spring-sale-bg.png')" }}>
+        <div className="mb-20 py-16 sm:px-8 2xl:px-0" style={{ background: "url('/images/spring-sale-bg.png')" }}>
             <Container>
                 <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center">
                     {/* ---- Timer ---- */}
@@ -198,7 +213,7 @@ const SpringSale = () => {
                     {/* ---- Slider ---- */}
                     <div className=" ">
                         {(!loading && springSaleProducts.length > 0) ? (
-                            <Slider {...settings} className="mt-12 sm:max-w-[464px] md:max-w-[950px]">
+                            <Slider {...settings} className="mt-12 sm:max-w-[464px] md:min-w-full xl:max-w-[950px]">
                                 {springSaleProducts.map(p => (
                                     <ProductLayout2 key={p.id} title={p.title} images={p.images} type={p.type} discountTag={p.discountTag} discountPercent={p.discountTag ? p.discountPercent : ""} rating={p.rating} totalRatings={p.totalRatings} price={p.price} previousPrice={p.discountTag ? p.previousPrice : ""} stock={p.stock} tags={p.tags} id={p.id} />
                                 ))}

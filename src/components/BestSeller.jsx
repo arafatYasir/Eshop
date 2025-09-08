@@ -8,6 +8,7 @@ import { db } from "../firebase/firebaseconfig";
 import { setBestSellerProducts } from "../slices/productsSlice";
 import LoadingSpinner from "./LoadingSpinner";
 import Button from "./Button";
+import { Link } from "react-router";
 
 const BestSeller = () => {
     const [loading, setLoading] = useState(false);
@@ -49,11 +50,11 @@ const BestSeller = () => {
 
     return (
         <Container>
-            <div className="flex flex-col items-center md:items-start md:flex-row md:justify-between sm:px-5 lg:px-0">
+            <div className="flex flex-col items-center md:items-start md:flex-row md:justify-center 2xl:justify-between sm:px-5 2xl:px-0">
                 <div className="max-w-[902px]">
                     <div className="flex justify-between items-center">
                         <h2 className="text-[22px] sm:text-3xl md:text-4xl text-[#303030] font-['Poppins'] leading-[46px] font-semibold">Best Seller</h2>
-                        <p className="flex items-center text-[#FF624C] font-['Montserrat'] font-bold leading-6 gap-4 cursor-pointer text-sm sm:text-base">View All <LongArrowIcon /></p>
+                        <Link to="/products-list" className="flex items-center text-[#FF624C] font-['Montserrat'] font-bold leading-6 gap-4 cursor-pointer text-sm sm:text-base">View All <LongArrowIcon /></Link>
                     </div>
 
                     {(!loading && bestSellingProducts.length > 0) ? <>
@@ -76,7 +77,7 @@ const BestSeller = () => {
                 </div>
 
 
-                <div className="hidden lg:block">
+                <div className="hidden 2xl:block">
                     <img src="images/best-seller-offer.png" alt="Best seller offer" />
                 </div>
             </div>

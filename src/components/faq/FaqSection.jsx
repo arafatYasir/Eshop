@@ -43,9 +43,9 @@ const FaqSection = () => {
     ];
 
     return (
-        <div className="bg-[#F4F4F4] py-16 my-20 w-full sm:px-5 lg:px-0">
+        <div className="bg-[#F4F4F4] py-16 my-20 w-full sm:px-5 2xl:px-0">
             <Container>
-                <div className="flex flex-col-reverse gap-10 lg:flex-row lg:items-end lg:gap-28 relative">
+                <div className="flex flex-col-reverse gap-10 xl:flex-row xl:items-end xl:gap-16 2xl:gap-28 relative">
                     <div className="flex flex-col gap-4 sm:gap-6">
                         {
                             faqs.map(faq => <FaqItem title={faq.title} description={faq.description} id={faq.id} handleOpenFaq={handleOpenFaq} key={faq.id} isOpen={faqId === faq.id} />)
@@ -57,7 +57,7 @@ const FaqSection = () => {
                         <Button value="Ask A Question" />
                     </div>
                     {/* Dots Image */}
-                    <div className="absolute top-0 right-0 hidden sm:block">
+                    <div className="absolute top-0 right-0 xl:right-[30px] hidden sm:block">
                         <img  src="images/faq-dots.png" alt="faq background" />
                     </div>
                 </div>

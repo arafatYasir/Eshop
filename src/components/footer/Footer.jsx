@@ -125,7 +125,7 @@ const Footer = () => {
 
                 <div className="h-[1px] bg-[#CBCBCB]"></div>
 
-                <div className="text-[#303030] font-['Montserrat'] text-xs sm:text-sm leading-5 flex justify-between mt-2 mb-20 opacity-75">
+                <div className="text-[#303030] font-['Montserrat'] text-xs sm:text-sm leading-5 flex justify-between mt-2 mb-20 opacity-75 lg:px-4">
                     <Link className="" to="#">Copyright © 2023 E-Shop. All Rights Reserved.</Link>
 
                     <div className="flex gap-2">
