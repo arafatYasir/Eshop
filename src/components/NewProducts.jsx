@@ -13,16 +13,22 @@ import LoadingSpinner from "./LoadingSpinner";
 
 
 const NewProducts = () => {
+    // States
     const [limit, setLimit] = useState(5);
     const [selectedCategory, setSelectedCategory] = useState({ id: 1, name: "All Categories", value: "all" });
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const dropdownRef = useRef(null);
     const [loading, setLoading] = useState(false);
     const localStorageProducts = JSON.parse(localStorage.getItem("newProducts")) || [];
+    const [showLoading, setShowLoading] = useState(false);
 
     // Redux state and dispatch
     const dispatch = useDispatch();
     const newProducts = useSelector(state => state.products.new);
+
+    // Refs
+    const dropdownRef = useRef(null);
+    const timerRef = useRef(null);
+
 
     const categories = [
         { id: 1, name: "All Categories", value: "all" },
@@ -40,7 +46,16 @@ const NewProducts = () => {
     }
 
     const handleLoadMore = () => {
-        setLimit(limit + 5);
+        if (timerRef.current) {
+            clearTimeout(timerRef.current);
+        }
+
+        setShowLoading(true);
+
+        timerRef.current = setTimeout(() => {
+            setLimit(limit + 5);
+            setShowLoading(false);
+        }, 800);
     }
 
 
@@ -64,13 +79,13 @@ const NewProducts = () => {
 
     // Filtered products based on selected category
     const filteredProducts = useMemo(() => {
-        if(!newProducts || newProducts.length === 0) return [];
+        if (!newProducts || newProducts.length === 0) return [];
 
         switch (selectedCategory.value) {
             case "all":
                 return newProducts;
             case "computer":
-                return newProducts.filter(p => p.type.toLowerCase() === "computer"|| p.type.toLowerCase() === "desktop");
+                return newProducts.filter(p => p.type.toLowerCase() === "computer" || p.type.toLowerCase() === "desktop");
             case "laptop":
                 return newProducts.filter(p => p.type.toLowerCase() === "laptop");
             case "mobile":
@@ -86,7 +101,7 @@ const NewProducts = () => {
 
     // useEffect to fetch new products
     useEffect(() => {
-        if(localStorageProducts.length === 0) {
+        if (localStorageProducts.length === 0) {
             fetchProducts();
         }
         else {
@@ -159,12 +174,17 @@ const NewProducts = () => {
                 </div>
 
                 {
-                    (limit !== filteredProducts.length && !loading) ? (
+                    showLoading && <LoadingSpinner message="Loading..." />
+                }
+
+                {
+                    (limit < filteredProducts.length && !loading) ? (
                         <div className="text-center mt-16">
                             <Button handleLoadMore={handleLoadMore} value="Load More" bg="white" color="#FF624C" border={true} />
                         </div>
-                    ) : ""
+                    ) : <></>
                 }
+
             </Container>
         </div>
     );

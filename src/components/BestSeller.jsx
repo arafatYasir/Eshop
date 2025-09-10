@@ -1,7 +1,7 @@
 import Container from "./commonLayouts/Container";
 import ProductLayout from "./commonLayouts/ProductLayout";
 import LongArrowIcon from "../icons/LongArrowIcon";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../firebase/firebaseconfig";
@@ -11,14 +11,32 @@ import Button from "./Button";
 import { Link } from "react-router";
 
 const BestSeller = () => {
+    // States
     const [loading, setLoading] = useState(false);
     const [limit, setLimit] = useState(6);
+    const [showLoading, setShowLoading] = useState(false);
+
+    // Redux states
     const dispatch = useDispatch();
     const bestSellingProducts = useSelector(state => state.products.bestSeller);
+
+    // LocalStorage
     const localStorageProducts = JSON.parse(localStorage.getItem("bestSellingProducts")) || [];
 
+    // Refs
+    const timerRef = useRef(null);
+
     const handleLoadMore = () => {
-        setLimit(limit + 3);
+        if (timerRef.current) {
+            clearTimeout(timerRef.current);
+        }
+
+        setShowLoading(true);
+
+        timerRef.current = setTimeout(() => {
+            setLimit(limit + 5);
+            setShowLoading(false);
+        }, 800);
     }
 
     const fetchProducts = async () => {
@@ -40,7 +58,7 @@ const BestSeller = () => {
     }
 
     useEffect(() => {
-        if(localStorageProducts.length === 0) {
+        if (localStorageProducts.length === 0) {
             fetchProducts();
         }
         else {
@@ -66,13 +84,17 @@ const BestSeller = () => {
                             }
                         </div>
 
-                    
-                        {limit !== bestSellingProducts.length ? (
+                        {
+                            showLoading && <LoadingSpinner message="Loading..." />
+                        }
+
+
+                        {limit < bestSellingProducts.length ? (
                             <div className="text-center mt-16">
                                 <Button handleLoadMore={handleLoadMore} value="Load More" bg="white" color="#FF624C" border={true} />
                             </div>
-                        ) : ""}
-                    
+                        ) : null}
+
                     </> : <LoadingSpinner message="Loading Best Selling Products..." />}
                 </div>
 

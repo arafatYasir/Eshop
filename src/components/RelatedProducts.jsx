@@ -4,16 +4,23 @@ import Container from "./commonLayouts/Container";
 import ProductLayout from "./commonLayouts/ProductLayout";
 import { useSelector } from "react-redux";
 import { db } from "../firebase/firebaseconfig";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import LoadingSpinner from "./LoadingSpinner";
 import Button from "./Button";
 
 
 const RelatedProducts = ({ category }) => {
-    const allProducts = useSelector(state => state.products.allProducts);
+    // States
     const [relatedProducts, setRelatedProducts] = useState([]);
     const [loading, setLoading] = useState(false);
     const [limit, setLimit] = useState(5);
+    const [showLoading, setShowLoading] = useState(false);
+
+    // Redux states
+    const allProducts = useSelector(state => state.products.allProducts);
+
+    // Refs
+    const timerRef = useRef(null);
 
     const fetchProducts = async () => {
         setLoading(true);
@@ -45,7 +52,16 @@ const RelatedProducts = ({ category }) => {
     }
 
     const handleLoadMore = () => {
-        setLimit(limit + 5);
+        if (timerRef.current) {
+            clearTimeout(timerRef.current);
+        }
+
+        setShowLoading(true);
+
+        timerRef.current = setTimeout(() => {
+            setLimit(limit + 5);
+            setShowLoading(false);
+        }, 800);
     }
 
 
@@ -75,12 +91,17 @@ const RelatedProducts = ({ category }) => {
                             : <LoadingSpinner />
                     }
                 </div>
+
                 {
-                    (limit !== relatedProducts.length && !loading) ? (
+                    showLoading && <LoadingSpinner message="Loading..." />
+                }
+
+                {
+                    (limit < relatedProducts.length && !loading) ? (
                         <div className="flex justify-center mt-16">
                             <Button handleLoadMore={handleLoadMore} value="Load More" bg="white" color="#FF624C" border={true} />
                         </div>
-                    ) : ""
+                    ) : null
                 }
             </Container>
         </div>
