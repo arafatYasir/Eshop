@@ -63,8 +63,8 @@ const ProductDetailsCarousel = ({images}) => {
     return (
         <div>
             {/* First Slider */}
-            <Slider className="max-w-[370px] md:max-w-[833px] pl-2" {...settings} asNavFor={nav2} ref={slider => (sliderRef1 = slider)}>
-                <div className="relative max-w-[370px] sm:max-w-full border">
+            <Slider className="max-w-[370px] md:max-w-[530px] 2xl:max-w-[833px] pl-2" {...settings} asNavFor={nav2} ref={slider => (sliderRef1 = slider)}>
+                <div className="relative max-w-[370px] sm:max-w-full">
                     <img className="w-full h-auto" src={images[1]} alt="Product Image" />
                     <div
                         className="absolute top-2 right-2 cursor-pointer"
@@ -73,7 +73,7 @@ const ProductDetailsCarousel = ({images}) => {
                         <FullscreenIcon />
                     </div>
                 </div>
-                <div className="relative max-w-[370px] sm:max-w-full border">
+                <div className="relative max-w-[370px] sm:max-w-full">
                     <img className="w-full h-auto" src={images[1]} alt="Product Image" />
                     <div
                         className="absolute top-2 right-2 cursor-pointer"
@@ -82,7 +82,7 @@ const ProductDetailsCarousel = ({images}) => {
                         <FullscreenIcon />
                     </div>
                 </div>
-                <div className="relative max-w-[370px] sm:max-w-full border">
+                <div className="relative max-w-[370px] sm:max-w-full">
                     <img className="w-full h-auto" src={images[1]} alt="Product Image" />
                     <div
                         className="absolute top-2 right-2 cursor-pointer"
@@ -115,10 +115,9 @@ const ProductDetailsCarousel = ({images}) => {
             {showFullScreen && (
                 <div className="fixed inset-0 bg-black/50 w-full h-screen flex items-center justify-center z-10">
                     <div className="relative">
-                        <img ref={modalRef} className="scale-120" src={images[1]} alt="Product Image" />
-                        <button className="absolute top-[-5%] right-[6%] sm:top-[-20px] sm:right-[-40px] sm:text-2xl cursor-pointer font-bold transition text-[#FF624C]" onClick={() => setShowFullScreen(false)}>&#10005;</button>
+                        <img ref={modalRef} className="xl:scale-120" src={images[1]} alt="Product Image" />
+                        <button className="absolute top-[10px] right-[20px] xl:top-[-30px] xl:right-[-50px] sm:text-2xl cursor-pointer font-bold transition text-[#FF624C]" onClick={() => setShowFullScreen(false)}>&#10005;</button>
                     </div>
-
                 </div>
             )}
         </div>

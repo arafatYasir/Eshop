@@ -6,9 +6,9 @@ const ProductDetails = ({product}) => {
     const formattedRating = parseFloat(rating).toFixed(0);
 
     return (
-        <div className="">
+        <div className="mt-5 sm:mt-10 md:mt-12 lg:mt-0">
             {/* Rating */}
-            <div className="flex items-center gap-2 mt-5 sm:mt-0">
+            <div className="flex items-center gap-2">
                 <div className="flex text-[#FED550] text-[25px]">
                     {Array.from({length: parseInt(formattedRating)}).map((_, index) => (
                         <IoMdStar key={index} />

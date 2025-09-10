@@ -11,25 +11,27 @@ const Footer = () => {
         <Container>
             <footer>
                 {/* ----Gradient Newsletter Card---- */}
-                <div className="bg-[linear-gradient(90deg,_rgba(244,244,244,1)_28%,_rgba(217,217,217,1)_45%)] sm:h-[531px] rounded-[25px] p-8 sm:pt-[114px] sm:pl-[100px]">
-                    <h3 className="text-[#303030] text-3xl sm:text-4xl leading-[46px] font-semibold font-['Poppins']">Get Our Updates</h3>
-                    <p className="sm:max-w-[514px] text-[#303030] text-sm sm:text-xl leading-[30px] font-['Montserrat'] mt-4">
-                        Browse our wide selection of electronics and
-                        find the perfect promo for you from newsletter.
-                    </p>
+                <div className="sm:px-5 xl:px-0">
+                    <div className="bg-[linear-gradient(90deg,_rgba(244,244,244,1)_28%,_rgba(217,217,217,1)_45%)] sm:h-[531px] rounded-[25px] p-8 sm:pt-[114px] sm:pl-[70px] md:pl-[100px]">
+                        <h3 className="text-[#303030] text-3xl sm:text-4xl leading-[46px] font-semibold font-['Poppins']">Get Our Updates</h3>
+                        <p className="sm:max-w-[514px] text-[#303030] text-sm sm:text-xl leading-[30px] font-['Montserrat'] mt-4">
+                            Browse our wide selection of electronics and
+                            find the perfect promo for you from newsletter.
+                        </p>
 
-                    <input
-                        className="placeholder:text-[#303030] placeholder:opacity-75 font-['Montserrat'] text-sm sm:text-base leading-6 border border-[#929292] outline-none rounded-[10px] py-3 pl-3 sm:py-6 sm:pl-6 w-full sm:w-[470px] mt-8 mb-4"
-                        type="text"
-                        placeholder="Enter your email address ..."
-                    />
-                    <br />
+                        <input
+                            className="placeholder:text-[#303030] placeholder:opacity-75 font-['Montserrat'] text-sm sm:text-base leading-6 border border-[#929292] outline-none rounded-[10px] py-3 pl-3 sm:py-6 sm:pl-6 w-full sm:w-[470px] mt-8 mb-4"
+                            type="text"
+                            placeholder="Enter your email address ..."
+                        />
+                        <br />
 
-                    <div className="sm:hidden">
-                        <Button value="Subscribe" paddingY="12px" paddingX="12px" />
-                    </div>
-                    <div className="hidden sm:block">
-                        <Button value="Subscribe" />
+                        <div className="sm:hidden">
+                            <Button value="Subscribe" paddingY="12px" paddingX="12px" />
+                        </div>
+                        <div className="hidden sm:block">
+                            <Button value="Subscribe" />
+                        </div>
                     </div>
                 </div>
 
