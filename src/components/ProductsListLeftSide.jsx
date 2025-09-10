@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { TfiAngleDown } from "react-icons/tfi";
 import { VscSettings } from "react-icons/vsc";
 import { useDispatch } from "react-redux";
@@ -17,7 +17,7 @@ const ProductsListLeftSide = ({ selectedCategories, setSelectedCategories, selec
     const [maxInput, setMaxInput] = useState("5000");
 
     const dispatch = useDispatch();
-    let timer;
+    const timerRef = useRef(null);
 
     const handleMinInputChange = (e) => {
         const value = e.target.value;
@@ -52,9 +52,6 @@ const ProductsListLeftSide = ({ selectedCategories, setSelectedCategories, selec
                 setMaxInput(parse.toString());
             }
         }
-
-        dispatch(setMin(minValue));
-        dispatch(setMax(maxValue));
 
 
     }
@@ -169,6 +166,18 @@ const ProductsListLeftSide = ({ selectedCategories, setSelectedCategories, selec
             }
         })
     }
+
+    // useEffect to implement debouncing on price slider
+    useEffect(() => {
+        if (timerRef.current) {
+            clearTimeout(timerRef.current);
+        }
+
+        timerRef.current = setTimeout(() => {
+            dispatch(setMin(minValue));
+            dispatch(setMax(maxValue));
+        }, 500);
+    }, [minValue, maxValue, dispatch])
 
     // useEffect to handle body scroll lock when the sidebar is open
     useEffect(() => {
