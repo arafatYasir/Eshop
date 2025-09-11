@@ -70,7 +70,7 @@ const CartProduct = ({ id, type, title, images, variant, price, totalPrice }) =>
                     </div>
 
                     {/* Actions – mobile & tablet absolute */}
-                    <div className="lg:hidden absolute top-4 right-4 flex gap-3">
+                    <div className="lg:hidden absolute top-1/2 sm:top-4 -translate-y-1/2 sm:translate-y-0 right-4 flex flex-col sm:flex-row gap-3">
                         <button
                             aria-label="Remove from cart"
                             onClick={handleRemoveFromCart}
