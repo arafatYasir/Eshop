@@ -40,6 +40,14 @@ const ProductLayout = ({ discountTag = false, images, id, discountPercent, type,
         toast.success("Item added to cart! Please go to your cart and update it.");
     }
 
+    const handleShare = (id) => {
+        const url = `https://eshop-ecommerce-project.vercel.app/product-details/${id}`;
+
+        navigator.clipboard.writeText(url)
+        .then(() => toast.success("Link copied!"))
+        .catch((e) => toast.error("Error copying the link!"))
+    }
+
     return (
         <div  className="p-6 group border border-[#C3C3C3] lg:border-transparent sm:hover:border-[#C3C3C3] rounded-[10px] max-w-[285px] relative">
             <div className="relative">
@@ -47,15 +55,15 @@ const ProductLayout = ({ discountTag = false, images, id, discountPercent, type,
 
                 {/* Icons */}
                 <div className="flex gap-[18px] lg:scale-0 lg:group-hover:scale-100 transition duration-100 cursor-pointer absolute bottom-[6px] left-[50%] -translate-x-1/2">
-                    <div onClick={handleAddToCart} onTouchStart={handleAddToCart} className="flex items-center justify-center w-10 h-10 md:w-[50px] md:h-[50px] rounded-full border border-[#FF624C] text-[#FF624C] text-3xl hover:bg-[#FF624C] hover:text-white transition duration-100 bg-white">
+                    <button onClick={handleAddToCart} onTouchStart={handleAddToCart} className="flex items-center justify-center w-10 h-10 md:w-[50px] md:h-[50px] rounded-full border border-[#FF624C] text-[#FF624C] text-3xl hover:bg-[#FF624C] hover:text-white transition duration-100 bg-white cursor-pointer">
                         <IoCartOutline size={22} />
-                    </div>
-                    <div className="flex items-center justify-center w-10 h-10 md:w-[50px] md:h-[50px] rounded-full border border-[#FF624C] text-[#FF624C] text-3xl hover:bg-[#FF624C] hover:text-white transition duration-100 bg-white">
+                    </button>
+                    <button className="flex items-center justify-center w-10 h-10 md:w-[50px] md:h-[50px] rounded-full border border-[#FF624C] text-[#FF624C] text-3xl hover:bg-[#FF624C] hover:text-white transition duration-100 bg-white cursor-pointer">
                         <IoIosHeartEmpty size={22} />
-                    </div>
-                    <div className="flex items-center justify-center w-10 h-10 md:w-[50px] md:h-[50px] rounded-full border border-[#FF624C] text-[#FF624C] text-3xl hover:bg-[#FF624C] hover:text-white transition duration-100 bg-white">
+                    </button>
+                    <button onClick={() => handleShare(id)} className="flex items-center justify-center w-10 h-10 md:w-[50px] md:h-[50px] rounded-full border border-[#FF624C] text-[#FF624C] text-3xl hover:bg-[#FF624C] hover:text-white transition duration-100 bg-white cursor-pointer">
                         <FiShare2 size={22} />
-                    </div>
+                    </button>
                 </div>
             </div>
             <Link to={`/product-details/${id}`} className="mt-10 block cursor-pointer">

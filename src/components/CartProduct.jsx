@@ -3,6 +3,7 @@ import ShareIcon from "../icons/ShareIcon";
 import TrashIcon from "../icons/TrashIcon";
 import CartQuantity from "./CartQuantity";
 import { removeFromCart } from "../slices/cartSlice";
+import { toast, ToastContainer } from "react-toastify";
 
 const CartProduct = ({ id, type, title, images, variant, price, totalPrice }) => {
     const dispatch = useDispatch();
@@ -10,6 +11,14 @@ const CartProduct = ({ id, type, title, images, variant, price, totalPrice }) =>
     const handleRemoveFromCart = () => {
         dispatch(removeFromCart(id));
     };
+
+    const handleShare = (id) => {
+        const url = `https://eshop-ecommerce-project.vercel.app/product-details/${id}`;
+
+        navigator.clipboard.writeText(url)
+        .then(() => toast.success("Link copied!"))
+        .catch((e) => toast.error("Error copying the link!"))
+    }
 
     return (
         <tr>
@@ -64,6 +73,7 @@ const CartProduct = ({ id, type, title, images, variant, price, totalPrice }) =>
                         <button
                             aria-label="Share product"
                             className="hover:bg-[#FF624C] text-[#FF624C] hover:text-white border border-[#FF624C] transition w-12 h-12 lg:w-16 lg:h-16 rounded-full flex items-center justify-center cursor-pointer"
+                            onClick={() => handleShare(id)}
                         >
                             <ShareIcon />
                         </button>
@@ -81,12 +91,14 @@ const CartProduct = ({ id, type, title, images, variant, price, totalPrice }) =>
                         <button
                             aria-label="Share product"
                             className="active:bg-[#FF624C] text-[#FF624C] active:text-white border border-[#FF624C] transition w-10 h-10 rounded-full flex items-center justify-center cursor-pointer"
+                            onClick={() => handleShare(id)}
                         >
                             <ShareIcon width={20} height={20} />
                         </button>
                     </div>
                 </div>
             </td>
+            <ToastContainer />
         </tr>
     );
 };
