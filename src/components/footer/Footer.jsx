@@ -11,7 +11,7 @@ const Footer = () => {
         <Container>
             <footer>
                 {/* ----Gradient Newsletter Card---- */}
-                <div className="sm:px-5 xl:px-0">
+                <div className="sm:px-5 2xl:px-0">
                     <div className="bg-[linear-gradient(90deg,_rgba(244,244,244,1)_28%,_rgba(217,217,217,1)_45%)] sm:h-[531px] rounded-[25px] p-8 sm:pt-[114px] sm:pl-[70px] md:pl-[100px]">
                         <h3 className="text-[#303030] text-3xl sm:text-4xl leading-[46px] font-semibold font-['Poppins']">Get Our Updates</h3>
                         <p className="sm:max-w-[514px] text-[#303030] text-sm sm:text-xl leading-[30px] font-['Montserrat'] mt-4">
