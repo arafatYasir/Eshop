@@ -19,7 +19,7 @@ const OrderSummary = () => {
             "Content-Type": "application/json"
         };
 
-        const response = await fetch(`http://localhost:4242/create-checkout-session`, {
+        const response = await fetch(`https://eshop-v6za.onrender.com/create-checkout-session`, {
             method: "POST",
             headers: headers,
             body: JSON.stringify(body)
