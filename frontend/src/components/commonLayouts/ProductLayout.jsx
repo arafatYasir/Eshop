@@ -60,7 +60,7 @@ const ProductLayout = ({ discountTag = false, images, id, discountPercent, type,
                 <img className="w-full" loading="lazy" src={images[0]} alt="product image" />
 
                 {/* Icons */}
-                <div className="flex gap-[18px]  transition duration-100 cursor-pointer absolute bottom-[6px] left-[50%] -translate-x-1/2">
+                <div className="flex gap-[18px] lg:scale-0 group-hover:scale-100 transition duration-100 cursor-pointer absolute bottom-[6px] left-[50%] -translate-x-1/2">
                     <button onClick={handleAddToCart} className="flex items-center justify-center w-10 h-10 md:w-[50px] md:h-[50px] rounded-full border border-[#FF624C] text-[#FF624C] text-3xl hover:bg-[#FF624C] hover:text-white transition duration-100 bg-white cursor-pointer">
                         <IoCartOutline size={22} />
                     </button>
