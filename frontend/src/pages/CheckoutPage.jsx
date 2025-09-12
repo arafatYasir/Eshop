@@ -2,6 +2,8 @@ import { useState } from "react";
 import Container from "../components/commonLayouts/Container";
 import OrderSummary from "../components/OrderSummary";
 import BillingForm from "../components/BillingForm";
+import { loadStripe } from "@stripe/stripe-js";
+import { useSelector } from "react-redux";
 
 const CheckoutPage = () => {
     const [activeTab, setActiveTab] = useState("Information");
@@ -16,11 +18,36 @@ const CheckoutPage = () => {
     });
     const [errors, setErrors] = useState({});
     const [selectedCountry, setSelectedCountry] = useState("");
-    const [selectedState, setSelectedState] = useState("");
-    const [selectedCity, setSelectedCity] = useState("");
 
-    console.log(selectedCountry, selectedState, selectedCity);
+    const { items } = useSelector(state => state.cart);
 
+    const makePayment = async () => {
+        const stripe = await loadStripe("pk_test_51S4Wzw57xZn3rkmAKVptCRpzXc8LpH5GaVsXeFjf2mQxPeyx77tEkrEc84Ga12TccVcnK46SwraBUYhLivvEFzJj00fidiMe39");
+
+        const body = {
+            products: items
+        };
+
+        const headers = {
+            "Content-Type": "application/json"
+        };
+
+        const response = await fetch(`https://eshop-v6za.onrender.com/create-checkout-session`, {
+            method: "POST",
+            headers: headers,
+            body: JSON.stringify(body)
+        });
+
+        const session = await response.json();
+
+        const result = await stripe.redirectToCheckout({
+            sessionId: session.id
+        });
+
+        if (result.error) {
+            console.log(result.error);
+        }
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -45,15 +72,17 @@ const CheckoutPage = () => {
         if (!formData.address.trim()) newErrors.address = "Address is required";
 
         if (!selectedCountry) newErrors.country = "Country is required";
-        if (!selectedState) newErrors.state = "State is required";
-        if (!selectedCity) newErrors.city = "City is required";
 
         if (formData.zip && !/^\d{4,10}$/.test(formData.zip)) {
             newErrors.zip = "Zip code must be numeric (4–10 digits)";
         }
 
         setErrors(newErrors);
-        return Object.keys(newErrors).length === 0;
+
+        if(Object.keys(newErrors).length === 0) {
+            makePayment();
+        }
+
     };
 
     return (
@@ -109,10 +138,10 @@ const CheckoutPage = () => {
 
                     <div className="flex flex-col gap-y-10 2xl:gap-y-0 2xl:flex-row items-start sm:items-center 2xl:items-start 2xl:justify-between my-20">
                         {/* Billing Details */}
-                        <BillingForm formData={formData} setFormData={setFormData} errors={errors} setErrors={setErrors} handleSubmit={handleSubmit} selectedCountry={selectedCountry} setSelectedCountry={setSelectedCountry} selectedCity={selectedCity} selectedState={selectedCity} setSelectedCity={setSelectedCity} setSelectedState={setSelectedState} />
+                        <BillingForm formData={formData} setFormData={setFormData} errors={errors} setErrors={setErrors} handleSubmit={handleSubmit} selectedCountry={selectedCountry} setSelectedCountry={setSelectedCountry} />
 
                         {/* Order Summary */}
-                        <OrderSummary  />
+                        <OrderSummary handleSubmit={handleSubmit} />
                     </div>
                 </div>
             </Container>

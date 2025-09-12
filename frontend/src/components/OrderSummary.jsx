@@ -2,42 +2,8 @@ import { useSelector } from "react-redux";
 import InfoIcon from "../icons/InfoIcon";
 import Button from "./Button";
 
-import {loadStripe} from '@stripe/stripe-js';
-
-const OrderSummary = () => {
+const OrderSummary = ({handleSubmit}) => {
     const { items, totalPrice } = useSelector(state => state.cart);
-    console.log(items);
-
-    const makePayment = async () => {
-        const stripe = await loadStripe("pk_test_51S4Wzw57xZn3rkmAKVptCRpzXc8LpH5GaVsXeFjf2mQxPeyx77tEkrEc84Ga12TccVcnK46SwraBUYhLivvEFzJj00fidiMe39");
-
-        const body = {
-            products: items
-        };
-
-        const headers = {
-            "Content-Type": "application/json"
-        };
-
-        const response = await fetch(`https://eshop-v6za.onrender.com/create-checkout-session`, {
-            method: "POST",
-            headers: headers,
-            body: JSON.stringify(body)
-        });
-
-        const session = await response.json();
-
-        const result = await stripe.redirectToCheckout({
-            sessionId: session.id
-        });
-
-        if(result.error) {
-            console.log(result.error);
-        }
-        else {
-            console.log("Payment done!");
-        }
-    }
 
     return (
         <div className="bg-[#F4F4F4] rounded-[25px] w-full md:w-[594px] pt-10 px-5 md:px-10 pb-14">
@@ -82,10 +48,10 @@ const OrderSummary = () => {
                 </p>
 
                 <div className="md:hidden text-center">
-                    <Button value="Order Now" paddingY="20px" paddingX="70px" handleSubmit={makePayment} />
+                    <Button value="Order Now" paddingY="20px" paddingX="70px" handleSubmit={handleSubmit} />
                 </div>
                 <div className="hidden md:block">
-                    <Button value="Order Now" paddingY="24px" paddingX="179px" handleSubmit={makePayment} />
+                    <Button value="Order Now" paddingY="24px" paddingX="179px" handleSubmit={handleSubmit} />
                 </div>
             </div>
         </div>

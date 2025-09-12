@@ -1,19 +1,8 @@
 import { TfiAngleDown } from "react-icons/tfi";
 
-const BillingForm = ({ formData, setFormData, errors, selectedCountry, setSelectedCountry, setSelectedCity, selectedCity, selectedState, setSelectedState }) => {
+const BillingForm = ({ formData, setFormData, errors, selectedCountry, setSelectedCountry }) => {
     const handleCountryChange = (e) => {
         setSelectedCountry(e.target.value);
-        setSelectedState("");
-        setSelectedCity("");
-    }
-
-    const handleStateChange = (e) => {
-        setSelectedState(e.target.value);
-        setSelectedCity("");
-    }
-
-    const handleCityChange = (e) => {
-        setSelectedCity(e.target.value);
     }
 
     const handleChange = (e) => {
@@ -137,53 +126,6 @@ const BillingForm = ({ formData, setFormData, errors, selectedCountry, setSelect
                         <TfiAngleDown className="text-xl text-[#303030] pointer-events-none absolute top-1/2 -translate-y-1/2 right-[28px]" />
                     </div>
                     {errors.country && <p className="text-red-500 text-sm">{errors.country}</p>}
-                </div>
-
-                {/* State */}
-                <div className="flex flex-col gap-3">
-                    <label className="sm:text-xl text-[#303030] font-['Montserrat'] font-bold leading-[30px]" htmlFor="state">State <span className="text-[#FF624C]">*</span></label>
-                    <div className="relative">
-                        <select
-                            id="state"
-                            value={selectedState}
-                            onChange={handleStateChange}
-                            className="appearance-none py-4 sm:py-[25px] px-6 sm:px-[32px] outline-none border border-[#CBCBCB] rounded-[10px] w-[360px] max-w-[400px] sm:w-[550px] sm:max-w-[550px] md:w-[640px] md:max-w-[640px] xl:w-[424px] xl:max-w-[424px]  text-[#303030] font-['Montserrat'] sm:text-xl leading-[30px] disabled:opacity-50"
-                            disabled={!selectedCountry}
-                        >
-                            <option value="">Select a state</option>
-                            {selectedCountry &&
-                                Object.keys(countries[selectedCountry]).map((state) => (
-                                    <option key={state} value={state}>
-                                        {state}
-                                    </option>
-                                ))}
-                        </select>
-                        <TfiAngleDown className="text-xl text-[#303030] pointer-events-none absolute top-1/2 -translate-y-1/2 right-[28px] " />
-                    </div>
-                    {errors.state && <p className="text-red-500 text-sm">{errors.state}</p>}
-                </div>
-
-                {/* City */}
-                <div className="flex flex-col gap-3">
-                    <label className="sm:text-xl text-[#303030] font-['Montserrat'] font-bold leading-[30px]" htmlFor="city">City <span className="text-[#FF624C]">*</span></label>
-                    <div className="relative">
-                        <select
-                            id="city"
-                            value={selectedCity}
-                            onChange={handleCityChange}
-                            className="appearance-none py-4 sm:py-[25px] px-6 sm:px-[32px] outline-none border border-[#CBCBCB] rounded-[10px] w-[360px] max-w-[400px] sm:w-[550px] sm:max-w-[550px] md:w-[640px] md:max-w-[640px] xl:w-[424px] xl:max-w-[424px]  text-[#303030] font-['Montserrat'] sm:text-xl leading-[30px] disabled:opacity-50"
-                            disabled={!selectedState}
-                        >
-                            <option value="">Select a city</option>
-                            {selectedState && (
-                                countries[selectedCountry][selectedState].map(city => (
-                                    <option key={city} value={city}>{city}</option>
-                                ))
-                            )}
-                        </select>
-                        <TfiAngleDown className="text-xl text-[#303030] pointer-events-none absolute top-1/2 -translate-y-1/2 right-[28px] " />
-                    </div>
-                    {errors.city && <p className="text-red-500 text-sm">{errors.city}</p>}
                 </div>
 
                 {/* Zip Code */}

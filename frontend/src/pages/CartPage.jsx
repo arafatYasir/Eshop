@@ -50,7 +50,6 @@ const CartPage = () => {
                             <th className="text-left px-6 py-4 uppercase text-[#303030] font-['Montserrat'] font-bold leading-6">Price</th>
                             <th className="text-left px-6 py-4 uppercase text-[#303030] font-['Montserrat'] font-bold leading-6">Qty</th>
                             <th className="text-left px-6 py-4 uppercase text-[#303030] font-['Montserrat'] font-bold leading-6">Total</th>
-                            <th className="text-left px-6 py-4 uppercase text-[#303030] font-['Montserrat'] font-bold leading-6">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
