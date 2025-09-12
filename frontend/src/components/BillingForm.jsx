@@ -1,8 +1,6 @@
 import { TfiAngleDown } from "react-icons/tfi";
 
 const BillingForm = ({ formData, setFormData, errors, selectedCountry, setSelectedCountry, setSelectedCity, selectedCity, selectedState, setSelectedState }) => {
-
-
     const handleCountryChange = (e) => {
         setSelectedCountry(e.target.value);
         setSelectedState("");
@@ -55,7 +53,7 @@ const BillingForm = ({ formData, setFormData, errors, selectedCountry, setSelect
                 <div className="flex flex-col gap-3">
                     <label className="sm:text-xl text-[#303030] font-['Montserrat'] font-bold leading-[30px]" htmlFor="firstname">First Name <span className="text-[#FF624C]">*</span></label>
                     <input
-                        className="py-4 sm:py-5 md:py-[25px] px-6 sm:px-7 md:px-[32px] outline-none border border-[#CBCBCB] rounded-[10px] w-[400px] max-w-[400px] sm:w-[550px] sm:max-w-[550px] md:w-[640px] md:max-w-[640px] xl:w-[424px] xl:max-w-[424px] text-[#303030] placeholder:text-[#303030] placeholder:opacity-75 font-['Montserrat'] sm:text-xl leading-[30px]"
+                        className="py-4 sm:py-5 md:py-[25px] px-6 sm:px-7 md:px-[32px] outline-none border border-[#CBCBCB] rounded-[10px] w-[360px] sm:w-[550px] sm:max-w-[550px] md:w-[640px] md:max-w-[640px] xl:w-[424px] xl:max-w-[424px] text-[#303030] placeholder:text-[#303030] placeholder:opacity-75 font-['Montserrat'] sm:text-xl leading-[30px]"
                         type="text"
                         id="firstname"
                         placeholder="Amelia Robert"
@@ -69,7 +67,7 @@ const BillingForm = ({ formData, setFormData, errors, selectedCountry, setSelect
                 <div className="flex flex-col gap-3">
                     <label className="sm:text-xl text-[#303030] font-['Montserrat'] font-bold leading-[30px]" htmlFor="lastname">Last Name <span className="text-[#FF624C]">*</span></label>
                     <input
-                        className="py-4 sm:py-[25px] px-6 sm:px-[32px] outline-none border border-[#CBCBCB] rounded-[10px] w-[400px] max-w-[400px] sm:w-[550px] sm:max-w-[550px] md:w-[640px] md:max-w-[640px] xl:w-[424px] xl:max-w-[424px] text-[#303030] placeholder:text-[#303030] placeholder:opacity-75 font-['Montserrat'] sm:text-xl leading-[30px]"
+                        className="py-4 sm:py-[25px] px-6 sm:px-[32px] outline-none border border-[#CBCBCB] rounded-[10px] w-[360px] max-w-[400px] sm:w-[550px] sm:max-w-[550px] md:w-[640px] md:max-w-[640px] xl:w-[424px] xl:max-w-[424px] text-[#303030] placeholder:text-[#303030] placeholder:opacity-75 font-['Montserrat'] sm:text-xl leading-[30px]"
                         type="text"
                         id="lastname"
                         placeholder="Watson"
@@ -83,7 +81,7 @@ const BillingForm = ({ formData, setFormData, errors, selectedCountry, setSelect
                 <div className="flex flex-col gap-3">
                     <label className="sm:text-xl text-[#303030] font-['Montserrat'] font-bold leading-[30px]" htmlFor="number">Phone Number <span className="text-[#FF624C]">*</span></label>
                     <input
-                        className="py-4 sm:py-[25px] px-6 sm:px-[32px] outline-none border border-[#CBCBCB] rounded-[10px] w-[400px] max-w-[400px] sm:w-[550px] sm:max-w-[550px] md:w-[640px] md:max-w-[640px] xl:w-[424px] xl:max-w-[424px] text-[#303030] placeholder:text-[#303030] placeholder:opacity-75 font-['Montserrat'] sm:text-xl leading-[30px]"
+                        className="py-4 sm:py-[25px] px-6 sm:px-[32px] outline-none border border-[#CBCBCB] rounded-[10px] w-[360px] max-w-[400px] sm:w-[550px] sm:max-w-[550px] md:w-[640px] md:max-w-[640px] xl:w-[424px] xl:max-w-[424px] text-[#303030] placeholder:text-[#303030] placeholder:opacity-75 font-['Montserrat'] sm:text-xl leading-[30px]"
                         type="text"
                         id="number"
                         placeholder="+123 456 7890"
@@ -97,7 +95,7 @@ const BillingForm = ({ formData, setFormData, errors, selectedCountry, setSelect
                 <div className="flex flex-col gap-3">
                     <label className="sm:text-xl text-[#303030] font-['Montserrat'] font-bold leading-[30px]" htmlFor="email">Email Address <span className="text-[#FF624C]">*</span></label>
                     <input
-                        className="py-4 sm:py-[25px] px-6 sm:px-[32px] outline-none border border-[#CBCBCB] rounded-[10px] w-[400px] max-w-[400px] sm:w-[550px] sm:max-w-[550px] md:w-[640px] md:max-w-[640px] xl:w-[424px] xl:max-w-[424px] text-[#303030] placeholder:text-[#303030] placeholder:opacity-75 font-['Montserrat'] sm:text-xl leading-[30px]"
+                        className="py-4 sm:py-[25px] px-6 sm:px-[32px] outline-none border border-[#CBCBCB] rounded-[10px] w-[360px] max-w-[400px] sm:w-[550px] sm:max-w-[550px] md:w-[640px] md:max-w-[640px] xl:w-[424px] xl:max-w-[424px] text-[#303030] placeholder:text-[#303030] placeholder:opacity-75 font-['Montserrat'] sm:text-xl leading-[30px]"
                         type="email"
                         id="email"
                         placeholder="amelia.watson@eshop.com"
@@ -111,7 +109,7 @@ const BillingForm = ({ formData, setFormData, errors, selectedCountry, setSelect
                 <div className="flex flex-col gap-3">
                     <label className="sm:text-xl text-[#303030] font-['Montserrat'] font-bold leading-[30px]" htmlFor="address">Address <span className="text-[#FF624C]">*</span></label>
                     <input
-                        className="py-4 sm:py-[25px] px-6 sm:px-[32px] outline-none border border-[#CBCBCB] rounded-[10px] w-[400px] max-w-[400px] sm:w-[550px] sm:max-w-[550px] md:w-[640px] md:max-w-[640px] xl:w-[870px] xl:max-w-[870px] text-[#303030] placeholder:text-[#303030] placeholder:opacity-75 font-['Montserrat'] sm:text-xl leading-[30px]"
+                        className="py-4 sm:py-[25px] px-6 sm:px-[32px] outline-none border border-[#CBCBCB] rounded-[10px] w-[360px] max-w-[400px] sm:w-[550px] sm:max-w-[550px] md:w-[640px] md:max-w-[640px] xl:w-[870px] xl:max-w-[870px] text-[#303030] placeholder:text-[#303030] placeholder:opacity-75 font-['Montserrat'] sm:text-xl leading-[30px]"
                         type="text"
                         id="address"
                         placeholder="Home Address, Auxiliary St. 12345, Anywhere State"
@@ -129,7 +127,7 @@ const BillingForm = ({ formData, setFormData, errors, selectedCountry, setSelect
                             id="country"
                             value={selectedCountry}
                             onChange={handleCountryChange}
-                            className="appearance-none py-4 sm:py-[25px] px-6 sm:px-[32px] outline-none border border-[#CBCBCB] rounded-[10px] w-[400px] max-w-[400px] sm:w-[550px] sm:max-w-[550px] md:w-[640px] md:max-w-[640px] xl:w-[424px] xl:max-w-[424px] text-[#303030] font-['Montserrat'] sm:text-xl leading-[30px]"
+                            className="appearance-none py-4 sm:py-[25px] px-6 sm:px-[32px] outline-none border border-[#CBCBCB] rounded-[10px] w-[360px] max-w-[400px] sm:w-[550px] sm:max-w-[550px] md:w-[640px] md:max-w-[640px] xl:w-[424px] xl:max-w-[424px] text-[#303030] font-['Montserrat'] sm:text-xl leading-[30px]"
                         >
                             <option value="">Select a country</option>
                             {Object.keys(countries).map(country => (
@@ -149,7 +147,7 @@ const BillingForm = ({ formData, setFormData, errors, selectedCountry, setSelect
                             id="state"
                             value={selectedState}
                             onChange={handleStateChange}
-                            className="appearance-none py-4 sm:py-[25px] px-6 sm:px-[32px] outline-none border border-[#CBCBCB] rounded-[10px] w-[400px] max-w-[400px] sm:w-[550px] sm:max-w-[550px] md:w-[640px] md:max-w-[640px] xl:w-[424px] xl:max-w-[424px]  text-[#303030] font-['Montserrat'] sm:text-xl leading-[30px] disabled:opacity-50"
+                            className="appearance-none py-4 sm:py-[25px] px-6 sm:px-[32px] outline-none border border-[#CBCBCB] rounded-[10px] w-[360px] max-w-[400px] sm:w-[550px] sm:max-w-[550px] md:w-[640px] md:max-w-[640px] xl:w-[424px] xl:max-w-[424px]  text-[#303030] font-['Montserrat'] sm:text-xl leading-[30px] disabled:opacity-50"
                             disabled={!selectedCountry}
                         >
                             <option value="">Select a state</option>
@@ -173,7 +171,7 @@ const BillingForm = ({ formData, setFormData, errors, selectedCountry, setSelect
                             id="city"
                             value={selectedCity}
                             onChange={handleCityChange}
-                            className="appearance-none py-4 sm:py-[25px] px-6 sm:px-[32px] outline-none border border-[#CBCBCB] rounded-[10px] w-[400px] max-w-[400px] sm:w-[550px] sm:max-w-[550px] md:w-[640px] md:max-w-[640px] xl:w-[424px] xl:max-w-[424px]  text-[#303030] font-['Montserrat'] sm:text-xl leading-[30px] disabled:opacity-50"
+                            className="appearance-none py-4 sm:py-[25px] px-6 sm:px-[32px] outline-none border border-[#CBCBCB] rounded-[10px] w-[360px] max-w-[400px] sm:w-[550px] sm:max-w-[550px] md:w-[640px] md:max-w-[640px] xl:w-[424px] xl:max-w-[424px]  text-[#303030] font-['Montserrat'] sm:text-xl leading-[30px] disabled:opacity-50"
                             disabled={!selectedState}
                         >
                             <option value="">Select a city</option>
@@ -192,7 +190,7 @@ const BillingForm = ({ formData, setFormData, errors, selectedCountry, setSelect
                 <div className="flex flex-col gap-3">
                     <label className="sm:text-xl text-[#303030] font-['Montserrat'] font-bold leading-[30px]" htmlFor="zip">Zip Code</label>
                     <input
-                        className="py-4 sm:py-[25px] px-6 sm:px-[32px] outline-none border border-[#CBCBCB] rounded-[10px] w-[400px] max-w-[400px] sm:w-[550px] sm:max-w-[550px] md:w-[640px] md:max-w-[640px] xl:w-[424px] xl:max-w-[424px] text-[#303030] placeholder:text-[#303030] placeholder:opacity-75 font-['Montserrat'] sm:text-xl leading-[30px]"
+                        className="py-4 sm:py-[25px] px-6 sm:px-[32px] outline-none border border-[#CBCBCB] rounded-[10px] w-[360px] max-w-[400px] sm:w-[550px] sm:max-w-[550px] md:w-[640px] md:max-w-[640px] xl:w-[424px] xl:max-w-[424px] text-[#303030] placeholder:text-[#303030] placeholder:opacity-75 font-['Montserrat'] sm:text-xl leading-[30px]"
                         type="number"
                         id="zip"
                         placeholder="555555"
@@ -206,7 +204,7 @@ const BillingForm = ({ formData, setFormData, errors, selectedCountry, setSelect
                 <div className="flex flex-col gap-3">
                     <label className="sm:text-xl text-[#303030] font-['Montserrat'] font-bold leading-[30px]" htmlFor="orderNotes">Order Notes</label>
                     <textarea
-                        className="py-4 sm:py-[25px] px-6 sm:px-[32px] outline-none border border-[#CBCBCB] rounded-[10px] w-[400px] max-w-[400px] sm:w-[550px] sm:max-w-[550px] md:w-[640px] md:max-w-[640px] xl:w-[870px] xl:max-w-[870px] h-[173px] text-[#303030] placeholder:text-[#303030] placeholder:opacity-75 font-['Montserrat'] sm:text-xl leading-[30px] resize-none"
+                        className="py-4 sm:py-[25px] px-6 sm:px-[32px] outline-none border border-[#CBCBCB] rounded-[10px] w-[360px] max-w-[400px] sm:w-[550px] sm:max-w-[550px] md:w-[640px] md:max-w-[640px] xl:w-[870px] xl:max-w-[870px] h-[173px] text-[#303030] placeholder:text-[#303030] placeholder:opacity-75 font-['Montserrat'] sm:text-xl leading-[30px] resize-none"
                         type="text"
                         id="orderNotes"
                         placeholder="Enter your order notes ..."
