@@ -5,11 +5,13 @@ import { IoCartOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router";
 import { addToCart } from "../../slices/cartSlice";
-import {ToastContainer, toast} from "react-toastify"
+import { toast } from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const ProductLayout = ({ discountTag = false, images, id, discountPercent, type, title, rating = 1, totalRatings, price, previousPrice, tags }) => {
     const [ratingStars, setRatingStars] = useState([]);
-    const {user} = useSelector(state => state.auth);
+    const { user } = useSelector(state => state.auth);
 
     const dispatch = useDispatch();
 
@@ -18,15 +20,15 @@ const ProductLayout = ({ discountTag = false, images, id, discountPercent, type,
         setRatingStars(newRatingArray);
     }, [rating]);
 
-    if(!tags || tags.length === 0) {return;}
+    if (!tags || tags.length === 0) { return; }
 
     const handleAddToCart = () => {
-        if(!user) {
+        console.log("HELLOOOOOO")
+        if (!user) {
             toast.error("You need to be logged in to add items to cart.");
             return;
         }
 
-        
         const product = {
             id,
             title,
@@ -37,25 +39,32 @@ const ProductLayout = ({ discountTag = false, images, id, discountPercent, type,
         };
         dispatch(addToCart(product));
 
-        toast.success("Item added to cart! Please go to your cart and update it.");
+        console.log("HelLO")
+
+        setTimeout(() => {
+            toast.success("Item added to cart! Please go to cart and update.");
+        }, 100);
+
     }
 
     const handleShare = (id) => {
         const url = `https://eshop-ecommerce-project.vercel.app/product-details/${id}`;
 
         navigator.clipboard.writeText(url)
-        .then(() => toast.success("Link copied!"))
-        .catch((e) => toast.error("Error copying the link!"))
+            .then(() => toast.success("Link copied!"))
+            .catch((e) => toast.error("Error copying the link!"))
     }
 
+    
+
     return (
-        <div  className="p-6 group border border-[#C3C3C3] lg:border-transparent sm:hover:border-[#C3C3C3] rounded-[10px] max-w-[285px] relative">
+        <div className="p-6 group border border-[#C3C3C3] lg:border-transparent sm:hover:border-[#C3C3C3] rounded-[10px] max-w-[285px] relative">
             <div className="relative">
                 <img className="w-full" loading="lazy" src={images[0]} alt="product image" />
 
                 {/* Icons */}
-                <div className="flex gap-[18px] lg:scale-0 lg:group-hover:scale-100 transition duration-100 cursor-pointer absolute bottom-[6px] left-[50%] -translate-x-1/2">
-                    <button onClick={handleAddToCart} onTouchStart={handleAddToCart} className="flex items-center justify-center w-10 h-10 md:w-[50px] md:h-[50px] rounded-full border border-[#FF624C] text-[#FF624C] text-3xl hover:bg-[#FF624C] hover:text-white transition duration-100 bg-white cursor-pointer">
+                <div className="flex gap-[18px]  transition duration-100 cursor-pointer absolute bottom-[6px] left-[50%] -translate-x-1/2">
+                    <button onClick={handleAddToCart} className="flex items-center justify-center w-10 h-10 md:w-[50px] md:h-[50px] rounded-full border border-[#FF624C] text-[#FF624C] text-3xl hover:bg-[#FF624C] hover:text-white transition duration-100 bg-white cursor-pointer">
                         <IoCartOutline size={22} />
                     </button>
                     <button className="flex items-center justify-center w-10 h-10 md:w-[50px] md:h-[50px] rounded-full border border-[#FF624C] text-[#FF624C] text-3xl hover:bg-[#FF624C] hover:text-white transition duration-100 bg-white cursor-pointer">
@@ -88,8 +97,6 @@ const ProductLayout = ({ discountTag = false, images, id, discountPercent, type,
             {discountTag && (
                 <div className="absolute top-4 right-4 text-white font-['Montserrat'] font-semibold leading-6 py-[7px] px-5 bg-[#FF624C] rounded-[5px]">{discountPercent}%</div>
             )}
-
-            <ToastContainer />
         </div>
     );
 };

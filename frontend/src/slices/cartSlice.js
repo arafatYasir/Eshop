@@ -24,7 +24,7 @@ const calculateTotals = (items) => {
 const initialState = {
     items: loadCartFromLocalStorage(),
     totalItems: 0,
-    totalPrice: 0
+    totalPrice: 0,
 }
 
 // Initializing totals

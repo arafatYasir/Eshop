@@ -5,7 +5,7 @@ import Button from "../components/Button";
 import Facilities from "../components/Facilities";
 import { useSelector } from "react-redux";
 import { updateUserCart } from "../firebase/firestoreService.js"
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 
 const CartPage = () => {
     const { user } = useSelector(state => state.auth);
@@ -18,7 +18,7 @@ const CartPage = () => {
 
     const handleUpdateCart = async () => {
         try {
-            await updateUserCart(user.uid, cartProducts);
+            await updateUserCart(user.uid, cartProducts || []);
             toast.success("Cart updated successfully!");
         } catch (err) {
             toast.error("Failed to update cart. Check console.");
@@ -82,7 +82,6 @@ const CartPage = () => {
                 <div className="border-t mt-[100px] border-[#CBCBCB] hidden md:block">
                     <Facilities />
                 </div>
-                <ToastContainer />
             </Container>
         </div>
     );
