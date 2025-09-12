@@ -117,9 +117,9 @@ const Footer = () => {
                         <div className="mt-8 sm:mt-[74px]">
                             <h4 className="text-lg sm:text-xl text-[#303030] font-semibold font-['Poppins'] leading-[30px]">Follow Us</h4>
                             <ul className="flex flex-col gap-3 text-[#303030] font-['Montserrat'] leading-6 mt-6">
-                                <li><Link to="#" className="text-sm sm:text-base hover:underline">Twitter</Link></li>
-                                <li><Link to="#" className="text-sm sm:text-base hover:underline">Instagram</Link></li>
-                                <li><Link to="#" className="text-sm sm:text-base hover:underline">Facebook</Link></li>
+                                <li><a href="https://x.com/" target="_blank" className="text-sm sm:text-base hover:underline">Twitter</a></li>
+                                <li><a href="https://www.instagram.com/" target="_blank" className="text-sm sm:text-base hover:underline">Instagram</a></li>
+                                <li><a href="https://www.facebook.com/" target="_blank" className="text-sm sm:text-base hover:underline">Facebook</a></li>
                             </ul>
                         </div>
                     </div>

@@ -52,8 +52,6 @@ const ProductsListLeftSide = ({ selectedCategories, setSelectedCategories, selec
                 setMaxInput(parse.toString());
             }
         }
-
-
     }
 
     const minPercent = (minValue / 5000) * 100;
