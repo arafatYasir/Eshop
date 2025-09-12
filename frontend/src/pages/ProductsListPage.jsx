@@ -1,12 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Container from "../components/commonLayouts/Container";
 
 import ProductsListLeftSide from "../components/ProductsListLeftSide";
 import ProductsListProducts from "../components/ProductsListProducts";
+import { useLocation } from "react-router";
 
 const ProductsListPage = () => {
     const [selectedCategories, setSelectedCategories] = useState("");
     const [selectedBrands, setSelectedBrands] = useState("");
+
+    const location = useLocation();
+
+    let categoryName = location.search;
+    categoryName = categoryName.slice(3, categoryName.length).split("%20").join(" ");
+
+    useEffect(() => {
+        setSelectedCategories(prev => [...prev, categoryName]);
+
+    }, [categoryName])
 
     return (
         <Container>

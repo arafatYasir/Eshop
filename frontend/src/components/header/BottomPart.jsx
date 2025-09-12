@@ -63,33 +63,33 @@ const BottomPart = () => {
 
                                 {isCategoriesDropdownOpen && (
                                     <div className="absolute top-[80%] left-0 mt-2 w-72 z-50 bg-white rounded-xl shadow-lg border border-gray-100 p-4 space-y-2 font-['Poppins']">
-                                        <a href="#" className="block px-4 py-2 rounded-lg text-sm text-[#303030] hover:bg-gray-100 transition duration-150">
+                                        <Link onClick={() => setIsCategoriesDropdownOpen(false)} to={`/products-list?q=Computers & Tablets`} className="block px-4 py-2 rounded-lg text-sm text-[#303030] hover:bg-gray-100 transition duration-150">
                                             Computers & Tablets
-                                        </a>
+                                        </Link>
 
-                                        <a href="#" className="block px-4 py-2 rounded-lg text-sm text-[#303030] hover:bg-gray-100 transition duration-150">
+                                        <Link onClick={() => setIsCategoriesDropdownOpen(false)} to={`/products-list?q=Mobile & Accessories`} className="block px-4 py-2 rounded-lg text-sm text-[#303030] hover:bg-gray-100 transition duration-150">
                                             Mobile & Accessories
-                                        </a>
+                                        </Link>
 
-                                        <a href="#" className="block px-4 py-2 rounded-lg text-sm text-[#303030] hover:bg-gray-100 transition duration-150">
+                                        <Link onClick={() => setIsCategoriesDropdownOpen(false)} to={`/products-list?q=TV & Home Theater`} className="block px-4 py-2 rounded-lg text-sm text-[#303030] hover:bg-gray-100 transition duration-150">
                                             TV & Home Theater
-                                        </a>
+                                        </Link>
 
-                                        <a href="#" className="block px-4 py-2 rounded-lg text-sm text-[#303030] hover:bg-gray-100 transition duration-150">
+                                        <Link onClick={() => setIsCategoriesDropdownOpen(false)} to={`/products-list?q=Audio & Headphones`} className="block px-4 py-2 rounded-lg text-sm text-[#303030] hover:bg-gray-100 transition duration-150">
                                             Audio & Headphones
-                                        </a>
+                                        </Link>
 
-                                        <a href="#" className="block px-4 py-2 rounded-lg text-sm text-[#303030] hover:bg-gray-100 transition duration-150">
+                                        <Link onClick={() => setIsCategoriesDropdownOpen(false)} to={`/products-list?q=Cameras & Camcorders`} className="block px-4 py-2 rounded-lg text-sm text-[#303030] hover:bg-gray-100 transition duration-150">
                                             Cameras & Camcorders
-                                        </a>
+                                        </Link>
 
-                                        <a href="#" className="block px-4 py-2 rounded-lg text-sm text-[#303030] hover:bg-gray-100 transition duration-150">
+                                        <Link onClick={() => setIsCategoriesDropdownOpen(false)} to={`/products-list?q=Gaming Equipment`} className="block px-4 py-2 rounded-lg text-sm text-[#303030] hover:bg-gray-100 transition duration-150">
                                             Gaming Equipment
-                                        </a>
+                                        </Link>
 
-                                        <a href="#" className="block px-4 py-2 rounded-lg text-sm text-[#303030] hover:bg-gray-100 transition duration-150">
+                                        <Link onClick={() => setIsCategoriesDropdownOpen(false)} to={`/products-list?q=Home Appliances`} className="block px-4 py-2 rounded-lg text-sm text-[#303030] hover:bg-gray-100 transition duration-150">
                                             Home Appliances
-                                        </a>
+                                        </Link>
                                     </div>
                                 )}
                             </li>

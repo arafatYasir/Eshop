@@ -44,7 +44,6 @@ const ProductLayout = ({ discountTag = false, images, id, discountPercent, type,
         setTimeout(() => {
             toast.success("Item added to cart! Please go to cart and update.");
         }, 100);
-
     }
 
     const handleShare = (id) => {
@@ -54,8 +53,6 @@ const ProductLayout = ({ discountTag = false, images, id, discountPercent, type,
             .then(() => toast.success("Link copied!"))
             .catch((e) => toast.error("Error copying the link!"))
     }
-
-    
 
     return (
         <div className="p-6 group border border-[#C3C3C3] lg:border-transparent sm:hover:border-[#C3C3C3] rounded-[10px] max-w-[285px] relative">
