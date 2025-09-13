@@ -75,10 +75,11 @@ const SpringSale = () => {
     function calculateTimeLeft() {
         const saleEndDate = new Date("September 18, 2025 12:00 PM +0600");
         const currentDate = new Date().getTime();
-        const difference = saleEndDate - currentDate;
+        let difference = saleEndDate - currentDate;
 
         if (difference <= 0) {
-            return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+            saleEndDate.setDate(saleEndDate.getDate() + 10);
+            difference = saleEndDate - currentDate;
         }
 
         return {
@@ -91,8 +92,10 @@ const SpringSale = () => {
 
     const fetchProducts = async () => {
         setLoading(true);
+        
         const q = query(collection(db, "Products"), where("tags", "array-contains", "Spring Sale"));
         const snapshot = await getDocs(q);
+
         const data = snapshot.docs.map(doc => {
             const product = doc.data();
 
