@@ -11,6 +11,7 @@ import { db } from "../firebase/firebaseconfig";
 import { useDispatch, useSelector } from "react-redux";
 import { setSpringSaleProducts } from "../slices/productsSlice";
 import LoadingSpinner from "./LoadingSpinner";
+import { Link } from "react-router";
 
 // ---- PC Slider Arrow Function ----
 function SampleNextArrow(props) {
@@ -92,7 +93,7 @@ const SpringSale = () => {
 
     const fetchProducts = async () => {
         setLoading(true);
-        
+
         const q = query(collection(db, "Products"), where("tags", "array-contains", "Spring Sale"));
         const snapshot = await getDocs(q);
 
@@ -111,7 +112,7 @@ const SpringSale = () => {
     }
 
     useEffect(() => {
-        if(localStorageProducts.length === 0) {
+        if (localStorageProducts.length === 0) {
             fetchProducts();
         }
         else {
@@ -206,7 +207,9 @@ const SpringSale = () => {
                             </div>
                         </div>
 
-                        <Button value="Shop Now" />
+                        <Link to="/products-list">
+                            <Button value="Shop Now" />
+                        </Link>
 
                         <div className="absolute bottom-[-210px] left-0">
                             <img src="/images/spring-sale-dots.png" alt="background dots" />
