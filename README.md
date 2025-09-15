@@ -2,7 +2,7 @@
 
 ## Table of Contents
 - [Core Features](#core-features)
-  - [For Shoppers](#core-features#for-shoppers)
+  - [For Shoppers](#for-shoppers)
   - [For Admins](#for-admins)
 - [Tech Stack](#tech-stack)
 - [Authentication Flow](#authentication-flow)
