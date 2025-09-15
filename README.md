@@ -1,4 +1,5 @@
 # e-shop — Modern E-Commerce Platform
+![01_Homepage v1](https://github.com/user-attachments/assets/44f356d5-ac46-4fe6-bf18-0b22d8bf3a0b)
 
 ## Table of Contents
 - [Core Features](#core-features)
